@@ -13,6 +13,27 @@
                 echo $model->getStatus();
                 ?>
             </span>
+            
+            <?php if ( !empty($validasi->validasi_kabid) ) { ?>
+                <span class="label label-info">
+                    <?php 
+
+                    echo $validasi->getStatus('validasi_kabid');
+                    ?>
+                    Kabid
+                </span>
+                <?php } ?>
+
+                <?php if ( !empty($validasi->validasi_kasubbid) ) { ?>
+                <span class="label label-info">
+                    <?php 
+
+                    echo $validasi->getStatus('validasi_kasubbid');
+                    ?>
+                    Kasubbid
+                </span>
+             <?php } ?>
+
             <?php if ( !empty($validasi->validasi_ppi) ) { ?>
             <span class="label label-info">
                 <?php 

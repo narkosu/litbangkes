@@ -37,6 +37,7 @@ $this->breadcrumbs=array(
 
                 <?php if (  Yii::app()->user->isSuperAdmin || 
                             Yii::app()->user->isKabid || 
+                            Yii::app()->user->isKasubbid || 
                             Yii::app()->user->isAdmin || 
                             Yii::app()->user->isPPI ||
                             Yii::app()->user->isKI ||

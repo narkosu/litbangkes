@@ -184,7 +184,16 @@ class ProposalPenelitianController extends Controller
         $criteria->condition .= 'bidang_id = '.$me->bidang_id;
         $criteria->condition .= ' OR pegawai_id = '.$me->id;
         $proposal = ProposalPenelitian::model()->findAll($criteria);
-    } else if ( Yii::app()->user->isMember ) {
+    } else if ( Yii::app()->user->isKasubbid ){
+        $me = Yii::app()->user->getState('pegawai');
+        
+        $criteria = new CDbCriteria();
+        $criteria->condition .= '( bidang_id = '.$me->bidang_id;
+        $criteria->condition .= ' AND  sub_bidang_id = '.$me->subbidang_id.' ) ';
+        $criteria->condition .= ' OR pegawai_id = '.$me->id .' ';
+        
+        $proposal = ProposalPenelitian::model()->findAll($criteria);
+    }else if ( Yii::app()->user->isMember ) {
         
         $me = Yii::app()->user->getState('pegawai');
         
