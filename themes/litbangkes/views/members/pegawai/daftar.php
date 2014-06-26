@@ -61,7 +61,7 @@ $this->breadcrumbs=array(
                       <td class="aligncenter"><span class="center">
                         <input type="checkbox" />
                       </span></td>
-                        <td><a href="contoh_penelitian.html"><?php echo $pegawai->nip ?></a></td>
+                        <td><a href="<?php echo Yii::app()->createUrl('/members/pegawai/update/id/'.$pegawai->id)?>"><?php echo $pegawai->nip ?></a></td>
                         <td><?php echo $pegawai->nama ?></td>
                         <td><?php echo $pegawai->satuan_kerja ?></td>
                         <td><?php echo ( $pegawai->isJabatan() ? $pegawai->getJabatan()->nama_jabatan : '') ?></td>

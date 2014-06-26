@@ -40,7 +40,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 /************************/
 
 body { background-image: url(../img/bg/blur.png); background-size: cover; background-repeat: no-repeat; 
-	font-family: 'HelveticaNeue', Arial, Helvetica, sans-serif; font-size: 12px; line-height: 21px; color: #666; }
+	font-family: 'HelveticaNeue', Arial, Helvetica, sans-serif; font-size: 13px; font-weight: bold; line-height: 21px; color: #666; }
 button, input, textarea, select, a, a:focus { outline: none; }
 a { text-decoration: none; color: #546f8e; }
 a:hover { text-decoration: underline; }
@@ -113,8 +113,9 @@ h4 { font-size: 16px; line-height: 26px; }
 .rightpanel { margin-left: 260px; position: relative; background: #f7f7f7; }
 .rightpanel:after { display: block; clear: both; content: ''; }
 
-.headerpanel { min-height: 50px; padding: 10px 0; }
-.headerpanel h1 { text-transform: uppercase; color: #fff; padding: 5px 0 0 10px; font-size: 24px; text-shadow: 1px 1px rgba(0,0,0,0.2); float:left; }
+.headerpanel { min-height: 80px; padding: 10px 0; background: url(../img/bg-header.jpg) no-repeat; }
+.litbangkes-small-title {	font-size: 16px; display: block; float: left; position: absolute; top: 60px; left: 125px; color: #fff; }
+.headerpanel h1 { text-transform: uppercase; color: #fff; padding: 5px 0 0 120px; font-size: 38px; text-shadow: 1px 1px rgba(0,0,0,0.2); float:left; }
 .headerpanel img { float: left; margin-right: 10px; height: 34px; border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius: 2px; border: 1px solid #fff;  }
 .headerright { float: right; padding: 7px 10px 0 0; }
 .headerright .dropdown { display: inline-block; margin-left: 7px; }
@@ -1218,7 +1219,7 @@ table td.center, table th.center { text-align: center; }
 .pager li.next a span { margin-left: 5px; }
 .pager .disabled > a, .pager .disabled > a:hover, .pager .disabled > span { background :#e7e7e7; border-color: #ccc; }
 
-.label { padding: 3px 5px; font-size: 11px; font-weight: normal; }
+.label { padding: 10px 5px; font-size: 12px; font-weight: normal; width: 100px; text-align: center; }
 .badge { font-size: 10px; -moz-border-radius: 50px; -webkit-border-radius: 50px; border-radius: 50px; line-height: 10px; padding: 3px 5px 2px 5px; }
 
 .progress { height: 12px; background: #ddd; }

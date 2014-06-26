@@ -28,8 +28,7 @@
 <div class="mainwrapper fullwrapper">
 		
     <div class="headerpanel">
-        	<h1>SISTEM INFORMASI RISET</h1>
-          <span class="litbangkes-small-title">BADAN PENELITIAN DAN PENGEMBANGAN KESEHATAN </span>
+        	<a href="" class="showmenu"></a><h1 > SISTEM INFORMASI RISET BADAN LITBANGKES</h1>  
             
             <div class="headerright">
                 
@@ -38,8 +37,8 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="/page.html">Hi,
                         <?php echo ucfirst(Yii::app()->user->name)?>! <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo Yii::app()->createUrl('members/pegawai/edit')?>"><span class="icon-edit"></span> Edit Profile</a></li>
-                        <li><a href="<?php echo Yii::app()->createUrl('site/changepassword')?>"><span class="icon-wrench"></span> Ganti Password</a></li>
+                        <li><a href="editprofile.html"><span class="icon-edit"></span> Edit Profile</a></li>
+                        <li><a href=""><span class="icon-wrench"></span> Ganti Password</a></li>
                         <li class="divider"></li>
                         <li><a href="<?php echo Yii::app()->createUrl('site/logout')?>"><span class="icon-off"></span> Sign Out</a></li>
                     </ul>
@@ -57,10 +56,8 @@
         
         <div class="plainwidget">
             <h6>Nama:<strong> <?php echo ucfirst(Yii::app()->user->name)?></strong></h6>
-            <?php if ( Yii::app()->user->getState('pegawai') ) {?>
-            <h6>NIP:<strong> <?php echo ucfirst(Yii::app()->user->getState('pegawai')->nama)?></strong></h6>
-            <h6>Satker:<strong> <?php echo ucfirst(Yii::app()->user->getState('pegawai')->satuan_kerja)?></strong></h6>
-            <?php } ?>
+            <h6>NIP:<strong> 123456789</strong></h6>
+            <h6>Satker:<strong> Nama satuan kerja</strong></h6>
         </div><!--plainwidget-->
         
         <div class="leftmenu">        
@@ -75,18 +72,16 @@
                 
                     <li <?php echo ($this->menuactive == 'penelitian' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian')?>"><span class="icon-align-justify"></span> Daftar Penelitian</a></li>
                     <li <?php echo ($this->menuactive == 'pengajuan' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/create')?>"><span class="icon-upload"></span> Pengajuan Penelitian</a></li>
-                    <?php /*
                     <li <?php echo ($this->menuactive == 'progress' ? 'class="active"' : '')?>><a href="progress.html"><span class="icon-indent-left"></span> Progres Penelitian</a></li>
-                    <li <?php echo ($this->menuactive == 'outputpenilaian' ? 'class="active"' : '')?>><a href="output.html"><span class="icon-book"></span> Output Penelitian</a></li>*/ ?>
+                    <li <?php echo ($this->menuactive == 'outputpenilaian' ? 'class="active"' : '')?>><a href="output.html"><span class="icon-book"></span> Output Penelitian</a></li>
                 <?php } ?>
                     
                 <?php if ( Yii::app()->user->isMember ) { ?>
                     <li <?php echo ($this->menuactive == 'penelitian' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian')?>"><span class="icon-align-justify"></span> Daftar Penelitian</a></li>
                     <li <?php echo ($this->menuactive == 'pengajuan' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/create')?>"><span class="icon-upload"></span> Pengajuan Penelitian</a></li>
-                    <?php /*
-                    <li <?php echo ($this->menuactive == 'progress' ? 'class="active"' : '')?>><a href="#"><span class="icon-indent-left"></span> Progres Penelitian</a></li>
-                    <li <?php echo ($this->menuactive == 'outputpenilaian' ? 'class="active"' : '')?>><a href="#"><span class="icon-book"></span> Output Penelitian</a></li>
-                <?php */ } ?>    
+                    <li <?php echo ($this->menuactive == 'progress' ? 'class="active"' : '')?>><a href="progress.html"><span class="icon-indent-left"></span> Progres Penelitian</a></li>
+                    <li <?php echo ($this->menuactive == 'outputpenilaian' ? 'class="active"' : '')?>><a href="output.html"><span class="icon-book"></span> Output Penelitian</a></li>
+                <?php } ?>    
                 <li><a href="">&nbsp;</a></li>
                 <li <?php echo ($this->menuactive == 'editprofil' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('members/pegawai/edit')?>"><span class="icon-user"></span> Edit Profil</a></li>
                 <li <?php echo ($this->menuactive == 'gantipassword' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('site/changepassword')?>"><span class="icon-cog"></span> Ganti Password</a></li>
@@ -116,9 +111,9 @@
         </div><!--pagetitle-->  
       <?php } ?>
         <div class="maincontent">
-        	<div class="contentinner content-dashboard">                
-                <?php echo $content?>
-            </div><!--contentinner-->
+
+            <?php echo $content?>
+          
         </div><!--maincontent-->
         
     </div><!--mainright-->

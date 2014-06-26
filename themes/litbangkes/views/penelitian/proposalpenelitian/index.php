@@ -62,8 +62,10 @@ $this->breadcrumbs=array(
                                     <td><?php echo $proposal->tahun_anggaran ?></td>
                                     <td><?php echo $proposal->getStatus() ?></td>
                                     <td class="center">
-                                        <a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/update/id/'.$proposal->id)?>">Edit</a> 
-                                        <a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/delete/id/'.$proposal->id)?>">Delete</a> 
+                                        <?php if ( Yii::app()->user->isSuperAdmin || ( Yii::app()->user->getState('pegawai') && Yii::app()->user->getState('pegawai')->id == $proposal->pegawai_id)) { ?>
+                                            <a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/update/id/'.$proposal->id)?>">Edit</a> 
+                                            <a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/delete/id/'.$proposal->id)?>">Delete</a> 
+                                        <?php } ?>
                                         
                                     </td>
                                 </tr>

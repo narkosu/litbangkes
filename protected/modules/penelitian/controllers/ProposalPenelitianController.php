@@ -31,7 +31,7 @@ class ProposalPenelitianController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
-				'expression'=>'$user->isSuperAdmin || $user->isMember',
+				'expression'=>'$user->isSuperAdmin || $user->isMember || $user->isKabid ',
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
@@ -55,6 +55,8 @@ class ProposalPenelitianController extends Controller
 	public function actionView($id)
 	{
     $validasi = ProposalValidasi::model()->find('proposal_id = '.$id);  
+    $proposal = $this->loadModel($id);
+    $modelFile = $proposal->file;
     if ( empty($validasi)){
         $validasi = new ProposalValidasi;
         $validasi->proposal_id = $id;
@@ -64,7 +66,8 @@ class ProposalPenelitianController extends Controller
     $validasi = $this->saveValidation($validasi, $_POST);
     
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$proposal,
+      'modelFile'=>$modelFile,
 			'validasi'=>$validasi,
 		));
 	}
@@ -174,6 +177,13 @@ class ProposalPenelitianController extends Controller
 	{
     if ( Yii::app()->user->isSuperAdmin ) {
         $proposal = ProposalPenelitian::model()->findAll();
+    } else if ( Yii::app()->user->isKabid ){
+        $me = Yii::app()->user->getState('pegawai');
+        
+        $criteria = new CDbCriteria();
+        $criteria->condition .= 'bidang_id = '.$me->bidang_id;
+        $criteria->condition .= ' OR pegawai_id = '.$me->id;
+        $proposal = ProposalPenelitian::model()->findAll($criteria);
     } else if ( Yii::app()->user->isMember ) {
         
         $me = Yii::app()->user->getState('pegawai');
@@ -181,8 +191,8 @@ class ProposalPenelitianController extends Controller
         $criteria = new CDbCriteria();
         $criteria->condition .= 'pegawai_id = '.$me->id;
         $proposal = ProposalPenelitian::model()->findAll($criteria);
-        
     }
+    
     /*$dataProvider=new CActiveDataProvider('ProposalPenelitian');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
@@ -240,14 +250,36 @@ class ProposalPenelitianController extends Controller
     if(isset($post['ProposalValidasi']))
 		{
       
-			$model->attributes=$_POST['ProposalValidasi'];
+			$model->attributes=$post['ProposalValidasi'];
       if ( $model->isNewRecord )
         $model->created_at = date('Y-m-d H:i:s');
       
       $model->updated_at = date('Y-m-d H:i:s');
       $model->created_by = Yii::app()->user->id;
 			if($model->save()) {
+          if ( $post['group_validasi'] == 'kabid'){
+            if ( $model->validasi_kasubbid == 3 ) { // disetujui  
+                $model->proposal->status = 3; // disetujui
+                $model->proposal->save();
+            }
+          }
+				  
+          if ( $post['group_validasi'] == 'kasubbid'){
+            if ( $model->validasi_kabid == 3 ) { // disetujui  
+                $model->proposal->status = 3; // disetujui
+                $model->proposal->save();
+            }
+          }
+          
           if ( $post['group_validasi'] == 'ppi'){
+            $model->proposal->status = $model->validasi_ppi;
+            $model->proposal->save();
+          }
+          if ( $post['group_validasi'] == 'ki'){
+            $model->proposal->status = $model->validasi_ppi;
+            $model->proposal->save();
+          }
+          if ( $post['group_validasi'] == 'ke'){
             $model->proposal->status = $model->validasi_ppi;
             $model->proposal->save();
           }

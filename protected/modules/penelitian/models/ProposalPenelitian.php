@@ -138,6 +138,6 @@ class ProposalPenelitian extends CActiveRecord
 	}
   
   public function getStatus(){
-      return $this->statusDocument[$this->status];
+      return (!empty($this->statusDocument[$this->status]) ? $this->statusDocument[$this->status] : '');
   }
 }

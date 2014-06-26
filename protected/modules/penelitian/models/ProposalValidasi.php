@@ -53,7 +53,7 @@ class ProposalValidasi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('proposal_id, step, revisi, validasi_ppi, validasi_ki, validasi_ke, created_by', 'numerical', 'integerOnly'=>true),
+			array('proposal_id, step, revisi, validasi_kabid, validasi_kasubbid, validasi_ppi, validasi_ki, validasi_ke, created_by', 'numerical', 'integerOnly'=>true),
 			array('created_at, updated_at', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

@@ -35,10 +35,17 @@ $this->breadcrumbs=array(
                 </div>
               </div>
 
-                <?php if ( Yii::app()->user->isSuperAdmin ) {?>
-                  <div class="widgetcontent bordered shadowed nopadding">
-                      <?php echo $this->renderPartial('_view_admin', array('model'=>$model,'validasi'=>$validasi)); ?>
-                  </div>
+                <?php if (  Yii::app()->user->isSuperAdmin || 
+                            Yii::app()->user->isKabid || 
+                            Yii::app()->user->isAdmin || 
+                            Yii::app()->user->isPPI ||
+                            Yii::app()->user->isKI ||
+                            Yii::app()->user->isKE ) {?>
+                   
+                    <div class="widgetcontent bordered shadowed nopadding">
+                        <?php echo $this->renderPartial('_view_admin', array('model'=>$model,
+                             'modelFile'=>$modelFile, 'validasi'=>$validasi)); ?>
+                    </div>
             <?php } else { ?>
                   <h4 class="widgettitle nomargin shadowed">Proposal Penelitian : <?php echo $model->nama_penelitian?></h4>
 
