@@ -19,7 +19,7 @@ class User extends CActiveRecord
   const LEVEL_SUPERADMIN=99;
   const LEVEL_MEMBER=10;
 	
-	
+	public $setHakAccess;
 	//define the label for each level
 	static function getAccessLevelList( $level = null ){
 		$levelList=array(
@@ -60,9 +60,10 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, salt', 'required'),
+			array('username, password', 'required'),
+			array('username', 'unique'),
 			array('username, password, salt, email', 'length', 'max'=>128),
-			array('profile,accessLevel', 'safe'),
+			array('profile,accessLevel,setHakAccess', 'safe'),
 		);
 	}
 
@@ -74,7 +75,8 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'posts' => array(self::HAS_MANY, 'Post', 'author_id'),
+			//'posts' => array(self::HAS_MANY, 'Post', 'author_id'),
+        'ValidasiGroup'=>array(self::MANY_MANY,'ValidasiGroup','tbl_user_validasigroup(user_id,validasigroup_id)'),
 		);
 	}
 

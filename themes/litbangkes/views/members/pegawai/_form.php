@@ -61,12 +61,49 @@
        </span>
 		<?php echo $form->error($model,'tgl_lahir'); ?>
 	</div>
+ 
+  <?php  $listJabatan = CHtml::listData(Jabatan::model()->findAll(), 'id', 'nama_jabatan'); ?>
   
+  <div class="par">
+		<?php echo $form->labelEx($model,'id_jabatan'); ?>
+       <span class="field">
+
+		<?php echo $form->dropDownList($model,'id_jabatan', $listJabatan, array('empty' => 'Pilih Jabatan')); ?>
+       </span>
+		<?php echo $form->error($model,'id_jabatan'); ?>
+	</div>
+  <?php  $listBidang = CHtml::listData(Bidang::model()->findAll(), 'id', 'nama_bidang'); ?>
+  <div class="par">
+		<?php echo $form->labelEx($model,'bidang_id'); ?>
+       <span class="field">
+
+		<?php echo $form->dropDownList($model,'bidang_id', $listBidang, array('empty' => 'Pilih Bidang')); ?>
+       </span>
+		<?php echo $form->error($model,'bidang_id'); ?>
+	</div>
+  
+  <?php  $listSubBidang = CHtml::listData(SubBidang::model()->findAll(), 'id', 'nama'); ?>
+  <div class="par">
+		<?php echo $form->labelEx($model,'subbidang_id'); ?>
+       <span class="field">
+
+		<?php echo $form->dropDownList($model,'subbidang_id', $listBidang, array('empty' => 'Pilih Sub Bidang')); ?>
+       </span>
+		<?php echo $form->error($model,'subbidang_id'); ?>
+	</div>
+  <div class="par">
+		<?php echo $form->labelEx($model,'satuan_kerja'); ?>
+ <span class="field">
+
+		<?php echo $form->textField($model,'satuan_kerja',array('class'=>'text-xlarge','size'=>50,'maxlength'=>50)); ?>
+ </span>
+		<?php echo $form->error($model,'satuan_kerja'); ?>
+	</div>
   <div class="par">
       <label>HAK AKSES</label>
           
        <span class="field">
-           <input type="checkbox" name="hakAkses" value="1">
+           <?php echo $form->checkBox($modelUser,'setHakAccess'); ?>
            Memiliki Hak Akses
        </span>
 	</div>
@@ -84,7 +121,7 @@
 		<?php echo $form->labelEx($modelUser,'password'); ?>
        <span class="field">
 
-		<?php echo $form->textField($modelUser,'password'); ?>
+		<?php echo $form->passwordField($modelUser,'password',array('value'=>'')); ?>
        </span>
 		<?php echo $form->error($modelUser,'password'); ?>
 	</div>

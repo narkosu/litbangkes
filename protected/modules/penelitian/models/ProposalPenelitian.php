@@ -78,7 +78,6 @@ class ProposalPenelitian extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
         'pegawai'=>array(self::BELONGS_TO,'Pegawai','pegawai_id'),
-        
         'jabatan'=>array(self::BELONGS_TO,'JabatanFungsional','jabatan_fungsional_id'),
         'subbidang'=>array(self::BELONGS_TO,'SubBidang','sub_bidang_id'),
         'jenispenelitian'=>array(self::BELONGS_TO,'JenisPenelitian','jenis_penelitian_id'),

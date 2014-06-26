@@ -50,9 +50,11 @@ class Pegawai extends CActiveRecord
 			array('nip, nama', 'length', 'max'=>30),
 			array('id_jabatan, tempat_lahir', 'length', 'max'=>50),
 			array('pendidikan', 'length', 'max'=>10),
+			array('satuan_kerja', 'length', 'max'=>255),
+			array('email', 'email'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, id_departemen, nip, nama, id_jabatan, pendidikan, tempat_lahir, tgl_lahir', 'safe', 'on'=>'search'),
+			array('id, id_departemen, nip, nama, satuan_kerja, id_jabatan, bidang_id, subbidang_id, pendidikan, tempat_lahir, tgl_lahir', 'safe', 'on'=>'search'),
 		);
 	}
   
@@ -64,6 +66,11 @@ class Pegawai extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+        'userAccess'=>array(self::BELONGS_TO,'User','user_id'),
+        'jabatan'=>array(self::BELONGS_TO,'Jabatan','id_jabatan'),
+        'bidang'=>array(self::BELONGS_TO,'Bidang','bidang_id'),
+        'subbidang'=>array(self::BELONGS_TO,'SubBidang','subbidang_id'),
+        
 		);
 	}
 
@@ -77,7 +84,10 @@ class Pegawai extends CActiveRecord
 			'id_departemen' => 'Id Departemen',
 			'nip' => 'Nip',
 			'nama' => 'Nama',
-			'jabatan' => 'Jabatan',
+			'id_jabatan' => 'Jabatan',
+			'bidang_id' => 'Bidang',
+			'subbidang_id' => 'Sub Bidang',
+			'satuan_kerja' => 'Satuan Kerja',
 			'pendidikan' => 'Pendidikan',
 			'tempat_lahir' => 'Tempat Lahir',
 			'tgl_lahir' => 'Tgl Lahir',
@@ -110,4 +120,61 @@ class Pegawai extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+  
+  public function getValidasiGroup(){
+      if ( !empty($this->userAccess->ValidasiGroup) ){
+            return $this->userAccess->ValidasiGroup;
+      }
+  }
+  
+  public function isJabatan(){
+      if ( empty($this->id_jabatan) )
+          return false;
+      
+      if ( !empty($this->jabatan) ){
+            return true;
+      }else{
+          return false;
+      }
+  }
+  
+  public function getJabatan(){
+      if ( !empty($this->jabatan) ){
+            return $this->jabatan;
+      }
+  }
+  
+  
+  public function isBidang(){
+      if ( empty($this->bidang_id) )
+          return false;
+      
+      if ( !empty($this->bidang) ){
+            return true;
+      }else{
+          return false;
+      }
+  }
+  
+  public function getBidang(){
+      if ( !empty($this->bidang) ){
+            return $this->bidang;
+      }
+  }
+  
+  public function isSubBidang(){
+      if ( empty($this->subbidang_id) )
+          return false;
+          
+      if ( !empty($this->subbidang) ){
+            return true;
+      }else{
+          return false;
+      }
+  }
+  public function getSubbidang(){
+      if ( !empty($this->subbidang) ){
+            return $this->subbidang;
+      }
+  }
 }

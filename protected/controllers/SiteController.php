@@ -3,7 +3,8 @@
 class SiteController extends Controller
 {
 	public $layout='/layouts/mainlogin';
-
+  public $pageTitle='';
+	public $menuactive='pegawai';
 	/**
 	 * Declares class-based actions.
 	 */
@@ -28,6 +29,7 @@ class SiteController extends Controller
 	 */
 	public function actionError()
 	{
+      $this->layout='/layouts/mainadmin';
 	    if($error=Yii::app()->errorHandler->error)
 	    {
 	    	if(Yii::app()->request->isAjaxRequest)
@@ -93,5 +95,37 @@ class SiteController extends Controller
 	{
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
+	}
+  
+  /**
+	 * Displays the contact page
+	 */
+	public function actionChangepassword()
+	{
+    $this->layout='/layouts/mainadmin';  
+    $this->menuactive = 'gantipassword';  
+    $pegawai = Yii::app()->user->getState('pegawai');
+    $this->pageTitle = ( empty($pegawai) ? Yii::app()->user->name : $pegawai->nama);
+    $model=new ChangePasswordForm;
+    
+    // collect user input data
+		if(isset($_POST['ChangePasswordForm']))
+		{
+			$model->attributes=$_POST['ChangePasswordForm'];
+			// validate user input and redirect to the previous page if valid
+			if($model->validate()){
+           $user = User::model()->findByPk(Yii::app()->user->id);
+           $user->generatePassword($model->password);
+           if ($user->save()){
+                Yii::app()->user->setFlash('password_success','Password sudah berubah.');
+                $this->refresh();
+               
+           }
+           
+           
+      }
+		}
+    
+		$this->render('changepassword',array('model'=>$model));
 	}
 }

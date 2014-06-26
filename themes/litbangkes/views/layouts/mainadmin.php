@@ -52,7 +52,7 @@
     <!-- START OF LEFT PANEL -->
     <div class="leftpanel">
         
-        <div class="datewidget">Hari ini is Senin, 2 Juni 2014</div>
+        <div class="datewidget">Hari ini, <?php echo date('d M Y')?></div>
         
         <div class="plainwidget">
             <h6>Nama:<strong> <?php echo ucfirst(Yii::app()->user->name)?></strong></h6>
@@ -83,9 +83,9 @@
                     <li <?php echo ($this->menuactive == 'outputpenilaian' ? 'class="active"' : '')?>><a href="output.html"><span class="icon-book"></span> Output Penelitian</a></li>
                 <?php } ?>    
                 <li><a href="">&nbsp;</a></li>
-                <li <?php echo ($this->menuactive == 'editprofil' ? 'class="active"' : '')?>><a href="editprofil.html"><span class="icon-user"></span> Edit Profil</a></li>
-                <li <?php echo ($this->menuactive == 'gantipassword' ? 'class="active"' : '')?>><a href="gantipassword.html"><span class="icon-cog"></span> Ganti Password</a></li>
-                <li ><a href="logout.html"><span class="icon-off"></span> Logout</a></li>
+                <li <?php echo ($this->menuactive == 'editprofil' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('members/pegawai/edit')?>"><span class="icon-user"></span> Edit Profil</a></li>
+                <li <?php echo ($this->menuactive == 'gantipassword' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('site/changepassword')?>"><span class="icon-cog"></span> Ganti Password</a></li>
+                <li ><a href="<?php echo Yii::app()->createUrl('site/logout')?>"><span class="icon-off"></span> Logout</a></li>
             </ul>
         </div><!--leftmenu-->
         
@@ -111,9 +111,9 @@
         </div><!--pagetitle-->  
       <?php } ?>
         <div class="maincontent">
-        	<div class="contentinner content-dashboard">                
-                <?php echo $content?>
-            </div><!--contentinner-->
+
+            <?php echo $content?>
+          
         </div><!--maincontent-->
         
     </div><!--mainright-->
