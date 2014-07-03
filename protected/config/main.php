@@ -32,7 +32,7 @@ return array(
 				)
 			)				  
 	),
-	'defaultController'=>'dashboard',
+	'defaultController'=>'members/pegawai/profile',
 
 	// application components
 	'components'=>array(
