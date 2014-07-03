@@ -98,7 +98,7 @@ class ProtokolpenelitianController extends Controller
                     $modelFile=new FilePenelitian;
                     $modelFile->attributes = $files;
 
-                    $fileaja=CUploadedFile::getInstance($modelFile,'filename['.$group.']');
+                    $fileaja = CUploadedFile::getInstance($modelFile,'filename['.$group.']');
 
                     if($modelFile->save())
                       {

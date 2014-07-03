@@ -15,7 +15,7 @@ class PegawaiController extends Controller {
     public function accessRules() {
         return array(
             array('allow',
-                'actions' => array('edit'),
+                'actions' => array('edit','profile'),
                 'users' => array('@'),
             ),
             array('allow',
@@ -161,6 +161,34 @@ class PegawaiController extends Controller {
         ));
     }
     
+    
+    /**
+     * Updates a particular model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id the ID of the model to be updated
+     */
+    public function actionProfile() {
+        $this->pageTitle = 'Profil';
+        $this->menuactive = 'editprofil';
+        
+        $model = Pegawai::model()->find('user_id ='.Yii::app()->user->id);
+        
+        if (!$model){
+            $this->pageTitle .= ' '.ucfirst(Yii::app()->user->name);
+            //$this->redirect(array('/members/pegawai'));
+        } else {
+            $this->pageTitle .= ' '.ucfirst($model->nama);
+        }
+        
+        $userAccess = $model->userAccess;
+        if (empty($userAccess))
+            $userAccess = new User;
+
+        $this->render('profile', array(
+            'model' => $model,
+            'modelUser' => $userAccess
+        ));
+    }
     
     /**
      * Returns the data model based on the primary key given in the GET variable.
