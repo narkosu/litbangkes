@@ -33,7 +33,8 @@ class ProposalPenelitian extends CActiveRecord
                             '3'=>'Disetujui',
                             '4'=>'Ditolak',
                             );   
-	/**
+	public $clients = array(1=>'Dalam Negeri', 2=>'Luar Negeri',3=> 'Lain - Lain');
+  /**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
 	 * @return ProposalPenelitian the static model class
@@ -80,6 +81,7 @@ class ProposalPenelitian extends CActiveRecord
         'pegawai'=>array(self::BELONGS_TO,'Pegawai','pegawai_id'),
         'jabatan'=>array(self::BELONGS_TO,'JabatanFungsional','jabatan_fungsional_id'),
         'subbidang'=>array(self::BELONGS_TO,'SubBidang','sub_bidang_id'),
+        'validasi'=>array(self::HAS_ONE,'ProposalValidasi','proposal_id'),
         'jenispenelitian'=>array(self::BELONGS_TO,'JenisPenelitian','jenis_penelitian_id'),
         'file'=>array(self::HAS_MANY,'FilePenelitian','proposal_id','condition'=>'file.status = 1'),
 		);
@@ -139,5 +141,16 @@ class ProposalPenelitian extends CActiveRecord
   
   public function getStatus(){
       return (!empty($this->statusDocument[$this->status]) ? $this->statusDocument[$this->status] : '');
+  }
+  
+  public function getClients(){
+      //print_r($this->clients);
+      return $this->clients;
+  }
+  
+  public function isValidasiPPI(){
+      if ( empty( $this->validasi ) ) return false;
+      
+      return ( $this->validasi->validasi_kabid && $this->validasi->validasi_kasubbid ) ;
   }
 }

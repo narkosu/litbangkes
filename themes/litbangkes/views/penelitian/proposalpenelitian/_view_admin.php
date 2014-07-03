@@ -21,7 +21,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
       <?php if ( Yii::app()->user->isKasubbid ) { ?>
         <li><a href="#tabs-3">Validasi Porposal Oleh KaSubBid</a></li>
        <?php } ?>
-      <?php if ( Yii::app()->user->isPPI ) { ?>
+       <?php if ( (Yii::app()->user->isPPI || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) && $model->isValidasiPPI()) { ?>
         <li><a href="#tabs-4">Validasi Porposal Oleh PPI</a></li>
        <?php } ?>
       <?php if ( Yii::app()->user->isKI ) { ?>
@@ -37,20 +37,51 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
         <div class="par">
             <label>Status</label>    
             <span class="field">
-                <span class="label label-info"><?php echo $model->getStatus() ?></span>
-                
+                <?php if ( $model->status == 3 ) {
+                            $labelValidasi = 'label-success';
+                        } else if ($model->status == 2) { // revisi
+                             $labelValidasi = 'label-success';
+                        } else if ($model->status == 4) { //ditolak
+                             $labelValidasi = 'label-important';
+                        }else {
+                        $labelValidasi = 'label-info';
+                    }
+                ?>
+                    <span class="label <?php echo $labelValidasi?>">
+                        <?php echo $model->getStatus() ?>
+                    </span>
+                = 
                 <?php if ( !empty($validasi->validasi_kabid) ) { ?>
-                    <span class="label label-info">
+                <?php if ( $validasi->validasi_kabid == 3 ) {
+                            $labelValidasi = 'label-success';
+                        } else if ($validasi->validasi_kabid == 2) { // revisi
+                             $labelValidasi = 'label-success';
+                        } else if ($validasi->validasi_kabid == 4) { //ditolak
+                             $labelValidasi = 'label-important';
+                        }else {
+                        $labelValidasi = 'label-info';
+                    }
+                ?>
+                    <span class="label <?php echo $labelValidasi?>">
                         <?php 
-
-                        echo $validasi->getStatus('validasi_kabid');
+                            echo $validasi->getStatus('validasi_kabid');
                         ?>
                         Kabid
                     </span>
                     <?php } ?>
 
                     <?php if ( !empty($validasi->validasi_kasubbid) ) { ?>
-                    <span class="label label-info">
+                        <?php if ( $validasi->validasi_kasubbid == 3 ) {
+                                    $labelValidasi = 'label-success';
+                                } else if ($validasi->validasi_kasubbid == 2) { // revisi
+                                     $labelValidasi = 'label-success';
+                                } else if ($validasi->validasi_kasubbid == 4) { //ditolak
+                                     $labelValidasi = 'label-important';
+                                }else {
+                        $labelValidasi = 'label-info';
+                    }
+                        ?>
+                    <span class="label <?php echo $labelValidasi?>">
                         <?php 
 
                         echo $validasi->getStatus('validasi_kasubbid');
@@ -60,7 +91,17 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
                     <?php } ?>
 
                     <?php if ( !empty($validasi->validasi_ppi) ) { ?>
-                    <span class="label label-info">
+                    <?php if ( $validasi->validasi_ppi == 3 ) {
+                                    $labelValidasi = 'label-success';
+                                } else if ($validasi->validasi_ppi == 2) { // revisi
+                                     $labelValidasi = 'label-success';
+                                } else if ($validasi->validasi_ppi == 4) { //ditolak
+                                     $labelValidasi = 'label-important';
+                                }else {
+                        $labelValidasi = 'label-info';
+                    }
+                        ?>
+                    <span class="label <?php echo $labelValidasi?>">
                         <?php 
 
                         echo $validasi->getStatus('validasi_ppi');
@@ -69,7 +110,17 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
                     </span>
                     <?php } ?>
                     <?php if ( !empty($validasi->validasi_ki) ) { ?>
-                    <span class="label label-info">
+                    <?php if ( $validasi->validasi_ki == 3 ) {
+                                    $labelValidasi = 'label-success';
+                                } else if ($validasi->validasi_ki == 2) { // revisi
+                                     $labelValidasi = 'label-success';
+                                } else if ($validasi->validasi_ki == 4) { //ditolak
+                                     $labelValidasi = 'label-important';
+                                }else {
+                        $labelValidasi = 'label-info';
+                    }
+                        ?>
+                    <span class="label <?php echo $labelValidasi?>">
                         <?php 
 
                         echo $validasi->getStatus('validasi_ki');
@@ -79,7 +130,17 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
                     <?php } ?>
 
                     <?php if ( !empty($validasi->validasi_ke) ) { ?>
-                    <span class="label label-info">
+                    <?php if ( $validasi->validasi_ke == 3 ) {
+                                    $labelValidasi = 'label-success';
+                                } else if ($validasi->validasi_ke == 2) { // revisi
+                                     $labelValidasi = 'label-success';
+                                } else if ($validasi->validasi_ke == 4) { //ditolak
+                                     $labelValidasi = 'label-important';
+                                }else {
+                        $labelValidasi = 'label-info';
+                    }
+                        ?>
+                    <span class="label <?php echo $labelValidasi?>">
                         <?php 
 
                         echo $validasi->getStatus('validasi_ke');
@@ -144,7 +205,9 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
                     <label><?php echo $jenisFile[$file->group_file]['main'] ?>
                     <small><?php echo $jenisFile[$file->group_file]['sub'] ?></small></label>  
                         <span class="field">
-                          <a href="<?php echo $file->filename; ?>"><?php echo $file->filename; ?></a>
+                          <a href="<?php echo Yii::app()->createUrl('penelitian/file/download').'?file='.$file->filename ?>">
+                              <?php echo $file->filename; ?>
+                          </a>
                        </span>
                 </div>
             <?php
@@ -254,7 +317,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
 
    </div> <!-- tabs-3 -->
    <?php } ?>
-    <?php if ( Yii::app()->user->isPPI ) { ?>
+   <?php if ( (Yii::app()->user->isPPI || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) && $model->isValidasiPPI()) { ?>
    <div id="tabs-4">
        <?php $form=$this->beginWidget('CActiveForm', array(
         'id'=>'validasi-ppi-form',

@@ -57,6 +57,7 @@ class ProposalpenelitianController extends Controller
     $validasi = ProposalValidasi::model()->find('proposal_id = '.$id);  
     $proposal = $this->loadModel($id);
     $modelFile = $proposal->file;
+    
     if ( empty($validasi)){
         $validasi = new ProposalValidasi;
         $validasi->proposal_id = $id;
@@ -142,8 +143,37 @@ class ProposalpenelitianController extends Controller
 		if(isset($_POST['ProposalPenelitian']))
 		{
 			$model->attributes=$_POST['ProposalPenelitian'];
-			if($model->save())
-				$this->redirect(array('proposalpenelitian/','id'=>$model->id));
+			if($model->save()){
+          
+          if ( !empty($_POST['FilePenelitian']['filename'])) {
+              
+            $modelFile->attributes=$_POST['FilePenelitian'];
+            $modelFile->filename=CUploadedFile::getInstance($modelFile,'filename');
+            if($modelFile->save())
+            {
+                  $time = time();
+                  $newfilename = $time.'.'.$modelFile->filename->getExtensionName();
+                  $extension = $modelFile->filename->getExtensionName();
+                  $modelFile->filename->saveAs($folder . '/' . $newfilename); 
+                  $modelFile->filename = $newfilename;
+                  $modelFile->proposal_id = $model->id;
+                  $modelFile->step = $model->step;
+                  $modelFile->group_file = 'proposal';
+                  $modelFile->version = $time;
+                  $modelFile->uploaded_by = Yii::app()->user->id;
+                  $modelFile->created_at = date('Y-m-d H:i:s');
+                  $modelFile->status = 1;
+                  $modelFile->save();
+
+
+                  $model->save();
+
+                  // redirect to success page
+
+                  $this->redirect(array('view','id'=>$model->id));
+            }
+          }
+      }
 		}
 
      

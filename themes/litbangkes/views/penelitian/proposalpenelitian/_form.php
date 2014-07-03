@@ -38,13 +38,13 @@ if ( Yii::app()->user->isMember ) {
     <div class="par">
         <label>NIP</label>   
         <span class="field">
-            <?php echo ucfirst($pegawai->nip) ?>
+            <?php echo $pegawai->nip ?>
         </span>
     </div>
     <div class="par">
         <label>Satuan Kerja</label>   
         <span class="field">
-            <?php ?>
+            <?php echo ucfirst($pegawai->satuan_kerja) ?>
         </span>
     </div>
 <?php } ?>
@@ -128,7 +128,7 @@ if ( Yii::app()->user->isMember ) {
 	<div class="par">
 		<?php echo $form->labelEx($model,'keywords'); ?>
       <span class="field">
-		<?php echo $form->textField($model,'keywords',array('size'=>60,'maxlength'=>255,'class'=>'input-large')); ?>
+		<?php echo $form->textField($model,'keywords',array('size'=>160,'maxlength'=>255,'class'=>'input-large')); ?>
       </span>
 		<?php echo $form->error($model,'keywords'); ?>
     
@@ -137,7 +137,11 @@ if ( Yii::app()->user->isMember ) {
 	<div class="par">
 		<?php echo $form->labelEx($model,'klien (Optional )'); ?>
       <span class="field">
-		<?php echo $form->textField($model,'klien',array('size'=>60,'maxlength'=>255)); ?>
+		<?php //echo $form->textField($model,'klien',array('size'=>60,'maxlength'=>255)); ?>
+      <?php $clients = $model->getClients(); 
+     
+      ?>
+      <?php echo $form->dropDownList($model, 'klien', $clients, array('empty' => 'Pilih Klien')); ?>    
       </span>
 		<?php echo $form->error($model,'klien'); ?>
 	</div>
@@ -159,8 +163,8 @@ $cs->registerScriptFile( Yii::app()->theme->baseUrl .'/js/jquery.tagsinput.min.j
 ?>
 
 <script type="text/javascript">
-  jQuery(document).ready(function(){
+  /*jQuery(document).ready(function(){
       jQuery('#ProposalPenelitian_keywords').tagsInput();
-  });
+  });*/
 </script>  
   
