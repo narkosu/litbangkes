@@ -65,28 +65,38 @@ class ProtokolpenelitianController extends Controller
 	public function actionCreate($id)
 	{
     $folder = Yii::getPathOfAlias('webroot')."/files";  
+    
     $model = ProposalPenelitian::model()->findByPk($id);
     
     if ( empty($model) ){
         $this->redirect(array('/penelitian/proposalpenelitian'));
     }
+    
     $validasi = ProposalValidasi::model()->find('proposal_id = '.$id.' and step = 1');
     if ( empty($validasi) ){
         $this->redirect(array('/penelitian/proposalpenelitian/view/id/'.$id));
     }
+    
     if ( $validasi->validasi_ppi != 3 ) {
         $this->redirect(array('/penelitian/proposalpenelitian/view/id/'.$id));
     }
-    
-    $modelProtokol = $this->loadModel($id);
-    if ( $modelProtokol->isNewRecord ) {
+    $newModelFile=new FilePenelitian;
+    $modelProtokol = $this->loadModelByProposal($id);
+    $groupFile = array();
+    if ( empty($modelProtokol) ) {
+        
     	$modelProtokol=new ProtokolPenelitian;
       $modelFile=new FilePenelitian;
     }else {
       
-      $modelFile = $model->file;  
+      $modelFile = $modelProtokol->file;  
+      if ( !empty($modelFile) ) 
+          foreach ( $modelFile as $_file ){
+          
+            $groupFile[$_file->group_file] = $_file;
+          }
     }
-		
+	
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -110,7 +120,7 @@ class ProtokolpenelitianController extends Controller
                       {
 
                           $time = time();
-                          $newfilename = $time.'.'.$fileaja->getExtensionName();
+                          $newfilename = $group.'_'.$time.'.'.$fileaja->getExtensionName();
                           $extension = $fileaja->getExtensionName();
 
                           $fileaja->saveAs($folder . '/' . $newfilename); 
@@ -134,6 +144,8 @@ class ProtokolpenelitianController extends Controller
 
 		$this->render('create',array(
 			'model'=>$model,
+      'newModelFile'=>$newModelFile,  
+      'groupFile' => $groupFile,  
 			'modelFile'=>$modelFile,
 			'modelProtokol'=>$modelProtokol,
         
@@ -217,6 +229,21 @@ class ProtokolpenelitianController extends Controller
 		return $model;
 	}
 
+  
+  /**
+	 * Returns the data model based on the primary key given in the GET variable.
+	 * If the data model is not found, an HTTP exception will be raised.
+	 * @param integer the ID of the model to be loaded
+	 */
+	public function loadModelByProposal($id)
+	{
+		$model=ProtokolPenelitian::model()->find('proposal_id = :pid',array('pid'=>$id));
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+  
+  
 	/**
 	 * Performs the AJAX validation.
 	 * @param CModel the model to be validated

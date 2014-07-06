@@ -69,23 +69,32 @@
         </span>
 
     </div>
-
   <div class="par">
       
 		  <label>Upload TOR</label>   
       <span class="field">
-         <?php echo $form->fileField($modelFile,'filename[tor]'); ?>   
+         <?php echo $form->fileField($newModelFile,'filename[tor]'); ?>   
+          <?php if ( !empty($groupFile['tor']) ) { ?>
+           <a href="<?php echo Yii::app()->createUrl('penelitian/file/download').'?file='.$groupFile['tor']->filename ?>">
+            <?php echo $groupFile['tor']->filename?>
+           </a>    
+          <?php } ?>
       </span>
-		<?php echo $form->error($modelFile,'filename[tor]'); ?>
+		<?php echo $form->error($newModelFile,'filename[tor]'); ?>
 	</div>
 
 <div class="par">
       
 		  <label>Upload Protokol</label>   
       <span class="field">
-         <?php echo $form->fileField($modelFile,'filename[protokol]'); ?>   
+         <?php echo $form->fileField($newModelFile ,'filename[protokol]'); ?> 
+          <?php if ( !empty($groupFile['protokol']) ) { ?>
+          <a href="<?php echo Yii::app()->createUrl('penelitian/file/download').'?file='.$groupFile['protokol']->filename ?>">
+          <?php echo $groupFile['protokol']->filename?>
+          </a>
+          <?php } ?>
       </span>
-		<?php echo $form->error($modelFile,'filename[protokol]'); ?>
+		<?php echo $form->error($newModelFile,'filename[protokol]'); ?>
 	</div>
 
 
@@ -101,9 +110,14 @@
       
 		  <label>Upload RAB</label>   
       <span class="field">
-         <?php echo $form->fileField($modelFile,'filename[rab]'); ?>   
+         <?php echo $form->fileField($newModelFile,'filename[rab]'); ?>   
+          <?php if ( !empty($groupFile['rab']) ) { ?>
+          <a href="<?php echo Yii::app()->createUrl('penelitian/file/download').'?file='.$groupFile['rab']->filename ?>">
+            <?php echo $groupFile['rab']->filename?>
+          </a>    
+          <?php } ?>
       </span>
-		<?php echo $form->error($modelFile,'filename[rab]'); ?>
+		<?php echo $form->error($newModelFile,'filename[rab]'); ?>
 	</div>
 
 	

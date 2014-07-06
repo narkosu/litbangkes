@@ -11,6 +11,7 @@ $this->menu=array(
 	array('label'=>'List ProtokolPenelitian', 'url'=>array('index')),
 	array('label'=>'Manage ProtokolPenelitian', 'url'=>array('admin')),
 );
+
 ?>
 
 <div class="maincontent">
@@ -48,6 +49,8 @@ $this->menu=array(
                      <?php echo $this->renderPartial('_form', 
                         array('model'=>$model, 
                               'modelFile' => $modelFile,
+                              'newModelFile'=>$newModelFile, 
+                              'groupFile' => $groupFile,  
                               'modelProtokol' => $modelProtokol,
                         )); ?>
                   </div><!--widgetcontent-->
