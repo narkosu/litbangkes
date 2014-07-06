@@ -28,6 +28,7 @@
               <div class="span9">
                   
                     <h4>Informasi Dasar</h4>
+                    <?php if (!empty($model)) { ?>
                       <p>
                         <label>Nama Lengkap:</label>
                         <span><?php echo $model->nama ?></span>
@@ -47,10 +48,17 @@
                           <span><?php echo $model->satuan_kerja ?></span>
                         
                       </p>
-
+                    <?php } else { ?>
                       <p>
-                        <label style="padding:0"><a href="gantipassword.html">Ganti Password?</a> 
-                        <a href="<?php echo Yii::app()->createUrl('members/pegawai/edit')?>">Edit Profil?</a></label>
+                        <label>Username:</label>
+                        <span><?php echo Yii::app()->user->name ?></span>
+                      </p>
+                      
+                    <?php } ?>
+                      <p>
+                        <label style="padding:0">
+                            <a href="<?php echo Yii::app()->createUrl('site/changepassword')?>" class="btn">Ganti Password?</a> 
+                        <a href="<?php echo Yii::app()->createUrl('members/pegawai/edit')?>"  class="btn">Edit Profil?</a></label>
                           
                       </p>
                       

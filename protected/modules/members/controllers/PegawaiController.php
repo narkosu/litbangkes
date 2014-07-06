@@ -176,11 +176,13 @@ class PegawaiController extends Controller {
         if (!$model){
             $this->pageTitle .= ' '.ucfirst(Yii::app()->user->name);
             //$this->redirect(array('/members/pegawai'));
+            $userAccess = Yii::app()->user;
         } else {
+            $userAccess = $model->userAccess;
             $this->pageTitle .= ' '.ucfirst($model->nama);
         }
         
-        $userAccess = $model->userAccess;
+        
         if (empty($userAccess))
             $userAccess = new User;
 
