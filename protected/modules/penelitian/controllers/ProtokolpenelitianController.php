@@ -78,8 +78,14 @@ class ProtokolpenelitianController extends Controller
         $this->redirect(array('/penelitian/proposalpenelitian/view/id/'.$id));
     }
     
-		$modelProtokol=new ProtokolPenelitian;
-		$modelFile=new FilePenelitian;
+    $modelProtokol = $this->loadModel($id);
+    if ( $modelProtokol->isNewRecord ) {
+    	$modelProtokol=new ProtokolPenelitian;
+      $modelFile=new FilePenelitian;
+    }else {
+      
+      $modelFile = $model->file;  
+    }
 		
 
 		// Uncomment the following line if AJAX validation is needed
