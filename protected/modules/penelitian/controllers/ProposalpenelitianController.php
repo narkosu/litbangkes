@@ -84,6 +84,7 @@ class ProposalpenelitianController extends Controller
     $model=new ProposalPenelitian;
     $modelFile=new FilePenelitian;
     
+    
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
     
@@ -92,6 +93,10 @@ class ProposalpenelitianController extends Controller
       
 			$model->attributes=$_POST['ProposalPenelitian'];
       $model->created_at = date('Y-m-d H:i:s');
+      $bidang = SubBidang::model()->findByPk($model->sub_bidang_id);
+      if ( !empty($bidang) ){
+        $model->bidang_id = $bidang->bidang_id;
+      }
 			if($model->save()) {
           $modelFile->attributes=$_POST['FilePenelitian'];
           $modelFile->filename=CUploadedFile::getInstance($modelFile,'filename');
@@ -110,7 +115,7 @@ class ProposalpenelitianController extends Controller
                 $modelFile->uploaded_by = Yii::app()->user->id;
                 $modelFile->created_at = date('Y-m-d H:i:s');
                 $modelFile->save();
-                $model->status = 1;
+                $model->status = 0;
                 
                 $model->save();
 
