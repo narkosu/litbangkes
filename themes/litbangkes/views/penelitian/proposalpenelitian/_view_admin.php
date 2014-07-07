@@ -24,7 +24,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
        <?php if ( (Yii::app()->user->isPPI || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) && $model->isValidasiPPI()) { ?>
         <li><a href="#tabs-4">Validasi Porposal Oleh PPI</a></li>
        <?php } ?>
-      <?php if ( Yii::app()->user->isKI ) { ?>
+      <?php if ( (Yii::app()->user->isKI || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) && $model->isValidasiKI()  ) { ?>
         <li><a <?php echo (($validasi->validasi_ppi == 3 ) ? 'href="#tabs-5"' : '') ?>>Validasi Proposal Oleh Komisi Ilmiah</a></li>
       <?php } ?>
       <?php if ( Yii::app()->user->isKE ) { ?>
@@ -352,7 +352,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
 
    </div> <!-- tabs-4 -->
     <?php } ?>
-    <?php if ( Yii::app()->user->isKI ) { ?>
+    <?php if ( (Yii::app()->user->isKI || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) && $model->isValidasiKI()  ) { ?>
    <div id="tabs-5" <?php echo (($validasi->validasi_ppi == 3 ) ? '' : 'style="display:none;"') ?>>
 
       <?php $form=$this->beginWidget('CActiveForm', array(
@@ -362,8 +362,8 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
       )); ?>
        <input type="hidden" name="group_validasi" value="ki">
         <p>
-            <label>Ditolak Oleh KI</label>
-            <span class="field"><input type="radio" name="ProposalValidasi[validasi_ki]" value="4" <?php echo ( $validasi->validasi_ki == 4 ? 'checked' : '');?> /></span>
+            <label>Revisi Oleh KI</label>
+            <span class="field"><input type="radio" name="ProposalValidasi[validasi_ki]" value="2" <?php echo ( $validasi->validasi_ki == 2 ? 'checked' : '');?> /></span>
         </p>
 
         <p>

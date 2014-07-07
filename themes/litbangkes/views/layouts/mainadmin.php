@@ -74,6 +74,7 @@
                     </li>
                 
                     <li <?php echo ($this->menuactive == 'penelitian' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian')?>"><span class="icon-align-justify"></span> Daftar Penelitian</a></li>
+                    <li <?php echo ($this->menuactive == 'validasipenelitian' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/validasi')?>"><span class="icon-align-justify"></span> Daftar Validasi Penelitian</a></li>
                     <li <?php echo ($this->menuactive == 'pengajuan' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/create')?>"><span class="icon-upload"></span> Pengajuan Penelitian</a></li>
                     <?php /*
                     <li <?php echo ($this->menuactive == 'progress' ? 'class="active"' : '')?>><a href="progress.html"><span class="icon-indent-left"></span> Progres Penelitian</a></li>
@@ -83,10 +84,20 @@
                 <?php if ( Yii::app()->user->isMember ) { ?>
                     <li <?php echo ($this->menuactive == 'penelitian' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian')?>"><span class="icon-align-justify"></span> Daftar Penelitian</a></li>
                     <li <?php echo ($this->menuactive == 'pengajuan' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/create')?>"><span class="icon-upload"></span> Pengajuan Penelitian</a></li>
+                    <?php if (Yii::app()->user->isPPI ) { ?>
+                        <li <?php echo ($this->menuactive == 'validasipenelitian' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/validasi')?>"><span class="icon-align-justify"></span> Daftar Validasi Penelitian</a></li>
+                    <?php } ?>
+                    <?php if (Yii::app()->user->isKabid ) { ?>
+                        <li <?php echo ($this->menuactive == 'validasipenelitian' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/validasi')?>"><span class="icon-align-justify"></span> Daftar Validasi Penelitian</a></li>
+                    <?php } ?>
+                    <?php if (Yii::app()->user->isKasubbid ) { ?>
+                        <li <?php echo ($this->menuactive == 'validasipenelitian' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/validasi')?>"><span class="icon-align-justify"></span> Daftar Validasi Penelitian</a></li>
+                    <?php } ?>    
                     <?php /*
                     <li <?php echo ($this->menuactive == 'progress' ? 'class="active"' : '')?>><a href="#"><span class="icon-indent-left"></span> Progres Penelitian</a></li>
                     <li <?php echo ($this->menuactive == 'outputpenilaian' ? 'class="active"' : '')?>><a href="#"><span class="icon-book"></span> Output Penelitian</a></li>
-                <?php */ } ?>    
+                <?php */ } ?>
+                    
                 <li><a href="">&nbsp;</a></li>
                 <li <?php echo ($this->menuactive == 'editprofil' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('members/pegawai/edit')?>"><span class="icon-user"></span> Edit Profil</a></li>
                 <li <?php echo ($this->menuactive == 'gantipassword' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('site/changepassword')?>"><span class="icon-cog"></span> Ganti Password</a></li>

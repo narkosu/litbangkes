@@ -34,7 +34,7 @@ class ProposalpenelitianController extends Controller
 				'expression'=>'$user->isSuperAdmin || $user->isMember || $user->isKabid ',
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','validasi','viewvalidasi'),
 				'users'=>array('@'),
         'expression'=>'$user->isSuperAdmin || $user->isMember',
 			),
@@ -56,6 +56,7 @@ class ProposalpenelitianController extends Controller
 	{
     $validasi = ProposalValidasi::model()->find('proposal_id = '.$id);  
     $proposal = $this->loadModel($id);
+    $this->pageTitle = $proposal->nama_penelitian;
     $modelFile = $proposal->file;
     
     if ( empty($validasi)){
@@ -73,6 +74,34 @@ class ProposalpenelitianController extends Controller
 		));
 	}
 
+  
+  /**
+	 * Displays a particular model.
+	 * @param integer $id the ID of the model to be displayed
+	 */
+	public function actionViewvalidasi($id)
+	{
+    $this->menuactive = 'validasipenelitian';  
+    $validasi = ProposalValidasi::model()->find('proposal_id = '.$id);  
+    $proposal = $this->loadModel($id);
+    $this->pageTitle = $proposal->nama_penelitian;
+    $modelFile = $proposal->file;
+    
+    if ( empty($validasi)){
+        $validasi = new ProposalValidasi;
+        $validasi->proposal_id = $id;
+        $validasi->step = 1;
+    }
+    
+    $validasi = $this->saveValidation($validasi, $_POST);
+    
+		$this->render('viewvalidasi',array(
+			'model'=>$proposal,
+      'modelFile'=>$modelFile,
+			'validasi'=>$validasi,
+		));
+	}
+  
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -248,6 +277,73 @@ class ProposalpenelitianController extends Controller
 		));
 	}
 
+  
+  /**
+	 * Lists all for validation models.
+	 */
+	public function actionValidasi()
+	{
+    $this->menuactive = 'validasipenelitian'; 
+    $userLogin = Yii::app()->user;
+    /*if ( Yii::app()->user->isSuperAdmin ) {
+        $proposal = ProposalPenelitian::model()->findAll();
+    } else if ( Yii::app()->user->isKabid ){
+        $me = Yii::app()->user->getState('pegawai');
+        
+        $criteria = new CDbCriteria();
+        $criteria->condition .= 'bidang_id = '.$me->bidang_id;
+        $criteria->condition .= ' OR pegawai_id = '.$me->id;
+        $proposal = ProposalPenelitian::model()->findAll($criteria);
+    } else if ( Yii::app()->user->isKasubbid ){
+        $me = Yii::app()->user->getState('pegawai');
+        
+        $criteria = new CDbCriteria();
+        $criteria->condition .= '( bidang_id = '.$me->bidang_id;
+        $criteria->condition .= ' AND  sub_bidang_id = '.$me->subbidang_id.' ) ';
+        $criteria->condition .= ' OR pegawai_id = '.$me->id .' ';
+        
+        $proposal = ProposalPenelitian::model()->findAll($criteria);
+    }else if ( Yii::app()->user->isMember ) {
+        
+        $me = Yii::app()->user->getState('pegawai');
+        
+        $criteria = new CDbCriteria();
+        $criteria->condition .= 'pegawai_id = '.$me->id;
+        $proposal = ProposalPenelitian::model()->findAll($criteria);
+    }*/
+    $criteria = new CDbCriteria();
+    /* validasi untuk PPI */
+    if ( $userLogin->isPPI  ) { 
+        $criteria->join = 'LEFT JOIN tbl_proposal_validasi a on t.id = a.proposal_id';
+        $criteria->condition .= 'a.validasi_kabid = 3 && a.validasi_kasubbid = 3';
+    }
+    
+    /* validasi untuk Kabid */
+    if ( $userLogin->isKabid  ) { 
+        $me = Yii::app()->user->getState('pegawai');
+        //$criteria->join = 'LEFT JOIN tbl_proposal_validasi a on t.id = a.proposal_id';
+        $criteria->condition .= 't.bidang_id = '.$me->bidang_id;
+    }
+    
+    /* validasi untuk Kasubbid */
+    if ( $userLogin->isKasubbid ) { 
+        $me = Yii::app()->user->getState('pegawai');
+        //$criteria->join = 'LEFT JOIN tbl_proposal_validasi a on t.id = a.proposal_id';
+        $criteria->condition .= 't.bidang_id = '.$me->bidang_id.' && t.sub_bidang_id = '.$me->subbidang_id;
+    }
+    
+    $proposal = ProposalPenelitian::model()->findAll($criteria);
+    /*$dataProvider=new CActiveDataProvider('ProposalPenelitian');
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+		));
+     * 
+     */
+     $this->render('validasi',array(
+			'data'=>$proposal,
+		));
+	}
+  
 	/**
 	 * Manages all models.
 	 */

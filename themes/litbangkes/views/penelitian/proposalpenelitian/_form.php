@@ -88,17 +88,30 @@ if ( Yii::app()->user->isMember ) {
 		<?php echo $form->error($model,'sub_bidang_id'); ?>
 	</div>
 
+<?php
+    $listPakar=CHtml::listData(Kepakaran::model()->findAll(), 'id', 'nama_kepakaran');;
+    ?>
+	<div class="par">
+		<?php echo $form->labelEx($model,'pakar_id'); ?>
+      <span class="field">
+		<?php echo $form->dropDownList($model, 'pakar_id',$listSubBidang, array('empty' => 'Pilih Kepakaran')); ?>
+      </span>
+		<?php echo $form->error($model,'pakar_id'); ?>
+	</div>
+
   <div class="par">
       
 		<?php echo $form->labelEx($modelFile,'filename'); ?>
       <?php if ( $model->file ){ 
-          foreach ($model->file as $file ){
-          ?>
-              <span class="field">
-                <?php echo $file->filename; ?>   
-             </span>
-          <?php
-          }
+            foreach ($model->file as $file ){
+            ?>
+                <span class="field">
+                    <a href="<?php echo Yii::app()->createUrl('penelitian/file/download').'?file='.$file->filename ?>">`
+                        <?php echo $file->filename; ?>   
+                    </a>      
+               </span>
+            <?php
+            }
           } ?>
       <span class="field">
          <?php echo $form->fileField($modelFile,'filename'); ?>   
