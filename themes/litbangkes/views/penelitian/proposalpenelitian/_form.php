@@ -94,7 +94,7 @@ if ( Yii::app()->user->isMember ) {
 	<div class="par">
 		<?php echo $form->labelEx($model,'pakar_id'); ?>
       <span class="field">
-		<?php echo $form->dropDownList($model, 'pakar_id',$listSubBidang, array('empty' => 'Pilih Kepakaran')); ?>
+		<?php echo $form->dropDownList($model, 'pakar_id',$listPakar, array('empty' => 'Pilih Kepakaran')); ?>
       </span>
 		<?php echo $form->error($model,'pakar_id'); ?>
 	</div>
