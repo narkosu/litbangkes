@@ -81,7 +81,7 @@ class ProposalPenelitian extends CActiveRecord
         'pegawai'=>array(self::BELONGS_TO,'Pegawai','pegawai_id'),
         'jabatan'=>array(self::BELONGS_TO,'JabatanFungsional','jabatan_fungsional_id'),
         'subbidang'=>array(self::BELONGS_TO,'SubBidang','sub_bidang_id'),
-        'validasi'=>array(self::HAS_ONE,'ProposalValidasi','proposal_id'),
+        'validasi'=>array(self::HAS_ONE,'ProposalValidasi','proposal_id','condition'=>'validasi.step = 1'),
         'jenispenelitian'=>array(self::BELONGS_TO,'JenisPenelitian','jenis_penelitian_id'),
         'file'=>array(self::HAS_MANY,'FilePenelitian','proposal_id','condition'=>'file.status = 1'),
 		);
@@ -152,5 +152,11 @@ class ProposalPenelitian extends CActiveRecord
       if ( empty( $this->validasi ) ) return false;
       
       return ( $this->validasi->validasi_kabid && $this->validasi->validasi_kasubbid ) ;
+  }
+  
+  public function isValidasiKI(){
+      if ( empty( $this->validasi ) ) return false;
+      
+      return ( $this->validasi->validasi_ppi == 3 ) ;
   }
 }

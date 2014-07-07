@@ -11,7 +11,21 @@
  */
 class ProtokolPenelitian extends CActiveRecord
 {
-	/**
+	const STATUS_DRAFT = 0;
+  const STATUS_PROGRESS = 1;
+  const STATUS_REVISI = 2;
+  const STATUS_SETUJU = 3;
+  const STATUS_TOLAK = 4;
+  public $editable = true;
+  public $statusDocument = array(
+                            '0'=>'Draft',
+                            '1'=>'Progress',
+                            '2'=>'Revisi',
+                            '3'=>'Disetujui',
+                            '4'=>'Ditolak',
+                            );   
+   
+   /**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
 	 * @return ProtokolPenelitian the static model class
@@ -56,6 +70,9 @@ class ProtokolPenelitian extends CActiveRecord
         'file'=>array(self::HAS_MANY,'FilePenelitian','',
                         'on' => 'proposal_id = file.proposal_id',
                         'condition'=>"file.status = 1 && ( file.group_file = 'tor' || file.group_file = 'protokol' || file.group_file = 'rab')"),
+        'validasi'=>array(self::HAS_ONE,'ProposalValidasi',''
+                        ,'on' => 'proposal_id = validasi.proposal_id',
+                        'condition'=>'validasi.step = 2'),
 		);
 	}
 
@@ -92,4 +109,8 @@ class ProtokolPenelitian extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+  
+  public function getStatus(){
+      return (!empty($this->statusDocument[$this->status]) ? $this->statusDocument[$this->status] : '');
+  }
 }
