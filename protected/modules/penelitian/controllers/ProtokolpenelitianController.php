@@ -71,11 +71,16 @@ class ProtokolpenelitianController extends Controller {
         
         $newModelFile = new FilePenelitian;
         $modelProtokol = $this->loadModelByProposal($id);
+        
         $groupFile = array();
         if (empty($modelProtokol)) {
 
-            $modelProtokol = new ProtokolPenelitian;
+            /*$modelProtokol = new ProtokolPenelitian;
             $modelFile = new FilePenelitian;
+            */
+            
+            $this->redirect(array('/penelitian/protokolpenelitian/create/id/' . $id));
+            
         } else {
 
             $modelFile = $modelProtokol->file;
@@ -314,8 +319,10 @@ class ProtokolpenelitianController extends Controller {
      */
     public function loadModelByProposal($id) {
         $model = ProtokolPenelitian::model()->find('proposal_id = :pid', array('pid' => $id));
-        if ($model === null)
+        /*if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
+         * 
+         */
         return $model;
     }
 

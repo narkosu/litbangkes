@@ -20,9 +20,10 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.modules.members.models.*',
+		'application.modules.masters.models.*',
 		'application.components.*',
 	),
-	'modules'=> array('members','penelitian',
+	'modules'=> array('masters','members','penelitian',
 		'gii'=>array(
 				'class'=>'system.gii.GiiModule',
 				'password'=>'test',

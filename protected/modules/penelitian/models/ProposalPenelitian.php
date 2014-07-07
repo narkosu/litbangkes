@@ -61,7 +61,7 @@ class ProposalPenelitian extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array(' pegawai_id, jabatan_fungsional_id, sub_bidang_id, jenis_penelitian_id, nama_penelitian', 'required'),
-			array('user_id, pegawai_id, jabatan_fungsional_id, sub_bidang_id, jenis_penelitian_id, tahun_anggaran, status, step', 'numerical', 'integerOnly'=>true),
+			array('user_id, pegawai_id, jabatan_fungsional_id, sub_bidang_id, pakar_id,jenis_penelitian_id, tahun_anggaran, status, step', 'numerical', 'integerOnly'=>true),
 			array('nama_penelitian, keywords, klien', 'length', 'max'=>255),
 			array('created_at', 'safe'),
 			// The following rule is used by search().
@@ -81,6 +81,7 @@ class ProposalPenelitian extends CActiveRecord
         'pegawai'=>array(self::BELONGS_TO,'Pegawai','pegawai_id'),
         'jabatan'=>array(self::BELONGS_TO,'JabatanFungsional','jabatan_fungsional_id'),
         'subbidang'=>array(self::BELONGS_TO,'SubBidang','sub_bidang_id'),
+        'pakar'=>array(self::BELONGS_TO,'Kepakaran','pakar_id'),
         'validasi'=>array(self::HAS_ONE,'ProposalValidasi','proposal_id','condition'=>'validasi.step = 1'),
         'jenispenelitian'=>array(self::BELONGS_TO,'JenisPenelitian','jenis_penelitian_id'),
         'file'=>array(self::HAS_MANY,'FilePenelitian','proposal_id','condition'=>'file.status = 1'),
@@ -99,6 +100,7 @@ class ProposalPenelitian extends CActiveRecord
 			'nama_penelitian' => 'Nama Penelitian',
 			'jabatan_fungsional_id' => 'Jabatan Fungsional',
 			'sub_bidang_id' => 'Sub Bidang',
+			'pakar_id' => 'Kepakaran',
 			'jenis_penelitian_id' => 'Jenis Penelitian',
 			'tahun_anggaran' => 'Tahun Anggaran',
 			'keywords' => 'Keywords',

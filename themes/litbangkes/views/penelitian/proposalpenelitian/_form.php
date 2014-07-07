@@ -88,6 +88,17 @@ if ( Yii::app()->user->isMember ) {
 		<?php echo $form->error($model,'sub_bidang_id'); ?>
 	</div>
 
+<?php
+    $listPakar=CHtml::listData(Kepakaran::model()->findAll(), 'id', 'nama_kepakaran');;
+    ?>
+	<div class="par">
+		<?php echo $form->labelEx($model,'pakar_id'); ?>
+      <span class="field">
+		<?php echo $form->dropDownList($model, 'pakar_id',$listSubBidang, array('empty' => 'Pilih Kepakaran')); ?>
+      </span>
+		<?php echo $form->error($model,'pakar_id'); ?>
+	</div>
+
   <div class="par">
       
 		<?php echo $form->labelEx($modelFile,'filename'); ?>
