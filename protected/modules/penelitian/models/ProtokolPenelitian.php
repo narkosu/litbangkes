@@ -73,6 +73,7 @@ class ProtokolPenelitian extends CActiveRecord
         'validasi'=>array(self::HAS_ONE,'ProposalValidasi',''
                         ,'on' => 'proposal_id = validasi.proposal_id',
                         'condition'=>'validasi.step = 2'),
+        'proposal'=>array(self::BELONGS_TO,'ProposalPenelitian','proposal_id')
 		);
 	}
 

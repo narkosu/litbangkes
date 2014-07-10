@@ -173,6 +173,7 @@ class ProtokolpenelitianController extends Controller {
         if ($validasi->validasi_ppi != 3) {
             $this->redirect(array('/penelitian/proposalpenelitian/view/id/' . $id));
         }
+        
         $newModelFile = new FilePenelitian;
         $modelProtokol = $this->loadModelByProposal($id);
         $groupFile = array();
@@ -189,8 +190,6 @@ class ProtokolpenelitianController extends Controller {
                     $groupFile[$_file->group_file] = $_file;
                 }
         }
-
-
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
@@ -200,8 +199,9 @@ class ProtokolpenelitianController extends Controller {
             $modelProtokol->attributes = $_POST['ProtokolPenelitian'];
             $modelProtokol->proposal_id = $id;
 
-            if ($modelProtokol->save()) {
-                foreach ($_POST['FilePenelitian']['filename'] as $group => $files) {
+            if ( $modelProtokol->save() ) {
+                
+                foreach ($_FILES['FilePenelitian']['name']['filename'] as $group => $files) {
                     if (!empty($files)) {
                         $modelFile = new FilePenelitian;
                         $modelFile->attributes = $files;
@@ -220,6 +220,7 @@ class ProtokolpenelitianController extends Controller {
                             $modelFile->step = $model->step;
                             $modelFile->group_file = $group;
                             $modelFile->version = $time;
+                            $modelFile->status = 1;
                             $modelFile->uploaded_by = Yii::app()->user->id;
                             $modelFile->created_at = date('Y-m-d H:i:s');
                             $modelFile->save();
@@ -227,7 +228,11 @@ class ProtokolpenelitianController extends Controller {
                         }
                     }
                 }
-
+                $proposal = $modelProtokol->proposal;
+                $proposal->step = ProposalPenelitian::ISPROTOKOL;
+                $proposal->save();
+                
+                $this->refresh();
                 //$this->redirect(array('view','id'=>$modelProtokol->id));
             }
         }
