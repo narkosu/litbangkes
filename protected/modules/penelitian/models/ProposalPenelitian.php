@@ -25,6 +25,8 @@ class ProposalPenelitian extends CActiveRecord
   const STATUS_REVISI = 2;
   const STATUS_SETUJU = 3;
   const STATUS_TOLAK = 4;
+  const ISPROPOSAL = 1;
+  const ISPROTOKOL = 2;
   
   public $editable = true;
   public $statusDocument = array(
