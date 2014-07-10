@@ -53,8 +53,11 @@ $StatusColor = array(   '0'=>'label-info',
                     <tr>
                         <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
                         <th class="head0">Judul Penelitian</th>
+                        <th class="head0">Diajukan oleh</th>
+                        
                         <th class="head1">Jenis Penelitian</th>
                         <th class="head0">Tahun Anggaran</th>
+                        <th class="head0">Position</th>
                         <th class="head0">status</th>
                         <th class="head0">Tindakan</th>
                     </tr>
@@ -66,8 +69,11 @@ $StatusColor = array(   '0'=>'label-info',
                                     <input type="checkbox" />
                                 </span></td>
                             <td><a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/view/id/' . $proposal->id) ?>"><?php echo $proposal->nama_penelitian ?></a></td>
+                            <td><?php echo $proposal->pegawai->nama ?></td>
                             <td><?php echo $proposal->jenispenelitian->nama ?></td>
+                            
                             <td><?php echo $proposal->tahun_anggaran ?></td>
+                            <td><?php echo $proposal->getPosition() ?></td>
                             <td><span class="label <?php echo $StatusColor[$proposal->status]?>"><?php echo $proposal->getStatus() ?></span></td>
                             <td class="center">
                                 <?php if (Yii::app()->user->isSuperAdmin || ( Yii::app()->user->getState('pegawai') && Yii::app()->user->getState('pegawai')->id == $proposal->pegawai_id)) { ?>

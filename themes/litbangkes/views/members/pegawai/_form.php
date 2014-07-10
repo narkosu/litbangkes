@@ -87,7 +87,7 @@
 		<?php echo $form->labelEx($model,'subbidang_id'); ?>
        <span class="field">
 
-		<?php echo $form->dropDownList($model,'subbidang_id', $listBidang, array('empty' => 'Pilih Sub Bidang')); ?>
+		<?php echo $form->dropDownList($model,'subbidang_id', $listSubBidang, array('empty' => 'Pilih Sub Bidang')); ?>
        </span>
 		<?php echo $form->error($model,'subbidang_id'); ?>
 	</div>

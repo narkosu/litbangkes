@@ -46,7 +46,7 @@ class Pegawai extends CActiveRecord
 			array(
           'nip, pendidikan, tempat_lahir, tgl_lahir',
           'required'),
-			array('id_departemen', 'numerical', 'integerOnly'=>true),
+			array('bidang_id, subbidang_id, id_departemen', 'numerical', 'integerOnly'=>true),
 			array('nip, nama', 'length', 'max'=>30),
 			array('id_jabatan, tempat_lahir', 'length', 'max'=>50),
 			array('pendidikan', 'length', 'max'=>10),

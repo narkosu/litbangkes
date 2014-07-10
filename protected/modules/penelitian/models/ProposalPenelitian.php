@@ -25,6 +25,7 @@ class ProposalPenelitian extends CActiveRecord
   const STATUS_REVISI = 2;
   const STATUS_SETUJU = 3;
   const STATUS_TOLAK = 4;
+  
   public $editable = true;
   public $statusDocument = array(
                             '0'=>'Draft',
@@ -33,7 +34,12 @@ class ProposalPenelitian extends CActiveRecord
                             '3'=>'Disetujui',
                             '4'=>'Ditolak',
                             );   
-	public $clients = array(1=>'Dalam Negeri', 2=>'Luar Negeri',3=> 'Lain - Lain');
+	public $positionDocument = array(
+                            '1'=>'Proposal',
+                            '2'=>'Protokol',
+                            );   
+  
+  public $clients = array(1=>'Dalam Negeri', 2=>'Luar Negeri',3=> 'Lain - Lain');
   /**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -143,6 +149,10 @@ class ProposalPenelitian extends CActiveRecord
   
   public function getStatus(){
       return (!empty($this->statusDocument[$this->status]) ? $this->statusDocument[$this->status] : '');
+  }
+  
+  public function getPosition(){
+      return (!empty($this->positionDocument[$this->step]) ? $this->positionDocument[$this->step] : '');
   }
   
   public function getClients(){
