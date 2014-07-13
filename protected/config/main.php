@@ -50,10 +50,10 @@ return array(
 		// uncomment the following to use a MySQL database
 		
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=litbangkes',
+			'connectionString' => 'mysql:host=localhost;dbname=narkosu_litbangkes',
 			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
+			'username' => 'narkosu_litbang',
+			'password' => 'litbangkes234',
 			'charset' => 'utf8',
 			'tablePrefix' => 'tbl_',
 		),
