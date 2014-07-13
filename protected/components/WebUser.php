@@ -34,6 +34,24 @@ class WebUser extends CWebUser{
 	}
 	
   
+  //is the user an Kapuslit ?
+	function getIsKapuslit(){
+		
+    $getKapuslit = Yii::app()->user->getState('isKapuslit');
+    if ( empty($getKapuslit) )  {           
+        $isKapuslit= UserValidasigroup::model()->find('user_id = '.$this->user->id. ' and validasigroup_id = 4');
+    } else {
+        $isKapuslit = $getKapuslit;
+    }
+    if ( !empty($isKapuslit)){
+        Yii::app()->user->setState('isKapuslit',$isKapuslit);
+        return true;
+    }else{
+        return false;
+    }
+   
+	}
+  
    //is the user an KI ?
 	function getIsKI(){
 		

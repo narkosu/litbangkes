@@ -69,8 +69,9 @@ class ProposalPenelitian extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array(' pegawai_id, jabatan_fungsional_id, sub_bidang_id, jenis_penelitian_id, nama_penelitian', 'required'),
-			array('user_id, pegawai_id, jabatan_fungsional_id, sub_bidang_id, pakar_id,jenis_penelitian_id, tahun_anggaran, status, step', 'numerical', 'integerOnly'=>true),
-			array('nama_penelitian, keywords, klien', 'length', 'max'=>255),
+			array('user_id, pegawai_id, jabatan_fungsional_id, sub_bidang_id, pakar_id,jenis_penelitian_id, tahun_anggaran, status, step, klien', 'numerical', 'integerOnly'=>true),
+			array('sumber_dana, detail_sumber_dana', 'numerical', 'integerOnly'=>true),
+			array('nama_penelitian, keywords, klien_lain, sumber_dana_lain', 'length', 'max'=>255),
 			array('created_at', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -110,6 +111,7 @@ class ProposalPenelitian extends CActiveRecord
 			'sub_bidang_id' => 'Sub Bidang',
 			'pakar_id' => 'Kepakaran',
 			'jenis_penelitian_id' => 'Jenis Penelitian',
+			'sumber_dana' => 'Sumber Dana',
 			'tahun_anggaran' => 'Tahun Anggaran',
 			'keywords' => 'Keywords',
 			'klien' => 'Klien',
@@ -166,6 +168,13 @@ class ProposalPenelitian extends CActiveRecord
       if ( empty( $this->validasi ) ) return false;
       
       return ( $this->validasi->validasi_kabid && $this->validasi->validasi_kasubbid ) ;
+  }
+  
+  public function isValidasiKapuslit(){
+      if ( empty( $this->validasi ) ) return false;
+      
+      return ( $this->validasi->validasi_kabid && $this->validasi->validasi_kasubbid 
+              && $this->validasi->validasi_ppi ) ;
   }
   
   public function isValidasiKI(){

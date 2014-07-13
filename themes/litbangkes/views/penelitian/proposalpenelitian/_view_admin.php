@@ -24,6 +24,9 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
        <?php if ( (Yii::app()->user->isPPI || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) && $model->isValidasiPPI()) { ?>
         <li><a href="#tabs-4">Validasi Porposal Oleh PPI</a></li>
        <?php } ?>
+        <?php if ( (Yii::app()->user->isKapuslit || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) && $model->isValidasiKapuslit()) { ?>
+        <li><a href="#tabs-validasi-kaspulit">Validasi Porposal Oleh PPI</a></li>
+       <?php } ?>
       <?php if ( (Yii::app()->user->isKI || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) && $model->isValidasiKI()  ) { ?>
         <li><a <?php echo (($validasi->validasi_ppi == 3 ) ? 'href="#tabs-5"' : '') ?>>Validasi Proposal Oleh Komisi Ilmiah</a></li>
       <?php } ?>
@@ -317,6 +320,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
 
    </div> <!-- tabs-3 -->
    <?php } ?>
+   
    <?php if ( (Yii::app()->user->isPPI || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) && $model->isValidasiPPI()) { ?>
    <div id="tabs-4">
        <?php $form=$this->beginWidget('CActiveForm', array(
@@ -352,6 +356,44 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
 
    </div> <!-- tabs-4 -->
     <?php } ?>
+   <!-- Kapuslit -->
+   <?php if ( (Yii::app()->user->isPPI || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) && $model->isValidasiKapuslit()) { ?>
+   <div id="tabs-validasi-kaspulit">
+       <?php $form=$this->beginWidget('CActiveForm', array(
+        'id'=>'validasi-ppi-form',
+        'enableAjaxValidation'=>false,
+         'htmlOptions'=>array('class'=>'stdform stdform2')
+      )); ?>
+      <input type="hidden" name="group_validasi" value="kapuslit">
+        <p>
+            <label>Ditolak Oleh Kapuslit</label>
+            <span class="field">
+                <input type="radio" name="ProposalValidasi[validasi_kapuslit]" value="4" <?php echo ( $validasi->validasi_kapuslit == 4 ? 'checked' : '');?> /> 
+            </span>
+        </p>
+
+        <p>
+            <label>Direvisi Oleh Kapuslit</label>
+            <span class="field">
+                <input type="radio" name="ProposalValidasi[validasi_kapuslit]" value="2" <?php echo ( $validasi->validasi_kapuslit == 2 ? 'checked' : '');?> />
+            </span>
+        </p>
+
+        <p>
+            <label>Disetujui Oleh Kapuslit</label>
+            <span class="field">
+                <input type="radio" name="ProposalValidasi[validasi_kapuslit]" value="3" <?php echo ( $validasi->validasi_kapuslit == 3 ? 'checked' : '');?> />
+            </span>
+        </p>
+        <p class="stdformbutton">
+                <button type="submit" class="btn btn-primary">Validasi</button>
+            </p>
+     <?php $this->endWidget(); ?>
+
+   </div> <!-- tabs-kapuslit -->
+    <?php } ?>
+   
+   
     <?php if ( (Yii::app()->user->isKI || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) && $model->isValidasiKI()  ) { ?>
    <div id="tabs-5" <?php echo (($validasi->validasi_ppi == 3 ) ? '' : 'style="display:none;"') ?>>
 

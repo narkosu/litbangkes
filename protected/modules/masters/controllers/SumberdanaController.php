@@ -1,13 +1,13 @@
 <?php
 
-class SaranpengembanganController extends Controller
+class SumberdanaController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout = '//layouts/main';
-	
+	public $layout='//layouts/mainadmin';
+
 	/**
 	 * @return array action filters
 	 */
@@ -32,7 +32,7 @@ class SaranpengembanganController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','LoadProcessing'),
+				'actions'=>array('create','update','detaillist'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -45,66 +45,6 @@ class SaranpengembanganController extends Controller
 		);
 	}
 
-  public function actionLoadProcessing(){
-		//print_r($_GET);
-		$DEFAULTCOL = array('id','departemen_id','kompetensi_id','jenis_pengembangan_id','nama_saran');
-		
-    $criteria=new CDbCriteria;
-		$criteria->compare('departemen_id',$this->module->current_departement_id);
-		
-		if ( !empty($_GET['sSearch'])){
-			$criteria->compare('nama_saran',$_GET['sSearch'],true,'AND',TRUE);
-		}
-		
-		if ( !empty($_GET['iSortCol_0'])){
-			 $criteria->order = $DEFAULTCOL[$_GET['iSortCol_0']].' '.$_GET['sSortDir_0'];
-			
-		}
-		
-		$Count = Saranpengembangan::model()->count($criteria);
-		
-		$criteria->offset = $_GET['iDisplayStart'];
-		
-		$criteria->limit = $_GET['iDisplayLength'];
-		
-		$items = Saranpengembangan::model()
-			->findAll($criteria);
-			
-		$output = array(
-			"sEcho" => intval($_GET['sEcho']),
-			"iTotalRecords" => $Count,
-			"iTotalDisplayRecords" => $Count,
-			"aaData" => array()
-		);
-
-		foreach ($items as $i=>$saran_pengembangan){
-			unset($row);
-			
-			foreach ($saran_pengembangan as $field => $vale){
-				
-				if ( $field == 'departemen_id') {
-					$row[$field] = $saran_pengembangan->dept->name;
-				}else 
-				
-          if ( $field == 'kompetensi_id') {
-					$row[$field] = $saran_pengembangan->kompetensi->name;
-					
-				} else if ( $field == 'jenispengembangan_id') {
-					$row[$field] = $saran_pengembangan->jenpeng->nama_pengembangan;
-					
-        } else {
-					$row[$field] = $vale;
-				}
-        $row['level'] = '';
-			}
-			
-			$row['ids'] = $saran_pengembangan->id;//for else
-			$output['aaData'][] = $row;
-		}
-		
-		echo json_encode($output);
-	}
-  
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
@@ -116,27 +56,59 @@ class SaranpengembanganController extends Controller
 		));
 	}
 
+  
+  /**
+	 * Displays a particular model.
+	 * @param integer $id the ID of the model to be displayed
+	 */
+	public function actionDetaillist()
+	{
+		$output = array('error'=>false);
+    $id = $_POST['sumber_dana'];
+    if (empty($id)){
+        $output['error'] = true;
+        $output['result']  = array();
+        echo json_encode($output);
+        return;
+    }
+    
+    if ($id == 3) { // LAIN - LAIN
+        $output['error'] = false;
+        $output['result']  = array();
+        $output['lain'] = true;
+        echo json_encode($output);
+        return;
+    }
+    $return = array();
+		$details = DetailSumberDana::model()->findAll('sumberdana_id = '.$id);
+    if ( !empty($details) ){
+        foreach ( $details as $detail ){
+            $return[$detail->id] = $detail->nama;
+        }
+    }
+    $output['result']  = $return;
+    echo json_encode($output);
+	}
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionCreate()
 	{
-		$model=new Saranpengembangan;
+		$model=new SumberDana;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Saranpengembangan']))
+		if(isset($_POST['SumberDana']))
 		{
-			$model->attributes=$_POST['Saranpengembangan'];
+			$model->attributes=$_POST['SumberDana'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
-        'params'=> array()
 		));
 	}
 
@@ -152,16 +124,15 @@ class SaranpengembanganController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Saranpengembangan']))
+		if(isset($_POST['SumberDana']))
 		{
-			$model->attributes=$_POST['Saranpengembangan'];
+			$model->attributes=$_POST['SumberDana'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
-        'params'=> array()
 		));
 	}
 
@@ -184,15 +155,9 @@ class SaranpengembanganController extends Controller
 	 */
 	public function actionIndex()
 	{
-    $criteria=new CDbCriteria;
-		$criteria->compare('departemen_id',$this->module->current_departement_id);
-            
-    $model = Saranpengembangan::model()
-			->findAll($criteria);
-		
+		$dataProvider=new CActiveDataProvider('SumberDana');
 		$this->render('index',array(
-			'model'=>$model,
-      'params'=> array()
+			'dataProvider'=>$dataProvider,
 		));
 	}
 
@@ -201,10 +166,10 @@ class SaranpengembanganController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Saranpengembangan('search');
+		$model=new SumberDana('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Saranpengembangan']))
-			$model->attributes=$_GET['Saranpengembangan'];
+		if(isset($_GET['SumberDana']))
+			$model->attributes=$_GET['SumberDana'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -218,7 +183,7 @@ class SaranpengembanganController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Saranpengembangan::model()->findByPk($id);
+		$model=SumberDana::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -230,7 +195,7 @@ class SaranpengembanganController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='saranpengembangan-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='sumber-dana-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

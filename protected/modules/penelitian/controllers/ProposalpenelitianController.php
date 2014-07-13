@@ -315,7 +315,13 @@ class ProposalpenelitianController extends Controller
     /* validasi untuk PPI */
     if ( $userLogin->isPPI  ) { 
         $criteria->join = 'LEFT JOIN tbl_proposal_validasi a on t.id = a.proposal_id';
-        $criteria->condition .= 'a.validasi_kabid = 3 && a.validasi_kasubbid = 3';
+        //$criteria->condition .= 'a.validasi_kabid = 3 && a.validasi_kasubbid = 3';
+    }
+    
+    /* validasi untuk Kapuslit */
+    if ( $userLogin->isKapuslit  ) { 
+        $criteria->join = 'LEFT JOIN tbl_proposal_validasi a on t.id = a.proposal_id';
+        //$criteria->condition .= 'a.validasi_kabid = 3 && a.validasi_kasubbid = 3';
     }
     
     /* validasi untuk Kabid */
@@ -415,12 +421,18 @@ class ProposalpenelitianController extends Controller
             $model->proposal->status = $model->validasi_ppi;
             $model->proposal->save();
           }
+          
+          if ( $post['group_validasi'] == 'kapuslit'){
+            $model->proposal->status = $model->validasi_kapuslit;
+            $model->proposal->save();
+          }
+          
           if ( $post['group_validasi'] == 'ki'){
-            $model->proposal->status = $model->validasi_ppi;
+            $model->proposal->status = $model->validasi_ki;
             $model->proposal->save();
           }
           if ( $post['group_validasi'] == 'ke'){
-            $model->proposal->status = $model->validasi_ppi;
+            $model->proposal->status = $model->validasi_ke;
             $model->proposal->save();
           }
 				  return $model;
