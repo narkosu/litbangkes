@@ -13,7 +13,6 @@ class MastersModule extends CWebModule
 		// import the module-level models and components
 		$this->setImport(array(
 			'masters.models.*',
-			'skj.models.*',
 		));
     
 		$this->current_departement_id = Yii::app()->user->getState('current_departement_id');

@@ -2,6 +2,17 @@
 /* @var $this ProposalPenelitianController */
 /* @var $model ProposalPenelitian */
 /* @var $form CActiveForm */
+$yearNow = date("Y");
+$yearFrom = $yearNow ;
+$yearTo = $yearNow + 5;
+$arrYears = array();
+    	 
+foreach (range($yearFrom, $yearTo) as $number) {
+    $arrYears[$number] = $number; 
+}
+//$arrYears = array_reverse($arrYears, false);
+		 
+
 ?>
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -94,7 +105,7 @@ if ( Yii::app()->user->isMember ) {
 	<div class="par">
 		<?php echo $form->labelEx($model,'pakar_id'); ?>
       <span class="field">
-		<?php echo $form->dropDownList($model, 'pakar_id',$listSubBidang, array('empty' => 'Pilih Kepakaran')); ?>
+		<?php echo $form->dropDownList($model, 'pakar_id',$listPakar, array('empty' => 'Pilih Kepakaran')); ?>
       </span>
 		<?php echo $form->error($model,'pakar_id'); ?>
 	</div>
@@ -130,10 +141,73 @@ if ( Yii::app()->user->isMember ) {
 		<?php echo $form->error($model,'jenis_penelitian_id'); ?>
 	</div>
 
+  <div class="par">
+		<?php //echo $form->labelEx($model,'sumber_dana'); ?>
+      <span class="field">
+      <?php $sumberdanalist = $model->getClients(); 
+      ?>
+      <?php //echo $form->dropDownList($model, 'sumber_dana', $sumberdanalist, array('empty' => 'Pilih Sumber Dana')); ?>  
+      </span>
+		<?php echo $form->error($model,'sumber_dana'); ?>
+	</div>
+  <div class="par">
+		<?php echo $form->labelEx($model,'sumber_dana'); ?>
+      <span class="field">
+    <?php echo $form->dropDownList($model, 'sumber_dana',$sumberdanalist, array('empty' => 'Pilih Sumber Dana',
+							'ajax'=>array(
+                                'type'=>'POST',                          
+                                'url'=>CController::createUrl('/masters/sumberdana/detaillist'),
+                                'dataType'=>'json',
+                                'success'=>"function(data){
+                                            if (data.error){
+                                                $('#subdetailsumberdana').hide();
+                                                $('#sumberdana_lain').hide();
+                                            }else{
+                                                if (!data.lain){
+                                                    $('#sumberdana_lain').hide()
+                                                    var subdetail = $('#ProposalPenelitian_detail_sumber_dana');
+                                                    var option = '<option value=\'\'>Detail Sumber Dana</option>';
+                                                    $.each(data.result,function(i,v){
+                                                        option = option + '<option value=\''+i+'\'>'+v+'</option>';
+                                                        console.log(option);
+                                                    });
+                                                    subdetail.html(option);
+                                                    $('#subdetailsumberdana').show();
+                                                }
+                                                
+                                                if (data.lain){
+                                                    $('#sumberdana_lain').show();
+                                                }
+                                                
+                                            }
+
+                                        }",
+                            'data'=>array('sumber_dana'=>'js:this.value'),
+                                 )));
+		?>
+      </span>
+  </div>
+
+  <div class="par" id="subdetailsumberdana" style="display:none;">
+		<?php echo $form->labelEx($model,'detail_sumber_dana'); ?>
+      <span class="field">
+    <?php echo $form->dropDownList($model, 'detail_sumber_dana',array(), 
+                                    array('empty' => 'Pilih Detail Sumber Dana')			
+                                 );
+		?>
+      </span>
+  </div>
+
+  <div class="par" id="sumberdana_lain" style="display:none;">
+		<?php echo $form->labelEx($model,'sumber_dana_lain'); ?>
+      <span class="field">
+        <?php echo $form->textField($model,'sumber_dana_lain',array('size'=>160,'maxlength'=>255,'class'=>'input-large')); ?>
+      </span>
+  </div>
 	<div class="par">
 		<?php echo $form->labelEx($model,'tahun_anggaran'); ?>
       <span class="field">
-		<?php echo $form->textField($model,'tahun_anggaran'); ?>
+		<?php echo $form->dropDownList($model,'tahun_anggaran',$arrYears);?>      
       </span>
 		<?php echo $form->error($model,'tahun_anggaran'); ?>
 	</div>
