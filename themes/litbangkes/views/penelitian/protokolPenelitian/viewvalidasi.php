@@ -34,14 +34,24 @@ $this->menu=array(
                 </div>
               </div>
 
-                <?php if ( Yii::app()->user->isSuperAdmin ) {?>
+                 <?php
+                if (Yii::app()->user->isSuperAdmin ||
+                        Yii::app()->user->isKabid ||
+                        Yii::app()->user->isKasubbid ||
+                        Yii::app()->user->isAdmin ||
+                        Yii::app()->user->isPPI ||
+                        Yii::app()->user->isKI ||
+                        Yii::app()->user->isKE) {
+                    ?>
                   <div class="widgetcontent bordered shadowed nopadding">
-                      <?php echo $this->renderPartial('_viewprotokol', 
+                      <?php echo $this->renderPartial('_viewprotokol_admin', 
                         array('model'=>$model, 
                               'modelFile' => $modelFile,
                               'newModelFile'=>$newModelFile, 
                               'groupFile' => $groupFile,    
                               'modelProtokol' => $modelProtokol,
+                                'validasi'  => $validasi,
+                                'pegawai'=> $pegawai
                         )); ?>
                   </div>
             <?php } else { ?>
@@ -54,6 +64,7 @@ $this->menu=array(
                               'newModelFile'=>$newModelFile, 
                               'groupFile' => $groupFile,  
                               'modelProtokol' => $modelProtokol,
+                            'validasi'  => $validasi
                         )); ?>
                   </div><!--widgetcontent-->
             <?php } ?>

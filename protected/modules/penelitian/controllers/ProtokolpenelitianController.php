@@ -106,27 +106,49 @@ class ProtokolpenelitianController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionViewvalidasi($id) {
-
+        
         $model = ProposalPenelitian::model()->findByPk($id);
-
+        
         if (empty($model)) {
             $this->redirect(array('/penelitian/proposalpenelitian'));
         }
-
-        $validasi = $model->validasi; // hanya untuk proposal
+        $this->pageTitle = $model->nama_penelitian;
+        $this->menuactive =  'validasipenelitian';
+        $step = $model->step; // hanya untuk proposal
         
         
-        if (empty($validasi)) {
+        if (empty($step)) {
             $this->redirect(array('/penelitian/proposalpenelitian/viewvalidasi/id/' . $id));
         }
         
         
-        if ( $validasi->validasi_ppi != 3 || $validasi->validasi_ki != 3 ) {
+        if ( $step != 2 ) { // protokol
             $this->redirect(array('/penelitian/proposalpenelitian/viewvalidasi/id/' . $id));
         }
         
         $newModelFile = new FilePenelitian;
         $modelProtokol = $this->loadModelByProposal($id);
+        $validasi = $modelProtokol->validasi;
+        
+        
+        if ( empty($validasi)){
+            $validasi = new ProposalValidasi;
+            $validasi->proposal_id = $id;
+            $validasi->step = 2;
+        }
+    
+        $validasi = $validasi->saveValidation($_POST);
+        
+        if ( !empty($_POST) ){
+            if ( $validasi->validasi_ppi == 3 ){
+                $modelProtokol->status = 3;
+            }else{
+                $modelProtokol->status = 1;
+            }
+            $modelProtokol->save();
+            $this->refresh();
+        }
+        
         $groupFile = array();
         if (empty($modelProtokol)) {
 
@@ -149,6 +171,8 @@ class ProtokolpenelitianController extends Controller {
             'groupFile' => $groupFile,
             'modelFile' => $modelFile,
             'modelProtokol' => $modelProtokol,
+            'validasi'  => $validasi,
+            'pegawai'   => $model->pegawai
         ));
     }
 
@@ -252,8 +276,9 @@ class ProtokolpenelitianController extends Controller {
      * @param integer $id the ID of the model to be updated
      */
     public function actionUpdate($id) {
-        $model = $this->loadModel($id);
-
+        $modelProtokol = $this->loadModelByProposal($id);
+        $model = $modelProtokol->proposal;
+        $newModelFile = new FilePenelitian;
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
@@ -265,6 +290,8 @@ class ProtokolpenelitianController extends Controller {
 
         $this->render('update', array(
             'model' => $model,
+            'modelprotokol'=>$modelProtokol,
+            'newmodelfile'=>$newModelFile
         ));
     }
 
@@ -308,9 +335,10 @@ class ProtokolpenelitianController extends Controller {
     /**
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.
-     * @param integer the ID of the model to be loaded
+     * @param integer the ID of the model to be loaded proposal penelitian id
      */
     public function loadModel($id) {
+        
         $model = ProtokolPenelitian::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
@@ -341,5 +369,55 @@ class ProtokolpenelitianController extends Controller {
             Yii::app()->end();
         }
     }
+    
+    protected function saveValidation($model, $post){
+      
+    if(isset($post['ProposalValidasi']))
+		{
+      
+			$model->attributes=$post['ProposalValidasi'];
+      if ( $model->isNewRecord )
+        $model->created_at = date('Y-m-d H:i:s');
+      
+      $model->updated_at = date('Y-m-d H:i:s');
+      $model->created_by = Yii::app()->user->id;
+			if($model->save()) {
+          if ( $post['group_validasi'] == 'kabid'){
+            if ( $model->validasi_kasubbid == 3 ) { // disetujui  
+                $model->proposal->status = 3; // disetujui
+                $model->proposal->save();
+            }
+          }
+				  
+          if ( $post['group_validasi'] == 'kasubbid'){
+            if ( $model->validasi_kabid == 3 ) { // disetujui  
+                $model->proposal->status = 3; // disetujui
+                $model->proposal->save();
+            }
+          }
+          
+          if ( $post['group_validasi'] == 'ppi'){
+            $model->proposal->status = $model->validasi_ppi;
+            $model->proposal->save();
+          }
+          
+          if ( $post['group_validasi'] == 'kapuslit'){
+            $model->proposal->status = $model->validasi_kapuslit;
+            $model->proposal->save();
+          }
+          
+          if ( $post['group_validasi'] == 'ki'){
+            $model->proposal->status = $model->validasi_ki;
+            $model->proposal->save();
+          }
+          if ( $post['group_validasi'] == 'ke'){
+            $model->proposal->status = $model->validasi_ke;
+            $model->proposal->save();
+          }
+				  return $model;
+      }
+    }
+    return $model;
+  }
 
 }

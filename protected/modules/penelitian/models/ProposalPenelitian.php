@@ -36,6 +36,7 @@ class ProposalPenelitian extends CActiveRecord
                             '3'=>'Disetujui',
                             '4'=>'Ditolak',
                             );   
+   
 	public $positionDocument = array(
                             '1'=>'Proposal',
                             '2'=>'Protokol',
@@ -152,6 +153,7 @@ class ProposalPenelitian extends CActiveRecord
 	}
   
   public function getStatus(){
+      
       return (!empty($this->statusDocument[$this->status]) ? $this->statusDocument[$this->status] : '');
   }
   
@@ -181,5 +183,13 @@ class ProposalPenelitian extends CActiveRecord
       if ( empty( $this->validasi ) ) return false;
       
       return ( $this->validasi->validasi_ppi == 3 ) ;
+  }
+  
+  public function isValidate(){
+      return ($this->step == 1);
+  }
+  
+  public static function statusDocument($status){
+      return ProposalPenelitian::model()->statusDocument[$status];
   }
 }
