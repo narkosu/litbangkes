@@ -66,7 +66,7 @@ if ( Yii::app()->user->isMember ) {
 <div class="par">
 		<?php echo $form->labelEx($model,'pegawai_id'); ?>
       <span class="field">
-		<?php echo $form->dropDownList($model, 'pegawai_id',$listPegawai, array('empty' => 'Pilih Pegawai')); ?>
+		<?php echo $form->dropDownList($model, 'pegawai_id',$listPegawai, array('empty' => 'Pilih Pegawai','class'=>"uniformselect"			)); ?>
       </span>
 		<?php echo $form->error($model,'pegawai_id'); ?>
 	</div>
@@ -74,7 +74,7 @@ if ( Yii::app()->user->isMember ) {
 	<div class="par">
 		<?php echo $form->labelEx($model,'nama_penelitian'); ?>
       <span class="field">
-		<?php echo $form->textField($model,'nama_penelitian',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->textField($model,'nama_penelitian',array('size'=>60,'maxlength'=>255,'class'=>'input-xxlarge')); ?>
       </span>
 		<?php echo $form->error($model,'nama_penelitian'); ?>
 	</div>
@@ -84,7 +84,7 @@ if ( Yii::app()->user->isMember ) {
 	<div class="par">
 		<?php echo $form->labelEx($model,'jabatan_fungsional_id'); ?>
       <span class="field">
-		<?php echo $form->dropDownList($model, 'jabatan_fungsional_id',$listJabatanFungsional, array('empty' => 'Pilih Jabatan Fungsional')); ?>
+		<?php echo $form->dropDownList($model, 'jabatan_fungsional_id',$listJabatanFungsional, array('empty' => 'Pilih Jabatan Fungsional','class'=>"uniformselect"			)); ?>
       </span>
 		<?php echo $form->error($model,'jabatan_fungsional_id'); ?>
 	</div>
@@ -94,7 +94,7 @@ if ( Yii::app()->user->isMember ) {
 	<div class="par">
 		<?php echo $form->labelEx($model,'sub_bidang_id'); ?>
       <span class="field">
-		<?php echo $form->dropDownList($model, 'sub_bidang_id',$listSubBidang, array('empty' => 'Pilih Sub Bidang')); ?>
+		<?php echo $form->dropDownList($model, 'sub_bidang_id',$listSubBidang, array('empty' => 'Pilih Sub Bidang','class'=>"uniformselect"			)); ?>
       </span>
 		<?php echo $form->error($model,'sub_bidang_id'); ?>
 	</div>
@@ -105,7 +105,7 @@ if ( Yii::app()->user->isMember ) {
 	<div class="par">
 		<?php echo $form->labelEx($model,'pakar_id'); ?>
       <span class="field">
-		<?php echo $form->dropDownList($model, 'pakar_id',$listPakar, array('empty' => 'Pilih Kepakaran')); ?>
+		<?php echo $form->dropDownList($model, 'pakar_id',$listPakar, array('empty' => 'Pilih Kepakaran','class'=>"uniformselect")); ?>
       </span>
 		<?php echo $form->error($model,'pakar_id'); ?>
 	</div>
@@ -125,7 +125,7 @@ if ( Yii::app()->user->isMember ) {
             }
           } ?>
       <span class="field">
-         <?php echo $form->fileField($modelFile,'filename'); ?>   
+         <?php echo $form->fileField($modelFile,'filename',array('class'=>'uniform-file')); ?>   
       </span>
 		<?php echo $form->error($modelFile,'filename'); ?>
 	</div>
@@ -136,7 +136,7 @@ if ( Yii::app()->user->isMember ) {
 	<div class="par">
 		<?php echo $form->labelEx($model,'jenis_penelitian_id'); ?>
       <span class="field">
-            <?php echo $form->dropDownList($model, 'jenis_penelitian_id',$listJenisPenelitian, array('empty' => 'Pilih Jenis Penelitian')); ?>
+            <?php echo $form->dropDownList($model, 'jenis_penelitian_id',$listJenisPenelitian, array('empty' => 'Pilih Jenis Penelitian','class'=>"uniformselect")); ?>
       </span>
 		<?php echo $form->error($model,'jenis_penelitian_id'); ?>
 	</div>
@@ -183,7 +183,7 @@ if ( Yii::app()->user->isMember ) {
 
                                         }",
                             'data'=>array('sumber_dana'=>'js:this.value'),
-                                 )));
+                                 ),'class'=>"uniformselect"));
 		?>
       </span>
   </div>
@@ -192,7 +192,7 @@ if ( Yii::app()->user->isMember ) {
 		<?php echo $form->labelEx($model,'detail_sumber_dana'); ?>
       <span class="field">
     <?php echo $form->dropDownList($model, 'detail_sumber_dana',array(), 
-                                    array('empty' => 'Pilih Detail Sumber Dana')			
+                                    array('empty' => 'Pilih Detail Sumber Dana','class'=>"uniformselect"			)
                                  );
 		?>
       </span>
@@ -207,7 +207,7 @@ if ( Yii::app()->user->isMember ) {
 	<div class="par">
 		<?php echo $form->labelEx($model,'tahun_anggaran'); ?>
       <span class="field">
-		<?php echo $form->dropDownList($model,'tahun_anggaran',$arrYears);?>      
+		<?php echo $form->dropDownList($model,'tahun_anggaran',$arrYears,array('class'=>"uniformselect"));?>      
       </span>
 		<?php echo $form->error($model,'tahun_anggaran'); ?>
 	</div>
@@ -215,7 +215,7 @@ if ( Yii::app()->user->isMember ) {
 	<div class="par">
 		<?php echo $form->labelEx($model,'keywords'); ?>
       <span class="field">
-		<?php echo $form->textField($model,'keywords',array('size'=>160,'maxlength'=>255,'class'=>'input-large')); ?>
+		<?php echo $form->textField($model,'keywords',array('size'=>160,'maxlength'=>255,'class'=>'input-xxlarge')); ?>
       </span>
 		<?php echo $form->error($model,'keywords'); ?>
     
@@ -228,7 +228,7 @@ if ( Yii::app()->user->isMember ) {
       <?php $clients = $model->getClients(); 
      
       ?>
-      <?php echo $form->dropDownList($model, 'klien', $clients, array('empty' => 'Pilih Klien')); ?>    
+      <?php echo $form->dropDownList($model, 'klien', $clients, array('empty' => 'Pilih Klien','class'=>"uniformselect"			)); ?>    
       </span>
 		<?php echo $form->error($model,'klien'); ?>
 	</div>
@@ -250,8 +250,8 @@ $cs->registerScriptFile( Yii::app()->theme->baseUrl .'/js/jquery.tagsinput.min.j
 ?>
 
 <script type="text/javascript">
-  /*jQuery(document).ready(function(){
-      jQuery('#ProposalPenelitian_keywords').tagsInput();
-  });*/
+  jQuery(document).ready(function(){
+      jQuery('.uniform-file').uniform();
+  });
 </script>  
   

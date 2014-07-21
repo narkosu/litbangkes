@@ -16,6 +16,7 @@ class ProtokolPenelitian extends CActiveRecord
   const STATUS_REVISI = 2;
   const STATUS_SETUJU = 3;
   const STATUS_TOLAK = 4;
+  
   public $editable = true;
   public $statusDocument = array(
                             '0'=>'Draft',
@@ -111,6 +112,29 @@ class ProtokolPenelitian extends CActiveRecord
 		));
 	}
   
+  public function isValidasiPPI(){
+      if ( empty( $this->validasi ) ) return false;
+      
+      return ( $this->validasi->validasi_kabid && $this->validasi->validasi_kasubbid ) ;
+  }
+  
+  public function isValidasiKapuslit(){
+      if ( empty( $this->validasi ) ) return false;
+      
+      return ( $this->validasi->validasi_kabid && $this->validasi->validasi_kasubbid 
+              && $this->validasi->validasi_ppi ) ;
+  }
+  
+  public function isValidasiKI(){
+      if ( empty( $this->validasi ) ) return false;
+      
+      return ( $this->validasi->validasi_ppi == 3 ) ;
+  }
+  /* filter "is this protokol in the validation session?" */
+  
+  public function isValidate(){
+      return ($this->proposal->step == 2);
+  }
   public function getStatus(){
       return (!empty($this->statusDocument[$this->status]) ? $this->statusDocument[$this->status] : '');
   }

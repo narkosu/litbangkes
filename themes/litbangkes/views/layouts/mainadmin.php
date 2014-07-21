@@ -17,6 +17,7 @@
 <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl;?>/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl;?>/js/custom.js"></script>
+<script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery.uniform.min.js"></script>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
 </head>
 

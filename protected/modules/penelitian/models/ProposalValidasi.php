@@ -53,11 +53,11 @@ class ProposalValidasi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('proposal_id, step, revisi, validasi_kabid, validasi_kasubbid, validasi_ppi, validasi_ki, validasi_ke, created_by', 'numerical', 'integerOnly'=>true),
+			array('proposal_id, step, revisi, validasi_kabid, validasi_kasubbid, validasi_ppi, validasi_kapuslit, validasi_ki, validasi_ke, created_by', 'numerical', 'integerOnly'=>true),
 			array('created_at, updated_at', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, proposal_id, step, revisi, validasi_ppi, validasi_ki, validasi_ke, created_by, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, proposal_id, step, revisi, validasi_ppi, validasi_kapuslit, validasi_ki, validasi_ke, created_by, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -121,5 +121,73 @@ class ProposalValidasi extends CActiveRecord
   
   public function getStatus($field){
       return $this->statusDocument[$this->$field];
+  }
+  
+  public function saveValidation($post){
+      if(isset($post['ProposalValidasi']))
+        {
+
+          $this->attributes=$post['ProposalValidasi'];
+          if ( $this->isNewRecord )
+            $this->created_at = date('Y-m-d H:i:s');
+
+          $this->updated_at = date('Y-m-d H:i:s');
+          $this->created_by = Yii::app()->user->id;
+          if($this->save()) {
+              /* save for history */
+              
+              $validasiHistory = new ProposalValidasiHistory;
+              $validasiHistory->proposal_id = $this->proposal_id;
+              $validasiHistory->step = $this->step;
+              $validasiHistory->level_validasi = $post['group_validasi'];
+              $validasiHistory->value_validasi = $post['ProposalValidasi']['validasi_'.$validasiHistory->level_validasi];
+              /*if ( $post['group_validasi'] == 'kabid'){
+                if ( $this->validasi_kasubbid == 3 ) { // disetujui  
+                    $this->proposal->status = 3; // disetujui
+                    $this->proposal->save();
+                }
+                
+                $validasiHistory->value_validasi = $this->validasi_kabid;
+              }
+
+              if ( $post['group_validasi'] == 'kasubbid'){
+                if ( $this->validasi_kabid == 3 ) { // disetujui  
+                    $this->proposal->status = 3; // disetujui
+                    $this->proposal->save();
+                }
+                $validasiHistory->value_validasi = $this->validasi_kasubbid;
+              }
+
+              if ( $post['group_validasi'] == 'ppi'){
+                $this->proposal->status = $this->validasi_ppi;
+                $this->proposal->save();
+                $validasiHistory->value_validasi = $this->validasi_ppi;
+              }
+
+              if ( $post['group_validasi'] == 'kapuslit'){
+                $this->proposal->status = $this->validasi_kapuslit;
+                $this->proposal->save();
+                $validasiHistory->value_validasi = $this->validasi_kapuslit;
+              }
+
+              if ( $post['group_validasi'] == 'ki'){
+                $this->proposal->status = $this->validasi_ki;
+                $this->proposal->save();
+                $validasiHistory->value_validasi = $this->validasi_ki;
+              }
+              if ( $post['group_validasi'] == 'ke'){
+                $this->proposal->status = $this->validasi_ke;
+                $this->proposal->save();
+                $validasiHistory->value_validasi = $this->validasi_ki;
+              }*/
+              
+              $validasiHistory->alasan = $post['ProposalValidasi']['alasan'];
+              $validasiHistory->created_at = date('Y-m-d H:i:s');
+              $validasiHistory->created_by = Yii::app()->user->id;
+              $validasiHistory->save();
+              return $this;
+          }
+        }
+        return $this;
   }
 }
