@@ -131,6 +131,7 @@ if ( Yii::app()->user->isMember ) {
 	</div>
 
   <?php
+  /*
     $listJenisPenelitian=CHtml::listData(JenisPenelitian::model()->findAll(), 'id', 'nama');;
     ?>
 	<div class="par">
@@ -140,7 +141,7 @@ if ( Yii::app()->user->isMember ) {
       </span>
 		<?php echo $form->error($model,'jenis_penelitian_id'); ?>
 	</div>
-
+  */?>  
   <div class="par">
 		<?php //echo $form->labelEx($model,'sumber_dana'); ?>
       <span class="field">
@@ -177,6 +178,7 @@ if ( Yii::app()->user->isMember ) {
                                                 
                                                 if (data.lain){
                                                     $('#sumberdana_lain').show();
+                                                    $('#subdetailsumberdana').hide();
                                                 }
                                                 
                                             }
@@ -228,10 +230,58 @@ if ( Yii::app()->user->isMember ) {
       <?php $clients = $model->getClients(); 
      
       ?>
-      <?php echo $form->dropDownList($model, 'klien', $clients, array('empty' => 'Pilih Klien','class'=>"uniformselect"			)); ?>    
+      <?php echo $form->dropDownList($model, 'klien', $clients, array('empty' => 'Pilih Klien',
+          'ajax'=>array(
+                                'type'=>'POST',                          
+                                'url'=>CController::createUrl('/masters/klien/detaillist'),
+                                'dataType'=>'json',
+                                'success'=>"function(data){
+                                            if (data.error){
+                                                $('#subdetailklien').hide();
+                                                $('#klien_lain').hide();
+                                            }else{
+                                                if (!data.lain){
+                                                    $('#klien_lain').hide()
+                                                    var subdetail = $('#ProposalPenelitian_detail_klien');
+                                                    var option = '<option value=\'\'>Detail Klien</option>';
+                                                    $.each(data.result,function(i,v){
+                                                        option = option + '<option value=\''+i+'\'>'+v+'</option>';
+                                                        console.log(option);
+                                                    });
+                                                    subdetail.html(option);
+                                                    $('#subdetailklien').show();
+                                                }
+                                                
+                                                if (data.lain){
+                                                    $('#klien_lain').show();
+                                                    $('#subdetailklien').hide();
+                                                }
+                                                
+                                            }
+
+                                        }",
+                            'data'=>array('klien'=>'js:this.value'),
+                                 ),
+          'class'=>"uniformselect"			)); ?>    
       </span>
 		<?php echo $form->error($model,'klien'); ?>
 	</div>
+
+<div class="par" id="subdetailklien" style="display:none;">
+    <?php echo $form->labelEx($model,'detail_klien'); ?>
+      <span class="field">
+    <?php echo $form->dropDownList($model, 'detail_klien',array(), 
+                                    array('empty' => 'Pilih Detail Klien','class'=>"uniformselect"			)
+                                 );
+    ?>
+      </span>
+  </div>
+ <div class="par" id="klien_lain" style="display:none;">
+		<?php echo $form->labelEx($model,'klien_lain'); ?>
+      <span class="field">
+        <?php echo $form->textField($model,'klien_lain',array('size'=>160,'maxlength'=>255,'class'=>'input-large')); ?>
+      </span>
+  </div>
 <?php if ( $model->editable ) { ?>
   <div class="stdformbutton">
 		
