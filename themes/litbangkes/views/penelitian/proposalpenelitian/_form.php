@@ -223,6 +223,18 @@ if ( Yii::app()->user->isMember ) {
     
 	</div>
 
+<div class="par">
+		<?php echo $form->labelEx($model,'isu_strategis'); ?>
+      <span class="field">
+		<?php //echo $form->textField($model,'klien',array('size'=>60,'maxlength'=>255)); ?>
+      <?php $clients = $model->getClients(); 
+     
+      ?>
+      <?php echo $form->dropDownList($model, 'isu_strategis', IsuStrategis::model()->listArray(), array('empty' => 'Pilih Klien',
+          'class'=>"uniformselect"			)); ?>    
+      </span>
+		<?php echo $form->error($model,'isu_strategis'); ?>
+	</div>
 	<div class="par">
 		<?php echo $form->labelEx($model,'klien (Optional )'); ?>
       <span class="field">
