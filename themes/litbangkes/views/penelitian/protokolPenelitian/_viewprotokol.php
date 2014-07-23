@@ -31,86 +31,135 @@
 	    <div class="par">
         <label>Status</label>    
         <span class="field">
-            <?php if ( $modelProtokol->status == 3 ) {
-                        $labelValidasi = 'label-success';
-                    } else if ($modelProtokol->status == 2) { // revisi
-                         $labelValidasi = 'label-success';
-                    } else if ($modelProtokol->status == 4) { //ditolak
-                         $labelValidasi = 'label-important';
-                    } else if ($modelProtokol->status == 1) { //progres
-                         $labelValidasi = 'label-warning';
-                    }else {
-                        $labelValidasi = 'label-info';
-                    }
+            <?php
+                if ($modelProtokol->status == 3) {
+                    $labelValidasi = 'label-success';
+                } else if ($modelProtokol->status == 2) { // revisi
+                    $labelValidasi = 'label-success';
+                } else if ($modelProtokol->status == 4) { //ditolak
+                    $labelValidasi = 'label-important';
+                } else if ($modelProtokol->status == 1) { //progres
+                    $labelValidasi = 'label-warning';
+                } else {
+                    $labelValidasi = 'label-info';
+                }
                 ?>
-                    <span class="label <?php echo $labelValidasi?>">
-                        <?php echo $modelProtokol->getStatus() ?>
-                    </span>
-                = 
-                    <?php if ( !empty($validasi->validasi_ppi) ) { ?>
-                    <?php if ( $validasi->validasi_ppi == 3 ) {
-                                    $labelValidasi = 'label-success';
-                                } else if ($validasi->validasi_ppi == 2) { // revisi
-                                     $labelValidasi = 'label-success';
-                                } else if ($validasi->validasi_ppi == 4) { //ditolak
-                                     $labelValidasi = 'label-important';
-                                } else if ($model->status == 1) { //progres
-                                    $labelValidasi = 'label-warning';
-                               } else {
+                <span class="label <?php echo $labelValidasi ?>">
+                    <?php echo $modelProtokol->getStatus() ?>
+                </span>
+                :
+                
+                <!-- validasi Kabid -->
+                <?php if (!empty($validasi->validasi_kabid)) { ?>
+                    <?php
+                    if ($validasi->validasi_kabid == 3) {
+                        $labelValidasi = 'label-success';
+                    } else if ($validasi->validasi_kabid == 2) { // revisi
+                        $labelValidasi = 'label-success';
+                    } else if ($validasi->validasi_kabid == 4) { //ditolak
+                        $labelValidasi = 'label-important';
+                    } else if ($model->status == 1) { //progres
+                        $labelValidasi = 'label-warning';
+                    } else {
                         $labelValidasi = 'label-info';
                     }
+                    ?>
+                    <span class="label <?php echo $labelValidasi ?>">
+                        <?php
+                        echo $validasi->getStatus('validasi_kabid');
                         ?>
-                    <span class="label <?php echo $labelValidasi?>">
-                        <?php 
-
+                        Kabid
+                    </span>
+                <?php } ?>
+                
+                <!-- validasi Kabid -->
+                <?php if (!empty($validasi->validasi_kasubbid)) { ?>
+                    <?php
+                    if ($validasi->validasi_kasubbid == 3) {
+                        $labelValidasi = 'label-success';
+                    } else if ($validasi->validasi_kasubbid == 2) { // revisi
+                        $labelValidasi = 'label-success';
+                    } else if ($validasi->validasi_kasubbid == 4) { //ditolak
+                        $labelValidasi = 'label-important';
+                    } else if ($model->status == 1) { //progres
+                        $labelValidasi = 'label-warning';
+                    } else {
+                        $labelValidasi = 'label-info';
+                    }
+                    ?>
+                    <span class="label <?php echo $labelValidasi ?>">
+                        <?php
+                        echo $validasi->getStatus('validasi_kasubbid');
+                        ?>
+                        Kasubbid
+                    </span>
+                <?php } ?>
+                
+                
+                <?php if (!empty($validasi->validasi_ppi)) { ?>
+                    <?php
+                    if ($validasi->validasi_ppi == 3) {
+                        $labelValidasi = 'label-success';
+                    } else if ($validasi->validasi_ppi == 2) { // revisi
+                        $labelValidasi = 'label-success';
+                    } else if ($validasi->validasi_ppi == 4) { //ditolak
+                        $labelValidasi = 'label-important';
+                    } else if ($model->status == 1) { //progres
+                        $labelValidasi = 'label-warning';
+                    } else {
+                        $labelValidasi = 'label-info';
+                    }
+                    ?>
+                    <span class="label <?php echo $labelValidasi ?>">
+                        <?php
                         echo $validasi->getStatus('validasi_ppi');
                         ?>
                         PPI
                     </span>
-                    <?php } ?>
-                    <?php if ( !empty($validasi->validasi_ki) ) { ?>
-                    <?php if ( $validasi->validasi_ki == 3 ) {
-                                    $labelValidasi = 'label-success';
-                                } else if ($validasi->validasi_ki == 2) { // revisi
-                                     $labelValidasi = 'label-success';
-                                } else if ($validasi->validasi_ki == 4) { //ditolak
-                                     $labelValidasi = 'label-important';
-                                } else if ($model->status == 1) { //progres
-                                    $labelValidasi = 'label-warning';
-                               } else {
-                                    $labelValidasi = 'label-info';
-                                }
-                        ?>
-                    <span class="label <?php echo $labelValidasi?>">
-                        <?php 
-
+                <?php } ?>
+                <?php if (!empty($validasi->validasi_ki)) { ?>
+                    <?php
+                    if ($validasi->validasi_ki == 3) {
+                        $labelValidasi = 'label-success';
+                    } else if ($validasi->validasi_ki == 2) { // revisi
+                        $labelValidasi = 'label-success';
+                    } else if ($validasi->validasi_ki == 4) { //ditolak
+                        $labelValidasi = 'label-important';
+                    } else if ($model->status == 1) { //progres
+                        $labelValidasi = 'label-warning';
+                    } else {
+                        $labelValidasi = 'label-info';
+                    }
+                    ?>
+                    <span class="label <?php echo $labelValidasi ?>">
+                        <?php
                         echo $validasi->getStatus('validasi_ki');
                         ?>
                         KI
-                     </span>
-                    <?php } ?>
+                    </span>
+                <?php } ?>
 
-                    <?php if ( !empty($validasi->validasi_ke) ) { ?>
-                    <?php if ( $validasi->validasi_ke == 3 ) {
-                                    $labelValidasi = 'label-success';
-                                } else if ($validasi->validasi_ke == 2) { // revisi
-                                     $labelValidasi = 'label-success';
-                                } else if ($validasi->validasi_ke == 4) { //ditolak
-                                     $labelValidasi = 'label-important';
-                                } else if ($model->status == 1) { //progres
-                                    $labelValidasi = 'label-warning';
-                               }else {
-                                    $labelValidasi = 'label-info';
-                                }
-                        ?>
-                    <span class="label <?php echo $labelValidasi?>">
-                        <?php 
-
+                <?php if (!empty($validasi->validasi_ke)) { ?>
+                    <?php
+                    if ($validasi->validasi_ke == 3) {
+                        $labelValidasi = 'label-success';
+                    } else if ($validasi->validasi_ke == 2) { // revisi
+                        $labelValidasi = 'label-success';
+                    } else if ($validasi->validasi_ke == 4) { //ditolak
+                        $labelValidasi = 'label-important';
+                    } else if ($model->status == 1) { //progres
+                        $labelValidasi = 'label-warning';
+                    } else {
+                        $labelValidasi = 'label-info';
+                    }
+                    ?>
+                    <span class="label <?php echo $labelValidasi ?>">
+                        <?php
                         echo $validasi->getStatus('validasi_ke');
                         ?>
                         KE
-                     </span>
-                    <?php } ?>
+                    </span>
+                <?php } ?>
             </span>
     </div>
 		

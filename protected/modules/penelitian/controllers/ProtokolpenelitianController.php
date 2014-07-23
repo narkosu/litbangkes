@@ -97,6 +97,7 @@ class ProtokolpenelitianController extends Controller {
             'newModelFile' => $newModelFile,
             'groupFile' => $groupFile,
             'modelFile' => $modelFile,
+            'validasi' => $validasi,
             'modelProtokol' => $modelProtokol,
         ));
     }
@@ -385,35 +386,42 @@ class ProtokolpenelitianController extends Controller {
           if ( $post['group_validasi'] == 'kabid'){
             if ( $model->validasi_kasubbid == 3 ) { // disetujui  
                 $model->proposal->status = 3; // disetujui
-                $model->proposal->save();
+            
             }
           }
 				  
           if ( $post['group_validasi'] == 'kasubbid'){
             if ( $model->validasi_kabid == 3 ) { // disetujui  
                 $model->proposal->status = 3; // disetujui
-                $model->proposal->save();
+            
             }
           }
           
           if ( $post['group_validasi'] == 'ppi'){
             $model->proposal->status = $model->validasi_ppi;
-            $model->proposal->save();
+            
           }
           
           if ( $post['group_validasi'] == 'kapuslit'){
             $model->proposal->status = $model->validasi_kapuslit;
-            $model->proposal->save();
+            
           }
           
           if ( $post['group_validasi'] == 'ki'){
             $model->proposal->status = $model->validasi_ki;
-            $model->proposal->save();
+            
           }
           if ( $post['group_validasi'] == 'ke'){
             $model->proposal->status = $model->validasi_ke;
-            $model->proposal->save();
+            
           }
+          
+          if ( $model->validasi_kasubbid == 3 && $model->validasi_kabid == 3 && 
+               $model->validasi_ppi == 3 && 
+               $model->validasi_kapuslit == 3 ){
+                $model->proposal->step = 3;  
+          }
+          $model->proposal->save();
 				  return $model;
       }
     }

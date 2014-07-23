@@ -230,7 +230,7 @@ if ( Yii::app()->user->isMember ) {
       <?php $clients = $model->getClients(); 
      
       ?>
-      <?php echo $form->dropDownList($model, 'isu_strategis', IsuStrategis::model()->listArray(), array('empty' => 'Pilih Klien',
+      <?php echo $form->dropDownList($model, 'isu_strategis', IsuStrategis::model()->listArray(), array('empty' => 'Pilih Isu Strategis',
           'class'=>"uniformselect"			)); ?>    
       </span>
 		<?php echo $form->error($model,'isu_strategis'); ?>
