@@ -11,12 +11,9 @@
             <input type="password" id="password" class="login_text" name="LoginForm[password]" placeholder="Password" />
         </p>
         <p >
-            <button type="submit" class="login_btn">LOGIN</button></p>
-        <p >
-            <a href="">
-                <span class="icon-question-sign icon-white"></span> Lupa Password?
-            </a>
+            <input type="submit" value="Login" class="login_btn" />
         </p>
+       
     <?php $this->endWidget(); ?>	
 </div><!--loginwrapperinner-->
         
