@@ -4,15 +4,15 @@
 				'action'=>Yii::app()->createUrl('site/login'),
 				'enableAjaxValidation'=>true,
 			)); ?>
-        <p >
-            <input type="text" id="username" class="login_text" name="LoginForm[username]" placeholder="Username" />
+        <p class="animate4 bounceIn">
+            <input type="text" id="username" name="LoginForm[username]" placeholder="Username" />
         </p>
-        <p >
-            <input type="password" id="password" class="login_text" name="LoginForm[password]" placeholder="Password" />
+        <p class="animate5 bounceIn">
+            <input type="password" id="password" name="LoginForm[password]" placeholder="Password" />
         </p>
-        <p >
-            <button type="submit" class="login_btn">LOGIN</button></p>
-        <p >
+        <p class="animate6 bounceIn">
+            <button type="submit" class="btn btn-default btn-block">LOGIN</button></p>
+        <p class="animate7 fadeIn">
             <a href="">
                 <span class="icon-question-sign icon-white"></span> Lupa Password?
             </a>
