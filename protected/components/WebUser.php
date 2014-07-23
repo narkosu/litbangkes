@@ -89,7 +89,7 @@ class WebUser extends CWebUser{
 	}
   
   
-  //is the user an KE ?
+  //is the user an Kabid ?
 	function getIsKabid(){
 		
     $pegawai = Yii::app()->user->getState('pegawai');
@@ -102,7 +102,7 @@ class WebUser extends CWebUser{
     }
  	}
   
-  //is the user an KE ?
+  //is the user an Kasubbid ?
 	function getIsKasubbid(){
 		
     $pegawai = Yii::app()->user->getState('pegawai');
