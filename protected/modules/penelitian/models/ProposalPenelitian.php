@@ -27,6 +27,9 @@ class ProposalPenelitian extends CActiveRecord
   const STATUS_TOLAK = 4;
   const ISPROPOSAL = 1;
   const ISPROTOKOL = 2;
+  const PROGRES = 3;
+  const OUTPUT = 4;
+  
   
   public $editable = true;
   public $statusDocument = array(
@@ -40,6 +43,8 @@ class ProposalPenelitian extends CActiveRecord
 	public $positionDocument = array(
                             '1'=>'Proposal',
                             '2'=>'Protokol',
+                            '3'=>'Progres',
+                            '4'=>'Output',
                             );   
   
   public $clients = array(1=>'Dalam Negeri', 2=>'Luar Negeri',3=> 'Lain - Lain');

@@ -52,7 +52,8 @@ $this->menu=array(
                         array('model'=>$model, 
                               'modelFile' => $modelFile,
                               'newModelFile'=>$newModelFile, 
-                              'groupFile' => $groupFile,  
+                              'groupFile' => $groupFile,
+                              'validasi' => $validasi,  
                               'modelProtokol' => $modelProtokol,
                         )); ?>
                   </div><!--widgetcontent-->

@@ -178,7 +178,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
         </span>
 
     </div>
-
+<?php /*
     <div class="par">
         <label>Jenis Penelitian</label>  
         <span class="field">
@@ -186,6 +186,8 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
         </span>
 
     </div>
+ * 
+ */?>
     <?php if ( $modelFile ){ 
             foreach ($modelFile as $file ){
             ?>
