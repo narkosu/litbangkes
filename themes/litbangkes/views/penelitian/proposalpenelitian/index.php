@@ -70,7 +70,7 @@ $StatusColor = array(   '0'=>'label-info',
                                 </span></td>
                             <td><a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/view/id/' . $proposal->id) ?>"><?php echo $proposal->nama_penelitian ?></a></td>
                             <td><?php echo $proposal->pegawai->nama ?></td>
-                            <td><?php echo $proposal->jenispenelitian->nama ?></td>
+                            <td><?php echo (!empty($proposal->jenispenelitian) ? $proposal->jenispenelitian->nama:'') ?></td>
                             
                             <td><?php echo $proposal->tahun_anggaran ?></td>
                             <td><?php echo $proposal->getPosition() ?></td>
