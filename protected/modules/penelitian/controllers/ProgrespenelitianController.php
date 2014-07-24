@@ -57,10 +57,19 @@ class ProgrespenelitianController extends Controller
 		//$model=new ProgresPenelitian;
     $this->pageTitle  = $model->nama_penelitian;
     $this->menuactive  = 'penelitian';
+    $modelFile = $model->file;
     
+    $modelProgress['triwulan1'] = $this->loadModelByProposalId($id,'triwulan1');
+    $modelProgress['triwulan2'] = $this->loadModelByProposalId($id,'triwulan2');
+    $modelProgress['triwulan3'] = $this->loadModelByProposalId($id,'triwulan3');
+    $modelProgress['triwulan4'] = $this->loadModelByProposalId($id,'triwulan4');
+    if ( empty($modelProgress['triwulan3']) )
+        $modelProgress['triwulan3'] = new ProgresPenelitian;
+    if ( empty($modelProgress['triwulan4']) )
+        $modelProgress['triwulan4'] = new ProgresPenelitian;
 		$this->render('view',array(
 			'model'=>$model,
-			'modelProgres' => $modelProgres,
+			'modelProgress' => $modelProgress,
       'modelFile'=>  $modelFile
 		));
 	}
@@ -91,8 +100,16 @@ class ProgrespenelitianController extends Controller
 		if(isset($_POST['ProgresPenelitian']['triwulan1']))
 		{
 			$modelProgress['triwulan1']->attributes=$_POST['ProgresPenelitian']['triwulan1'];
+      
+      if (!empty($_POST['ProgresPenelitian']['triwulan1']['tanggal_pangajuan_etik'])){
+      
+        list($mo,$da,$ya) = explode('/',$_POST['ProgresPenelitian']['triwulan1']['tanggal_pangajuan_etik']);
+        echo $modelProgress['triwulan1']->tanggal_pangajuan_etik = $ya.'-'.$mo.'-'.$da;
+      }
+      
       $modelProgress['triwulan1']->proposal_id = $id;
-			if($modelProgress['triwulan1']->save())
+			
+      if($modelProgress['triwulan1']->save())
 				$this->redirect(array('create','id'=>$model->id));
 		}
     
@@ -106,6 +123,10 @@ class ProgrespenelitianController extends Controller
 		if(isset($_POST['ProgresPenelitian']['triwulan2']))
 		{
 			$modelProgress['triwulan2']->attributes=$_POST['ProgresPenelitian']['triwulan2'];
+      if (!empty($_POST['ProgresPenelitian']['triwulan2']['tanggal_pangajuan_etik'])){
+        list($mo,$da,$ya) = explode('/',$_POST['ProgresPenelitian']['triwulan2']['tanggal_pangajuan_etik']);
+        $modelProgress['triwulan2']->tanggal_pangajuan_etik = $ya.'-'.$mo.'-'.$da;
+      }
       $modelProgress['triwulan2']->proposal_id = $id;
 			if($modelProgress['triwulan2']->save())
 				$this->redirect(array('create','id'=>$model->id));
@@ -121,6 +142,10 @@ class ProgrespenelitianController extends Controller
 		if(isset($_POST['ProgresPenelitian']['triwulan3']))
 		{
 			$modelProgress['triwulan3']->attributes=$_POST['ProgresPenelitian']['triwulan3'];
+      if (!empty($_POST['ProgresPenelitian']['triwulan3']['tanggal_pangajuan_etik'])){
+        list($mo,$da,$ya) = explode('/',$_POST['ProgresPenelitian']['triwulan3']['tanggal_pangajuan_etik']);
+        $modelProgress['triwulan3']->tanggal_pangajuan_etik = $ya.'-'.$mo.'-'.$da;
+      }
       $modelProgress['triwulan3']->proposal_id = $id;
 			if($modelProgress['triwulan3']->save())
 				$this->redirect(array('create','id'=>$model->id));
@@ -136,6 +161,10 @@ class ProgrespenelitianController extends Controller
 		if(isset($_POST['ProgresPenelitian']['triwulan4']))
 		{
 			$modelProgress['triwulan4']->attributes=$_POST['ProgresPenelitian']['triwulan4'];
+      if (!empty($_POST['ProgresPenelitian']['triwulan4']['tanggal_pangajuan_etik'])){
+        list($mo,$da,$ya) = explode('/',$_POST['ProgresPenelitian']['triwulan4']['tanggal_pangajuan_etik']);
+        $modelProgress['triwulan4']->tanggal_pangajuan_etik = $ya.'-'.$mo.'-'.$da;
+      }
       $modelProgress['triwulan4']->proposal_id = $id;
 			if($modelProgress['triwulan4']->save())
 				$this->redirect(array('create','id'=>$model->id));
