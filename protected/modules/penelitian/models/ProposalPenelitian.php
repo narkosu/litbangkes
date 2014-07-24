@@ -171,17 +171,35 @@ class ProposalPenelitian extends CActiveRecord
       return $this->clients;
   }
   
+  public function isValidasiKasubbid(){
+      if ( empty( $this->validasi ) ) return false;
+      
+      return ( $this->validasi->validasi_kasubbid == 3 ) ;
+  }
+  
+  public function isValidasiKabid(){
+      if ( empty( $this->validasi ) ) return false;
+      
+      return ( $this->validasi->validasi_kabid == 3 ) ;
+  }
+  
   public function isValidasiPPI(){
       if ( empty( $this->validasi ) ) return false;
       
-      return ( $this->validasi->validasi_kabid && $this->validasi->validasi_kasubbid ) ;
+      return ( $this->validasi->validasi_kabid == 3 && $this->validasi->validasi_kasubbid ==3 ) ;
+  }
+  
+  public function isValidasiPPIEditable(){
+    if ( empty( $this->validasi ) ) return false;
+      
+    return ( $this->validasi->validasi_ppi != ProposalPenelitian::STATUS_SETUJU && $this->validasi->validasi_ppi != ProposalPenelitian::STATUS_TOLAK ) ;
   }
   
   public function isValidasiKapuslit(){
       if ( empty( $this->validasi ) ) return false;
       
-      return ( $this->validasi->validasi_kabid && $this->validasi->validasi_kasubbid 
-              && $this->validasi->validasi_ppi ) ;
+      return ( $this->validasi->validasi_kabid == 3 && $this->validasi->validasi_kasubbid == 3
+              && $this->validasi->validasi_ppi == 3 ) ;
   }
   
   public function isValidasiKI(){
@@ -191,7 +209,7 @@ class ProposalPenelitian extends CActiveRecord
   }
   
   public function isValidate(){
-      return ($this->step == 1);
+      return ($this->step == 1  );
   }
   
   public static function statusDocument($status){

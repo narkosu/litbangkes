@@ -440,4 +440,28 @@ class ProposalpenelitianController extends Controller
     }
     return $model;
   }
+  
+  public function AccessAsKabid(){
+      return ( Yii::app()->user->isKabid || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) ;
+  }
+  
+  public function AccessAsKasubbid(){
+      return ( Yii::app()->user->isKasubbid || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) ;
+  }
+  
+  public function AccessAsPPI(){
+      return (Yii::app()->user->isPPI || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin );
+  }
+  
+  public function AccessAsKapuslit(){
+      return (Yii::app()->user->isKapuslit || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin);
+  }
+  
+  public function AccessAsKI(){
+      return (Yii::app()->user->isKI || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin);
+  }
+  
+  public function AccessAsKE(){
+      return (Yii::app()->user->isKE || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin);
+  }
 }
