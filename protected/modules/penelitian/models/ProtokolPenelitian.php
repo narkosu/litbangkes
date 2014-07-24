@@ -112,17 +112,29 @@ class ProtokolPenelitian extends CActiveRecord
 		));
 	}
   
+  public function isValidasiKasubbid(){
+      if ( empty( $this->validasi ) || empty( $this->id) ) return false;
+      
+      return ( $this->id ) ;
+  }
+  
+   public function isValidasiKabid(){
+      if ( empty( $this->validasi ) ) return false;
+      
+      return ( $this->validasi->validasi_kasubbid == ProposalPenelitian::STATUS_SETUJU ) ;
+  }
+  
   public function isValidasiPPI(){
       if ( empty( $this->validasi ) ) return false;
       
-      return ( $this->validasi->validasi_kabid && $this->validasi->validasi_kasubbid ) ;
+      return ( $this->validasi->validasi_kabid == ProposalPenelitian::STATUS_SETUJU 
+              && $this->validasi->validasi_kasubbid == ProposalPenelitian::STATUS_SETUJU) ;
   }
   
   public function isValidasiKapuslit(){
       if ( empty( $this->validasi ) ) return false;
       
-      return ( $this->validasi->validasi_kabid && $this->validasi->validasi_kasubbid 
-              && $this->validasi->validasi_ppi ) ;
+      return (  $this->validasi->validasi_ppi == ProposalPenelitian::STATUS_SETUJU) ;
   }
   
   public function isValidasiKI(){
@@ -130,10 +142,27 @@ class ProtokolPenelitian extends CActiveRecord
       
       return ( $this->validasi->validasi_ppi == 3 ) ;
   }
+  
+  public function isValidasiKE(){
+      if ( empty( $this->validasi ) ) return false;
+      
+      return ( $this->validasi->validasi_kapuslit == ProposalPenelitian::STATUS_SETUJU ) ;
+  }
+  
+  public function isValidasiKEEditable(){
+    if ( empty( $this->validasi ) ) return false;
+      
+    return ( $this->validasi->validasi_ke != ProposalPenelitian::STATUS_SETUJU && $this->validasi->validasi_ke != ProposalPenelitian::STATUS_TOLAK ) ;
+  }
+  
   /* filter "is this protokol in the validation session?" */
   
-  public function isValidate(){
-      return ($this->proposal->step == 2);
+  public function isValidate( $proposal ){
+      if ( empty($this->proposal) ){
+          return ( $proposal->step == ProposalPenelitian::ISPROTOKOL );
+      }
+      
+      return ($this->proposal->step == ProposalPenelitian::ISPROTOKOL );
   }
   public function getStatus(){
       return (!empty($this->statusDocument[$this->status]) ? $this->statusDocument[$this->status] : '');

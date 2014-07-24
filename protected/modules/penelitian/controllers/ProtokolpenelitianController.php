@@ -123,31 +123,45 @@ class ProtokolpenelitianController extends Controller {
         }
         
         
-        if ( $step != 2 ) { // protokol
+        if ( $step < 2 ) { // protokol
             $this->redirect(array('/penelitian/proposalpenelitian/viewvalidasi/id/' . $id));
         }
         
         $newModelFile = new FilePenelitian;
         $modelProtokol = $this->loadModelByProposal($id);
-        $validasi = $modelProtokol->validasi;
         
-        
-        if ( empty($validasi)){
-            $validasi = new ProposalValidasi;
-            $validasi->proposal_id = $id;
-            $validasi->step = 2;
-        }
-    
-        $validasi = $validasi->saveValidation($_POST);
-        
-        if ( !empty($_POST) ){
-            if ( $validasi->validasi_ppi == 3 ){
-                $modelProtokol->status = 3;
-            }else{
-                $modelProtokol->status = 1;
+        if (!empty($modelProtokol) ) {
+            $validasi = $modelProtokol->validasi;
+
+
+            if ( empty($validasi)){
+                $validasi = new ProposalValidasi;
+                $validasi->proposal_id = $id;
+                $validasi->step = ProposalPenelitian::ISPROTOKOL;
             }
-            $modelProtokol->save();
-            $this->refresh();
+            
+
+            $validasi = $validasi->saveValidation($_POST);
+
+            if ( !empty($_POST) ){
+                if ( $validasi->validasi_ppi == 3 ){
+                    $modelProtokol->status = 3;
+                }else{
+                    $modelProtokol->status = 1;
+                }
+                
+                if ( $validasi->validasi_ke == ProposalPenelitian::STATUS_SETUJU ) {
+                    $modelProtokol->proposal->status = ProposalPenelitian::STATUS_SETUJU;
+                    $modelProtokol->proposal->step = ProposalPenelitian::PROGRES;
+                }
+                $modelProtokol->proposal->save();
+                $modelProtokol->save();
+                
+                
+                $this->refresh();
+            }
+        }else{
+            $validasi = new StdClass;
         }
         
         $groupFile = array();
@@ -165,6 +179,7 @@ class ProtokolpenelitianController extends Controller {
                 }
         }
 
+        
 
         $this->render('viewvalidasi', array(
             'model' => $model,
@@ -428,4 +443,28 @@ class ProtokolpenelitianController extends Controller {
     return $model;
   }
 
+  
+  public function AccessAsKabid(){
+      return ( Yii::app()->user->isKabid || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin)  ;
+  }
+  
+  public function AccessAsKasubbid(){
+      return ( Yii::app()->user->isKasubbid || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) ;
+  }
+  
+  public function AccessAsPPI(){
+      return (Yii::app()->user->isPPI || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin );
+  }
+  
+  public function AccessAsKapuslit(){
+      return (Yii::app()->user->isKapuslit || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin);
+  }
+  
+  public function AccessAsKI(){
+      return (Yii::app()->user->isKI || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin);
+  }
+  
+  public function AccessAsKE(){
+      return (Yii::app()->user->isKE || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin);
+  }
 }
