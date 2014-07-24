@@ -78,6 +78,8 @@ $StatusColor = array(   '0'=>'label-info',
                             <td class="center">
                                 <?php if (Yii::app()->user->isSuperAdmin || ( Yii::app()->user->getState('pegawai') && Yii::app()->user->getState('pegawai')->id == $proposal->pegawai_id)) { ?>
                                     <a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/update/id/' . $proposal->id) ?>" class="btn btn-primary btn-rounded">Edit</a> 
+                                <?php } ?>    
+                                    <?php if (Yii::app()->user->isSuperAdmin ) { ?>
                                     <a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/delete/id/' . $proposal->id) ?>" class="btn btn-primary btn-rounded">Delete</a> 
                                 <?php } ?>
 
@@ -87,6 +89,7 @@ $StatusColor = array(   '0'=>'label-info',
 
                 </tbody>
             </table>
+            <?php /*]
             <div class="dataTables_info" id="dyntable_info">Showing 1 to 10 of 13 entries</div>
             <div class="dataTables_paginate paging_full_numbers" id="dyntable_paginate">
                 <a tabindex="0" class="first paginate_button paginate_button_disabled" id="dyntable_first">First</a>
@@ -95,6 +98,15 @@ $StatusColor = array(   '0'=>'label-info',
                     <a tabindex="0" class="paginate_active">1</a><a tabindex="0" class="paginate_button">2</a></span>
                 <a style="margin-left: -3px;" tabindex="0" class="next paginate_button" id="dyntable_next">Next</a>
                 <a style="margin-left: -3px;" tabindex="0" class="last paginate_button" id="dyntable_last">Last</a>
+            </div>
+            */?>
+            <div class="dataTables_info" >
+                <?php 
+                //echo $pages->getPageCount();
+                $this->widget('CLinkPager', array(
+                    'pages' => $pages,
+                ));
+                ?>
             </div>
         </div>
         <br>

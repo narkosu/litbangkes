@@ -27,7 +27,7 @@ $this->breadcrumbs = array(
                                     <span class="badge badge-success">1</span>&nbsp;&nbsp;Proposal Penelitian <i class="iconfa-ok"></i></a></li>
                             <li class="haslink"><a href="<?php echo Yii::app()->createUrl('penelitian/protokolpenelitian/view/id/' . $model->id) ?>">
                                     <span class="badge">2</span>&nbsp;&nbsp;Protokol Penelitian </a></li>
-                            <li class="haslink"><a href="upload_progress_triwulan_1.html">
+                            <li class="haslink"><a href="<?php echo Yii::app()->createUrl('penelitian/progrespenelitian/create/id/' . $model->id) ?>">
                                     <span class="badge">3</span>&nbsp;&nbsp;Progress Penelitian</a></li>
                             <li><a><span class="badge">4</span>&nbsp;&nbsp;Output Penelitian</a></li>
                         </ul>

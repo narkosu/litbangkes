@@ -21,6 +21,7 @@ return array(
 		'application.models.*',
 		'application.modules.members.models.*',
 		'application.modules.masters.models.*',
+		'application.modules.penelitian.models.*',
 		'application.components.*',
 	),
 	'modules'=> array('masters','members','penelitian',

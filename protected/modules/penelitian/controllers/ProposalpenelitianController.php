@@ -17,7 +17,7 @@ class ProposalpenelitianController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
+			//'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -38,10 +38,14 @@ class ProposalpenelitianController extends Controller
 				'users'=>array('@'),
         'expression'=>'$user->isSuperAdmin || $user->isMember',
 			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+        array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('delete'),
+				'expression'=>'$user->isSuperAdmin',
+			),
+			/*array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
 				'users'=>array('admin'),
-			),
+			),*/
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -227,11 +231,14 @@ class ProposalpenelitianController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+     
+		$model = $this->loadModel($id);
+    $model->status_record = -1;
+    $model->save();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('proposalpenelitian'));
 	}
 
 	/**
@@ -240,32 +247,45 @@ class ProposalpenelitianController extends Controller
 	public function actionIndex()
 	{
     if ( Yii::app()->user->isSuperAdmin ) {
-        $proposal = ProposalPenelitian::model()->findAll();
+        $criteria = new CDbCriteria();
+        $criteria->condition   .= 'status_record = 1 '; // tidak delete
+        $criteria->order   = 'created_at desc';
+        
     } else if ( Yii::app()->user->isKabid ){
         $me = Yii::app()->user->getState('pegawai');
         
         $criteria = new CDbCriteria();
-        $criteria->condition .= 'bidang_id = '.$me->bidang_id;
-        $criteria->condition .= ' OR pegawai_id = '.$me->id;
-        $proposal = ProposalPenelitian::model()->findAll($criteria);
+        $criteria->condition   .= 'status_record = 1 '; // tidak delete
+        $criteria->condition .= ' AND ( bidang_id = '.$me->bidang_id.' OR pegawai_id = '.$me->id.' )';
+        $criteria->order   = 'created_at desc';
+        
     } else if ( Yii::app()->user->isKasubbid ){
         $me = Yii::app()->user->getState('pegawai');
         
         $criteria = new CDbCriteria();
-        $criteria->condition .= '( bidang_id = '.$me->bidang_id;
+        $criteria->condition  .= 'status_record = 1 '; // tidak delete
+        $criteria->condition .= ' AND ( bidang_id = '.$me->bidang_id;
         $criteria->condition .= ' AND  sub_bidang_id = '.$me->subbidang_id.' ) ';
         $criteria->condition .= ' OR pegawai_id = '.$me->id .' ';
+        $criteria->order   = 'created_at desc'; 
         
-        $proposal = ProposalPenelitian::model()->findAll($criteria);
     }else if ( Yii::app()->user->isMember ) {
         
         $me = Yii::app()->user->getState('pegawai');
         
         $criteria = new CDbCriteria();
-        $criteria->condition .= 'pegawai_id = '.$me->id;
-        $proposal = ProposalPenelitian::model()->findAll($criteria);
+        $criteria->condition   .= ' status_record = 1 '; // tidak delete
+        $criteria->condition .= ' AND pegawai_id = '.$me->id;
+        $criteria->order   = 'created_at desc';
+        
     }
     
+    $count      = ProposalPenelitian::model()->count($criteria);
+    $pages      = new CPagination($count);
+    // results per page
+    $pages->pageSize    = 20;
+    $pages->applyLimit($criteria);
+    $proposal = ProposalPenelitian::model()->findAll($criteria);
     /*$dataProvider=new CActiveDataProvider('ProposalPenelitian');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
@@ -274,6 +294,7 @@ class ProposalpenelitianController extends Controller
      */
      $this->render('index',array(
 			'data'=>$proposal,
+      'pages'=>$pages   
 		));
 	}
 
@@ -285,6 +306,7 @@ class ProposalpenelitianController extends Controller
 	{
     $this->menuactive = 'validasipenelitian'; 
     $userLogin = Yii::app()->user;
+    
     /*if ( Yii::app()->user->isSuperAdmin ) {
         $proposal = ProposalPenelitian::model()->findAll();
     } else if ( Yii::app()->user->isKabid ){
@@ -311,7 +333,11 @@ class ProposalpenelitianController extends Controller
         $criteria->condition .= 'pegawai_id = '.$me->id;
         $proposal = ProposalPenelitian::model()->findAll($criteria);
     }*/
-    $criteria = new CDbCriteria();
+    
+    
+    $criteria   = new CDbCriteria;
+    
+
     /* validasi untuk PPI */
     if ( $userLogin->isPPI  ) { 
         $criteria->join = 'LEFT JOIN tbl_proposal_validasi a on t.id = a.proposal_id';
@@ -337,16 +363,22 @@ class ProposalpenelitianController extends Controller
         //$criteria->join = 'LEFT JOIN tbl_proposal_validasi a on t.id = a.proposal_id';
         $criteria->condition .= 't.bidang_id = '.$me->bidang_id.' && t.sub_bidang_id = '.$me->subbidang_id;
     }
+    $criteria->order = 't.created_at desc';
+    $criteria->condition   .= (!empty($criteria->condition) ? ' AND ':'') . ' t.status_record = 1 '; // tidak delete
+    
+    $count      = ProposalPenelitian::model()->count($criteria);
+    $pages      = new CPagination($count);
+    // results per page
+    $pages->pageSize    = 20;
+    $pages->applyLimit($criteria);
     
     $proposal = ProposalPenelitian::model()->findAll($criteria);
-    /*$dataProvider=new CActiveDataProvider('ProposalPenelitian');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-     * 
-     */
+    
+    
+    
      $this->render('validasi',array(
 			'data'=>$proposal,
+      'pages'=>$pages   
 		));
 	}
   

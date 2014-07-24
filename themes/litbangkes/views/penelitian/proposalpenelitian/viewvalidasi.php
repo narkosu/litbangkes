@@ -40,6 +40,7 @@ $this->breadcrumbs = array(
                         Yii::app()->user->isKasubbid ||
                         Yii::app()->user->isAdmin ||
                         Yii::app()->user->isPPI ||
+                        Yii::app()->user->isKapuslit ||
                         Yii::app()->user->isKI ||
                         Yii::app()->user->isKE) {
                     ?>
