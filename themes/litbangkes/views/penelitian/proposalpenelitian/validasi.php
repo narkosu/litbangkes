@@ -76,6 +76,8 @@ $StatusColor = array(   '0'=>'label-info',
                             <td class="center">
                                 <?php if (Yii::app()->user->isSuperAdmin || ( Yii::app()->user->getState('pegawai') && Yii::app()->user->getState('pegawai')->id == $proposal->pegawai_id)) { ?>
                                     <a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/update/id/' . $proposal->id) ?>" class="btn btn-primary btn-rounded">Edit</a> 
+                                <?php }  ?>
+                                    <?php if (Yii::app()->user->isSuperAdmin ) { ?>
                                     <a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/delete/id/' . $proposal->id) ?>" class="btn btn-primary btn-rounded">Delete</a> 
                                 <?php } ?>
 

@@ -52,11 +52,11 @@ class ProtokolpenelitianController extends Controller {
     public function actionView($id) {
 
         $model = ProposalPenelitian::model()->findByPk($id);
-
+        
         if (empty($model)) {
             $this->redirect(array('/penelitian/proposalpenelitian'));
         }
-
+        $this->pageTitle = $model->nama_penelitian;
         $validasi = $model->validasi; // hanya untuk proposal
         
         

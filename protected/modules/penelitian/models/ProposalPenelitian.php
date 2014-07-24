@@ -163,6 +163,7 @@ class ProposalPenelitian extends CActiveRecord
   }
   
   public function getPosition(){
+      
       return (!empty($this->positionDocument[$this->step]) ? $this->positionDocument[$this->step] : '');
   }
   
