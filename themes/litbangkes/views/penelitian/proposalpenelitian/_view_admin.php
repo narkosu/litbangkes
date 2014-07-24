@@ -116,6 +116,26 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
                             PPI
                         </span>
                     <?php } ?>
+                    <?php if (!empty($validasi->validasi_kapuslit)) { ?>
+                        <?php
+                        if ($validasi->validasi_kapuslit == 3) {
+                            $labelValidasi = 'label-success';
+                        } else if ($validasi->validasi_kapuslit == 2) { // revisi
+                            $labelValidasi = 'label-success';
+                        } else if ($validasi->validasi_kapuslit == 4) { //ditolak
+                            $labelValidasi = 'label-important';
+                        } else {
+                            $labelValidasi = 'label-info';
+                        }
+                        ?>
+                        <span class="label <?php echo $labelValidasi ?>">
+                            <?php
+                            echo $validasi->getStatus('validasi_kapuslit');
+                            ?>
+                            Kapuslit
+                        </span>
+                    <?php } ?>
+                    
                     <?php if (!empty($validasi->validasi_ki)) { ?>
                         <?php
                         if ($validasi->validasi_ki == 3) {
@@ -135,8 +155,10 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
                             KI
                         </span>
                     <?php } ?>
+                    
+                    
 
-                    <?php if (!empty($validasi->validasi_ke)) { ?>
+                    <?php /*if (!empty($validasi->validasi_ke)) { ?>
                         <?php
                         if ($validasi->validasi_ke == 3) {
                             $labelValidasi = 'label-success';
@@ -154,7 +176,7 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
                             ?>
                             KE
                         </span>
-                    <?php } ?>
+                    <?php } */ ?>
                 </span>
 
 

@@ -7,6 +7,26 @@
 <div id="tabs">
     <ul>
         <li><a href="#tabs-1">Informasi Penelitian</a></li>
+         <?php if ($this->AccessAsKasubbid() && $modelProtokol->isValidasiKasubbid()) { ?>
+            <li><a href="#tabs-3">Validasi Porposal Oleh KaSubBid</a></li>
+        <?php } ?>
+
+        <?php if ($this->AccessAsKabid() && $modelProtokol->isValidasiKabid()) { ?>
+            <li><a href="#tabs-2">Validasi Porposal Oleh Kabid</a></li>
+        <?php } ?>
+
+        <?php if ($this->AccessAsPPI() && $modelProtokol->isValidasiPPI()) { ?>
+            <li><a href="#tabs-4">Validasi Porposal Oleh PPI</a></li>
+        <?php } ?>
+        <?php if ($this->AccessAsKapuslit() && $modelProtokol->isValidasiKapuslit()) { ?>
+            <li><a href="#tabs-validasi-kaspulit">Validasi Porposal Oleh Kapuslit</a></li>
+        <?php } ?>
+        
+        <?php if ($this->AccessAsKE() && $modelProtokol->isValidasiKE()) { ?>
+            <li><a href="#tabs-6">Validasi Protokol Oleh Komisi Etik</a></li>
+        <?php } ?>
+         <?php /*   
+            
         <?php if (Yii::app()->user->isKabid) { ?>
             <li><a href="#tabs-2">Validasi Porposal Oleh Kabid</a></li>
         <?php } ?>
@@ -19,11 +39,13 @@
         <?php if ((Yii::app()->user->isKapuslit || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) && $modelProtokol->isValidasiKapuslit()) { ?>
             <li><a href="#tabs-5">Validasi Porposal Oleh Kapuslit</a></li>
         <?php } ?>
-
+            */?>
     </ul>
 
     <div id="tabs-1">
+        
         <div class="par">
+            <?php if ( !empty($modelProtokol->id) ) { ?>
             <label>Status</label>    
             <span class="field">
                 <?php
@@ -111,13 +133,13 @@
                         PPI
                     </span>
                 <?php } ?>
-                <?php if (!empty($validasi->validasi_ki)) { ?>
+                <?php if (!empty($validasi->validasi_kapuslit)) { ?>
                     <?php
-                    if ($validasi->validasi_ki == 3) {
+                    if ($validasi->validasi_kapuslit == 3) {
                         $labelValidasi = 'label-success';
-                    } else if ($validasi->validasi_ki == 2) { // revisi
+                    } else if ($validasi->validasi_kapuslit == 2) { // revisi
                         $labelValidasi = 'label-success';
-                    } else if ($validasi->validasi_ki == 4) { //ditolak
+                    } else if ($validasi->validasi_kapuslit == 4) { //ditolak
                         $labelValidasi = 'label-important';
                     } else if ($model->status == 1) { //progres
                         $labelValidasi = 'label-warning';
@@ -127,9 +149,9 @@
                     ?>
                     <span class="label <?php echo $labelValidasi ?>">
                         <?php
-                        echo $validasi->getStatus('validasi_ki');
+                        echo $validasi->getStatus('validasi_kapuslit');
                         ?>
-                        KI
+                        Kapuslit
                     </span>
                 <?php } ?>
 
@@ -243,68 +265,20 @@
                     </a>    
                 <?php } ?>
             </span>
-
+           <?php } else { ?> <!-- end of protokol -->
+           Protokol Tidak ada
+           <?php } ?>
         </div>
 
     </div> <!-- tabs-1 -->
 
-    <?php if (Yii::app()->user->isKabid) { ?>
-        <?php if ($modelProtokol->isValidate()) {
-            $validasi->validasi_kabid = (empty($validasi->validasi_kabid) ? '' : $validasi->validasi_kabid);
-            ?>
-            <div id="tabs-2">
-                <?php
-                $form = $this->beginWidget('CActiveForm', array(
-                    'id' => 'validasi-ppi-form',
-                    'enableAjaxValidation' => false,
-                    'htmlOptions' => array('class' => 'stdform stdform2')
-                ));
-                ?>
-                <input type="hidden" name="group_validasi" value="kabid">
-                <p>
-                    <label>Ditolak Oleh KaBid</label>
-                    <span class="field">
-                        <input type="radio" name="ProposalValidasi[validasi_kabid]" value="4" <?php echo ( $validasi->validasi_kabid == 4 ? 'checked' : ''); ?> /> 
-                    </span>
-                </p>
-
-                <p>
-                    <label>Direvisi Oleh KaBid</label>
-                    <span class="field">
-                        <input type="radio" name="ProposalValidasi[validasi_kabid]" value="2" <?php echo ( $validasi->validasi_kabid == 2 ? 'checked' : ''); ?> />
-                    </span>
-                </p>
-
-                <p>
-                    <label>Disetujui Oleh KaBid</label>
-                    <span class="field">
-                        <input type="radio" name="ProposalValidasi[validasi_kabid]" value="3" <?php echo ( $validasi->validasi_kabid == 3 ? 'checked' : ''); ?> />
-                    </span>
-                </p>
-                <p>
-                    <label>Alasan</label>
-                    <span class="field">
-                        <textarea name="ProposalValidasi[alasan]" class="input-xxlarge"></textarea>
-                    </span>
-                </p>
-                <p class="stdformbutton">
-                    <button type="submit" class="btn btn-primary">Validasi</button>
-                </p>
-
-                <?php $this->endWidget(); ?>
-    <?php } else { ?>  
-                <p>
-                    <span class="label <?php echo $labelValidasi ?>">
-        <?php echo ProposalPenelitian::statusDocument($validasi->validasi_kabid) ?>
-                    </span>    
-                </p>
-        <?php } ?>  
-        </div> <!-- tabs-2 -->
-    <?php } ?>
-        
-        <?php if (Yii::app()->user->isKasubbid) { ?>
+    <?php if ($this->AccessAsKasubbid() && $modelProtokol->isValidasiKasubbid()) { ?>
+    
         <div id="tabs-3">
-            <?php if ( $modelProtokol->isValidate() ) { ?>
+            <?php if ( $modelProtokol->isValidate($model)  && !$modelProtokol->isValidasiKasubbid()) { ?>
+            
+            <?php $validasi->validasi_kasubbid = empty($validasi->validasi_kasubbid) ? '' : $validasi->validasi_kasubbid;?>
+            
                 <?php
                 $form = $this->beginWidget('CActiveForm', array(
                     'id' => 'validasi-ppi-form',
@@ -355,9 +329,66 @@
         </div> <!-- tabs-3 -->
         <?php } ?>
 
-        <?php if ((Yii::app()->user->isPPI || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) && $modelProtokol->isValidasiPPI()) { ?>
+        
+    <?php if ($this->AccessAsKabid() && $modelProtokol->isValidasiKabid()) { ?>
+        
+            <div id="tabs-2">
+                <?php if ( $modelProtokol->isValidate($model)  && !$modelProtokol->isValidasiKabid() ) {
+            $validasi->validasi_kabid = (empty($validasi->validasi_kabid) ? '' : $validasi->validasi_kabid);
+            ?>
+                <?php
+                $form = $this->beginWidget('CActiveForm', array(
+                    'id' => 'validasi-ppi-form',
+                    'enableAjaxValidation' => false,
+                    'htmlOptions' => array('class' => 'stdform stdform2')
+                ));
+                ?>
+                <input type="hidden" name="group_validasi" value="kabid">
+                <p>
+                    <label>Ditolak Oleh KaBid</label>
+                    <span class="field">
+                        <input type="radio" name="ProposalValidasi[validasi_kabid]" value="4" <?php echo ( $validasi->validasi_kabid == 4 ? 'checked' : ''); ?> /> 
+                    </span>
+                </p>
+
+                <p>
+                    <label>Direvisi Oleh KaBid</label>
+                    <span class="field">
+                        <input type="radio" name="ProposalValidasi[validasi_kabid]" value="2" <?php echo ( $validasi->validasi_kabid == 2 ? 'checked' : ''); ?> />
+                    </span>
+                </p>
+
+                <p>
+                    <label>Disetujui Oleh KaBid</label>
+                    <span class="field">
+                        <input type="radio" name="ProposalValidasi[validasi_kabid]" value="3" <?php echo ( $validasi->validasi_kabid == 3 ? 'checked' : ''); ?> />
+                    </span>
+                </p>
+                <p>
+                    <label>Alasan</label>
+                    <span class="field">
+                        <textarea name="ProposalValidasi[alasan]" class="input-xxlarge"></textarea>
+                    </span>
+                </p>
+                <p class="stdformbutton">
+                    <button type="submit" class="btn btn-primary">Validasi</button>
+                </p>
+
+                <?php $this->endWidget(); ?>
+    <?php } else { ?>  
+                <p>
+                    <span class="label <?php echo $labelValidasi ?>">
+        <?php echo ProposalPenelitian::statusDocument($validasi->validasi_kabid) ?>
+                    </span>    
+                </p>
+        <?php } ?>  
+        </div> <!-- tabs-2 -->
+    <?php } ?>
+        
+        
+        <?php if ($this->AccessAsPPI() && $modelProtokol->isValidasiPPI()) { ?>
         <div id="tabs-4">
-            <?php if ($modelProtokol->isValidate()) { ?>
+            <?php if ( $modelProtokol->isValidate($model) && !$modelProtokol->isValidasiPPI() ) { ?>
                 <?php
                 $form = $this->beginWidget('CActiveForm', array(
                     'id' => 'validasi-ppi-form',
@@ -407,9 +438,9 @@
         </div> <!-- tabs-4 -->
         <?php } ?>
 
-        <?php if ((Yii::app()->user->isKapuslit || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) && $modelProtokol->isValidasiKapuslit()) { ?>
-            <div id="tabs-5">
-                <?php if ($modelProtokol->isValidate()) { ?>
+        <?php if ($this->AccessAsKapuslit() && $modelProtokol->isValidasiKapuslit()) { ?> 
+            <div id="tabs-validasi-kaspulit">
+                <?php if ($modelProtokol->isValidate($model) && !$modelProtokol->isValidasiKapuslit()) { ?>
                     <?php
                     $form = $this->beginWidget('CActiveForm', array(
                         'id' => 'validasi-ppi-form',
@@ -460,4 +491,56 @@
      <?php } ?>
 
 
+            <?php if ($this->AccessAsKE() && $modelProtokol->isValidasiKE()) { ?>
+            <div id="tabs-6">
+                <?php if ($modelProtokol->isValidate($model) && $modelProtokol->isValidasiKEEditable()) { ?>
+                <?php $validasi->validasi_ke = empty($validasi->validasi_ke) ? '' : $validasi->validasi_ke;?>
+                    <?php
+                    $form = $this->beginWidget('CActiveForm', array(
+                        'id' => 'validasi-ppi-form',
+                        'enableAjaxValidation' => false,
+                        'htmlOptions' => array('class' => 'stdform stdform2')
+                    ));
+                    ?>
+                            <input type="hidden" name="group_validasi" value="ke">
+                            <?php /*<p>
+                                <label>Ditolak Oleh Komisi Etik</label>
+                                <span class="field">
+                                    <input type="radio" name="ProposalValidasi[validasi_kapuslit]" value="4" <?php echo ( $validasi->validasi_kapuslit == 4 ? 'checked' : ''); ?> /> 
+                                </span>
+                            </p>
+                            */?>
+                            <p>
+                                <label>Direvisi Oleh Komisi Etik</label>
+                                <span class="field">
+                                    <input type="radio" name="ProposalValidasi[validasi_ke]" value="2" <?php echo ( $validasi->validasi_ke == 2 ? 'checked' : ''); ?> />
+                                </span>
+                            </p>
+
+                            <p>
+                                <label>Disetujui Oleh Komisi Etik</label>
+                                <span class="field">
+                                    <input type="radio" name="ProposalValidasi[validasi_ke]" value="3" <?php echo ( $validasi->validasi_ke == 3 ? 'checked' : ''); ?> />
+                                </span>
+                            </p>
+                            <p>
+                                <label>Alasan</label>
+                                <span class="field">
+                                    <textarea name="ProposalValidasi[alasan]" class="input-xxlarge"></textarea>
+                                </span>
+                            </p>
+                            <p class="stdformbutton">
+                                <button type="submit" class="btn btn-primary">Validasi</button>
+                            </p>
+
+                            <?php $this->endWidget(); ?>
+                    <?php } else { ?>  
+                            <p>
+                                <span class="label <?php echo $labelValidasi ?>">
+                                    <?php echo ProposalPenelitian::statusDocument($validasi->validasi_kapuslit) ?>
+                                </span>    
+                            </p>
+                <?php } ?>
+            </div> <!-- tabs-ke -->
+     <?php } ?>
 </div>  

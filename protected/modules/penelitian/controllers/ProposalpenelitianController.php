@@ -404,15 +404,15 @@ class ProposalpenelitianController extends Controller
       $model->created_by = Yii::app()->user->id;
 			if($model->save()) {
           if ( $post['group_validasi'] == 'kabid'){
-            if ( $model->validasi_kasubbid == 3 ) { // disetujui  
-                $model->proposal->status = 3; // disetujui
+            if ( $model->validasi_kasubbid == ProposalPenelitian::STATUS_SETUJU ) { // disetujui  
+                $model->proposal->status = ProposalPenelitian::STATUS_SETUJU; // disetujui
                 $model->proposal->save();
             }
           }
 				  
           if ( $post['group_validasi'] == 'kasubbid'){
-            if ( $model->validasi_kabid == 3 ) { // disetujui  
-                $model->proposal->status = 3; // disetujui
+            if ( $model->validasi_kabid == ProposalPenelitian::STATUS_SETUJU ) { // disetujui  
+                $model->proposal->status = ProposalPenelitian::STATUS_SETUJU; // disetujui
                 $model->proposal->save();
             }
           }
@@ -428,13 +428,16 @@ class ProposalpenelitianController extends Controller
           }
           
           if ( $post['group_validasi'] == 'ki'){
-            $model->proposal->status = $model->validasi_ki;
-            $model->proposal->save();
+            if ( $model->validasi_ki == ProposalPenelitian::STATUS_SETUJU ) {
+                $model->proposal->step = ProposalPenelitian::ISPROTOKOL;
+                $model->proposal->status = $model->validasi_ki;
+                $model->proposal->save();
+            }
           }
-          if ( $post['group_validasi'] == 'ke'){
+          /*if ( $post['group_validasi'] == 'ke'){
             $model->proposal->status = $model->validasi_ke;
             $model->proposal->save();
-          }
+          }*/
 				  return $model;
       }
     }
