@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <?php echo $this->renderPartial('_form', array('model'=>$model, 'modelProgres' => $modelProgres,
+        <?php echo $this->renderPartial('_view', array('model'=>$model, 'modelProgress' => $modelProgress,
             'modelFile' => $modelFile)); ?>                    
 
     </div><!--span8-->
