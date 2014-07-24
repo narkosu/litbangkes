@@ -59,7 +59,7 @@
         <div class="plainwidget">
             <h6>Nama:<strong> <?php echo ucfirst(Yii::app()->user->name)?></strong></h6>
             <?php if ( Yii::app()->user->getState('pegawai') ) {?>
-            <h6>NIP:<strong> <?php echo ucfirst(Yii::app()->user->getState('pegawai')->nama)?></strong></h6>
+            <h6>NIP:<strong> <?php echo ucfirst(Yii::app()->user->getState('pegawai')->nip)?></strong></h6>
             <h6>Satker:<strong> <?php echo ucfirst(Yii::app()->user->getState('pegawai')->satuan_kerja)?></strong></h6>
             <?php } ?>
         </div><!--plainwidget-->
@@ -86,6 +86,9 @@
                     <li <?php echo ($this->menuactive == 'penelitian' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian')?>"><span class="icon-align-justify"></span> Daftar Penelitian</a></li>
                     <li <?php echo ($this->menuactive == 'pengajuan' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/create')?>"><span class="icon-upload"></span> Pengajuan Penelitian</a></li>
                     <?php if (Yii::app()->user->isPPI ) { ?>
+                        <li <?php echo ($this->menuactive == 'validasipenelitian' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/validasi')?>"><span class="icon-align-justify"></span> Daftar Validasi Penelitian</a></li>
+                    <?php } ?>
+                    <?php if (Yii::app()->user->isKapuslit ) { ?>
                         <li <?php echo ($this->menuactive == 'validasipenelitian' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/validasi')?>"><span class="icon-align-justify"></span> Daftar Validasi Penelitian</a></li>
                     <?php } ?>
                     <?php if (Yii::app()->user->isKabid ) { ?>

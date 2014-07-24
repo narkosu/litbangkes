@@ -75,7 +75,7 @@ class ProposalPenelitian extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array(' pegawai_id, jabatan_fungsional_id, sub_bidang_id, nama_penelitian', 'required'),
-			array('user_id, pegawai_id, jabatan_fungsional_id, sub_bidang_id, pakar_id,jenis_penelitian_id, tahun_anggaran, status, step, klien', 'numerical', 'integerOnly'=>true),
+			array('user_id, pegawai_id, jabatan_fungsional_id, sub_bidang_id, pakar_id,jenis_penelitian_id, tahun_anggaran, status_record, status, step, klien', 'numerical', 'integerOnly'=>true),
 			array('sumber_dana, detail_sumber_dana, jenis_penelitian_id, detail_klien', 'numerical', 'integerOnly'=>true),
 			array('nama_penelitian, keywords, klien_lain, sumber_dana_lain', 'length', 'max'=>255),
 			array('created_at', 'safe'),
