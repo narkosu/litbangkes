@@ -72,6 +72,11 @@ class ProgrespenelitianController extends Controller
 	public function actionCreate($id)
 	{
     $model = ProposalPenelitian::model()->findByPk($id);
+    if ($model->step < ProposalPenelitian::PROGRES ){
+        $this->redirect(array('/penelitian/proposalpenelitian/view/id/' . $id));
+        
+    }
+    
 		//$model=new ProgresPenelitian;
     $this->pageTitle  = $model->nama_penelitian;
     $this->menuactive  = 'penelitian';
