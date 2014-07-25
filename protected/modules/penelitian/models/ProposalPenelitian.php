@@ -75,13 +75,13 @@ class ProposalPenelitian extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array(' pegawai_id, jabatan_fungsional_id, sub_bidang_id, nama_penelitian', 'required'),
-			array('user_id, pegawai_id, jabatan_fungsional_id, isu_strategi, sub_bidang_id, pakar_id,jenis_penelitian_id, tahun_anggaran, status_record, status, step, klien', 'numerical', 'integerOnly'=>true),
+			array('user_id, pegawai_id, jabatan_fungsional_id, isu_strategis, sub_bidang_id, pakar_id,jenis_penelitian_id, tahun_anggaran, status_record, status, step, klien', 'numerical', 'integerOnly'=>true),
 			array('sumber_dana, detail_sumber_dana, jenis_penelitian_id, detail_klien', 'numerical', 'integerOnly'=>true),
 			array('nama_penelitian, keywords, klien_lain, sumber_dana_lain', 'length', 'max'=>255),
 			array('created_at', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, user_id, pegawai_id, nama_penelitian, jabatan_fungsional_id, sub_bidang_id, jenis_penelitian_id, tahun_anggaran, keywords, klien, status, step, created_at', 'safe', 'on'=>'search'),
+			array('id, user_id, pegawai_id, nama_penelitian, isu_strategis,jabatan_fungsional_id, sub_bidang_id, jenis_penelitian_id, tahun_anggaran, keywords, klien, status, step, created_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -94,10 +94,12 @@ class ProposalPenelitian extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
         'pegawai'=>array(self::BELONGS_TO,'Pegawai','pegawai_id'),
-        'jabatan'=>array(self::BELONGS_TO,'JabatanFungsional','jabatan_fungsional_id'),
+        'jabatanfungsi'=>array(self::BELONGS_TO,'JabatanFungsional','jabatan_fungsional_id'),
         'subbidang'=>array(self::BELONGS_TO,'SubBidang','sub_bidang_id'),
         'pakar'=>array(self::BELONGS_TO,'Kepakaran','pakar_id'),
         'validasi'=>array(self::HAS_ONE,'ProposalValidasi','proposal_id','condition'=>'validasi.step = 1'),
+        'isustrategis'=>array(self::BELONGS_TO,'IsuStrategis','isu_strategis'),
+        'nmklien'=>array(self::BELONGS_TO,'Klien','klien'),
         'jenispenelitian'=>array(self::BELONGS_TO,'JenisPenelitian','jenis_penelitian_id'),
         'file'=>array(self::HAS_MANY,'FilePenelitian','proposal_id','condition'=>'file.status = 1'),
 		);
@@ -112,7 +114,7 @@ class ProposalPenelitian extends CActiveRecord
 			'id' => 'ID',
 			'user_id' => 'User',
 			'pegawai_id' => 'Pegawai',
-			'nama_penelitian' => 'Nama Penelitian',
+			'nama_penelitian' => 'Judul Penelitian',
 			'jabatan_fungsional_id' => 'Jabatan Fungsional',
 			'sub_bidang_id' => 'Sub Bidang',
 			'pakar_id' => 'Kepakaran',

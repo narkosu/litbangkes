@@ -147,6 +147,7 @@ class ProposalpenelitianController extends Controller
                 $modelFile->version = $time;
                 $modelFile->uploaded_by = Yii::app()->user->id;
                 $modelFile->created_at = date('Y-m-d H:i:s');
+                $modelFile->status = 1;
                 $modelFile->save();
                 $model->status = 0;
                 
