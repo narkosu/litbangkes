@@ -252,11 +252,11 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
 <?php echo $model->nmklien->name; ?>
         </span>
     </div>
-    <?php if ( $model->status == 0 ) { ?>
+    <?php /*if ( $model->status == 0 ) { ?>
     <p class="stdformbutton">
     <button class="btn btn-primary">Pengajuan</button>
     </p>
-    <?php } ?>
+    <?php }*/ ?>
 </div>
 
 

@@ -97,7 +97,9 @@ class ProposalpenelitianController extends Controller
         $validasi->step = 1;
     }
     
-    $validasi = $this->saveValidation($validasi, $_POST);
+    $validasi = $validasi->saveValidation($_POST);
+    
+//$validasi = $this->saveValidation($validasi, $_POST);
     
 		$this->render('viewvalidasi',array(
 			'model'=>$proposal,

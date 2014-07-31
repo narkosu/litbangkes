@@ -18,7 +18,7 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
             <li><a href="#tabs-3">Validasi Porposal Oleh KaSubBid</a></li>
         <?php } ?>
 
-        <?php if ($this->AccessAsKabid() && $validasi->validasi_kasubbid == 3 ) { ?>
+        <?php if ($this->AccessAsKabid() && $model->isValidasiKabid() ) { ?>
             <li><a href="#tabs-2">Validasi Porposal Oleh Kabid</a></li>
         <?php } ?>
 
@@ -29,14 +29,12 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
             <li><a href="#tabs-validasi-kaspulit">Validasi Porposal Oleh Kapuslit</a></li>
         <?php } ?>
         <?php if ($this->AccessAsKI() && $model->isValidasiKI()) { ?>
-            <li><a <?php echo (($validasi->validasi_ppi == 3 ) ? 'href="#tabs-5"' : '') ?>>Validasi Proposal Oleh Komisi Ilmiah</a></li>
+            <li><a href="#tabs-5">Validasi Proposal Oleh Komisi Ilmiah</a></li>
         <?php } ?>
-        <?php if ($this->AccessAsKE() && Yii::app()->user->isKE) { ?>
-            <li><a <?php echo (( $validasi->validasi_ki == 3 && $model->step == 2 ) ? 'href="#tabs-6"' : '') ?>>Validasi Protokol Oleh Komisi Etik</a></li>
-        <?php } ?>
+        
             <li style="clear:both;"></li>
     </ul>
-
+<?php die; ?>
     <div id="tabs-1">
         <div class="stdform stdform2">
             <div class="par">
@@ -57,7 +55,7 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
                         <?php echo $model->getStatus() ?>
                     </span>
                     :
-                    <?php if (!empty($validasi->validasi_kabid)) { ?>
+                    <?php /*if (!empty($validasi->validasi_kabid)) { ?>
                         <?php
                         if ($validasi->validasi_kabid == 3) {
                             $labelValidasi = 'label-success';
@@ -197,13 +195,13 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
             <div class="par">
                 <label>Satuan Kerja</label>   
                 <span class="field">
-                    <?php ?>
+                    <?php echo $model->pegawai->satuan_kerja?>
                 </span>
             </div>
             <div class="par">
                 <label>Jabatan Fungsional</label>   
                 <span class="field">
-                    <?php echo $model->jabatan->nama ?>
+                    <?php echo $model->jabatanfungsi->nama ?>
                 </span>
             </div>
             <div class="par">
@@ -229,6 +227,16 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
               </div>
              * 
              */ ?>
+            
+            <div class="par">
+                <label>Kepakaran</label>  
+                <span class="field">
+                    <?php echo $model->pakar->nama_kepakaran ?>
+                </span>
+
+            </div>
+ 
+            
             <?php
             if ($modelFile) {
                 foreach ($modelFile as $file) {
@@ -266,21 +274,24 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
             </div>
 
             <div class="par">
+                <label>Isu Strategis</label>  
+                <span class="field">
+                      <?php echo $model->isustrategis->tahun.' : '.$model->isustrategis->isu_strategis; ?>  
+                </span>
+
+            </div>
+
+            <div class="par">
                 <label>Klien</label> 
                 <span class="field">
-                    <?php echo $model->klien; ?>
+        <?php echo $model->nmklien->name; ?>
                 </span>
             </div>
-            <?php if ($model->status == 0) { ?>
-                <p class="stdformbutton">
-                    <button class="btn btn-primary">Pengajuan</button>
-                </p>
-            <?php } ?>
         </div>
 
     </div> <!-- tabs-1 -->
 
-    <?php if ( $this->AccessAsKabid() && $validasi->validasi_kasubbid == 3 ) { ?>
+    <?php if ( $this->AccessAsKabid() && $model->isValidasiKabid() ) { ?>
         <div id="tabs-2">
             <?php if ($model->isValidate() && !$model->isValidasiKabid()) { ?>
 
