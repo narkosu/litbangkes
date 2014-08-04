@@ -11,6 +11,7 @@ $jenisFile['protokol'] = array('main'=>'Protokol','sub'=>'Upload file dalam bent
 $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel');
 
 ?>
+
 <div class="stdform stdform2">
     <div class="par">
         <label>Status</label>    
@@ -193,7 +194,9 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
     <div class="par">
         <label>Kepakaran</label>  
         <span class="field">
-            <?php echo $model->pakar->nama_kepakaran ?>
+            <?php if ( !empty($model->pakar) ) { ?>
+                <?php echo $model->pakar->nama_kepakaran ?>
+            <?php } ?>
         </span>
 
     </div>
@@ -241,7 +244,9 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
     <div class="par">
         <label>Isu Strategis</label>  
         <span class="field">
-              <?php echo $model->isustrategis->tahun.' : '.$model->isustrategis->isu_strategis; ?>  
+              <?php if ( !empty($model->isustrategis) ) { ?>
+                      <?php echo $model->isustrategis->tahun.' : '.$model->isustrategis->isu_strategis; ?>  
+                <?php } ?>
         </span>
 
     </div>
@@ -249,7 +254,9 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
     <div class="par">
         <label>Klien</label> 
         <span class="field">
-<?php echo $model->nmklien->name; ?>
+            <?php if ( !empty($model->nmklien) ) { ?>   
+                <?php echo $model->nmklien->name; ?>
+            <?php } ?>
         </span>
     </div>
     <?php /*if ( $model->status == 0 ) { ?>

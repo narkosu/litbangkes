@@ -43,7 +43,7 @@ class ProposalPenelitian extends CActiveRecord
 	public $positionDocument = array(
                             '1'=>'Proposal',
                             '2'=>'Protokol',
-                            '3'=>'Progres',
+                            '3'=>'Progress',
                             '4'=>'Output',
                             );   
   
@@ -101,7 +101,8 @@ class ProposalPenelitian extends CActiveRecord
         'isustrategis'=>array(self::BELONGS_TO,'IsuStrategis','isu_strategis'),
         'nmklien'=>array(self::BELONGS_TO,'Klien','klien'),
         'jenispenelitian'=>array(self::BELONGS_TO,'JenisPenelitian','jenis_penelitian_id'),
-        'file'=>array(self::HAS_MANY,'FilePenelitian','proposal_id','condition'=>'file.status = 1'),
+        'file'=>array(self::HAS_MANY,'FilePenelitian','proposal_id',
+            'condition'=>'file.status = 1 AND file.group_file = "proposal" '),
 		);
 	}
 

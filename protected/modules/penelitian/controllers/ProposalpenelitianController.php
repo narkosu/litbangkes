@@ -310,37 +310,8 @@ class ProposalpenelitianController extends Controller
     $this->menuactive = 'validasipenelitian'; 
     $userLogin = Yii::app()->user;
     
-    /*if ( Yii::app()->user->isSuperAdmin ) {
-        $proposal = ProposalPenelitian::model()->findAll();
-    } else if ( Yii::app()->user->isKabid ){
-        $me = Yii::app()->user->getState('pegawai');
-        
-        $criteria = new CDbCriteria();
-        $criteria->condition .= 'bidang_id = '.$me->bidang_id;
-        $criteria->condition .= ' OR pegawai_id = '.$me->id;
-        $proposal = ProposalPenelitian::model()->findAll($criteria);
-    } else if ( Yii::app()->user->isKasubbid ){
-        $me = Yii::app()->user->getState('pegawai');
-        
-        $criteria = new CDbCriteria();
-        $criteria->condition .= '( bidang_id = '.$me->bidang_id;
-        $criteria->condition .= ' AND  sub_bidang_id = '.$me->subbidang_id.' ) ';
-        $criteria->condition .= ' OR pegawai_id = '.$me->id .' ';
-        
-        $proposal = ProposalPenelitian::model()->findAll($criteria);
-    }else if ( Yii::app()->user->isMember ) {
-        
-        $me = Yii::app()->user->getState('pegawai');
-        
-        $criteria = new CDbCriteria();
-        $criteria->condition .= 'pegawai_id = '.$me->id;
-        $proposal = ProposalPenelitian::model()->findAll($criteria);
-    }*/
-    
-    
     $criteria   = new CDbCriteria;
     
-
     /* validasi untuk PPI */
     if ( $userLogin->isPPI  ) { 
         $criteria->join = 'LEFT JOIN tbl_proposal_validasi a on t.id = a.proposal_id';
@@ -366,6 +337,7 @@ class ProposalpenelitianController extends Controller
         //$criteria->join = 'LEFT JOIN tbl_proposal_validasi a on t.id = a.proposal_id';
         $criteria->condition .= 't.bidang_id = '.$me->bidang_id.' && t.sub_bidang_id = '.$me->subbidang_id;
     }
+    
     $criteria->order = 't.created_at desc';
     $criteria->condition   .= (!empty($criteria->condition) ? ' AND ':'') . ' t.status_record = 1 '; // tidak delete
     
@@ -376,8 +348,6 @@ class ProposalpenelitianController extends Controller
     $pages->applyLimit($criteria);
     
     $proposal = ProposalPenelitian::model()->findAll($criteria);
-    
-    
     
      $this->render('validasi',array(
 			'data'=>$proposal,

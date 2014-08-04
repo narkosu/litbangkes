@@ -34,12 +34,13 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
         
             <li style="clear:both;"></li>
     </ul>
-<?php die; ?>
+
     <div id="tabs-1">
         <div class="stdform stdform2">
             <div class="par">
                 <label>Status</label>    
                 <span class="field">
+                    
                     <?php
                     if ($model->status == 3) {
                         $labelValidasi = 'label-success';
@@ -51,11 +52,13 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
                         $labelValidasi = 'label-info';
                     }
                     ?>
+                    
                     <span class="label <?php echo $labelValidasi ?>">
                         <?php echo $model->getStatus() ?>
                     </span>
                     :
-                    <?php /*if (!empty($validasi->validasi_kabid)) { ?>
+                    
+                    <?php if (!empty($validasi->validasi_kabid)) { ?>
                         <?php
                         if ($validasi->validasi_kabid == 3) {
                             $labelValidasi = 'label-success';
@@ -186,12 +189,14 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
                     <?php echo ucfirst($model->pegawai->nama) ?>
                 </span>
             </div>
+            
             <div class="par">
                 <label>NIP</label>   
                 <span class="field">
                     <?php echo ucfirst($model->pegawai->nip) ?>
                 </span>
             </div>
+            
             <div class="par">
                 <label>Satuan Kerja</label>   
                 <span class="field">
@@ -217,6 +222,7 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
                 </span>
 
             </div>
+            
             <?php /*
               <div class="par">
               <label>Jenis Penelitian</label>
@@ -231,7 +237,9 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
             <div class="par">
                 <label>Kepakaran</label>  
                 <span class="field">
+                    <?php if ( !empty($model->pakar) ) { ?>
                     <?php echo $model->pakar->nama_kepakaran ?>
+                    <?php } ?>
                 </span>
 
             </div>
@@ -276,7 +284,9 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
             <div class="par">
                 <label>Isu Strategis</label>  
                 <span class="field">
+                    <?php if ( !empty($model->isustrategis) ) { ?>
                       <?php echo $model->isustrategis->tahun.' : '.$model->isustrategis->isu_strategis; ?>  
+                    <?php } ?>
                 </span>
 
             </div>
@@ -284,7 +294,9 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
             <div class="par">
                 <label>Klien</label> 
                 <span class="field">
-        <?php echo $model->nmklien->name; ?>
+                <?php if ( !empty($model->nmklien) ) { ?>   
+                    <?php echo $model->nmklien->name; ?>
+                <?php } ?>
                 </span>
             </div>
         </div>
