@@ -11,6 +11,7 @@ $jenisFile['protokol'] = array('main'=>'Protokol','sub'=>'Upload file dalam bent
 $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel');
 
 ?>
+
 <div class="stdform stdform2">
     <div class="par">
         <label>Status</label>    
@@ -30,7 +31,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
                     <span class="label <?php echo $labelValidasi?>">
                         <?php echo $model->getStatus() ?>
                     </span>
-                = 
+                : 
                 <?php if ( !empty($validasi->validasi_kabid) ) { ?>
                 <?php if ( $validasi->validasi_kabid == 3 ) {
                             $labelValidasi = 'label-success';
@@ -162,7 +163,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
     <div class="par">
         <label>Jabatan Fungsional</label>   
         <span class="field">
-            <?php echo $model->jabatan->nama ?>
+            <?php echo $model->jabatanfungsi->nama ?>
         </span>
     </div>
     <div class="par">
@@ -188,6 +189,18 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
     </div>
  * 
  */?>
+    
+    
+    <div class="par">
+        <label>Kepakaran</label>  
+        <span class="field">
+            <?php if ( !empty($model->pakar) ) { ?>
+                <?php echo $model->pakar->nama_kepakaran ?>
+            <?php } ?>
+        </span>
+
+    </div>
+ 
     <?php if ( $modelFile ){ 
             foreach ($modelFile as $file ){
             ?>
@@ -229,16 +242,28 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
     </div>
 
     <div class="par">
+        <label>Isu Strategis</label>  
+        <span class="field">
+              <?php if ( !empty($model->isustrategis) ) { ?>
+                      <?php echo $model->isustrategis->tahun.' : '.$model->isustrategis->isu_strategis; ?>  
+                <?php } ?>
+        </span>
+
+    </div>
+    
+    <div class="par">
         <label>Klien</label> 
         <span class="field">
-<?php echo $model->klien; ?>
+            <?php if ( !empty($model->nmklien) ) { ?>   
+                <?php echo $model->nmklien->name; ?>
+            <?php } ?>
         </span>
     </div>
-    <?php if ( $model->status == 0 ) { ?>
+    <?php /*if ( $model->status == 0 ) { ?>
     <p class="stdformbutton">
     <button class="btn btn-primary">Pengajuan</button>
     </p>
-    <?php } ?>
+    <?php }*/ ?>
 </div>
 
 

@@ -73,7 +73,7 @@ $StatusColor = array(   '0'=>'label-info',
                             <td><?php echo (!empty($proposal->jenispenelitian) ? $proposal->jenispenelitian->nama:'') ?></td>
                             
                             <td><?php echo $proposal->tahun_anggaran ?></td>
-                            <td><?php echo $proposal->getPosition() ?></td>
+                            <td><?php echo ucfirst($proposal->getPosition()) ?></td>
                             <td><span class="label <?php echo $StatusColor[$proposal->status]?>"><?php echo $proposal->getStatus() ?></span></td>
                             <td class="center">
                                 <?php if (Yii::app()->user->isSuperAdmin || ( Yii::app()->user->getState('pegawai') && Yii::app()->user->getState('pegawai')->id == $proposal->pegawai_id)) { ?>

@@ -53,7 +53,7 @@
     <div class="par">
         <label>Jabatan Fungsional</label>   
         <span class="field">
-            <?php echo $model->jabatan->nama ?>
+            <?php echo $model->jabatanfungsi->nama ?>
         </span>
     </div>
     <div class="par">
