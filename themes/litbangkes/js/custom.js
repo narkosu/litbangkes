@@ -116,10 +116,10 @@ jQuery(document).ready(function(){
 	// show left panel
 	function showLeftPanel() {
 		jQuery('.leftpanel').css({marginLeft: '0px'}).removeClass('hide');
-		jQuery('.rightpanel').css({marginLeft: '260px'});
+		jQuery('.rightpanel').css({marginLeft: '0'});
 		jQuery('.mainwrapper').css({backgroundPosition: '0 0'});
 		jQuery('.footerleft').show();
-		jQuery('.footerright').css({marginLeft: '260px'});
+		jQuery('.footerright').css({marginLeft: '0'});
 	}
 	
 	// show and hide left panel

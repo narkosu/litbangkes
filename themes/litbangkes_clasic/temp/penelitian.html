@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SISTEM INFORMASI BADAN PENELITIAN LITBANGKES SURABAYA</title>
+<link rel="stylesheet" href="css/style.default.css" type="text/css" />
+   <link id="addonstyle" rel="stylesheet" href="css/style.dark.css" type="text/css" />
+<link rel="stylesheet" href="prettify/prettify.css" type="text/css" />
+<script type="text/javascript" src="prettify/prettify.js"></script>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-migrate-1.1.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.9.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.flot.min.js"></script>
+<script type="text/javascript" src="js/jquery.flot.resize.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
+</head>
+
+<body>
+<!-- START OF HEADER -->
+
+    	
+
+<div class="mainwrapper fullwrapper">
+		
+    <div class="headerpanel">
+        	<a href="" class="showmenu"></a><h1 > SISTEM INFORMASI RISET BADAN LITBANGKES</h1>  
+            
+            <div class="headerright">
+                
+    					<div class="dropdown userinfo">
+              			<img src="img/photo/pic1.png" >
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="/page.html">Hi, Budi Sunarko! <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="editprofil.html"><span class="icon-edit"></span> Edit Profile</a></li>
+                        <li><a href="gantipassword.html"><span class="icon-wrench"></span> Ganti Password</a></li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><span class="icon-off"></span> Sign Out</a></li>
+                    </ul>
+                </div><!--dropdown-->
+    		
+            </div><!--headerright-->
+            
+    	</div><!--headerpanel-->
+		
+		
+    <!-- START OF LEFT PANEL -->
+    <div class="leftpanel">
+    	
+      <div class="datewidget">Hari ini Senin, 2 Juni 2014</div>
+      
+    	<div class="plainwidget">
+            <h6>Nama:<strong> Nirta Aditya</strong></h6>
+            <h6>NIP:<strong> 123456789</strong></h6>
+            <h6>Satker:<strong><br> Pusat Humaniora Kebijakan Kesehatan dan Pemberdayaan Masyarakat</strong></h6>
+        </div><!--plainwidget-->
+        
+        <div class="leftmenu">        
+            <ul class="nav nav-tabs nav-stacked">
+            	<li class="nav-header">MENU UTAMA</li>
+                <li><a href="dashboard.html"><span class="icon-align-justify"></span> Dashboard</a></li>
+                <li><a href="pengajuan.html"><span class="icon-upload"></span> Pengajuan Proposal</a></li>
+                <li class="active"><a href="penelitian.html"><span class="icon-briefcase"></span> Daftar Penelitian</a></li>
+                <li><a href="informasi.html"><span class="icon-book"></span> Informasi Penelitian</a></li>
+                <li><a href="">&nbsp;</a></li>
+                <li><a href="edituser.html"><span class="icon-user"></span> Edit Profil</a></li>
+                <li><a href="gantipassword.html"><span class="icon-cog"></span> Ganti Password</a></li>
+                <li><a href="logout.html"><span class="icon-off"></span> Logout</a></li>
+            </ul>
+        </div><!--leftmenu-->
+        
+    </div><!--mainleft-->
+    <!-- END OF LEFT PANEL -->
+    
+    <!-- START OF RIGHT PANEL -->
+    <div class="rightpanel">  	
+      
+      <div class="breadcrumbwidget">
+        <ul class="breadcrumb">
+              <li><a href="dashboard.html">Halaman Depan</a> <span class="divider">/</span></li>
+              <li class="active">Pengajuan Proposal<span class="divider">/</span></li>
+          </ul>
+      </div><!--breadcrumbs-->
+      
+      <div class="pagetitle">
+        	<h1>Daftar Penelitian</h1>
+        </div><!--pagetitle-->
+        
+        <div class="maincontent">
+        	<div class="contentinner content-dashboard">
+            		
+                <!--
+                <div class="alert alert-error">
+                  <button data-dismiss="alert" class="close" type="button">×</button>
+                  <strong>Maaf!</strong> Pengajuan proposal anda dengan judul "Penelitian Anak Cerdas Se-Indonesia" tidak disetujui.
+                </div><!--alert-->
+                <!--
+                <div class="alert alert-success">
+                  <button data-dismiss="alert" class="close" type="button">×</button>
+                  <strong>Selamat!</strong> Proposal anda dengan judul "Penelitian Anak Cerdas Se-Indonesia" telah di setujui.
+                </div><!--alert-->
+                <!--
+                <div class="alert alert-info">
+                  <button data-dismiss="alert" class="close" type="button">×</button>
+                  <strong></strong> Proposal anda dengan judul "Penelitian Anak Cerdas Se-Indonesia" sedang diseminarkan.
+                </div><!--alert-->
+                
+                
+                                
+                <div class="row-fluid">
+                	<div class="span16">                        
+                        <div class="widgetcontent">
+                        		<h4 class="widgettitle">Daftar Proposal Penelitian Anda</h4>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Judul Penelitian</th>
+                                            <th class="center">Jenis Proposal</th>
+                                            <th class="center">Tanggal Pengajuan</th>
+                                            <th class="center">Status</th>
+                                            <th class="center">Tindakan</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="contoh_penelitian.html"><strong>Judul Penelitian Satu</strong></a></td>
+                                            <td class="center"><a href="">DIPA</a></td>
+                                            <td class="center">1 Juni 2014</td>
+                                            <td class="center"><span class="label label-important">Ditolak</span></td>
+                                            <td class="center">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="contoh_penelitian.html"><strong>Judul Penelitian Dua</strong></a></td>
+                                            <td class="center"><a href="">LISBIN</a></td>
+                                            <td class="center">2 Juni 2014</td>
+                                            <td class="center"><span class="label label-warning">Proses</span></td>
+                                            <td class="center">
+                                            	<a href="" class="btn btn-danger btn-rounded"> <i class="iconsweets-create iconsweets-white"></i>  &nbsp; Update Proposal</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="contoh_penelitian.html"><strong>Judul Penelitian Tiga</strong></a></td>
+                                            <td class="center"><a href="">DIPA</a></td>
+                                            <td class="center">3 Juni 2014</td>
+                                            <td class="center"><span class="label label-success">Disetujui</span></td>
+                                            <td class="center">
+                                            	<a href="upload_protokol.html" class="btn btn-warning btn-rounded"> <i class="iconsweets-create iconsweets-white"></i>  &nbsp; Upload Protokol</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="contoh_penelitian.html"><strong>Judul Penelitian Empat</strong></a></td>
+                                            <td class="center"><a href="">LISBIN</a></td>
+                                            <td class="center">4 Juni 2014</td>
+                                            <td class="center"><span class="label label-warning">Proses</span></td>
+                                            <td class="center">
+                                            	<a href="" class="btn btn-primary btn-rounded"> <i class="iconsweets-create iconsweets-white"></i>  &nbsp; Update Protokol</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="contoh_penelitian.html"><strong>Judul Penelitian Lima</strong></a></td>
+                                            <td class="center"><a href="">DIPA</a></td>
+                                            <td class="center">5 Juni 2014</td>
+                                            <td class="center"><span class="label label-success">Disetujui</span></td>
+                                            <td class="center">
+                                            	<a href="upload_protokol.html" class="btn btn-primary btn-rounded"> <i class="iconsweets-create iconsweets-white"></i>  &nbsp; Progree Report</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="contoh_penelitian.html"><strong>Judul Penelitian Enam</strong></a></td>
+                                            <td class="center"><a href="">DIPA</a></td>
+                                            <td class="center">6 Juni 2014</td>
+                                            <td class="center"><span class="label label-success">Disetujui</span></td>
+                                            <td class="center">
+                                            	<a href="upload_protokol.html" class="btn btn-primary btn-rounded"> <i class="iconsweets-create iconsweets-white"></i>  &nbsp; Upload Output</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="contoh_penelitian.html"><strong>Judul Penelitian Tujuh</strong></a></td>
+                                            <td class="center"><a href="">LISBIN</a></td>
+                                            <td class="center">7 Juni 2014</td>
+                                            <td class="center"><span class="label label-important">Ditolak</span></td>
+                                            <td class="center">
+                                            	<a href="" class="btn btn-primary btn-rounded"> <i class="iconsweets-create iconsweets-white"></i>  &nbsp; Upload Protokol</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="contoh_penelitian.html"><strong>Judul Penelitian Delepan</strong></a></td>
+                                            <td class="center"><a href="">DIPA</a></td>
+                                            <td class="center">8 Juni 2014</td>
+                                            <td class="center"><span class="label label-success">Disetujui</span></td>
+                                            <td class="center">
+                                            	<a href="upload_protokol.html" class="btn btn-primary btn-rounded"> <i class="iconsweets-create iconsweets-white"></i>  &nbsp; Upload Protokol</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+                                <div class="pagination pagination-centered">
+                                  <ul>
+                                    <li class="disabled"><a>Previous</a></li>
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">6</a></li>
+                                    <li><a href="#">Next</a></li>
+                                  </ul>
+                                </div>
+                                
+                        </div><!--widgetcontent-->                        
+                        
+                    </div><!--span8-->
+                    
+                </div><!--row-fluid-->
+            </div><!--contentinner-->
+        </div><!--maincontent-->
+        
+    </div><!--mainright-->
+    <!-- END OF RIGHT PANEL -->
+    
+    <div class="clearfix"></div>
+    
+    <div class="footer">
+    	<div class="footerleft">&copy; Litbangkes 2014. All Rights Reserved.</div>
+    	<div class="footerright"></div>
+    </div><!--footer-->
+
+    
+</div><!--mainwrapper-->
+<script type="text/javascript">
+jQuery(document).ready(function(){
+								
+		// basic chart
+		var flash = [[0, 2], [1, 6], [2,3], [3, 8], [4, 5], [5, 13], [6, 8]];
+		var html5 = [[0, 5], [1, 4], [2,4], [3, 1], [4, 9], [5, 10], [6, 13]];
+			
+		function showTooltip(x, y, contents) {
+			jQuery('<div id="tooltip" class="tooltipflot">' + contents + '</div>').css( {
+				position: 'absolute',
+				display: 'none',
+				top: y + 5,
+				left: x + 5
+			}).appendTo("body").fadeIn(200);
+		}
+	
+			
+		var plot = jQuery.plot(jQuery("#chartplace2"),
+			   [ { data: flash, label: "Flash(x)", color: "#fb6409"}, { data: html5, label: "HTML5(x)", color: "#096afb"} ], {
+				   series: {
+					   lines: { show: true, fill: true, fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.15 } ] } },
+					   points: { show: true }
+				   },
+				   legend: { position: 'nw'},
+				   grid: { hoverable: true, clickable: true, borderColor: '#ccc', borderWidth: 1, labelMargin: 10 },
+				   yaxis: { min: 0, max: 15 }
+				 });
+		
+		var previousPoint = null;
+		jQuery("#chartplace2").bind("plothover", function (event, pos, item) {
+			jQuery("#x").text(pos.x.toFixed(2));
+			jQuery("#y").text(pos.y.toFixed(2));
+			
+			if(item) {
+				if (previousPoint != item.dataIndex) {
+					previousPoint = item.dataIndex;
+						
+					jQuery("#tooltip").remove();
+					var x = item.datapoint[0].toFixed(2),
+					y = item.datapoint[1].toFixed(2);
+						
+					showTooltip(item.pageX, item.pageY,
+									item.series.label + " of " + x + " = " + y);
+				}
+			
+			} else {
+			   jQuery("#tooltip").remove();
+			   previousPoint = null;            
+			}
+		
+		});
+		
+		jQuery("#chartplace2").bind("plotclick", function (event, pos, item) {
+			if (item) {
+				jQuery("#clickdata").text("You clicked point " + item.dataIndex + " in " + item.series.label + ".");
+				plot.highlight(item.series, item.datapoint);
+			}
+		});
+
+
+		// bar graph
+		var d2 = [];
+		for (var i = 0; i <= 10; i += 1)
+			d2.push([i, parseInt(Math.random() * 30)]);
+			
+		var stack = 0, bars = true, lines = false, steps = false;
+		jQuery.plot(jQuery("#bargraph2"), [ d2 ], {
+			series: {
+				stack: stack,
+				lines: { show: lines, fill: true, steps: steps },
+				bars: { show: bars, barWidth: 0.6 }
+			},
+			grid: { hoverable: true, clickable: true, borderColor: '#bbb', borderWidth: 1, labelMargin: 10 },
+			colors: ["#06c"]
+		});
+		
+		// calendar
+		jQuery('#calendar').datepicker();
+
+
+});
+</script>
+</body>
+</html>

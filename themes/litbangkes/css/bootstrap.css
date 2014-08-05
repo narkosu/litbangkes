@@ -659,6 +659,7 @@ p {
   line-height: 30px;
 }
 
+
 small {
   font-size: 85%;
 }
@@ -5651,6 +5652,7 @@ a.thumbnail:focus {
 .badge:empty {
   display: none;
 }
+
 
 a.label:hover,
 a.label:focus,

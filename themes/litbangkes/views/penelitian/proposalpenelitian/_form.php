@@ -141,7 +141,9 @@ if ( Yii::app()->user->isMember ) {
       </span>
 		<?php echo $form->error($model,'jenis_penelitian_id'); ?>
 	</div>
-  */?>  
+  */?>
+  
+  <?php /*  
   <div class="par">
 		<?php //echo $form->labelEx($model,'sumber_dana'); ?>
       <span class="field">
@@ -151,6 +153,11 @@ if ( Yii::app()->user->isMember ) {
       </span>
 		<?php echo $form->error($model,'sumber_dana'); ?>
 	</div>
+  */ ?>
+  
+  <?php $sumberdanalist = $model->getClients(); 
+	echo $form->error($model,'sumber_dana'); ?>
+  
   <div class="par">
 		<?php echo $form->labelEx($model,'sumber_dana'); ?>
       <span class="field">

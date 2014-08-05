@@ -57,12 +57,11 @@ h3 { font-size: 18px; line-height: 28px; }
 h4 { font-size: 16px; line-height: 26px; }
 
 .mainwrapper { 
-	width: 1280px; margin: auto; background: #232323; position: relative; 
+	width: 1280px; margin: auto; background: #fff; position: relative; 
 	overflow: hidden; -moz-box-shadow: 0 0 5px rgba(0,0,0,0.1); 
 	-webkit-box-shadow: 0 0 5px rgba(0,0,0,0.1); box-shadow: 0 0 5px rgba(0,0,0,0.1); padding-bottom: 60px; 
 }
 .fullwrapper { width: auto; border: 0; }
-
 
 /***** LEFT PANEL *****/
 /**********************/
@@ -110,12 +109,12 @@ h4 { font-size: 16px; line-height: 26px; }
 /***** RIGHT PANEL *****/
 /***********************/
 
-.rightpanel { margin-left: 260px; position: relative; background: #f7f7f7; }
+.rightpanel { margin-left: 0;  background: #ffffff; width: 100%; }
 .rightpanel:after { display: block; clear: both; content: ''; }
 
 .headerpanel { min-height: 80px; padding: 10px 0; background: url(../img/bg-header.jpg) no-repeat; }
-.litbangkes-small-title {	font-size: 16px; display: block; float: left; position: absolute; top: 60px; left: 125px; color: #fff; }
-.headerpanel h1 { text-transform: uppercase; color: #fff; padding: 5px 0 0 120px; font-size: 38px; text-shadow: 1px 1px rgba(0,0,0,0.2); float:left; }
+.litbangkes-small-title {	font-size: 14px; display: block; float: left; position: absolute; top: 60px; left: 125px; color: #fff; }
+.headerpanel h1 { text-transform: uppercase; color: #fff; padding: 5px 0 0 120px; font-size: 48px; text-shadow: 1px 1px rgba(0,0,0,0.2); float:left; }
 .headerpanel img { float: left; margin-right: 10px; height: 34px; border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius: 2px; border: 1px solid #fff;  }
 .headerright { float: right; padding: 7px 10px 0 0; }
 .headerright .dropdown { display: inline-block; margin-left: 7px; }
@@ -162,21 +161,21 @@ h4 { font-size: 16px; line-height: 26px; }
 .showmenu:hover, .showmenu:active { background-color: #083865; }
 
 /* Page Title */
-.pagetitle { padding: 8px 12px; background: #eee !important; box-shadow: 0px 1px 2px #ccc;  }
+.pagetitle { padding: 8px 12px; background: #eee !important; box-shadow: 0px 1px 3px #ccc; border-bottom: 1px solid #ccc; border-top: 1px solid #025b2d;  }
 .pagetitle h1 { display: inline-block; font-size: 18px; vertical-align: middle; }
 .pagetitle span { display: inline-block; margin-left: 10px; font-size: 11px; font-style: italic; color: #999; }
 
 
 /* Main Content */
 .maincontent { position: relative; padding-right: 30px; }
-.contentinner { padding: 15px; min-height: 650px; float: left; width: 100%; }
+.contentinner { padding: 15px;  float: left; width: 100%; }
 .contentinner p { margin: 15px 0; }
 .contentinner p:first-child { margin-top: 0; }
 .contnetinner p:last-child { margin-bottom: 0; }
 .wrapper404 ul { list-style: none; margin: 10px 0; }
 
 .widgettitle { 
-	color: #999; text-transform: uppercase; text-transform: uppercase; margin-bottom: 15px; 
+	color: #000; text-transform: uppercase; text-transform: uppercase; margin-bottom: 15px; 
 	text-shadow: 1px 1px rgba(255,255,255,0.3); border: 1px solid #bbb; position: relative;
 }
 h4.widgettitle { font-size: 12px; padding: 2px 10px; font-weight: bold; }
@@ -735,6 +734,10 @@ ul.list-nostyle li span, ol.list-nostyle li span { vertical-align: top; }
 
 
 /***** MESSAGES *****/
+.mandatory {
+  padding: 10px; height: 20px; font-weight: normal;
+}
+
 /********************/
 
 .mailinbox tbody tr td { background: #fafafa; }
@@ -919,10 +922,10 @@ ul.list-nostyle li span, ol.list-nostyle li span { vertical-align: top; }
 /*************************/
 
 
-.footer { position: absolute; bottom: 0; left: 0; font-size: 11px; background: #333; color: #999; width: 100%; }
+.footer { position: absolute; bottom: 0; left: 0; font-size: 11px; background: #333; color: #999; width: 100%; text-align: center; padding: 10px 0; }
 .footer a { color: #bbb; }
 .footer .footerleft { padding: 10px 15px; width: 230px; float: left; background: #111; min-height: 20px; border-right: 1px solid #3c3c3c; }
-.footer .footerright { padding: 10px 15px; margin-left: 260px; text-align: right; }
+.footer .footerright { padding: 10px 0; margin-left: 0; text-align: center; }
 
 /***** USING ROBOTO FONT *****/
 /****************************/
@@ -948,7 +951,7 @@ h1,h2,h3, .logopanel h1, h3.widgettitle,
 .navbar-inverse .navbar-inner, .pager li > a, .pager li > span,
 .verwizard .verticalmenu a, .chatcontent .messagebox button.send,
 .mediamgr_category ul li a, .profile-left .taglist li, .tooltipflot,
-.loginwrapper button.btn { -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px;}
+.loginwrapper button.btn { -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0;}
 
 /* Reset Border Radius */
 .searchwidget input.search-query, .searchwidget .input-append .btn,
@@ -1108,6 +1111,8 @@ table td.center, table th.center { text-align: center; }
 .btn-group > .btn, .btn-group > .dropdown-menu { font-size: 12px; }
 .btn-circle { -moz-border-radius: 50px; -webkit-border-radius: 50px; border-radius: 50px; padding: 5px 8px; }
 .btn-rounded { -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
+
+.btn-group { margin-right: -5px; }
 
 .nav-tabs { border-color: #bbb; }
 .nav-tabs > li > a:hover { border-color: #bbb #bbb #eee; }
@@ -1346,9 +1351,10 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 
 .dropdown-menu li > a:hover, .dropdown-menu li > a:focus, .dropdown-submenu:hover a { background: #546f8e; color: #fff; }
 
-.table { margin-bottom: 0; }
-.table th { background: #fcfcfc; }
-.table tfoot th { border-bottom: 1px solid #ddd; }
+.table { margin-bottom: 0; box-shadow: 0 2px 4px #ddd; }
+.table td { background: #fff; }
+.table th { background: #eeeeee; color: #333; }
+.table tfoot th { border-bottom: 2px solid #aaa; }
 .table th.centeralign, .table td.centeralign { text-align: center; }
 
 .dropdown-menu { 
@@ -1428,7 +1434,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 /***** LOGIN PAGE *****/
 /************************/
 
-body.loginbody { background: #232323; }
+body.loginbody { background-color: #f9f9f9; }
 
 .loginwrapper { width: 400px; margin: 80px auto 0 auto; }
 .loginwrapper p { margin: 20px 0; }

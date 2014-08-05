@@ -17,7 +17,10 @@ $this->breadcrumbs=array(
             </ul>
 
             <!-- dynamic table start-->
+            
             <div id="dyntable_wrapper" class="dataTables_wrapper" role="grid">
+                
+                <?php /*
                 <div id="dyntable_length" class="dataTables_length">
                     <label style="display: inline-block">Show <select size="1" name="dyntable_length" aria-controls="dyntable">
                             <option value="10" selected="selected">10</option>
@@ -32,6 +35,7 @@ $this->breadcrumbs=array(
                 <div class="dataTables_filter" id="dyntable_filter">
                    <label>Search: <input type="text" aria-controls="dyntable"></label>
                 </div>
+								*/ ?>
 
             <table class="table table-bordered" id="dyntable">
                 <colgroup>
@@ -44,23 +48,21 @@ $this->breadcrumbs=array(
                 </colgroup>
                 <thead>
                     <tr>
-                        <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
-                        <th class="head0">NIP</th>
-                        <th class="head1">Nama Pegawai</th>
-                        <th class="head0">Satuan Kerja</th>
-                        <th class="head0">Jabatan</th>
-                        <th class="head0">Bidang</th>
-                        <th class="head0">Sub Bidang</th>
-                        <th class="head0">Sebagai validasi</th>
-                        <th class="head0">Tindakan</th>
+                        <th class="head0 nosort center">No</th>
+                        <th class="head0 center">NIP</th>
+                        <th class="head1 center">Nama Pegawai</th>
+                        <th class="head0 center">Satuan Kerja</th>
+                        <th class="head0 center">Jabatan</th>
+                        <th class="head0 center">Bidang</th>
+                        <th class="head0 center">Sub Bidang</th>
+                        <th class="head0 center">Validasi</th>
+                        <th class="head0 center">Tindakan</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($data as $index=>$pegawai ){ ?>
                     <tr class="gradeX">
-                      <td class="aligncenter"><span class="center">
-                        <input type="checkbox" />
-                      </span></td>
+                      <td class="aligncenter">1</td>
                         <td><a href="<?php echo Yii::app()->createUrl('/members/pegawai/update/id/'.$pegawai->id)?>"><?php echo $pegawai->nip ?></a></td>
                         <td><?php echo $pegawai->nama ?></td>
                         <td><?php echo $pegawai->satuan_kerja ?></td>
@@ -78,27 +80,29 @@ $this->breadcrumbs=array(
                             ?>
                         </td>
                         <td class="center">
-                            <a href="<?php echo Yii::app()->createUrl('/members/pegawai/update/id/'.$pegawai->id)?>">Edit</a> | 
-                            <a  title="Setting sebagai validasi">Bag Validasi</a>
+                            <a href="<?php echo Yii::app()->createUrl('/members/pegawai/update/id/'.$pegawai->id)?>"  class="btn btn-warning">Edit</a> 
+                            <!-- <a  title="Setting sebagai validasi">Bag Validasi</a>-->
                         </td>
                     </tr>
                     <?php } ?>
 
                 </tbody>
             </table>
-            <div class="dataTables_info" id="dyntable_info">Showing 1 to 10 of 13 entries</div>
-            <div class="dataTables_paginate paging_full_numbers" id="dyntable_paginate">
-                <a tabindex="0" class="first paginate_button paginate_button_disabled" id="dyntable_first">First</a>
-                <a tabindex="0" style="margin-left: -3px;" class="previous paginate_button paginate_button_disabled" id="dyntable_previous">Previous</a>
-                <span style="margin-left: -3px;">
-                    <a tabindex="0" class="paginate_active">1</a><a tabindex="0" class="paginate_button">2</a></span>
-                <a style="margin-left: -3px;" tabindex="0" class="next paginate_button" id="dyntable_next">Next</a>
-                <a style="margin-left: -3px;" tabindex="0" class="last paginate_button" id="dyntable_last">Last</a>
-            </div>
-            </div>
-            <br>
 
-            <!-- dynamic table end -->                                             
+            <!-- dynamic table end -->
+            
+             <div class="pagination pagination-centered pagination-small">
+                <ul>
+                	<li><a href="#">Previous</a></li>
+                	<li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li><a href="#">6</a></li>
+                  <li><a href="#">Next</a></li>
+                </ul>
+              </div>                                          
 
         </div><!--span8-->
 
