@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SISTEM INFORMASI BADAN PENELITIAN LITBANGKES SURABAYA</title>
+<link rel="stylesheet" href="css/style.default.css" type="text/css" />
+<link id="addonstyle" rel="stylesheet" href="css/style.dark.css" type="text/css" />
+<link rel="stylesheet" href="prettify/prettify.css" type="text/css" />
+<script type="text/javascript" src="prettify/prettify.js"></script>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-migrate-1.1.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.9.2.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.uniform.min.js"></script>
+<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="js/jquery.autogrow-textarea.js"></script>
+<script type="text/javascript" src="js/charCount.js"></script>
+<script type="text/javascript" src="js/ui.spinner.min.js"></script>
+<script type="text/javascript" src="js/chosen.jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+<script type="text/javascript" src="js/forms.js"></script>
+
+<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
+</head>
+
+<body>
+<!-- START OF HEADER -->
+
+    	
+
+<div class="mainwrapper fullwrapper">
+		
+    <div class="headerpanel">
+        	<a href="" class="showmenu"></a><h1 > SISTEM INFORMASI RISET BADAN LITBANGKES</h1>  
+            
+            <div class="headerright">
+                
+    					<div class="dropdown userinfo">
+              			<img src="img/photo/pic1.png" >
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="/page.html">Hi, Budi Sunarko! <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="editprofil.html"><span class="icon-edit"></span> Edit Profile</a></li>
+                        <li><a href="gantipassword.html"><span class="icon-wrench"></span> Ganti Password</a></li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><span class="icon-off"></span> Sign Out</a></li>
+                    </ul>
+                </div><!--dropdown-->
+    		
+            </div><!--headerright-->
+            
+    	</div><!--headerpanel-->
+		
+		
+    <!-- START OF LEFT PANEL -->
+    <div class="leftpanel">
+    
+    		<div class="datewidget">Hari ini Senin, 2 Juni 2014</div>
+        
+    		<div class="plainwidget">
+            <h6>Nama:<strong> Nirta Aditya</strong></h6>
+            <h6>NIP:<strong> 123456789</strong></h6>
+            <h6>Satker:<strong><br> Pusat Humaniora Kebijakan Kesehatan dan Pemberdayaan Masyarakat</strong></h6>
+        </div><!--plainwidget-->
+        
+        <div class="leftmenu">        
+            <ul class="nav nav-tabs nav-stacked">
+            	<li class="nav-header">MENU UTAMA</li>
+                <li><a href="dashboard.html"><span class="icon-align-justify"></span> Dashboard</a></li>
+                <li class="active"><a href="pengajuan.html"><span class="icon-upload"></span> Pengajuan Proposal</a></li>
+                <li><a href="penelitian.html"><span class="icon-briefcase"></span> Daftar Penelitian</a></li>
+                <li><a href="informasi.html"><span class="icon-book"></span> Informasi Penelitian</a></li>
+                <li><a href="">&nbsp;</a></li>
+                <li><a href="edituser.html"><span class="icon-user"></span> Edit Profil</a></li>
+                <li><a href="gantipassword.html"><span class="icon-cog"></span> Ganti Password</a></li>
+                <li><a href="logout.html"><span class="icon-off"></span> Logout</a></li>
+            </ul>
+        </div><!--leftmenu-->
+        
+    </div><!--mainleft-->
+    <!-- END OF LEFT PANEL -->
+    
+    <!-- START OF RIGHT PANEL -->
+    <div class="rightpanel">  	
+      
+      <div class="breadcrumbwidget">
+        <ul class="breadcrumb">
+              <li><a href="dashboard.html">Halaman Depan</a> <span class="divider">/</span></li>
+              <li class="active">Pengajuan Proposal<span class="divider">/</span></li>
+          </ul>
+      </div><!--breadcrumbs-->
+      
+      <!-- 
+      <div class="pagetitle">
+        	<h1>Pengajuan Proposal Penelitian</h1>
+        </div><!--pagetitle-->
+        
+        <div class="maincontent">
+        	<div class="contentinner content-dashboard">                
+                
+                <div class="row-fluid">
+                	<div class="span16">                        
+                     
+                     <div class="navbar">
+                      <div class="navbar-inner">
+                        <a href="#" class="brand">Pengajuan Proposal Penelitian</a>
+                        <ul class="nav">
+                          <li><a href="pengajuan.html"><span class="badge badge-important">1</span>&nbsp;&nbsp;Upload Proposal</a></li>
+                          <li class="active"><a href="upload_protokol.html"><span class="badge badge-success">2</span>&nbsp;&nbsp;Upload Protokol</a></li>
+                          <li><a><span class="badge">3</span>&nbsp;&nbsp;Selesai</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                     
+                     <h4 class="widgettitle nomargin shadowed">Form Upload Protokol Penelitian</h4>
+                      <div class="widgetcontent bordered shadowed nopadding">
+                          <form id="formpengajuan" class="stdform stdform2" method="post" action="">
+                                  <p>
+                                      <label>ID Proposal</label>
+                                      <span class="field"><strong>123456789</strong></span>
+                                  </p>
+                                  
+                                  <p>
+                                      <label>Judul Proposal</label>
+                                      <span class="field"><strong>Judul Proposal</strong></span>
+                                  </p>
+                                  
+                                  <p>
+                                      <label>Upload Protokol <small>Upload file dalam bentuk PDF</small></label>
+                                      <span class="field">
+                                      	<input type="file" class="uniform-file" id="draft" name="draft" />
+                                      </span>
+                                  </p>
+                                  
+                                  <p>
+                                      <label>Anggaran</label>
+                                      <span class="field"><input type="text" name="jabatan_fungsional" id="jabatan_fungsional" class="input-medium" /></span>
+                                  </p>
+                                  
+                                  <p>
+                                      <label>Upload RAB <small>Upload file dalam bentuk Excel</small></label>
+                                      <span class="field">
+                                      	<input type="file" class="uniform-file" id="draft" name="draft" />
+                                      </span>
+                                  </p>
+                                  
+                                  <p>
+                                      <label>Upload TOR <small>Upload file dalam bentuk PDF</small></label>
+                                      <span class="field">
+                                      	<input type="file" class="uniform-file" id="draft" name="draft" />
+                                      </span>
+                                  </p>
+                                                          
+                                  <p class="stdformbutton">
+                                      <button class="btn btn-primary">Upload Protokol</button>
+                                      <button type="reset" class="btn">Reset Form</button>
+                                  </p>
+                              </form>
+                          </div><!--widgetcontent-->                     
+                        
+                    </div><!--span8-->
+                    
+                </div><!--row-fluid-->
+            </div><!--contentinner-->
+        </div><!--maincontent-->
+        
+    </div><!--mainright-->
+    <!-- END OF RIGHT PANEL -->
+    
+    <div class="clearfix"></div>
+    
+    <div class="footer">
+    	<div class="footerleft">&copy; Litbangkes 2014. All Rights Reserved.</div>
+    	<div class="footerright"></div>
+    </div><!--footer-->
+
+    
+</div><!--mainwrapper-->
+</body>
+</html>

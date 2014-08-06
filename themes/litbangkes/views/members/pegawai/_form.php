@@ -11,7 +11,7 @@
    'htmlOptions'=>array('class'=>'stdform stdform2')
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<span class="mandatory">Fields with * are required.</span>
 
 	<?php //echo $form->errorSummary($model); ?>
 <?php /*

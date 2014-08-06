@@ -9,6 +9,7 @@ $jenisFile['proposal'] = array('main' => 'Outline / Draft Proposal', 'sub' => 'U
 $jenisFile['tor'] = array('main' => 'TOR', 'sub' => 'Upload file dalam bentuk PDF');
 $jenisFile['protokol'] = array('main' => 'Protokol', 'sub' => 'Upload file dalam bentuk PDF');
 $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Excel');
+
 ?>
 
 <div id="tabs">
@@ -303,11 +304,18 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
 
     </div> <!-- tabs-1 -->
 
-    <?php if ( $this->AccessAsKabid() && $model->isValidasiKabid() ) { ?>
+    <?php 
+    
+    if ( $this->AccessAsKabid() && $model->isValidasiKabid() ) { 
+        
+        ?>
+    
         <div id="tabs-2">
-            <?php if ($model->isValidate() && !$model->isValidasiKabid()) { ?>
+            <?php if ($model->isValidate() && $model->isValidasiKabidEditable()) { ?>
 
                 <?php
+                
+                
                 $form = $this->beginWidget('CActiveForm', array(
                     'id' => 'validasi-ppi-form',
                     'enableAjaxValidation' => false,
@@ -348,7 +356,9 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
                 </p>
 
                 <?php $this->endWidget(); ?>
-            <?php } else { ?>
+            <?php } else { 
+               //die; 
+                ?>
                  <?php
                     if ($validasi->validasi_kabid == ProposalPenelitian::STATUS_SETUJU) {
                         $labelValidasi = 'label-success';

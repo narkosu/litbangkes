@@ -184,7 +184,13 @@ class ProposalPenelitian extends CActiveRecord
   public function isValidasiKabid(){
       if ( empty( $this->validasi ) ) return false;
       
-      return ( $this->validasi->validasi_kabid == 3 ) ;
+      return ( $this->validasi->validasi_kasubbid == 3 ) ;
+  }
+  
+  public function isValidasiKabidEditable(){
+    if ( empty( $this->validasi ) ) return false;
+      
+    return ( $this->validasi->validasi_kabid != ProposalPenelitian::STATUS_SETUJU && $this->validasi->validasi_kabid != ProposalPenelitian::STATUS_TOLAK ) ;
   }
   
   public function isValidasiPPI(){

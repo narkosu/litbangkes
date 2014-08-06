@@ -85,13 +85,14 @@ class ProgrespenelitianController extends Controller
         $this->redirect(array('/penelitian/proposalpenelitian/view/id/' . $id));
         
     }
-    
+   
 		//$model=new ProgresPenelitian;
     $this->pageTitle  = $model->nama_penelitian;
     $this->menuactive  = 'penelitian';
     $modelFile = $model->file;
    /* triwulan1 */
     $modelProgress['triwulan1'] = $this->loadModelByProposalId($id,'triwulan1');
+    
     if (empty($modelProgress['triwulan1']))
         $modelProgress['triwulan1'] = new ProgresPenelitian;
 		// Uncomment the following line if AJAX validation is needed
@@ -112,33 +113,35 @@ class ProgrespenelitianController extends Controller
       if($modelProgress['triwulan1']->save())
 				$this->redirect(array('create','id'=>$model->id));
 		}
-    
+     
     /* triwulan1 */
     $modelProgress['triwulan2'] = $this->loadModelByProposalId($id,'triwulan2');
     if (empty($modelProgress['triwulan2']))
         $modelProgress['triwulan2'] = new ProgresPenelitian;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['ProgresPenelitian']['triwulan2']))
+    
+		if( isset($_POST['ProgresPenelitian']['triwulan2']) )
 		{
 			$modelProgress['triwulan2']->attributes=$_POST['ProgresPenelitian']['triwulan2'];
       if (!empty($_POST['ProgresPenelitian']['triwulan2']['tanggal_pangajuan_etik'])){
         list($mo,$da,$ya) = explode('/',$_POST['ProgresPenelitian']['triwulan2']['tanggal_pangajuan_etik']);
         $modelProgress['triwulan2']->tanggal_pangajuan_etik = $ya.'-'.$mo.'-'.$da;
       }
+      
       $modelProgress['triwulan2']->proposal_id = $id;
 			if($modelProgress['triwulan2']->save())
-				$this->redirect(array('create','id'=>$model->id));
+         $this->redirect(array('create','id'=>$model->id));
 		}
-    
+    //print_r($_POST);
+    //die;
     /* triwulan1 */
     $modelProgress['triwulan3'] = $this->loadModelByProposalId($id,'triwulan3');
     if (empty($modelProgress['triwulan3']))
         $modelProgress['triwulan3'] = new ProgresPenelitian;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
+    
 		if(isset($_POST['ProgresPenelitian']['triwulan3']))
 		{
 			$modelProgress['triwulan3']->attributes=$_POST['ProgresPenelitian']['triwulan3'];

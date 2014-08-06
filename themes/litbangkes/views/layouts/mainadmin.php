@@ -30,7 +30,7 @@
 		
     <div class="headerpanel">
         	<h1>SISTEM INFORMASI RISET</h1>
-          <span class="litbangkes-small-title">BADAN PENELITIAN DAN PENGEMBANGAN KESEHATAN </span>
+          <span class="litbangkes-small-title">PUSAT HUMANIORA, KEBIJAKAN KESEHATAN DAN PERMBERDAYAAN MASYARAKAT</span>
             
             <div class="headerright">
                 
@@ -42,92 +42,112 @@
                         <li><a href="<?php echo Yii::app()->createUrl('members/pegawai/edit')?>"><span class="icon-edit"></span> Edit Profile</a></li>
                         <li><a href="<?php echo Yii::app()->createUrl('site/changepassword')?>"><span class="icon-wrench"></span> Ganti Password</a></li>
                         <li class="divider"></li>
-                        <li><a href="<?php echo Yii::app()->createUrl('site/logout')?>"><span class="icon-off"></span> Sign Out</a></li>
+                        <li><a href="<?php echo Yii::app()->createUrl('site/logout')?>"><span class="icon-off"></span> Keluar</a></li>
                     </ul>
                 </div><!--dropdown-->
     		
             </div><!--headerright-->
             
     	</div><!--headerpanel-->
-		
-		
-    <!-- START OF LEFT PANEL -->
-    <div class="leftpanel">
-        
-        <div class="datewidget">Hari ini, <?php echo date('d M Y')?></div>
-        
-        <div class="plainwidget">
-            <h6>Nama:<strong> <?php echo ucfirst(Yii::app()->user->name)?></strong></h6>
-            <?php if ( Yii::app()->user->getState('pegawai') ) {?>
-            <h6>NIP:<strong> <?php echo ucfirst(Yii::app()->user->getState('pegawai')->nip)?></strong></h6>
-            <h6>Satker:<strong> <?php echo ucfirst(Yii::app()->user->getState('pegawai')->satuan_kerja)?></strong></h6>
-            <?php } ?>
-        </div><!--plainwidget-->
-        
-        <div class="leftmenu">        
-            <ul class="nav nav-tabs nav-stacked">
-                <li class="nav-header">MENU UTAMA</li>
-                <?php if ( Yii::app()->user->isSuperAdmin ) { ?>
-                
-                    <li <?php echo ($this->menuactive == 'pegawai' ? 'class="active"' : '')?>>
-                        <a href="<?php echo Yii::app()->createUrl('members/pegawai')?>">
-                            <span class="icon-upload"></span> Anggota</a>
-                    </li>
-                
-                    <li <?php echo ($this->menuactive == 'penelitian' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian')?>"><span class="icon-align-justify"></span> Daftar Penelitian</a></li>
-                    <li <?php echo ($this->menuactive == 'validasipenelitian' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/validasi')?>"><span class="icon-align-justify"></span> Daftar Validasi Penelitian</a></li>
-                    <li <?php echo ($this->menuactive == 'pengajuan' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/create')?>"><span class="icon-upload"></span> Pengajuan Penelitian</a></li>
-                    <?php /*
-                    <li <?php echo ($this->menuactive == 'progress' ? 'class="active"' : '')?>><a href="progress.html"><span class="icon-indent-left"></span> Progres Penelitian</a></li>
-                    <li <?php echo ($this->menuactive == 'outputpenilaian' ? 'class="active"' : '')?>><a href="output.html"><span class="icon-book"></span> Output Penelitian</a></li>*/ ?>
-                <?php } ?>
-                    
-                <?php if ( Yii::app()->user->isMember ) { ?>
-                    <li <?php echo ($this->menuactive == 'penelitian' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian')?>"><span class="icon-align-justify"></span> Daftar Penelitian</a></li>
-                    <li <?php echo ($this->menuactive == 'pengajuan' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/create')?>"><span class="icon-upload"></span> Pengajuan Penelitian</a></li>
-                    <?php if (Yii::app()->user->isPPI ) { ?>
-                        <li <?php echo ($this->menuactive == 'validasipenelitian' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/validasi')?>"><span class="icon-align-justify"></span> Daftar Validasi Penelitian</a></li>
-                    <?php } ?>
-                    <?php if (Yii::app()->user->isKapuslit ) { ?>
-                        <li <?php echo ($this->menuactive == 'validasipenelitian' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/validasi')?>"><span class="icon-align-justify"></span> Daftar Validasi Penelitian</a></li>
-                    <?php } ?>
-                    <?php if (Yii::app()->user->isKabid ) { ?>
-                        <li <?php echo ($this->menuactive == 'validasipenelitian' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/validasi')?>"><span class="icon-align-justify"></span> Daftar Validasi Penelitian</a></li>
-                    <?php } ?>
-                    <?php if (Yii::app()->user->isKasubbid ) { ?>
-                        <li <?php echo ($this->menuactive == 'validasipenelitian' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/validasi')?>"><span class="icon-align-justify"></span> Daftar Validasi Penelitian</a></li>
-                    <?php } ?>    
-                    <?php /*
-                    <li <?php echo ($this->menuactive == 'progress' ? 'class="active"' : '')?>><a href="#"><span class="icon-indent-left"></span> Progres Penelitian</a></li>
-                    <li <?php echo ($this->menuactive == 'outputpenilaian' ? 'class="active"' : '')?>><a href="#"><span class="icon-book"></span> Output Penelitian</a></li>
-                <?php */ } ?>
-                    
-                <li><a href="">&nbsp;</a></li>
-                <li <?php echo ($this->menuactive == 'editprofil' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('members/pegawai/edit')?>"><span class="icon-user"></span> Edit Profil</a></li>
-                <li <?php echo ($this->menuactive == 'gantipassword' ? 'class="active"' : '')?>><a href="<?php echo Yii::app()->createUrl('site/changepassword')?>"><span class="icon-cog"></span> Ganti Password</a></li>
-                <li ><a href="<?php echo Yii::app()->createUrl('site/logout')?>"><span class="icon-off"></span> Logout</a></li>
-            </ul>
-        </div><!--leftmenu-->
-        
-    </div><!--mainleft-->
-    <!-- END OF LEFT PANEL -->
-    
-    <!-- START OF RIGHT PANEL -->
-    <div class="rightpanel">	
       
+      <?php /*
       <div class="breadcrumbwidget">
      <?php
         $this->widget('zii.widgets.CBreadcrumbs', array(
             'links'=>$this->breadcrumbs,
             'htmlOptions'=>array('class'=>'breadcrumb'),
-            'separator'=> '<span class="divider" style="padding:0px 5px;">/</span>'
-)       );
+            'separator'=> '<span class="divider" style="padding:0px 5px;">/</span>'));
      ?>
         
       </div><!--breadcrumbs-->
+      */ ?>
+      <!-- menu utama start -->
+      <div class="pagetitle">
+      
+      	<?php if ( Yii::app()->user->isMember ) { ?>
+          <a class="btn btn-info" href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/create')?>">Pengajuan Penelitian</a>
+          <a class="btn btn-success" href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian')?>">Daftar Penelitian</a>
+          
+          <?php if (Yii::app()->user->isKasubbid ) { ?>
+          	<a class="btn btn-success" href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/validasi')?>">Daftar Validasi</a>
+          <?php } ?>
+          
+          <?php if (Yii::app()->user->isKabid ) { ?>
+          	<a class="btn btn-success" href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/validasi')?>">Daftar Validasi</a>
+          <?php } ?>
+          
+          <?php if (Yii::app()->user->isPPI ) { ?>
+          	<a class="btn btn-success" href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/validasi')?>">Daftar Validasi</a>
+          <?php } ?>
+          
+          <?php if (Yii::app()->user->isKapuslit ) { ?>
+          	<a class="btn btn-success" href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/validasi')?>">Daftar Validasi</a>
+          <?php } ?>
+          
+          <a class="btn btn-success" href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/create') ?>">Sejarah</a>
+             
+        
+        <div class="btn-group">
+          <button data-toggle="dropdown" class="btn btn-success dropdown-toggle">Pencarian <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="<?php echo Yii::app()->createUrl('penelitian/search')?>">Cari Proposal Penelitian</a></li>
+            <li><a href="#">Cari Protokol Penelitian</a></li>
+            <li><a href="#">Cari Output Penelitian</a></li>
+          </ul>
+        </div>
+        
+        <?php } ?> 
+        
+        <?php if ( Yii::app()->user->isSuperAdmin ) { ?>
+          <a class="btn btn-info" href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/create')?>">Pengajuan Penelitian</a>
+          <a class="btn btn-success" href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian')?>">Daftar Penelitian</a>
+          <a class="btn btn-success" href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/validasi')?>">Daftar Validasi</a>
+          
+          <div class="btn-group">
+            <button data-toggle="dropdown" class="btn btn-success dropdown-toggle">Pencarian <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a href="<?php echo Yii::app()->createUrl('penelitian/search')?>">Cari Proposal Penelitian</a></li>
+              <li><a href="#">Cari Protokol Penelitian</a></li>
+              <li><a href="#">Cari Output Penelitian</a></li>
+            </ul>
+          </div>
+          
+          <div class="btn-group">
+          <button data-toggle="dropdown" class="btn btn-success dropdown-toggle">Data Master <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Master Jabatan Fungsional</a></li>
+            <li><a href="#">Master Bidang</a></li>
+            <li><a href="#">Master Sub Bidang</a></li>
+            <li><a href="#">Master Kepakaran</a></li>
+            <li><a href="#">Master Sumber Dana</a></li>
+            <li><a href="#">Master Isu Strategis</a></li>
+            <li><a href="#">Master Klien</a></li>
+          </ul>
+        </div>
+        
+        <div class="btn-group">
+          <button data-toggle="dropdown" class="btn btn-success dropdown-toggle">Kepegawaian <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="<?php echo Yii::app()->createUrl('members/pegawai')?>">Daftar Pegawai</a></li>
+            <li><a href="<?php echo Yii::app()->createUrl('members/pegawai/create')?>">Tambah Pegawai</a></li>
+          </ul>
+        </div>
+        
+        <?php } ?>
+        <div class="btn-group">
+        	<a class="btn btn-danger" href="<?php echo Yii::app()->createUrl('site/logout')?>">Keluar</a>
+        </div>
+        
+      </div>
+      <!-- menu utama end -->
+    
+    <!-- START OF RIGHT PANEL -->
+    <div class="rightpanel">	
+      
+      
       <?php if ( !empty($this->pageTitle) ) { ?>
-        <div class="pagetitle">
-            <h1><?php echo $this->pageTitle?></h1>
+        <div><br>
+            <h3 class="text-center"><?php echo $this->pageTitle?></h3>
         </div><!--pagetitle-->  
       <?php } ?>
         <div class="maincontent">
@@ -142,8 +162,7 @@
     <div class="clearfix"></div>
     
     <div class="footer">
-    	<div class="footerleft">&copy; Litbangkes 2014. All Rights Reserved.</div>
-    	<div class="footerright"></div>
+    	&copy; <?php echo date("Y");?> Pusat Humaniora, Kebijakan Kesehatan dan Pemberdayaan Masyarakat. All Rights Reserved.
     </div><!--footer-->
 
     
