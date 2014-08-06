@@ -16,7 +16,7 @@ class ProtokolPenelitian extends CActiveRecord
   const STATUS_REVISI = 2;
   const STATUS_SETUJU = 3;
   const STATUS_TOLAK = 4;
-  
+  public $validasiProtokol;
   public $editable = true;
   public $statusDocument = array(
                             '0'=>'Draft',
@@ -71,9 +71,9 @@ class ProtokolPenelitian extends CActiveRecord
         'file'=>array(self::HAS_MANY,'FilePenelitian','',
                         'on' => 'proposal_id = file.proposal_id',
                         'condition'=>"file.status = 1 && ( file.group_file = 'tor' || file.group_file = 'protokol' || file.group_file = 'rab')"),
-        'validasi'=>array(self::HAS_ONE,'ProposalValidasi',''
+        /*'validasi'=>array(self::HAS_ONE,'ProposalValidasi',''
                         ,'on' => 'proposal_id = validasi.proposal_id',
-                        'condition'=>'validasi.step = 2'),
+                        'condition'=>'proposal_id = validasi.proposal_id && step 2'),*/
         'proposal'=>array(self::BELONGS_TO,'ProposalPenelitian','proposal_id')
 		);
 	}
@@ -113,7 +113,7 @@ class ProtokolPenelitian extends CActiveRecord
 	}
   
   public function isValidasiKasubbid(){
-      if ( empty( $this->validasi ) || empty( $this->id) ) return false;
+      if ( empty( $this->id) ) return false;
       
       return ( $this->id ) ;
   }
@@ -124,6 +124,12 @@ class ProtokolPenelitian extends CActiveRecord
       return ( $this->validasi->validasi_kasubbid == ProposalPenelitian::STATUS_SETUJU ) ;
   }
   
+  public function isValidasiKabidEditable(){
+    if ( empty( $this->validasi ) ) return false;
+      
+    return ( $this->validasi->validasi_kabid != ProposalPenelitian::STATUS_SETUJU && $this->validasi->validasi_kabid != ProposalPenelitian::STATUS_TOLAK ) ;
+  }
+  
   public function isValidasiPPI(){
       if ( empty( $this->validasi ) ) return false;
       
@@ -131,10 +137,22 @@ class ProtokolPenelitian extends CActiveRecord
               && $this->validasi->validasi_kasubbid == ProposalPenelitian::STATUS_SETUJU) ;
   }
   
+  public function isValidasiPPIEditable(){
+    if ( empty( $this->validasi ) ) return false;
+      
+    return ( $this->validasi->validasi_ppi != ProposalPenelitian::STATUS_SETUJU && $this->validasi->validasi_ppi != ProposalPenelitian::STATUS_TOLAK ) ;
+  }
+  
   public function isValidasiKapuslit(){
       if ( empty( $this->validasi ) ) return false;
       
       return (  $this->validasi->validasi_ppi == ProposalPenelitian::STATUS_SETUJU) ;
+  }
+  
+  public function isValidasiKapuslitEditable(){
+    if ( empty( $this->validasi ) ) return false;
+      
+    return ( $this->validasi->validasi_kapuslit != ProposalPenelitian::STATUS_SETUJU && $this->validasi->validasi_kapuslit != ProposalPenelitian::STATUS_TOLAK ) ;
   }
   
   public function isValidasiKI(){
@@ -164,7 +182,16 @@ class ProtokolPenelitian extends CActiveRecord
       
       return ($this->proposal->step == ProposalPenelitian::ISPROTOKOL );
   }
+  
   public function getStatus(){
       return (!empty($this->statusDocument[$this->status]) ? $this->statusDocument[$this->status] : '');
+  }
+  
+  public function getValidasi(){
+      if ( empty($this->validasiProtokol) ) {
+        $this->validasiProtokol = ProposalValidasi::model()->find('proposal_id = '.$this->proposal_id.' AND step = 2');
+      }
+      
+      return $this->validasiProtokol;
   }
 }

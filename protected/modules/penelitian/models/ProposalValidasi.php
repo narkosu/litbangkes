@@ -70,6 +70,7 @@ class ProposalValidasi extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
         'proposal'=>array(self::BELONGS_TO,'ProposalPenelitian','proposal_id'),
+        'protokol'=>array(self::BELONGS_TO,'ProposalPenelitian','','on'=>'proposal_id = protokol.proposal_id '),
 		);
 	}
 

@@ -16,21 +16,21 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
     <ul>
         <li><a href="#tabs-1">Informasi Penelitian</a></li>
         <?php if ($this->AccessAsKasubbid()) { ?>
-            <li><a href="#tabs-3">Validasi Porposal Oleh KaSubBid</a></li>
+            <li><a href="#tabs-3">Validasi Oleh KaSubBid</a></li>
         <?php } ?>
 
         <?php if ($this->AccessAsKabid() && $model->isValidasiKabid() ) { ?>
-            <li><a href="#tabs-2">Validasi Porposal Oleh Kabid</a></li>
+            <li><a href="#tabs-2">Validasi Oleh Kabid</a></li>
         <?php } ?>
 
         <?php if ($this->AccessAsPPI() && $model->isValidasiPPI()) { ?>
-            <li><a href="#tabs-4">Validasi Porposal Oleh PPI</a></li>
+            <li><a href="#tabs-4">Validasi Oleh PPI</a></li>
         <?php } ?>
         <?php if ($this->AccessAsKapuslit() && $model->isValidasiKapuslit()) { ?>
-            <li><a href="#tabs-validasi-kaspulit">Validasi Porposal Oleh Kapuslit</a></li>
+            <li><a href="#tabs-validasi-kaspulit">Validasi Oleh Kapuslit</a></li>
         <?php } ?>
         <?php if ($this->AccessAsKI() && $model->isValidasiKI()) { ?>
-            <li><a href="#tabs-5">Validasi Proposal Oleh Komisi Ilmiah</a></li>
+            <li><a href="#tabs-5">Validasi Oleh Komisi Ilmiah</a></li>
         <?php } ?>
         
             <li style="clear:both;"></li>

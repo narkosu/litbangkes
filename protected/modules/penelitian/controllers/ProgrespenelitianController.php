@@ -90,9 +90,9 @@ class ProgrespenelitianController extends Controller
     $this->pageTitle  = $model->nama_penelitian;
     $this->menuactive  = 'penelitian';
     $modelFile = $model->file;
+    
    /* triwulan1 */
     $modelProgress['triwulan1'] = $this->loadModelByProposalId($id,'triwulan1');
-    
     if (empty($modelProgress['triwulan1']))
         $modelProgress['triwulan1'] = new ProgresPenelitian;
 		// Uncomment the following line if AJAX validation is needed
