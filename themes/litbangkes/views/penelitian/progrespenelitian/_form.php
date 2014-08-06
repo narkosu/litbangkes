@@ -220,7 +220,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           <p>
               <label>Tanggal Pengajuan Etik</label>
               <span class="field">
-                <?php echo $form->textField($modelProgress['triwulan1'],'tanggal_pangajuan_etik',array('name'=>'ProgresPenelitian[triwulan1][tanggal_pangajuan_etik]','class'=>'input-small','id'=>'datepicker')); ?>  
+                <?php echo $form->textField($modelProgress['triwulan1'],'tanggal_pangajuan_etik',array('value'=>$modelProgress['triwulan1']->getTanggalPengajuan(), 'name'=>'ProgresPenelitian[triwulan1][tanggal_pangajuan_etik]','class'=>'input-small','id'=>'datepicker')); ?>  
                  &nbsp; <small><em>mm / dd / yyyy</em></small>
               </span>
           </p>
@@ -285,7 +285,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           <p>
               <label>Tanggal Pengajuan Etik</label>
               <span class="field">
-                <?php echo $form->textField($modelProgress['triwulan2'],'tanggal_pangajuan_etik',array('name'=>'ProgresPenelitian[triwulan2][tanggal_pangajuan_etik]','class'=>'input-small','id'=>'datepicker')); ?>  
+                <?php echo $form->textField($modelProgress['triwulan2'],'tanggal_pangajuan_etik',array('value'=>$modelProgress['triwulan2']->getTanggalPengajuan(),'name'=>'ProgresPenelitian[triwulan2][tanggal_pangajuan_etik]','class'=>'input-small','id'=>'datepicker')); ?>  
                  &nbsp; <small><em>mm / dd / yyyy</em></small>
               </span>
           </p>
@@ -349,7 +349,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           <p>
               <label>Tanggal Pengajuan Etik</label>
               <span class="field">
-                <?php echo $form->textField($modelProgress['triwulan3'],'tanggal_pangajuan_etik',array('name'=>'ProgresPenelitian[triwulan3][tanggal_pangajuan_etik]','class'=>'input-small','id'=>'datepicker')); ?>  
+                <?php echo $form->textField($modelProgress['triwulan3'],'tanggal_pangajuan_etik',array('value'=>$modelProgress['triwulan3']->getTanggalPengajuan(),'name'=>'ProgresPenelitian[triwulan3][tanggal_pangajuan_etik]','class'=>'input-small','id'=>'datepicker')); ?>  
                  &nbsp; <small><em>mm / dd / yyyy</em></small>
               </span>
           </p>
@@ -413,7 +413,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           <p>
               <label>Tanggal Pengajuan Etik</label>
               <span class="field">
-                <?php echo $form->textField($modelProgress['triwulan4'],'tanggal_pangajuan_etik',array('name'=>'ProgresPenelitian[triwulan4][tanggal_pangajuan_etik]','class'=>'input-small','id'=>'datepicker')); ?>  
+                <?php echo $form->textField($modelProgress['triwulan4'],'tanggal_pangajuan_etik',array('value'=>$modelProgress['triwulan4']->getTanggalPengajuan(), 'name'=>'ProgresPenelitian[triwulan4][tanggal_pangajuan_etik]','class'=>'input-small','id'=>'datepicker')); ?>  
                  &nbsp; <small><em>mm / dd / yyyy</em></small>
               </span>
           </p>

@@ -20,7 +20,8 @@
  */
 class ProgresPenelitian extends CActiveRecord
 {
-	/**
+	
+  /**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
 	 * @return ProgresPenelitian the static model class
@@ -119,4 +120,15 @@ class ProgresPenelitian extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+  
+  public function getTanggalPengajuan(){
+      if ( !empty($this->tanggal_pangajuan_etik) ){
+          list($year, $month, $day) = explode('-',$this->tanggal_pangajuan_etik);
+          $return = $month.'/'.$day.'/'.$year;
+      }else{
+          $return = '';
+      }
+      return $return;
+      //return $this->tanggal_pangajuan_etik;
+  }
 }
