@@ -52,6 +52,7 @@ return array(
 		
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=litbangkes',
+			//'connectionString' => 'mysql:host=localhost;dbname=litbangkes_682014',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => '',
