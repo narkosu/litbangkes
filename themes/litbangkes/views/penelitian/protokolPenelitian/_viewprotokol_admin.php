@@ -7,23 +7,23 @@
 <div id="tabs">
     <ul>
         <li><a href="#tabs-1">Informasi Penelitian</a></li>
-         <?php if ($this->AccessAsKasubbid() && $modelProtokol->isValidasiKasubbid()) { ?>
-            <li><a href="#tabs-3">Validasi Porposal Oleh KaSubBid</a></li>
+         <?php if ($this->AccessAsKasubbid() ) { ?>
+            <li><a href="#tabs-3">Validasi Oleh KaSubBid</a></li>
         <?php } ?>
 
         <?php if ($this->AccessAsKabid() && $modelProtokol->isValidasiKabid()) { ?>
-            <li><a href="#tabs-2">Validasi Porposal Oleh Kabid</a></li>
+            <li><a href="#tabs-2">Validasi Oleh Kabid</a></li>
         <?php } ?>
 
         <?php if ($this->AccessAsPPI() && $modelProtokol->isValidasiPPI()) { ?>
-            <li><a href="#tabs-4">Validasi Porposal Oleh PPI</a></li>
+            <li><a href="#tabs-4">Validasi Oleh PPI</a></li>
         <?php } ?>
         <?php if ($this->AccessAsKapuslit() && $modelProtokol->isValidasiKapuslit()) { ?>
-            <li><a href="#tabs-validasi-kaspulit">Validasi Porposal Oleh Kapuslit</a></li>
+            <li><a href="#tabs-validasi-kaspulit">Validasi Oleh Kapuslit</a></li>
         <?php } ?>
         
         <?php if ($this->AccessAsKE() && $modelProtokol->isValidasiKE()) { ?>
-            <li><a href="#tabs-6">Validasi Protokol Oleh Komisi Etik</a></li>
+            <li><a href="#tabs-6">Validasi Oleh Komisi Etik</a></li>
         <?php } ?>
          <?php /*   
             
@@ -65,28 +65,6 @@
                     <?php echo $modelProtokol->getStatus() ?>
                 </span>
                 :
-                <!-- validasi Kabid -->
-                <?php if (!empty($validasi->validasi_kabid)) { ?>
-                    <?php
-                    if ($validasi->validasi_kabid == 3) {
-                        $labelValidasi = 'label-success';
-                    } else if ($validasi->validasi_kabid == 2) { // revisi
-                        $labelValidasi = 'label-success';
-                    } else if ($validasi->validasi_kabid == 4) { //ditolak
-                        $labelValidasi = 'label-important';
-                    } else if ($model->status == 1) { //progres
-                        $labelValidasi = 'label-warning';
-                    } else {
-                        $labelValidasi = 'label-info';
-                    }
-                    ?>
-                    <span class="label <?php echo $labelValidasi ?>">
-                        <?php
-                        echo $validasi->getStatus('validasi_kabid');
-                        ?>
-                        Kabid
-                    </span>
-                <?php } ?>
                 
                 <!-- validasi Kabid -->
                 <?php if (!empty($validasi->validasi_kasubbid)) { ?>
@@ -106,6 +84,29 @@
                     <span class="label <?php echo $labelValidasi ?>">
                         <?php
                         echo $validasi->getStatus('validasi_kasubbid');
+                        ?>
+                        Kasubbid
+                    </span>
+                <?php } ?>
+                
+                <!-- validasi Kabid -->
+                <?php if (!empty($validasi->validasi_kabid)) { ?>
+                    <?php
+                    if ($validasi->validasi_kabid == 3) {
+                        $labelValidasi = 'label-success';
+                    } else if ($validasi->validasi_kabid == 2) { // revisi
+                        $labelValidasi = 'label-success';
+                    } else if ($validasi->validasi_kabid == 4) { //ditolak
+                        $labelValidasi = 'label-important';
+                    } else if ($model->status == 1) { //progres
+                        $labelValidasi = 'label-warning';
+                    } else {
+                        $labelValidasi = 'label-info';
+                    }
+                    ?>
+                    <span class="label <?php echo $labelValidasi ?>">
+                        <?php
+                        echo $validasi->getStatus('validasi_kabid');
                         ?>
                         Kabid
                     </span>
@@ -272,7 +273,7 @@
 
     </div> <!-- tabs-1 -->
 
-    <?php if ($this->AccessAsKasubbid() && $modelProtokol->isValidasiKasubbid()) { ?>
+    <?php if ($this->AccessAsKasubbid() ) { ?>
     
         <div id="tabs-3">
             <?php if ( $modelProtokol->isValidate($model)  && !$modelProtokol->isValidasiKasubbid()) { ?>
@@ -333,7 +334,7 @@
     <?php if ($this->AccessAsKabid() && $modelProtokol->isValidasiKabid()) { ?>
         
             <div id="tabs-2">
-                <?php if ( $modelProtokol->isValidate($model)  && !$modelProtokol->isValidasiKabid() ) {
+                <?php if ( $modelProtokol->isValidate($model)  && $modelProtokol->isValidasiKabidEditable() ) {
             $validasi->validasi_kabid = (empty($validasi->validasi_kabid) ? '' : $validasi->validasi_kabid);
             ?>
                 <?php
@@ -376,11 +377,13 @@
 
                 <?php $this->endWidget(); ?>
     <?php } else { ?>  
+                
                 <p>
                     <span class="label <?php echo $labelValidasi ?>">
-        <?php echo ProposalPenelitian::statusDocument($validasi->validasi_kabid) ?>
+                        <?php echo ProposalPenelitian::statusDocument($validasi->validasi_kabid) ?>
                     </span>    
                 </p>
+                
         <?php } ?>  
         </div> <!-- tabs-2 -->
     <?php } ?>
@@ -388,7 +391,7 @@
         
         <?php if ($this->AccessAsPPI() && $modelProtokol->isValidasiPPI()) { ?>
         <div id="tabs-4">
-            <?php if ( $modelProtokol->isValidate($model) && !$modelProtokol->isValidasiPPI() ) { ?>
+            <?php if ( $modelProtokol->isValidate($model) && $modelProtokol->isValidasiPPIEditable() ) { ?>
                 <?php
                 $form = $this->beginWidget('CActiveForm', array(
                     'id' => 'validasi-ppi-form',
@@ -440,7 +443,7 @@
 
         <?php if ($this->AccessAsKapuslit() && $modelProtokol->isValidasiKapuslit()) { ?> 
             <div id="tabs-validasi-kaspulit">
-                <?php if ($modelProtokol->isValidate($model) && !$modelProtokol->isValidasiKapuslit()) { ?>
+                <?php if ($modelProtokol->isValidate($model) && $modelProtokol->isValidasiKapuslitEditable()) { ?>
                     <?php
                     $form = $this->beginWidget('CActiveForm', array(
                         'id' => 'validasi-ppi-form',

@@ -90,9 +90,9 @@ class ProgrespenelitianController extends Controller
     $this->pageTitle  = $model->nama_penelitian;
     $this->menuactive  = 'penelitian';
     $modelFile = $model->file;
+     
    /* triwulan1 */
     $modelProgress['triwulan1'] = $this->loadModelByProposalId($id,'triwulan1');
-    
     if (empty($modelProgress['triwulan1']))
         $modelProgress['triwulan1'] = new ProgresPenelitian;
 		// Uncomment the following line if AJAX validation is needed
@@ -133,8 +133,7 @@ class ProgrespenelitianController extends Controller
 			if($modelProgress['triwulan2']->save())
          $this->redirect(array('create','id'=>$model->id));
 		}
-    //print_r($_POST);
-    //die;
+    
     /* triwulan1 */
     $modelProgress['triwulan3'] = $this->loadModelByProposalId($id,'triwulan3');
     if (empty($modelProgress['triwulan3']))
@@ -172,7 +171,7 @@ class ProgrespenelitianController extends Controller
 			if($modelProgress['triwulan4']->save())
 				$this->redirect(array('create','id'=>$model->id));
 		}
-
+    
 		$this->render('create',array(
 			'model'=>$model,
 			'modelProgress' => $modelProgress,

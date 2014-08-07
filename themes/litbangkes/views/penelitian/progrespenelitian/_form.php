@@ -12,9 +12,27 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
     <ul>
         <li><a href="#tabs-1">Informasi Penelitian</a></li>
         <li><a href="#tabs-2">Progress Triwulan 1</a></li>
-        <li><a href="#tabs-3">Progress Triwulan 2</a></li>
-        <li><a href="#tabs-4">Progress Triwulan 3</a></li>
-        <li><a href="#tabs-5">Progress Triwulan 4</a></li>
+        <li>
+            <?php if ( !$modelProgress['triwulan1']->isNewRecord ) { ?>
+                <a href="#tabs-3">Progress Triwulan 2</a>
+            <?php } else { ?>
+                <a >Progress Triwulan 2</a>
+            <?php } ?>
+        </li>
+        <li>
+            <?php if ( !$modelProgress['triwulan2']->isNewRecord ) { ?>
+                <a href="#tabs-4">Progress Triwulan 3</a>
+            <?php } else { ?>
+                <a >Progress Triwulan 3</a>
+            <?php } ?>
+        </li>
+        <li>
+            <?php if ( !$modelProgress['triwulan3']->isNewRecord ) { ?>
+                <a href="#tabs-5">Progress Triwulan 4</a>
+            <?php } else { ?>
+                <a >Progress Triwulan 4</a>
+            <?php } ?>
+        </li>
     </ul>
 
     <div id="tabs-1">
@@ -266,7 +284,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
         <?php $this->endWidget(); ?>
 
      </div> <!-- tabs-2 -->
-
+    <?php if ( !$modelProgress['triwulan1']->isNewRecord ) { ?>
     <div id="tabs-3">
         <?php $form=$this->beginWidget('CActiveForm', array(
             'id'=>'progres-penelitian-form',
@@ -285,7 +303,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           <p>
               <label>Tanggal Pengajuan Etik</label>
               <span class="field">
-                <?php echo $form->textField($modelProgress['triwulan2'],'tanggal_pangajuan_etik',array('value'=>$modelProgress['triwulan2']->getTanggalPengajuan(),'name'=>'ProgresPenelitian[triwulan2][tanggal_pangajuan_etik]','class'=>'input-small','id'=>'datepicker')); ?>  
+                <?php echo $form->textField($modelProgress['triwulan2'],'tanggal_pangajuan_etik',array('value'=>$modelProgress['triwulan2']->getTanggalPengajuan(),'name'=>'ProgresPenelitian[triwulan2][tanggal_pangajuan_etik]','class'=>'input-small','id'=>'datepicker2')); ?>  
                  &nbsp; <small><em>mm / dd / yyyy</em></small>
               </span>
           </p>
@@ -330,7 +348,8 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           </p>
         <?php $this->endWidget(); ?>
     </div> <!-- tabs-3 -->
-
+    <?php } ?>
+    <?php if ( !$modelProgress['triwulan2']->isNewRecord ) { ?>
     <div id="tabs-4">
         <?php $form=$this->beginWidget('CActiveForm', array(
             'id'=>'progres-penelitian-form',
@@ -342,14 +361,13 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
               <label>Pagu (Rp.)</label>
               <span class="field">
                   <?php echo $form->textField($modelProgress['triwulan3'],'pagu',array('name'=>'ProgresPenelitian[triwulan3][pagu]','class'=>'input-medium')); ?>
-                  
               </span>
           </p>
 
           <p>
               <label>Tanggal Pengajuan Etik</label>
               <span class="field">
-                <?php echo $form->textField($modelProgress['triwulan3'],'tanggal_pangajuan_etik',array('value'=>$modelProgress['triwulan3']->getTanggalPengajuan(),'name'=>'ProgresPenelitian[triwulan3][tanggal_pangajuan_etik]','class'=>'input-small','id'=>'datepicker')); ?>  
+                <?php echo $form->textField($modelProgress['triwulan3'],'tanggal_pangajuan_etik',array('value'=>$modelProgress['triwulan3']->getTanggalPengajuan(),'name'=>'ProgresPenelitian[triwulan3][tanggal_pangajuan_etik]','class'=>'input-small','id'=>'datepicker3')); ?>  
                  &nbsp; <small><em>mm / dd / yyyy</em></small>
               </span>
           </p>
@@ -394,7 +412,8 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           </p>
         <?php $this->endWidget(); ?>
     </div> <!-- tabs-4 -->
-
+    <?php } ?>
+    <?php if ( !$modelProgress['triwulan3']->isNewRecord ) { ?>
     <div id="tabs-5">
         <?php $form=$this->beginWidget('CActiveForm', array(
             'id'=>'progres-penelitian-form',
@@ -413,7 +432,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           <p>
               <label>Tanggal Pengajuan Etik</label>
               <span class="field">
-                <?php echo $form->textField($modelProgress['triwulan4'],'tanggal_pangajuan_etik',array('value'=>$modelProgress['triwulan4']->getTanggalPengajuan(), 'name'=>'ProgresPenelitian[triwulan4][tanggal_pangajuan_etik]','class'=>'input-small','id'=>'datepicker')); ?>  
+                <?php echo $form->textField($modelProgress['triwulan4'],'tanggal_pangajuan_etik',array('value'=>$modelProgress['triwulan4']->getTanggalPengajuan(), 'name'=>'ProgresPenelitian[triwulan4][tanggal_pangajuan_etik]','class'=>'input-small','id'=>'datepicker4')); ?>  
                  &nbsp; <small><em>mm / dd / yyyy</em></small>
               </span>
           </p>
@@ -458,10 +477,18 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           </p>
         <?php $this->endWidget(); ?>
     </div> <!-- tabs-5 -->
-
+    <?php } ?>
+    
 </div>
 <script type="text/javascript">
   jQuery(document).ready(function(){
-      jQuery('.uniform-file').uniform();
-  });
+        jQuery('.uniform-file').uniform();
+        if(jQuery('#datepicker2').length > 0)
+            jQuery( "#datepicker2" ).datepicker();
+        if(jQuery('#datepicker3').length > 0)
+            jQuery( "#datepicker3" ).datepicker();
+        
+        if(jQuery('#datepicker4').length > 0)
+            jQuery( "#datepicker4" ).datepicker();
+    });
 </script> 

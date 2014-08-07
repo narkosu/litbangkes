@@ -57,20 +57,12 @@ class ProtokolpenelitianController extends Controller {
             $this->redirect(array('/penelitian/proposalpenelitian'));
         }
         $this->pageTitle = $model->nama_penelitian;
-        $validasi = $model->validasi; // hanya untuk proposal
-        
-        
-        if (empty($validasi)) {
-            $this->redirect(array('/penelitian/proposalpenelitian/view/id/' . $id));
-        }
-        
-        
-        if ( $validasi->validasi_ppi != 3 || $validasi->validasi_ki != 3 ) {
-            $this->redirect(array('/penelitian/proposalpenelitian/view/id/' . $id));
-        }
         
         $newModelFile = new FilePenelitian;
         $modelProtokol = $this->loadModelByProposal($id);
+        
+        $validasi = $modelProtokol->getValidasi(); 
+        //$validasiProtokol = $modelProtokol->getValidasi(); // hanya untuk PROTOKOL
         
         $groupFile = array();
         if (empty($modelProtokol)) {
@@ -91,7 +83,7 @@ class ProtokolpenelitianController extends Controller {
                 }
         }
 
-
+        //print_r($validasi);
         $this->render('viewprotokol', array(
             'model' => $model,
             'newModelFile' => $newModelFile,
@@ -443,7 +435,7 @@ class ProtokolpenelitianController extends Controller {
     return $model;
   }
 
-  
+  /*
   public function AccessAsKabid(){
       return ( Yii::app()->user->isKabid || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin)  ;
   }
@@ -466,5 +458,5 @@ class ProtokolpenelitianController extends Controller {
   
   public function AccessAsKE(){
       return (Yii::app()->user->isKE || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin);
-  }
+  }*/
 }

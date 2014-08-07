@@ -202,17 +202,11 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
     </div>        
 
     <div id="tabs-2">
-                         
-        <?php $form=$this->beginWidget('CActiveForm', array(
-            'id'=>'progres-penelitian-form',
-            'enableAjaxValidation'=>false,
-            'htmlOptions'=>array('class'=>'stdform stdform2', 'enctype'=>'multipart/form-data')
-          )); ?>
-        <?php echo $form->hiddenField($modelProgress['triwulan1'],'periode',array('name'=>'ProgresPenelitian[triwulan1][periode]','value'=>'triwulan1')) ?>
+        
           <p>
               <label>Pagu (Rp.)</label>
               <span class="field">
-                  <?php echo $modelProgress['triwulan1']->pagu?>
+                  <?php echo (!empty($modelProgress['triwulan1']->pagu) ? $modelProgress['triwulan1']->pagu : '') ?>
                   
               </span>
           </p>
@@ -220,11 +214,11 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           <p>
               <label>Tanggal Pengajuan Etik</label>
               <span class="field">
-                <?php echo $modelProgress['triwulan1']->tanggal_pangajuan_etik ?>  
+                <?php echo (!empty($modelProgress['triwulan1']->tanggal_pangajuan_etik) ? $modelProgress['triwulan1']->getTanggalPengajuan() : '') ?>  
                  &nbsp; <small><em>mm / dd / yyyy</em></small>
               </span>
           </p>
-
+          
           <p>
               <label>Ijin Etik <small>Upload file dalam bentuk PDF</small></label>
               <span class="field">
@@ -235,47 +229,46 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           <p>
               <label>Narasi</label>
               <span class="field">
-                  
+              <?php if ( !empty($modelProgress['triwulan1']->narasi) ) { ?>    
               <?php echo nl2br($modelProgress['triwulan1']->narasi)?>
+              <?php } ?>
           </p>
-
+        
           <p>
               <label>Realisasi Anggaran (Rp.)</label>
               <span class="field">
-                  <?php echo $modelProgress['triwulan1']->realisasi_anggaran ?>
+                <?php if ( !empty($modelProgress['triwulan1']->realisasi_anggaran) ) { ?>    
+                    <?php echo $modelProgress['triwulan1']->realisasi_anggaran ?>
+                <?php } ?>
+                  
               </span>
           </p>
 
           <p>
               <label>Masalah / Kendala</label>
               <span class="field">
-              <?php echo $modelProgress['triwulan1']->masalah?>
+                  <?php if ( !empty($modelProgress['triwulan1']->masalah) ) { ?>  
+                    <?php echo $modelProgress['triwulan1']->masalah?>
+                  <?php } ?>
               </span>
           </p>
 
           <p>
               <label>Tindak Lanjut</label>
               <span class="field">
-              <?php echo $modelProgress['triwulan1']->tindak_lanjut?>
+                  <?php if ( !empty($modelProgress['triwulan1']->tindak_lanjut) ) { ?> 
+                        <?php echo $modelProgress['triwulan1']->tindak_lanjut?>
+                  <?php } ?>
               </span>
           </p>
-
-          
-        <?php $this->endWidget(); ?>
-
+       
      </div> <!-- tabs-2 -->
 
     <div id="tabs-3">
-        <?php $form=$this->beginWidget('CActiveForm', array(
-            'id'=>'progres-penelitian-form',
-            'enableAjaxValidation'=>false,
-            'htmlOptions'=>array('class'=>'stdform stdform2', 'enctype'=>'multipart/form-data')
-          )); ?>
-        <?php echo $form->hiddenField($modelProgress['triwulan2'],'periode',array('name'=>'ProgresPenelitian[triwulan2][periode]','value'=>'triwulan2')) ?>
-          <p>
+        <p>
               <label>Pagu (Rp.)</label>
               <span class="field">
-                  <?php echo $modelProgress['triwulan2']->pagu?>
+                  <?php echo (!empty($modelProgress['triwulan2']->pagu) ? $modelProgress['triwulan2']->pagu : '') ?>
                   
               </span>
           </p>
@@ -283,59 +276,60 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           <p>
               <label>Tanggal Pengajuan Etik</label>
               <span class="field">
-                <?php echo $modelProgress['triwulan2']->tanggal_pangajuan_etik ?>  
+                <?php echo (!empty($modelProgress['triwulan2']->tanggal_pangajuan_etik) ? $modelProgress['triwulan2']->getTanggalPengajuan() : '') ?>  
                  &nbsp; <small><em>mm / dd / yyyy</em></small>
               </span>
           </p>
-
+          
           <p>
               <label>Ijin Etik <small>Upload file dalam bentuk PDF</small></label>
               <span class="field">
-                <?php //echo $form->fileField($modelProgress['triwulan1'],'file_ijin_etik',array('class'=>'uniform-file')); ?>
+                <?php //echo $form->fileField($modelProgress['triwulan2'],'file_ijin_etik',array('class'=>'uniform-file')); ?>
               </span>
           </p>
 
           <p>
               <label>Narasi</label>
               <span class="field">
-                  
+              <?php if ( !empty($modelProgress['triwulan2']->narasi) ) { ?>    
               <?php echo nl2br($modelProgress['triwulan2']->narasi)?>
+              <?php } ?>
           </p>
-
+        
           <p>
               <label>Realisasi Anggaran (Rp.)</label>
               <span class="field">
-                  <?php echo $modelProgress['triwulan2']->realisasi_anggaran ?>
+                <?php if ( !empty($modelProgress['triwulan2']->realisasi_anggaran) ) { ?>    
+                    <?php echo $modelProgress['triwulan2']->realisasi_anggaran ?>
+                <?php } ?>
+                  
               </span>
           </p>
 
           <p>
               <label>Masalah / Kendala</label>
               <span class="field">
-              <?php echo $modelProgress['triwulan2']->masalah?>
+                  <?php if ( !empty($modelProgress['triwulan2']->masalah) ) { ?>  
+                    <?php echo $modelProgress['triwulan2']->masalah?>
+                  <?php } ?>
               </span>
           </p>
 
           <p>
               <label>Tindak Lanjut</label>
               <span class="field">
-              <?php echo $modelProgress['triwulan2']->tindak_lanjut?>
+                  <?php if ( !empty($modelProgress['triwulan2']->tindak_lanjut) ) { ?> 
+                        <?php echo $modelProgress['triwulan2']->tindak_lanjut?>
+                  <?php } ?>
               </span>
           </p>
-        <?php $this->endWidget(); ?>
     </div> <!-- tabs-3 -->
 
     <div id="tabs-4">
-        <?php $form=$this->beginWidget('CActiveForm', array(
-            'id'=>'progres-penelitian-form',
-            'enableAjaxValidation'=>false,
-            'htmlOptions'=>array('class'=>'stdform stdform2', 'enctype'=>'multipart/form-data')
-          )); ?>
-        <?php echo $form->hiddenField($modelProgress['triwulan3'],'periode',array('name'=>'ProgresPenelitian[triwulan3][periode]','value'=>'triwulan3')) ?>
-          <p>
+        <p>
               <label>Pagu (Rp.)</label>
               <span class="field">
-                  <?php echo $modelProgress['triwulan3']->pagu?>
+                  <?php echo (!empty($modelProgress['triwulan3']->pagu) ? $modelProgress['triwulan3']->pagu : '') ?>
                   
               </span>
           </p>
@@ -343,59 +337,60 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           <p>
               <label>Tanggal Pengajuan Etik</label>
               <span class="field">
-                <?php echo $modelProgress['triwulan3']->tanggal_pangajuan_etik ?>  
+                <?php echo (!empty($modelProgress['triwulan3']->tanggal_pangajuan_etik) ? $modelProgress['triwulan3']->getTanggalPengajuan() : '') ?>  
                  &nbsp; <small><em>mm / dd / yyyy</em></small>
               </span>
           </p>
-
+          
           <p>
               <label>Ijin Etik <small>Upload file dalam bentuk PDF</small></label>
               <span class="field">
-                <?php //echo $form->fileField($modelProgress['triwulan1'],'file_ijin_etik',array('class'=>'uniform-file')); ?>
+                <?php //echo $form->fileField($modelProgress['triwulan3'],'file_ijin_etik',array('class'=>'uniform-file')); ?>
               </span>
           </p>
 
           <p>
               <label>Narasi</label>
               <span class="field">
-                  
+              <?php if ( !empty($modelProgress['triwulan3']->narasi) ) { ?>    
               <?php echo nl2br($modelProgress['triwulan3']->narasi)?>
+              <?php } ?>
           </p>
-
+        
           <p>
               <label>Realisasi Anggaran (Rp.)</label>
               <span class="field">
-                  <?php echo $modelProgress['triwulan3']->realisasi_anggaran ?>
+                <?php if ( !empty($modelProgress['triwulan3']->realisasi_anggaran) ) { ?>    
+                    <?php echo $modelProgress['triwulan3']->realisasi_anggaran ?>
+                <?php } ?>
+                  
               </span>
           </p>
 
           <p>
               <label>Masalah / Kendala</label>
               <span class="field">
-              <?php echo $modelProgress['triwulan3']->masalah?>
+                  <?php if ( !empty($modelProgress['triwulan3']->masalah) ) { ?>  
+                    <?php echo $modelProgress['triwulan3']->masalah?>
+                  <?php } ?>
               </span>
           </p>
 
           <p>
               <label>Tindak Lanjut</label>
               <span class="field">
-              <?php echo $modelProgress['triwulan3']->tindak_lanjut?>
+                  <?php if ( !empty($modelProgress['triwulan3']->tindak_lanjut) ) { ?> 
+                        <?php echo $modelProgress['triwulan3']->tindak_lanjut?>
+                  <?php } ?>
               </span>
           </p>
-        <?php $this->endWidget(); ?>
     </div> <!-- tabs-4 -->
 
     <div id="tabs-5">
-        <?php $form=$this->beginWidget('CActiveForm', array(
-            'id'=>'progres-penelitian-form',
-            'enableAjaxValidation'=>false,
-            'htmlOptions'=>array('class'=>'stdform stdform2', 'enctype'=>'multipart/form-data')
-          )); ?>
-        <?php echo $form->hiddenField($modelProgress['triwulan4'],'periode',array('name'=>'ProgresPenelitian[triwulan4][periode]','value'=>'triwulan4')) ?>
-         <p>
+        <p>
               <label>Pagu (Rp.)</label>
               <span class="field">
-                  <?php echo $modelProgress['triwulan4']->pagu?>
+                  <?php echo (!empty($modelProgress['triwulan4']->pagu) ? $modelProgress['triwulan4']->pagu : '') ?>
                   
               </span>
           </p>
@@ -403,51 +398,53 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           <p>
               <label>Tanggal Pengajuan Etik</label>
               <span class="field">
-                <?php echo $modelProgress['triwulan4']->tanggal_pangajuan_etik ?>  
+                <?php echo (!empty($modelProgress['triwulan4']->tanggal_pangajuan_etik) ? $modelProgress['triwulan4']->getTanggalPengajuan() : '') ?>  
                  &nbsp; <small><em>mm / dd / yyyy</em></small>
               </span>
           </p>
-
+          
           <p>
               <label>Ijin Etik <small>Upload file dalam bentuk PDF</small></label>
               <span class="field">
-                <?php //echo $form->fileField($modelProgress['triwulan1'],'file_ijin_etik',array('class'=>'uniform-file')); ?>
+                <?php //echo $form->fileField($modelProgress['triwulan4'],'file_ijin_etik',array('class'=>'uniform-file')); ?>
               </span>
           </p>
 
           <p>
               <label>Narasi</label>
               <span class="field">
-                  
+              <?php if ( !empty($modelProgress['triwulan4']->narasi) ) { ?>    
               <?php echo nl2br($modelProgress['triwulan4']->narasi)?>
+              <?php } ?>
           </p>
-
+        
           <p>
               <label>Realisasi Anggaran (Rp.)</label>
               <span class="field">
-                  <?php echo $modelProgress['triwulan4']->realisasi_anggaran ?>
+                <?php if ( !empty($modelProgress['triwulan4']->realisasi_anggaran) ) { ?>    
+                    <?php echo $modelProgress['triwulan4']->realisasi_anggaran ?>
+                <?php } ?>
+                  
               </span>
           </p>
 
           <p>
               <label>Masalah / Kendala</label>
               <span class="field">
-              <?php echo $modelProgress['triwulan4']->masalah?>
+                  <?php if ( !empty($modelProgress['triwulan4']->masalah) ) { ?>  
+                    <?php echo $modelProgress['triwulan4']->masalah?>
+                  <?php } ?>
               </span>
           </p>
 
           <p>
               <label>Tindak Lanjut</label>
               <span class="field">
-              <?php echo $modelProgress['triwulan4']->tindak_lanjut?>
+                  <?php if ( !empty($modelProgress['triwulan4']->tindak_lanjut) ) { ?> 
+                        <?php echo $modelProgress['triwulan4']->tindak_lanjut?>
+                  <?php } ?>
               </span>
           </p>
-        <?php $this->endWidget(); ?>
     </div> <!-- tabs-5 -->
 
 </div>
-<script type="text/javascript">
-  jQuery(document).ready(function(){
-      jQuery('.uniform-file').uniform();
-  });
-</script> 

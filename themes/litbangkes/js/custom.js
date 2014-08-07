@@ -236,7 +236,7 @@ jQuery(document).ready(function(){
 		});
 	}
 
-	
+	  
 	// date picker
 	if(jQuery('#datepicker').length > 0)
 		jQuery( "#datepicker" ).datepicker();

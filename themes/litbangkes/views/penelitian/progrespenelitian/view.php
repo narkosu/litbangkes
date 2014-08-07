@@ -10,7 +10,15 @@
                             <span class="badge">2</span>&nbsp;&nbsp;Protokol Penelitian <i class="iconfa-ok"></i></a></li>
                     <li class="active"><a href="<?php echo Yii::app()->createUrl('penelitian/progrespenelitian/create/id/'.$model->id)?>">
                             <span class="badge badge-success">3</span>&nbsp;&nbsp;Progress Penelitian</a></li>
-                    <li><a><span class="badge">4</span>&nbsp;&nbsp;Output Penelitian</a></li>
+                    <li>
+                        
+                        <?php if ( $model->isOutputAvailable() ) { ?>
+                            <a href="<?php echo Yii::app()->createUrl('penelitian/outputpenelitian/view/id/'.$model->id)?>">
+                                <span class="badge">4</span>&nbsp;&nbsp;Output Penelitian</a>
+                        <?php } else { ?>
+                            <a><span class="badge">4</span>&nbsp;&nbsp;Output Penelitian</a>
+                        <?php } ?>
+                    </li>
                 </ul>
             </div>
         </div>
