@@ -188,7 +188,8 @@ class ProtokolPenelitian extends CActiveRecord
   }
   
   public function getValidasi(){
-      if ( empty($this->validasiProtokol) ) {
+      //if (  )
+      if ( empty($this->validasiProtokol) && !empty($this->proposal_id ) ) {
         $this->validasiProtokol = ProposalValidasi::model()->find('proposal_id = '.$this->proposal_id.' AND step = 2');
       }
       

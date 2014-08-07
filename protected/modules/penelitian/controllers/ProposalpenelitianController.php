@@ -98,7 +98,12 @@ class ProposalpenelitianController extends Controller
     }
     
     $validasi = $validasi->saveValidation($_POST);
-    
+    if ( isset($_POST) ) {
+        if ( $validasi->validasi_ki == ProposalPenelitian::STATUS_SETUJU ) {
+            $proposal->step = 2;
+            $proposal->save();
+        }
+    }
 //$validasi = $this->saveValidation($validasi, $_POST);
     
 		$this->render('viewvalidasi',array(
@@ -335,7 +340,7 @@ class ProposalpenelitianController extends Controller
     if ( $userLogin->isKasubbid ) { 
         $me = Yii::app()->user->getState('pegawai');
         //$criteria->join = 'LEFT JOIN tbl_proposal_validasi a on t.id = a.proposal_id';
-        $criteria->condition .= 't.bidang_id = '.$me->bidang_id.' && t.sub_bidang_id = '.$me->subbidang_id;
+        $criteria->condition .= 't.bidang_id = '.$me->bidang_id.' AND t.sub_bidang_id = '.$me->subbidang_id;
     }
     
     $criteria->order = 't.created_at desc';

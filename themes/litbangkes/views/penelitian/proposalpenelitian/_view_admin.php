@@ -263,7 +263,27 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
                 }
             }
             ?>
+            
+             
+            <div class="par">
+                <label>Sumber Dana</label>  
+                <span class="field">
+                    <?php if ( !empty($model->sumberdana) ) { ?>
+                    <?php echo $model->sumberdana->name; ?>
+                    <?php } ?>
+                </span>
 
+            </div>
+
+            <div class="par">
+                <label>Detail Sumber Dana</label>  
+                <span class="field">
+                    <?php if ( !empty($model->detailsumberdana) ) { ?>
+                    <?php echo $model->detailsumberdana->nama; ?>
+                    <?php } ?>
+                </span>
+
+            </div>
 
             <div class="par">
                 <label>Tahun Anggaran</label>  
@@ -509,7 +529,7 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
     <?php if ($this->AccessAsKapuslit() && $model->isValidasiKapuslit()) { ?>    
 
         <div id="tabs-validasi-kaspulit">
-            <?php if ($model->isValidate()) { ?>
+            <?php if ($model->isValidate() && $model->isValidasiKapuslitEditable()) { ?>
                 <?php
                 $form = $this->beginWidget('CActiveForm', array(
                     'id' => 'validasi-ppi-form',
@@ -574,7 +594,7 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
     <?php if ($this->AccessAsKI() && $model->isValidasiKI()) { ?>
 
         <div id="tabs-5" <?php echo (($validasi->validasi_ppi == 3 ) ? '' : 'style="display:none;"') ?>>
-            <?php if ($model->isValidate()) { ?>
+            <?php if ($model->isValidate() && $model->isValidasiKIEditable()) { ?>
                 <?php
                 $form = $this->beginWidget('CActiveForm', array(
                     'id' => 'validasi-ppi-form',

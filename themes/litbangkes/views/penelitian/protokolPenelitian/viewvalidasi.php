@@ -50,6 +50,7 @@ $this->menu=array(
                         Yii::app()->user->isKapuslit ||
                         Yii::app()->user->isKI ||
                         Yii::app()->user->isKE) {
+                    
                     ?>
                   <div class="widgetcontent bordered shadowed nopadding">
                       <?php echo $this->renderPartial('_viewprotokol_admin', 
@@ -60,7 +61,9 @@ $this->menu=array(
                               'modelProtokol' => $modelProtokol,
                                 'validasi'  => $validasi,
                                 'pegawai'=> $pegawai
-                        )); ?>
+                        )); 
+                      
+                      ?>
                   </div>
             <?php } else { ?>
                   <h4 class="widgettitle nomargin shadowed">Update Protokol Penelitian : <?php echo $model->nama_penelitian?></h4>

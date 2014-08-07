@@ -51,10 +51,10 @@ $StatusColor = array(   '0'=>'label-info',
                 </colgroup>
                 <thead>
                     <tr>
-                        <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
+                        <th class="head0 nosort"><!--<input type="checkbox" class="checkall" />--></th>
                         <th class="head0">Judul Penelitian</th>
                         <th class="head0">Diajukan oleh</th>
-                        <th class="head1">Jenis Penelitian</th>
+                        <th class="head1">Sumber Dana</th>
                         <th class="head0">Tahun Anggaran</th>
                         <th class="head0">Position</th>
                         <th class="head0">status</th>
@@ -62,14 +62,28 @@ $StatusColor = array(   '0'=>'label-info',
                     </tr>
                 </thead>
                 <tbody>
+                    
+                    <?php if ( !empty($data) ) { ?>
+                    <?php $no = ($pages->getCurrentPage() * $pages->getPageSize()) + 1; ?>
                     <?php foreach ($data as $index => $proposal) { ?>
                         <tr class="gradeX">
                             <td class="aligncenter"><span class="center">
-                                    <input type="checkbox" />
+                                    <!--<input type="checkbox" /> -->
+                                    <?php echo $no ?>
                                 </span></td>
                             <td><a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/viewvalidasi/id/' . $proposal->id) ?>"><?php echo $proposal->nama_penelitian ?></a></td>
                             <td><?php echo $proposal->pegawai->nama ?></td>
-                            <td><?php echo (!empty($proposal->jenispenelitian) ? $proposal->jenispenelitian->nama:'') ?></td>
+                            <td>
+                                <?php 
+                                $textSumberDana ='';
+                                if ( !empty($proposal->sumberdana) ){
+                                    $textSumberDana = $proposal->sumberdana->name;
+                                    if ( !empty($proposal->detailsumberdana))
+                                        $textSumberDana .= ' - '.$proposal->detailsumberdana->nama;
+                                } 
+                                echo $textSumberDana;
+                                ?>
+                            </td>
                             <td><?php echo $proposal->tahun_anggaran ?></td>
                             <td><?php echo $proposal->getPosition() ?></td>
                             <td><span class="label <?php echo $StatusColor[$proposal->status]?>"><?php echo $proposal->getStatus() ?></span></td>
@@ -83,6 +97,9 @@ $StatusColor = array(   '0'=>'label-info',
 
                             </td>
                         </tr>
+                    <?php 
+                        $no++;
+                    } ?>
                     <?php } ?>
 
                 </tbody>

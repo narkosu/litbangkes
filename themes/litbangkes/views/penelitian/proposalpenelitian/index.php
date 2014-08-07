@@ -31,8 +31,7 @@ $StatusColor = array(   '0'=>'label-info',
                         <th class="head0 nosort center">No</th>
                         <th class="head0">Judul Penelitian</th>
                         <th class="head0 center">Diajukan oleh</th>
-                        
-                        <th class="head1 center">Jenis Penelitian</th>
+                        <th class="head1 center">Sumber Dana</th>
                         <th class="head0 center">Tahun Anggaran</th>
                         <th class="head0 center">Position</th>
                         <th class="head0 center">Status</th>
@@ -40,12 +39,25 @@ $StatusColor = array(   '0'=>'label-info',
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($data as $index => $proposal) { ?>
+                    <?php 
+                    $no = ($pages->getCurrentPage() * $pages->getPageSize()) + 1;
+                    if ( !empty($data) )
+                    foreach ($data as $index => $proposal) { ?>
                         <tr class="gradeX">
-                            <td class="center">&nbsp;</td>
+                            <td class="center"><?php echo $no ?></td>
                             <td><a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/view/id/' . $proposal->id) ?>"><?php echo $proposal->nama_penelitian ?></a></td>
                             <td class="center"><?php echo $proposal->pegawai->nama ?></td>
-                            <td class="center"><?php echo (!empty($proposal->jenispenelitian) ? $proposal->jenispenelitian->nama:'') ?></td>
+                            <td class="center">
+                                <?php 
+                                $textSumberDana ='';
+                                if ( !empty($proposal->sumberdana) ){
+                                    $textSumberDana = $proposal->sumberdana->name;
+                                    if ( !empty($proposal->detailsumberdana))
+                                        $textSumberDana .= ' - '.$proposal->detailsumberdana->nama;
+                                } 
+                                echo $textSumberDana;
+                                ?>
+                            </td>
                             
                             <td class="center"><?php echo $proposal->tahun_anggaran ?></td>
                             <td class="center"><?php echo ucfirst($proposal->getPosition()) ?></td>
@@ -60,22 +72,24 @@ $StatusColor = array(   '0'=>'label-info',
 
                             </td>
                         </tr>
-                    <?php } ?>
+                    <?php 
+                        $no++;
+                    } ?>
 
                 </tbody>
             </table>
-            <?php /*
-            <div class="dataTables_info" >
+            
+            <div class="pagination pagination-centered pagination-small" >
+                <?php
                 
-                //echo $pages->getPageCount();
                 $this->widget('CLinkPager', array(
                     'pages' => $pages,
                 ));
-                
+                ?>
             </div>
-						*/?>
+						
             
-              <div class="pagination pagination-centered pagination-small">
+            <?php /*  <div class="pagination pagination-centered pagination-small">
                 <ul>
                 	<li><a href="#">Previous</a></li>
                 	<li><a href="#">1</a></li>
@@ -87,7 +101,7 @@ $StatusColor = array(   '0'=>'label-info',
                   <li><a href="#">Next</a></li>
                 </ul>
               </div>
-              
+              */?>
             </div>
 
         <!-- dynamic table end -->                                             

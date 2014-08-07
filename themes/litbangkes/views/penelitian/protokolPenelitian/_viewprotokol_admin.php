@@ -2,6 +2,7 @@
 /* @var $this ProposalPenelitianController */
 /* @var $model ProposalPenelitian */
 /* @var $form CActiveForm */
+
 ?>
 
 <div id="tabs">
@@ -15,16 +16,18 @@
             <li><a href="#tabs-2">Validasi Oleh Kabid</a></li>
         <?php } ?>
 
-        <?php if ($this->AccessAsPPI() && $modelProtokol->isValidasiPPI()) { ?>
+        <?php 
+        
+        if ($this->AccessAsPPI() && $modelProtokol->isValidasiPPI()) { ?>
             <li><a href="#tabs-4">Validasi Oleh PPI</a></li>
-        <?php } ?>
+        <?php }?>
         <?php if ($this->AccessAsKapuslit() && $modelProtokol->isValidasiKapuslit()) { ?>
             <li><a href="#tabs-validasi-kaspulit">Validasi Oleh Kapuslit</a></li>
         <?php } ?>
         
         <?php if ($this->AccessAsKE() && $modelProtokol->isValidasiKE()) { ?>
             <li><a href="#tabs-6">Validasi Oleh Komisi Etik</a></li>
-        <?php } ?>
+        <?php }  ?>
          <?php /*   
             
         <?php if (Yii::app()->user->isKabid) { ?>

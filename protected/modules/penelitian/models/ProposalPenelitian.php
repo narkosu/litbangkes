@@ -101,6 +101,8 @@ class ProposalPenelitian extends CActiveRecord
         'isustrategis'=>array(self::BELONGS_TO,'IsuStrategis','isu_strategis'),
         'nmklien'=>array(self::BELONGS_TO,'Klien','klien'),
         'jenispenelitian'=>array(self::BELONGS_TO,'JenisPenelitian','jenis_penelitian_id'),
+        'sumberdana'=>array(self::BELONGS_TO,'SumberDana','sumber_dana'),
+        'detailsumberdana'=>array(self::BELONGS_TO,'DetailSumberDana','detail_sumber_dana'),
         'file'=>array(self::HAS_MANY,'FilePenelitian','proposal_id',
             'condition'=>'file.status = 1 AND file.group_file = "proposal" '),
 		);
@@ -213,12 +215,22 @@ class ProposalPenelitian extends CActiveRecord
               && $this->validasi->validasi_ppi == ProposalPenelitian::STATUS_SETUJU ) ;
   }
   
+  public function isValidasiKapuslitEditable(){
+    if ( empty( $this->validasi ) ) return false;
+      
+    return ( $this->validasi->validasi_kapuslit != ProposalPenelitian::STATUS_SETUJU && $this->validasi->validasi_kapuslit != ProposalPenelitian::STATUS_TOLAK ) ;
+  }
+  
   public function isValidasiKI(){
       if ( empty( $this->validasi ) ) return false;
       
       return ( $this->validasi->validasi_kapuslit == ProposalPenelitian::STATUS_SETUJU ) ;
   }
-  
+  public function isValidasiKIEditable(){
+    if ( empty( $this->validasi ) ) return false;
+      
+    return ( $this->validasi->validasi_ki != ProposalPenelitian::STATUS_SETUJU && $this->validasi->validasi_ki != ProposalPenelitian::STATUS_TOLAK ) ;
+  }
   public function isValidate(){
       return ($this->step == 1  );
   }

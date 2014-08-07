@@ -61,7 +61,7 @@ class ProtokolpenelitianController extends Controller {
         $newModelFile = new FilePenelitian;
         $modelProtokol = $this->loadModelByProposal($id);
         
-        $validasi = $modelProtokol->getValidasi(); 
+        
         //$validasiProtokol = $modelProtokol->getValidasi(); // hanya untuk PROTOKOL
         
         $groupFile = array();
@@ -82,8 +82,8 @@ class ProtokolpenelitianController extends Controller {
                     $groupFile[$_file->group_file] = $_file;
                 }
         }
-
-        //print_r($validasi);
+        $validasi = $modelProtokol->getValidasi(); 
+        
         $this->render('viewprotokol', array(
             'model' => $model,
             'newModelFile' => $newModelFile,
@@ -123,7 +123,8 @@ class ProtokolpenelitianController extends Controller {
         $modelProtokol = $this->loadModelByProposal($id);
         
         if (!empty($modelProtokol) ) {
-            $validasi = $modelProtokol->validasi;
+            
+            $validasi = $modelProtokol->getValidasi();
 
 
             if ( empty($validasi)){
@@ -134,6 +135,12 @@ class ProtokolpenelitianController extends Controller {
             
 
             $validasi = $validasi->saveValidation($_POST);
+            if ( isset($_POST) ) {
+                if ( $validasi->validasi_ke == ProposalPenelitian::STATUS_SETUJU ) {
+                    $model->step = 3;
+                    $model->save();
+                }
+            }
 
             if ( !empty($_POST) ){
                 if ( $validasi->validasi_ppi == 3 ){
@@ -172,7 +179,6 @@ class ProtokolpenelitianController extends Controller {
         }
 
         
-
         $this->render('viewvalidasi', array(
             'model' => $model,
             'newModelFile' => $newModelFile,
@@ -192,7 +198,7 @@ class ProtokolpenelitianController extends Controller {
         $folder = Yii::getPathOfAlias('webroot') . "/files";
 
         $model = ProposalPenelitian::model()->findByPk($id);
-
+        /* filter */
         if (empty($model)) {
             $this->redirect(array('/penelitian/proposalpenelitian'));
         }
@@ -202,9 +208,17 @@ class ProtokolpenelitianController extends Controller {
             $this->redirect(array('/penelitian/proposalpenelitian/view/id/' . $id));
         }
 
-        if ($validasi->validasi_ppi != 3) {
+        if ($model->step < 2 ) {
             $this->redirect(array('/penelitian/proposalpenelitian/view/id/' . $id));
         }
+        
+        if (  (!Yii::app()->user->isSuperAdmin && !Yii::app()->user->isAdmin)   ){
+            if ( Yii::app()->user->id != $model->user_id ) {
+                $this->redirect(array('/penelitian/proposalpenelitian/view/id/' . $id));
+                
+            }
+        }
+        /* ------filter ------*/
         
         $newModelFile = new FilePenelitian;
         $modelProtokol = $this->loadModelByProposal($id);
