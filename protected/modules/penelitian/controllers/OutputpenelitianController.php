@@ -59,15 +59,15 @@ class OutputpenelitianController extends Controller {
         $this->pageTitle = $model->nama_penelitian;
         
         $newModelFile = new FilePenelitian;
-        $modelProtokol = $this->loadModelByProposal($id);
+        $modelOutput = $this->loadModelByProposal($id);
         
         
         //$validasiProtokol = $modelProtokol->getValidasi(); // hanya untuk PROTOKOL
         
         $groupFile = array();
-        if (empty($modelProtokol)) {
+        if (empty($modelOutput)) {
 
-            /*$modelProtokol = new ProtokolPenelitian;
+            /*$modelOutput = new ProtokolPenelitian;
             $modelFile = new FilePenelitian;
             */
             
@@ -75,22 +75,22 @@ class OutputpenelitianController extends Controller {
             
         } else {
 
-            $modelFile = $modelProtokol->file;
+            $modelFile = $modelOutput->file;
             if (!empty($modelFile))
                 foreach ($modelFile as $_file) {
 
                     $groupFile[$_file->group_file] = $_file;
                 }
         }
-        $validasi = $modelProtokol->getValidasi(); 
+        
         
         $this->render('viewoutput', array(
             'model' => $model,
             'newModelFile' => $newModelFile,
             'groupFile' => $groupFile,
             'modelFile' => $modelFile,
-            'validasi' => $validasi,
-            'modelProtokol' => $modelProtokol,
+           
+            'modelOutput' => $modelOutput,
         ));
     }
     
