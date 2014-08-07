@@ -214,7 +214,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           <p>
               <label>Tanggal Pengajuan Etik</label>
               <span class="field">
-                <?php echo (!empty($modelProgress['triwulan1']->tanggal_pangajuan_etik) ? $modelProgress['triwulan1']->getPengajuanEtik() : '') ?>  
+                <?php echo (!empty($modelProgress['triwulan1']->tanggal_pangajuan_etik) ? $modelProgress['triwulan1']->getTanggalPengajuan() : '') ?>  
                  &nbsp; <small><em>mm / dd / yyyy</em></small>
               </span>
           </p>
@@ -276,7 +276,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           <p>
               <label>Tanggal Pengajuan Etik</label>
               <span class="field">
-                <?php echo (!empty($modelProgress['triwulan2']->tanggal_pangajuan_etik) ? $modelProgress['triwulan2']->getPengajuanEtik() : '') ?>  
+                <?php echo (!empty($modelProgress['triwulan2']->tanggal_pangajuan_etik) ? $modelProgress['triwulan2']->getTanggalPengajuan() : '') ?>  
                  &nbsp; <small><em>mm / dd / yyyy</em></small>
               </span>
           </p>
@@ -337,7 +337,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           <p>
               <label>Tanggal Pengajuan Etik</label>
               <span class="field">
-                <?php echo (!empty($modelProgress['triwulan3']->tanggal_pangajuan_etik) ? $modelProgress['triwulan3']->getPengajuanEtik() : '') ?>  
+                <?php echo (!empty($modelProgress['triwulan3']->tanggal_pangajuan_etik) ? $modelProgress['triwulan3']->getTanggalPengajuan() : '') ?>  
                  &nbsp; <small><em>mm / dd / yyyy</em></small>
               </span>
           </p>
@@ -398,7 +398,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           <p>
               <label>Tanggal Pengajuan Etik</label>
               <span class="field">
-                <?php echo (!empty($modelProgress['triwulan4']->tanggal_pangajuan_etik) ? $modelProgress['triwulan4']->getPengajuanEtik() : '') ?>  
+                <?php echo (!empty($modelProgress['triwulan4']->tanggal_pangajuan_etik) ? $modelProgress['triwulan4']->getTanggalPengajuan() : '') ?>  
                  &nbsp; <small><em>mm / dd / yyyy</em></small>
               </span>
           </p>

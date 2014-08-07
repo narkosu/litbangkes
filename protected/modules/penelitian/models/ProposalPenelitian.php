@@ -226,4 +226,22 @@ class ProposalPenelitian extends CActiveRecord
   public static function statusDocument($status){
       return ProposalPenelitian::model()->statusDocument[$status];
   }
+  
+  public function isOutputAvailable(){
+      $progress = ProgresPenelitian::model()->findALL("proposal_id = '". $this->id ."'");
+      if ( !empty($progress) ){
+          foreach ($progress as $progres){
+              $isProgress[] = $progres->periode;
+          }
+          if ( in_array('triwulan1', $isProgress) &&
+           in_array('triwulan2', $isProgress) &&
+           in_array('triwulan3', $isProgress) &&
+           in_array('triwulan4', $isProgress)
+              )
+            return true;
+      }
+      
+      
+      return false;
+  }
 }
