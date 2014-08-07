@@ -28,15 +28,20 @@ $this->breadcrumbs = array(
                             <li class="haslink"><a href="<?php echo Yii::app()->createUrl('penelitian/protokolpenelitian/viewvalidasi/id/' . $model->id) ?>">
                                     <span class="badge">2</span>&nbsp;&nbsp;Protokol Penelitian </a></li>
                             <?php if ( $model->step >= 3 ) { ?> 
-                                 <li class="haslink"><a href="<?php echo Yii::app()->createUrl('penelitian/progrespenelitian/view/id/'.$model->id)?>">
-                                    <span class="badge">3</span>&nbsp;&nbsp;Progress Penelitian</a>
-                                 </li>
+                                <li class="haslink"><a href="<?php echo Yii::app()->createUrl('penelitian/progrespenelitian/view/id/'.$model->id)?>">
+                                   <span class="badge">3</span>&nbsp;&nbsp;Progress Penelitian</a>
+                                </li>
                             <?php } else { ?>
-                                 <li ><a >
-                                    <span class="badge">3</span>&nbsp;&nbsp;Progress Penelitian</a>
-                                 </li>
+                                <li ><a >
+                                   <span class="badge">3</span>&nbsp;&nbsp;Progress Penelitian</a>
+                                </li>
                             <?php } ?>
-                            <li><a><span class="badge">4</span>&nbsp;&nbsp;Output Penelitian</a></li>
+                           <?php if ( $model->isOutputAvailable() ) { ?>
+                                <a href="<?php echo Yii::app()->createUrl('penelitian/outputpenelitian/view/id/'.$model->id)?>">
+                                    <span class="badge">4</span>&nbsp;&nbsp;Output Penelitian</a>
+                            <?php } else { ?>
+                                <a><span class="badge">4</span>&nbsp;&nbsp;Output Penelitian</a>
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>

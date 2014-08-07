@@ -1,6 +1,6 @@
 <?php
 
-class ProtokolpenelitianController extends Controller {
+class OutputpenelitianController extends Controller {
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -8,7 +8,7 @@ class ProtokolpenelitianController extends Controller {
      */
     public $layout = '//layouts/mainadmin';
     public $menuactive = 'penelitian';
-    public $pageTitle = 'Protokol Penelitian';
+    public $pageTitle = 'Output Penelitian';
 
     /**
      * @return array action filters
@@ -84,7 +84,7 @@ class ProtokolpenelitianController extends Controller {
         }
         $validasi = $modelProtokol->getValidasi(); 
         
-        $this->render('viewprotokol', array(
+        $this->render('viewoutput', array(
             'model' => $model,
             'newModelFile' => $newModelFile,
             'groupFile' => $groupFile,
@@ -203,14 +203,10 @@ class ProtokolpenelitianController extends Controller {
             $this->redirect(array('/penelitian/proposalpenelitian'));
         }
 
-        $validasi = ProposalValidasi::model()->find('proposal_id = ' . $id . ' and step = 1');
-        if (empty($validasi)) {
+        if ( !$model->isOutputAvailable() ) { 
             $this->redirect(array('/penelitian/proposalpenelitian/view/id/' . $id));
         }
 
-        if ($model->step < 2 ) {
-            $this->redirect(array('/penelitian/proposalpenelitian/view/id/' . $id));
-        }
         
         if (  (!Yii::app()->user->isSuperAdmin && !Yii::app()->user->isAdmin)   ){
             if ( Yii::app()->user->id != $model->user_id ) {
@@ -221,15 +217,15 @@ class ProtokolpenelitianController extends Controller {
         /* ------filter ------*/
         
         $newModelFile = new FilePenelitian;
-        $modelProtokol = $this->loadModelByProposal($id);
+        $modelOutput = $this->loadModelByProposal($id);
         $groupFile = array();
-        if (empty($modelProtokol)) {
+        if (empty($modelOutput)) {
 
-            $modelProtokol = new ProtokolPenelitian;
+            $modelOutput = new OutputPenelitian;
             $modelFile = new FilePenelitian;
         } else {
 
-            $modelFile = $modelProtokol->file;
+            $modelFile = $modelOutput->file;
             if (!empty($modelFile))
                 foreach ($modelFile as $_file) {
 
@@ -239,43 +235,51 @@ class ProtokolpenelitianController extends Controller {
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['ProtokolPenelitian'])) {
+        if (isset($_POST['OutputPenelitian'])) {
 
 
-            $modelProtokol->attributes = $_POST['ProtokolPenelitian'];
-            $modelProtokol->proposal_id = $id;
+            $modelOutput->attributes = $_POST['OutputPenelitian'];
+            $modelOutput->created_by = Yii::app()->user->id;
+            $modelOutput->created_at = date('Y-m-d H:i:s');
 
-            if ( $modelProtokol->save() ) {
-                
+            if ( $modelOutput->save() ) {
+                //print_r($_FILES);
                 foreach ($_FILES['FilePenelitian']['name']['filename'] as $group => $files) {
+                   
                     if (!empty($files)) {
+                        
                         $modelFile = new FilePenelitian;
-                        $modelFile->attributes = $files;
+                        $modelFile->proposal_id = $id;
 
                         $fileaja = CUploadedFile::getInstance($modelFile, 'filename[' . $group . ']');
 
                         if ($modelFile->save()) {
-
+                           
                             $time = time();
+                           
+                           
                             $newfilename = $group . '_' . $time . '.' . $fileaja->getExtensionName();
                             $extension = $fileaja->getExtensionName();
-
+                            
                             $fileaja->saveAs($folder . '/' . $newfilename);
                             $modelFile->filename = $newfilename;
                             $modelFile->proposal_id = $id;
-                            $modelFile->step = $model->step;
+                            $modelFile->step = ProposalPenelitian::OUTPUT;
                             $modelFile->group_file = $group;
                             $modelFile->version = $time;
                             $modelFile->status = 1;
                             $modelFile->uploaded_by = Yii::app()->user->id;
                             $modelFile->created_at = date('Y-m-d H:i:s');
-                            $modelFile->save();
+                            if ( !$modelFile->save() )
+                                print_r($modelFile->getErrors());
                             //      $this->redirect(array('view','id'=>$model->id));
                         }
                     }
+                    
                 }
-                $proposal = $modelProtokol->proposal;
-                $proposal->step = ProposalPenelitian::ISPROTOKOL;
+              
+                $proposal = $modelOutput->proposal;
+                $proposal->step = ProposalPenelitian::OUTPUT;
                 $proposal->save();
                 
                 $this->refresh();
@@ -288,7 +292,7 @@ class ProtokolpenelitianController extends Controller {
             'newModelFile' => $newModelFile,
             'groupFile' => $groupFile,
             'modelFile' => $modelFile,
-            'modelProtokol' => $modelProtokol,
+            'modelOutput' => $modelOutput,
         ));
     }
 
@@ -373,7 +377,7 @@ class ProtokolpenelitianController extends Controller {
      * @param integer the ID of the model to be loaded
      */
     public function loadModelByProposal($id) {
-        $model = ProtokolPenelitian::model()->find('proposal_id = :pid', array('pid' => $id));
+        $model = OutputPenelitian::model()->find('proposal_id = :pid', array('pid' => $id));
         /*if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
          * 

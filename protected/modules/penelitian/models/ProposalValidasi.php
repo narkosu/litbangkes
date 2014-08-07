@@ -127,7 +127,7 @@ class ProposalValidasi extends CActiveRecord
   public function saveValidation($post){
       if(isset($post['ProposalValidasi']))
         {
-
+          
           $this->attributes=$post['ProposalValidasi'];
           if ( $this->isNewRecord )
             $this->created_at = date('Y-m-d H:i:s');
@@ -136,59 +136,54 @@ class ProposalValidasi extends CActiveRecord
           $this->created_by = Yii::app()->user->id;
           if($this->save()) {
               /* save for history */
+              if ( $post['group_validasi'] == 'kabid'){
+                if ( $this->validasi_kabid == 3 ) { // disetujui  
+                    $this->proposal->status = $this->validasi_kabid; // disetujui
+                    
+                }
+                
+              }
+
+             
+              if ( $post['group_validasi'] == 'ppi'){
+                $this->proposal->status = $this->validasi_ppi;
+                
+              }
+
+              if ( $post['group_validasi'] == 'kapuslit'){
+                $this->proposal->status = $this->validasi_kapuslit;
+                
+              }
+
+              if ( $post['group_validasi'] == 'ki'){
+                $this->proposal->status = $this->validasi_ki;
+                
+              }
+              if ( $post['group_validasi'] == 'ke'){
+                $this->proposal->status = $this->validasi_ke;
+                
+                //$validasiHistory->value_validasi = $this->validasi_ki;
+              }
+              $this->proposal->save();
+              
+            
               
               $validasiHistory = new ProposalValidasiHistory;
               $validasiHistory->proposal_id = $this->proposal_id;
               $validasiHistory->step = $this->step;
               $validasiHistory->level_validasi = $post['group_validasi'];
               $validasiHistory->value_validasi = $post['ProposalValidasi']['validasi_'.$validasiHistory->level_validasi];
-              /*if ( $post['group_validasi'] == 'kabid'){
-                if ( $this->validasi_kasubbid == 3 ) { // disetujui  
-                    $this->proposal->status = 3; // disetujui
-                    $this->proposal->save();
-                }
-                
-                $validasiHistory->value_validasi = $this->validasi_kabid;
-              }
-
-              if ( $post['group_validasi'] == 'kasubbid'){
-                if ( $this->validasi_kabid == 3 ) { // disetujui  
-                    $this->proposal->status = 3; // disetujui
-                    $this->proposal->save();
-                }
-                $validasiHistory->value_validasi = $this->validasi_kasubbid;
-              }
-
-              if ( $post['group_validasi'] == 'ppi'){
-                $this->proposal->status = $this->validasi_ppi;
-                $this->proposal->save();
-                $validasiHistory->value_validasi = $this->validasi_ppi;
-              }
-
-              if ( $post['group_validasi'] == 'kapuslit'){
-                $this->proposal->status = $this->validasi_kapuslit;
-                $this->proposal->save();
-                $validasiHistory->value_validasi = $this->validasi_kapuslit;
-              }
-
-              if ( $post['group_validasi'] == 'ki'){
-                $this->proposal->status = $this->validasi_ki;
-                $this->proposal->save();
-                $validasiHistory->value_validasi = $this->validasi_ki;
-              }
-              if ( $post['group_validasi'] == 'ke'){
-                $this->proposal->status = $this->validasi_ke;
-                $this->proposal->save();
-                $validasiHistory->value_validasi = $this->validasi_ki;
-              }*/
+              
               
               $validasiHistory->alasan = $post['ProposalValidasi']['alasan'];
               $validasiHistory->created_at = date('Y-m-d H:i:s');
               $validasiHistory->created_by = Yii::app()->user->id;
               $validasiHistory->save();
+              
               return $this;
           }
         }
         return $this;
+        
   }
 }

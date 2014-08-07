@@ -118,6 +118,12 @@ class ProtokolPenelitian extends CActiveRecord
       return ( $this->id ) ;
   }
   
+  public function isValidasiKasubbidEditable(){
+    if ( empty( $this->validasi ) ) return true;
+    return ( ( $this->validasi->validasi_kasubbid != ProposalPenelitian::STATUS_SETUJU 
+                    && $this->validasi->validasi_kasubbid != ProposalPenelitian::STATUS_TOLAK )  ) ;
+  }
+  
    public function isValidasiKabid(){
       if ( empty( $this->validasi ) ) return false;
       
@@ -188,7 +194,8 @@ class ProtokolPenelitian extends CActiveRecord
   }
   
   public function getValidasi(){
-      if ( empty($this->validasiProtokol) ) {
+      //if (  )
+      if ( empty($this->validasiProtokol) && !empty($this->proposal_id ) ) {
         $this->validasiProtokol = ProposalValidasi::model()->find('proposal_id = '.$this->proposal_id.' AND step = 2');
       }
       

@@ -1,24 +1,20 @@
 <?php
 
 /**
- * This is the model class for table "{{file_penelitian}}".
+ * This is the model class for table "{{output_penelitian}}".
  *
- * The followings are the available columns in table '{{file_penelitian}}':
+ * The followings are the available columns in table '{{output_penelitian}}':
  * @property string $id
  * @property integer $proposal_id
- * @property integer $step
- * @property string $group_file
- * @property integer $version
- * @property string $filename
- * @property integer $uploaded_by
  * @property string $created_at
+ * @property integer $created_by
  */
-class FilePenelitian extends CActiveRecord
+class OutputPenelitian extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return FilePenelitian the static model class
+	 * @return OutputPenelitian the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -30,7 +26,7 @@ class FilePenelitian extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{file_penelitian}}';
+		return '{{output_penelitian}}';
 	}
 
 	/**
@@ -41,13 +37,11 @@ class FilePenelitian extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('proposal_id, step, version, uploaded_by', 'numerical', 'integerOnly'=>true),
-			array('group_file', 'length', 'max'=>255),
-			array('filename', 'file', 'allowEmpty'=>true, 'types'=>'pdf, xls, xlsx'),
+			array('proposal_id, created_by', 'numerical', 'integerOnly'=>true),
 			array('created_at', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, proposal_id, step, group_file, version, filename, uploaded_by, created_at', 'safe', 'on'=>'search'),
+			array('id, proposal_id, created_at, created_by', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,6 +53,15 @@ class FilePenelitian extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+        'file'=>array(self::HAS_MANY,'FilePenelitian','',
+                        'on' => 'proposal_id = file.proposal_id',
+                        'condition'=>"file.status = 1 && 
+                            ( file.group_file = 'output_laporan' || 
+                                file.group_file = 'output_raw_data' || 
+                                file.group_file = 'output_draft_artikel' || 
+                                file.group_file = 'output_penelitian'
+                                )"),
+        'proposal'=>array(self::BELONGS_TO,'ProposalPenelitian','proposal_id')
 		);
 	}
 
@@ -70,12 +73,8 @@ class FilePenelitian extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'proposal_id' => 'Proposal',
-			'step' => 'Step',
-			'group_file' => 'Group File',
-			'version' => 'Version',
-			'filename' => 'Outline / Draft Proposal',
-			'uploaded_by' => 'Uploaded By',
 			'created_at' => 'Created At',
+			'created_by' => 'Created By',
 		);
 	}
 
@@ -92,12 +91,8 @@ class FilePenelitian extends CActiveRecord
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('proposal_id',$this->proposal_id);
-		$criteria->compare('step',$this->step);
-		$criteria->compare('group_file',$this->group_file,true);
-		$criteria->compare('version',$this->version);
-		$criteria->compare('filename',$this->filename,true);
-		$criteria->compare('uploaded_by',$this->uploaded_by);
 		$criteria->compare('created_at',$this->created_at,true);
+		$criteria->compare('created_by',$this->created_by);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

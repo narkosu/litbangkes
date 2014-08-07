@@ -216,7 +216,27 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
             <?php
               }
         } ?>
-        
+    
+    <div class="par">
+        <label>Sumber Dana</label>  
+        <span class="field">
+            <?php if ( !empty($model->sumberdana) ) { ?>
+            <?php echo $model->sumberdana->name; ?>
+            <?php } ?>
+        </span>
+
+    </div>
+    
+    <div class="par">
+        <label>Detail Sumber Dana</label>  
+        <span class="field">
+            <?php if ( !empty($model->detailsumberdana) ) { ?>
+            <?php echo $model->detailsumberdana->nama; ?>
+            <?php } ?>
+        </span>
+
+    </div>
+    
     <div class="par">
         <label>Tahun Anggaran</label>  
         <span class="field">
