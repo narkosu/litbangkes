@@ -91,6 +91,7 @@ class ProtokolpenelitianController extends Controller {
             'modelFile' => $modelFile,
             'validasi' => $validasi,
             'modelProtokol' => $modelProtokol,
+            'pegawai'   => $model->pegawai
         ));
     }
     

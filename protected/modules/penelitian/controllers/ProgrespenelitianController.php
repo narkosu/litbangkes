@@ -54,6 +54,9 @@ class ProgrespenelitianController extends Controller
 	public function actionView($id)
 	{
     $model = ProposalPenelitian::model()->findByPk($id);
+    if ( $model->user_id == Yii::app()->user->id ){
+         $this->redirect(array('/penelitian/progrespenelitian/create/id/' . $id));
+    }
 		//$model=new ProgresPenelitian;
     $this->pageTitle  = $model->nama_penelitian;
     $this->menuactive  = 'penelitian';

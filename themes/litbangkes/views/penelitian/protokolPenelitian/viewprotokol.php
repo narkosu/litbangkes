@@ -58,6 +58,8 @@ $this->menu=array(
                               'newModelFile'=>$newModelFile, 
                               'groupFile' => $groupFile,    
                               'modelProtokol' => $modelProtokol,
+                                'validasi'  => $validasi,
+                                'pegawai'=> $pegawai
                         )); ?>
                   </div>
             <?php } else { ?>
