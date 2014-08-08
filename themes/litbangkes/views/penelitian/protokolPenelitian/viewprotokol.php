@@ -27,9 +27,25 @@ $this->menu=array(
                       <span class="badge">1</span>&nbsp;&nbsp;Proposal Penelitian <i class="iconfa-ok"></i></a></li>
                     <li class="active"><a href="<?php echo Yii::app()->createUrl('penelitian/protokolpenelitian/create/id/'.$model->id)?>">
                       <span class="badge badge-success">2</span>&nbsp;&nbsp;Protokol Penelitian </a></li>
-                    <li class="haslink"><a href="<?php echo Yii::app()->createUrl('penelitian/progrespenelitian/create/id/'.$model->id)?>">
-                      <span class="badge">3</span>&nbsp;&nbsp;Progress Penelitian</a></li>
-                    <li><a><span class="badge">4</span>&nbsp;&nbsp;Output Penelitian</a></li>
+                    <?php if ( $model->step >= 3 ) { ?> 
+                        <li class="haslink"><a href="<?php echo Yii::app()->createUrl('penelitian/progrespenelitian/view/id/'.$model->id)?>">
+                           <span class="badge">3</span>&nbsp;&nbsp;Progress Penelitian</a>
+                        </li>
+                    <?php } else { ?>
+                        <li ><a >
+                           <span class="badge">3</span>&nbsp;&nbsp;Progress Penelitian</a>
+                        </li>
+                    <?php } ?>
+                   <?php if ( $model->isOutputAvailable() ) { ?>
+                        <li class="haslink">
+                        <a href="<?php echo Yii::app()->createUrl('penelitian/outputpenelitian/view/id/'.$model->id)?>">
+                            <span class="badge ">4</span>&nbsp;&nbsp;Output Penelitian</a>
+                        </li>    
+                    <?php } else { ?>
+                        <li>
+                        <a><span class="badge">4</span>&nbsp;&nbsp;Output Penelitian</a>
+                        </li>
+                    <?php } ?>
                   </ul>
                 </div>
               </div>
@@ -42,6 +58,8 @@ $this->menu=array(
                               'newModelFile'=>$newModelFile, 
                               'groupFile' => $groupFile,    
                               'modelProtokol' => $modelProtokol,
+                                'validasi'  => $validasi,
+                                'pegawai'=> $pegawai
                         )); ?>
                   </div>
             <?php } else { ?>

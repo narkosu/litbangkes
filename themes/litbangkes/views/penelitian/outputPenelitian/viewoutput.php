@@ -52,25 +52,25 @@ $this->menu=array(
 
                 <?php if ( Yii::app()->user->isSuperAdmin ) {?>
                   <div class="widgetcontent bordered shadowed nopadding">
-                      <?php echo $this->renderPartial('_viewprotokol', 
+                      <?php echo $this->renderPartial('_viewoutput', 
                         array('model'=>$model, 
                               'modelFile' => $modelFile,
                               'newModelFile'=>$newModelFile, 
                               'groupFile' => $groupFile,    
-                              'modelProtokol' => $modelProtokol,
+                              'modelProtokol' => $modelOutput,
                         )); ?>
                   </div>
             <?php } else { ?>
                   <h4 class="widgettitle nomargin shadowed">Update Protokol Penelitian : <?php echo $model->nama_penelitian?></h4>
 
                   <div class="widgetcontent bordered shadowed nopadding">
-                     <?php echo $this->renderPartial('_viewprotokol', 
+                     <?php echo $this->renderPartial('_viewoutput', 
                         array('model'=>$model, 
                               'modelFile' => $modelFile,
                               'newModelFile'=>$newModelFile, 
                               'groupFile' => $groupFile,
                               'validasi' => $validasi,  
-                              'modelProtokol' => $modelProtokol,
+                              'modelProtokol' => $modelOutput,
                         )); ?>
                   </div><!--widgetcontent-->
             <?php } ?>

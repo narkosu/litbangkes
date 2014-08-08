@@ -54,10 +54,17 @@ class ProgrespenelitianController extends Controller
 	public function actionView($id)
 	{
     $model = ProposalPenelitian::model()->findByPk($id);
+    if ( $model->user_id == Yii::app()->user->id ){
+         $this->redirect(array('/penelitian/progrespenelitian/create/id/' . $id));
+    }
 		//$model=new ProgresPenelitian;
     $this->pageTitle  = $model->nama_penelitian;
     $this->menuactive  = 'penelitian';
-    $modelFile = $model->file;
+    $modelFile = $model->fileProgress;
+    
+    foreach ($modelFile as $f){
+        $groupFile[$f->group_file] = $f;
+    } 
     
     $modelProgress['triwulan1'] = $this->loadModelByProposalId($id,'triwulan1');
     $modelProgress['triwulan2'] = $this->loadModelByProposalId($id,'triwulan2');
@@ -70,7 +77,8 @@ class ProgrespenelitianController extends Controller
 		$this->render('view',array(
 			'model'=>$model,
 			'modelProgress' => $modelProgress,
-      'modelFile'=>  $modelFile
+      'modelFile'=>  $modelFile,
+      'groupFile'=>$groupFile
 		));
 	}
 
@@ -80,6 +88,9 @@ class ProgrespenelitianController extends Controller
 	 */
 	public function actionCreate($id)
 	{
+    $modelProgressSaved = false;  
+    $folder = Yii::getPathOfAlias('webroot') . "/files";
+    
     $model = ProposalPenelitian::model()->findByPk($id);
     if ($model->step < ProposalPenelitian::PROGRES ){
         $this->redirect(array('/penelitian/proposalpenelitian/view/id/' . $id));
@@ -89,8 +100,12 @@ class ProgrespenelitianController extends Controller
 		//$model=new ProgresPenelitian;
     $this->pageTitle  = $model->nama_penelitian;
     $this->menuactive  = 'penelitian';
-    $modelFile = $model->file;
-     
+    $modelFile = $model->fileProgress;
+    
+    foreach ($modelFile as $f){
+        $groupFile[$f->group_file] = $f;
+    } 
+    
    /* triwulan1 */
     $modelProgress['triwulan1'] = $this->loadModelByProposalId($id,'triwulan1');
     if (empty($modelProgress['triwulan1']))
@@ -105,13 +120,15 @@ class ProgrespenelitianController extends Controller
       if (!empty($_POST['ProgresPenelitian']['triwulan1']['tanggal_pangajuan_etik'])){
       
         list($mo,$da,$ya) = explode('/',$_POST['ProgresPenelitian']['triwulan1']['tanggal_pangajuan_etik']);
-        echo $modelProgress['triwulan1']->tanggal_pangajuan_etik = $ya.'-'.$mo.'-'.$da;
+        $modelProgress['triwulan1']->tanggal_pangajuan_etik = $ya.'-'.$mo.'-'.$da;
       }
       
       $modelProgress['triwulan1']->proposal_id = $id;
 			
-      if($modelProgress['triwulan1']->save())
-				$this->redirect(array('create','id'=>$model->id));
+      if($modelProgress['triwulan1']->save()){
+         $modelProgressSaved = true;
+      }
+				//$this->redirect(array('create','id'=>$model->id));
 		}
      
     /* triwulan1 */
@@ -131,7 +148,7 @@ class ProgrespenelitianController extends Controller
       
       $modelProgress['triwulan2']->proposal_id = $id;
 			if($modelProgress['triwulan2']->save())
-         $this->redirect(array('create','id'=>$model->id));
+         $modelProgressSaved = true;
 		}
     
     /* triwulan1 */
@@ -150,7 +167,7 @@ class ProgrespenelitianController extends Controller
       }
       $modelProgress['triwulan3']->proposal_id = $id;
 			if($modelProgress['triwulan3']->save())
-				$this->redirect(array('create','id'=>$model->id));
+				$modelProgressSaved = true;
 		}
     
     /* triwulan4 */
@@ -169,13 +186,51 @@ class ProgrespenelitianController extends Controller
       }
       $modelProgress['triwulan4']->proposal_id = $id;
 			if($modelProgress['triwulan4']->save())
-				$this->redirect(array('create','id'=>$model->id));
+				$modelProgressSaved = true;
 		}
     
+    if ( $modelProgressSaved ){
+        if (!empty($_FILES['FilePenelitian']['name']['filename']))
+            foreach ($_FILES['FilePenelitian']['name']['filename'] as $group => $files) {
+
+              if (!empty($files)) {
+
+                  $modelFile = new FilePenelitian;
+                  $modelFile->proposal_id = $id;
+
+                  $fileaja = CUploadedFile::getInstance($modelFile, 'filename[' . $group . ']');
+
+                  if ($modelFile->save()) {
+
+                      $time = time();
+                      $newfilename = $group . '_' . $time . '.' . $fileaja->getExtensionName();
+                      $extension = $fileaja->getExtensionName();
+
+                      $fileaja->saveAs($folder . '/' . $newfilename);
+                      $modelFile->filename = $newfilename;
+                      $modelFile->proposal_id = $id;
+                      $modelFile->step = ProposalPenelitian::PROGRES;
+                      $modelFile->group_file = $group;
+                      $modelFile->version = $time;
+                      $modelFile->status = 1;
+                      $modelFile->uploaded_by = Yii::app()->user->id;
+                      $modelFile->created_at = date('Y-m-d H:i:s');
+                      if ( !$modelFile->save() )
+                          print_r($modelFile->getErrors());
+                      //      $this->redirect(array('view','id'=>$model->id));
+                  }
+              }
+            }
+            $this->refresh();
+    }
+    
+    $newModelFile = new FilePenelitian;
 		$this->render('create',array(
 			'model'=>$model,
 			'modelProgress' => $modelProgress,
-      'modelFile'=>  $modelFile
+      'modelFile'=>  $modelFile,
+      'newModelFile'=> $newModelFile,
+      'groupFile'=>$groupFile
 		));
 	}
 

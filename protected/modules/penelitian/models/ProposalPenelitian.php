@@ -105,6 +105,14 @@ class ProposalPenelitian extends CActiveRecord
         'detailsumberdana'=>array(self::BELONGS_TO,'DetailSumberDana','detail_sumber_dana'),
         'file'=>array(self::HAS_MANY,'FilePenelitian','proposal_id',
             'condition'=>'file.status = 1 AND file.group_file = "proposal" '),
+        'fileProgress'=>array(self::HAS_MANY,'FilePenelitian','proposal_id',
+                        
+                        'condition'=>"fileProgress.status = 1 AND ( fileProgress.group_file = 'progress_ijin_etik_triwulan1' 
+                                OR fileProgress.group_file = 'progress_ijin_etik_triwulan2' 
+                                OR fileProgress.group_file = 'progress_ijin_etik_triwulan3' 
+                                OR fileProgress.group_file = 'progress_ijin_etik_triwulan4')"),
+                
+
 		);
 	}
 

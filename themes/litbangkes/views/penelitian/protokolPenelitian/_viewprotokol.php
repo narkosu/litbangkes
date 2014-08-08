@@ -50,29 +50,6 @@
                 :
                 
                 <!-- validasi Kabid -->
-                <?php if (!empty($validasi->validasi_kabid)) { ?>
-                    <?php
-                    if ($validasi->validasi_kabid == 3) {
-                        $labelValidasi = 'label-success';
-                    } else if ($validasi->validasi_kabid == 2) { // revisi
-                        $labelValidasi = 'label-success';
-                    } else if ($validasi->validasi_kabid == 4) { //ditolak
-                        $labelValidasi = 'label-important';
-                    } else if ($model->status == 1) { //progres
-                        $labelValidasi = 'label-warning';
-                    } else {
-                        $labelValidasi = 'label-info';
-                    }
-                    ?>
-                    <span class="label <?php echo $labelValidasi ?>">
-                        <?php
-                        echo $validasi->getStatus('validasi_kabid');
-                        ?>
-                        Kabid
-                    </span>
-                <?php } ?>
-                
-                <!-- validasi Kabid -->
                 <?php if (!empty($validasi->validasi_kasubbid)) { ?>
                     <?php
                     if ($validasi->validasi_kasubbid == 3) {
@@ -92,6 +69,29 @@
                         echo $validasi->getStatus('validasi_kasubbid');
                         ?>
                         Kasubbid
+                    </span>
+                <?php } ?>
+                
+                <!-- validasi Kabid -->
+                <?php if (!empty($validasi->validasi_kabid)) { ?>
+                    <?php
+                    if ($validasi->validasi_kabid == 3) {
+                        $labelValidasi = 'label-success';
+                    } else if ($validasi->validasi_kabid == 2) { // revisi
+                        $labelValidasi = 'label-success';
+                    } else if ($validasi->validasi_kabid == 4) { //ditolak
+                        $labelValidasi = 'label-important';
+                    } else if ($model->status == 1) { //progres
+                        $labelValidasi = 'label-warning';
+                    } else {
+                        $labelValidasi = 'label-info';
+                    }
+                    ?>
+                    <span class="label <?php echo $labelValidasi ?>">
+                        <?php
+                        echo $validasi->getStatus('validasi_kabid');
+                        ?>
+                        Kabid
                     </span>
                 <?php } ?>
                 
@@ -117,13 +117,13 @@
                         PPI
                     </span>
                 <?php } ?>
-                <?php if (!empty($validasi->validasi_ki)) { ?>
+                <?php if (!empty($validasi->validasi_kapuslit)) { ?>
                     <?php
-                    if ($validasi->validasi_ki == 3) {
+                    if ($validasi->validasi_kapuslit == 3) {
                         $labelValidasi = 'label-success';
-                    } else if ($validasi->validasi_ki == 2) { // revisi
+                    } else if ($validasi->validasi_kapuslit == 2) { // revisi
                         $labelValidasi = 'label-success';
-                    } else if ($validasi->validasi_ki == 4) { //ditolak
+                    } else if ($validasi->validasi_kapuslit == 4) { //ditolak
                         $labelValidasi = 'label-important';
                     } else if ($model->status == 1) { //progres
                         $labelValidasi = 'label-warning';
@@ -133,9 +133,9 @@
                     ?>
                     <span class="label <?php echo $labelValidasi ?>">
                         <?php
-                        echo $validasi->getStatus('validasi_ki');
+                        echo $validasi->getStatus('validasi_kapuslit');
                         ?>
-                        KI
+                        Kapuslit
                     </span>
                 <?php } ?>
 

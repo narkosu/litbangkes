@@ -24,7 +24,8 @@
         </div>
 
         <?php echo $this->renderPartial('_view', array('model'=>$model, 'modelProgress' => $modelProgress,
-            'modelFile' => $modelFile)); ?>                    
+            'modelFile' => $modelFile,
+            'groupFile'=>$groupFile)); ?>                    
 
     </div><!--span8-->
 
