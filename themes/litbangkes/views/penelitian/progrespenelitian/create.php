@@ -26,7 +26,10 @@
         </div>
 
         <?php echo $this->renderPartial('_form', array('model'=>$model, 'modelProgress' => $modelProgress,
-            'modelFile' => $modelFile)); ?>                    
+            'modelFile' => $modelFile,
+            'newModelFile'=> $newModelFile,
+            'groupFile'=>$groupFile
+                )); ?>                    
 
     </div><!--span8-->
 
