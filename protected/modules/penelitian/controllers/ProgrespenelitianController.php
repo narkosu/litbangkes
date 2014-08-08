@@ -61,7 +61,8 @@ class ProgrespenelitianController extends Controller
     $this->pageTitle  = $model->nama_penelitian;
     $this->menuactive  = 'penelitian';
     $modelFile = $model->fileProgress;
-    
+    $groupFile = array();
+    if ( !empty($modelFile) )
     foreach ($modelFile as $f){
         $groupFile[$f->group_file] = $f;
     } 
@@ -101,7 +102,8 @@ class ProgrespenelitianController extends Controller
     $this->pageTitle  = $model->nama_penelitian;
     $this->menuactive  = 'penelitian';
     $modelFile = $model->fileProgress;
-    
+    $groupFile = array();
+    if ( !empty($modelFile) )
     foreach ($modelFile as $f){
         $groupFile[$f->group_file] = $f;
     } 
