@@ -220,9 +220,14 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           </p>
           
           <p>
-              <label>Ijin Etik <small>Upload file dalam bentuk PDF</small></label>
+              <label>File Ijin Etik</label>
               <span class="field">
-                <?php //echo $form->fileField($modelProgress['triwulan1'],'file_ijin_etik',array('class'=>'uniform-file')); ?>
+                <?php if ( !empty($groupFile['progress_ijin_etik_triwulan1']) ) { ?>
+                 <a href="<?php echo Yii::app()->createUrl('penelitian/file/download')
+                         .'?file='.$groupFile['progress_ijin_etik_triwulan1']->filename ?>">
+                <?php echo $groupFile['progress_ijin_etik_triwulan1']->filename?>
+                 </a>    
+                <?php } ?>
               </span>
           </p>
 
@@ -282,9 +287,14 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           </p>
           
           <p>
-              <label>Ijin Etik <small>Upload file dalam bentuk PDF</small></label>
+              <label>File Ijin Etik</label>
               <span class="field">
-                <?php //echo $form->fileField($modelProgress['triwulan2'],'file_ijin_etik',array('class'=>'uniform-file')); ?>
+                <?php if ( !empty($groupFile['progress_ijin_etik_triwulan2']) ) { ?>
+                 <a href="<?php echo Yii::app()->createUrl('penelitian/file/download')
+                         .'?file='.$groupFile['progress_ijin_etik_triwulan2']->filename ?>">
+                <?php echo $groupFile['progress_ijin_etik_triwulan2']->filename?>
+                 </a>    
+                <?php } ?>
               </span>
           </p>
 
@@ -343,9 +353,14 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           </p>
           
           <p>
-              <label>Ijin Etik <small>Upload file dalam bentuk PDF</small></label>
+              <label>File Ijin Etik </label>
               <span class="field">
-                <?php //echo $form->fileField($modelProgress['triwulan3'],'file_ijin_etik',array('class'=>'uniform-file')); ?>
+               <?php if ( !empty($groupFile['progress_ijin_etik_triwulan3']) ) { ?>
+                 <a href="<?php echo Yii::app()->createUrl('penelitian/file/download')
+                         .'?file='.$groupFile['progress_ijin_etik_triwulan3']->filename ?>">
+                <?php echo $groupFile['progress_ijin_etik_triwulan3']->filename?>
+                 </a>    
+                <?php } ?>
               </span>
           </p>
 
@@ -404,9 +419,13 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
           </p>
           
           <p>
-              <label>Ijin Etik <small>Upload file dalam bentuk PDF</small></label>
+              <label>File Ijin Etik </label>
               <span class="field">
-                <?php //echo $form->fileField($modelProgress['triwulan4'],'file_ijin_etik',array('class'=>'uniform-file')); ?>
+                <?php if ( !empty($groupFile['progress_ijin_etik_triwulan4']) ) { ?>
+                 <a href="<?php echo Yii::app()->createUrl('penelitian/file/download').'?file='.$groupFile['progress_ijin_etik_triwulan4']->filename ?>">
+                <?php echo $groupFile['progress_ijin_etik_triwulan4']->filename?>
+                 </a>    
+                <?php } ?>
               </span>
           </p>
 

@@ -60,7 +60,11 @@ class ProgrespenelitianController extends Controller
 		//$model=new ProgresPenelitian;
     $this->pageTitle  = $model->nama_penelitian;
     $this->menuactive  = 'penelitian';
-    $modelFile = $model->file;
+    $modelFile = $model->fileProgress;
+    
+    foreach ($modelFile as $f){
+        $groupFile[$f->group_file] = $f;
+    } 
     
     $modelProgress['triwulan1'] = $this->loadModelByProposalId($id,'triwulan1');
     $modelProgress['triwulan2'] = $this->loadModelByProposalId($id,'triwulan2');
@@ -73,7 +77,8 @@ class ProgrespenelitianController extends Controller
 		$this->render('view',array(
 			'model'=>$model,
 			'modelProgress' => $modelProgress,
-      'modelFile'=>  $modelFile
+      'modelFile'=>  $modelFile,
+      'groupFile'=>$groupFile
 		));
 	}
 
@@ -99,7 +104,6 @@ class ProgrespenelitianController extends Controller
     
     foreach ($modelFile as $f){
         $groupFile[$f->group_file] = $f;
-        
     } 
     
    /* triwulan1 */
