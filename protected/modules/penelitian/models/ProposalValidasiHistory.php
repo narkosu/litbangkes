@@ -58,9 +58,7 @@ class ProposalValidasiHistory extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
         'proposal'=>array(self::BELONGS_TO,'ProposalPenelitian','proposal_id'),
-        'proposalProtokol'=>array(self::BELONGS_TO,'ProtokolPenilaian','',
-                                    'on' => 'proposal_id = proposalProtokol.proposal_id'
-                                    ),
+        'oleh'=>array(self::BELONGS_TO,'User','created_by'),
 		);
 	}
 

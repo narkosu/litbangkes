@@ -42,7 +42,7 @@ class DiseminasiPenelitian extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('proposal_id, , media, created_by', 'numerical', 'integerOnly'=>true),
-			array('tanggal, tempat, keterangan, created_at', 'safe'),
+			array('tanggal,media_url, tempat, keterangan, created_at', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, proposal_id, tanggal, tempat, media, keterangan, created_at, created_by', 'safe', 'on'=>'search'),

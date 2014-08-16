@@ -18,9 +18,20 @@
 			  <span class="field">
             <?php 
             $listMedia = array('1'=>'Media Cetak', '2' => 'Media Elektronik', '3'=> 'Media Internet', '4'=>'Lain -lain');
-            echo $form->dropDownList($modelDiseminasi, 'media', $listMedia, array('empty' => 'Pilih Media','class'=>"uniformselect"			)); ?>
+            echo $form->dropDownList($modelDiseminasi, 'media', $listMedia, 
+                    array('empty' => 'Pilih Media','class'=>"uniformselect",
+                        'onChange'=> 'javascript:media()')
+                    ); ?>
             </span>
 			</p>
+      
+      <p id="blockmediaurl" style="<?php echo ($modelDiseminasi->media == 3 ) ? 'display:block' : 'display:none'?>">
+			  <label>URL Media</label>
+			  <span class="field">
+            <?php echo $form->textField($modelDiseminasi, 'media_url', array('class'=>'input-large')); ?> 
+        </span>
+			</p>
+      
 			<p>
 				<label>Tanggal</label>
 				<span class="field">
@@ -41,7 +52,7 @@
 			<p>
 				<label>Keterangan</label>
 				<span class="field">
-				<?php echo $form->textarea($modelDiseminasi,'keterangan'); ?>
+				<?php echo $form->textarea($modelDiseminasi,'keterangan',array('cols'=>'80','rows'=>3,'class'=>'span9')); ?>
         </span>
 			</p>
 			
@@ -91,7 +102,11 @@
                    foreach ($data as $index => $diseminasi) { ?>
                        <tr class="gradeX">
                            <td class="center"><?php echo $no ?></td>
-                           <td><?php echo $diseminasi->relmedia->nama ?></td>
+                           <td>
+                               <label><?php echo $diseminasi->relmedia->nama ?></label>
+                               <small><?php echo $diseminasi->media_url ?></small>
+                           
+                           </td>
                            <td class="center"><?php echo $diseminasi->getTanggal() ?></td>
                            <td class="center">
                                <?php echo $diseminasi->tempat ?>
@@ -154,4 +169,12 @@
           jQuery("#tabsx").tabs();
       <?php } ?>
   });
+  
+  function media(){
+      if ( document.getElementById('DiseminasiPenelitian_media').value == 3 ){
+          jQuery("#blockmediaurl").show();
+      }else{
+          jQuery("#blockmediaurl").hide();
+      }
+  }
 </script>  
