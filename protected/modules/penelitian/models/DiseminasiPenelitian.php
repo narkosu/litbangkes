@@ -1,20 +1,24 @@
 <?php
 
 /**
- * This is the model class for table "{{output_penelitian}}".
+ * This is the model class for table "{{diseminasi_penelitian}}".
  *
- * The followings are the available columns in table '{{output_penelitian}}':
+ * The followings are the available columns in table '{{diseminasi_penelitian}}':
  * @property string $id
  * @property integer $proposal_id
+ * @property string $tanggal
+ * @property integer $tempat
+ * @property integer $media
+ * @property string $keterangan
  * @property string $created_at
  * @property integer $created_by
  */
-class OutputPenelitian extends CActiveRecord
+class DiseminasiPenelitian extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return OutputPenelitian the static model class
+	 * @return DiseminasiPenelitian the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -26,7 +30,7 @@ class OutputPenelitian extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{output_penelitian}}';
+		return '{{diseminasi_penelitian}}';
 	}
 
 	/**
@@ -37,11 +41,11 @@ class OutputPenelitian extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('proposal_id, created_by', 'numerical', 'integerOnly'=>true),
-			array('created_at', 'safe'),
+			array('proposal_id, , media, created_by', 'numerical', 'integerOnly'=>true),
+			array('tanggal, tempat, keterangan, created_at', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, proposal_id, created_at, created_by', 'safe', 'on'=>'search'),
+			array('id, proposal_id, tanggal, tempat, media, keterangan, created_at, created_by', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,17 +57,8 @@ class OutputPenelitian extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-       /* 'file'=>array(self::HAS_MANY,'FilePenelitian','',
-                        'on' => 'proposal_id = file.proposal_id',
-                        'condition'=>"file.status = 1 AND file.proposal_id = proposal_id AND 
-                            ( file.group_file = 'output_abstrak' OR 
-                                file.group_file = 'output_summary' OR 
-                                file.group_file = 'output_laporan' OR 
-                                file.group_file = 'output_raw_data' OR 
-                                file.group_file = 'output_draft_artikel' OR 
-                                file.group_file = 'output_penelitian'
-                                )"),*/
-        'proposal'=>array(self::BELONGS_TO,'ProposalPenelitian','proposal_id')
+        'relmedia'=> array(self::BELONGS_TO,'MediaDiseminasi','media'),
+        'file'=> array(self::HAS_ONE,'FilePenelitian','group_file')
 		);
 	}
 
@@ -75,6 +70,10 @@ class OutputPenelitian extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'proposal_id' => 'Proposal',
+			'tanggal' => 'Tanggal',
+			'tempat' => 'Tempat',
+			'media' => 'Media',
+			'keterangan' => 'Keterangan',
 			'created_at' => 'Created At',
 			'created_by' => 'Created By',
 		);
@@ -93,6 +92,10 @@ class OutputPenelitian extends CActiveRecord
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('proposal_id',$this->proposal_id);
+		$criteria->compare('tanggal',$this->tanggal,true);
+		$criteria->compare('tempat',$this->tempat);
+		$criteria->compare('media',$this->media);
+		$criteria->compare('keterangan',$this->keterangan,true);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('created_by',$this->created_by);
 
@@ -101,17 +104,14 @@ class OutputPenelitian extends CActiveRecord
 		));
 	}
   
-  public function getFile(){
-      return $fileOutput =  FilePenelitian::model()->findAll("status = 1 AND 
-                                proposal_id = ".$this->proposal_id." AND 
-                            ( group_file = 'output_abstrak' OR 
-                                group_file = 'output_summary' OR 
-                                group_file = 'output_laporan' OR 
-                                group_file = 'output_raw_data' OR 
-                                group_file = 'output_draft_artikel' OR 
-                                group_file = 'output_penelitian'
-                                )");
-  
-      
+  public function getTanggal(){
+      if ( !empty($this->tanggal) ){
+          list($year, $month, $day) = explode('-',$this->tanggal);
+          $return = $month.'/'.$day.'/'.$year;
+      }else{
+          $return = '';
+      }
+      return $return;
+      //return $this->tanggal_pangajuan_etik;
   }
 }

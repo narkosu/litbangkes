@@ -38,9 +38,9 @@ $this->menu=array(
                     <?php } ?>
                         
                    <?php if ( $model->isOutputAvailable() ) { ?>
-                        <li class="active">
+                        <li class="haslink">
                         <a href="<?php echo Yii::app()->createUrl('penelitian/outputpenelitian/view/id/'.$model->id)?>">
-                            <span class="badge badge-success">4</span>&nbsp;&nbsp;Output Penelitian</a>
+                            <span class="badge">4</span>&nbsp;&nbsp;Output Penelitian</a>
                         </li>    
                     <?php } else { ?>
                         <li>
@@ -50,42 +50,28 @@ $this->menu=array(
                         
                     <?php if ( $model->isDesiminasiAvailable() ) { ?>
                         <li class="active">
-                        <a href="<?php echo Yii::app()->createUrl('penelitian/desiminasi/view/id/'.$model->id)?>">
-                            <span class="badge badge-success">4</span>&nbsp;&nbsp;Desiminasi</a>
+                        <a href="<?php echo Yii::app()->createUrl('penelitian/diseminasipenelitian/view/id/'.$model->id)?>">
+                            <span class="badge badge-success">5</span>&nbsp;&nbsp;Desiminasi</a>
                         </li>    
                     <?php } else { ?>
                         <li>
-                        <a><span class="badge">4</span>&nbsp;&nbsp;Desiminasi</a>
+                        <a><span class="badge">5</span>&nbsp;&nbsp;Desiminasi</a>
                         </li>
                     <?php } ?>    
                   </ul>
                 </div>
               </div>
-
-                <?php if ( Yii::app()->user->isSuperAdmin ) {?>
-                  <div class="widgetcontent bordered shadowed nopadding">
-                      <?php echo $this->renderPartial('_viewoutput', 
-                        array('model'=>$model, 
-                              'modelFile' => $modelFile,
+				<div class="widgetcontent bordered shadowed nopadding">
+                     <?php echo $this->renderPartial('_viewdiseminasi', 
+                        array(
+                            'model'=>$model, 
+                            'modelDiseminasi' => $modelDiseminasi,
                               'newModelFile'=>$newModelFile, 
-                              'groupFile' => $groupFile,    
-                              'modelProtokol' => $modelOutput,
-                        )); ?>
-                  </div>
-            <?php } else { ?>
-                  <h4 class="widgettitle nomargin shadowed">Update Protokol Penelitian : <?php echo $model->nama_penelitian?></h4>
-
-                  <div class="widgetcontent bordered shadowed nopadding">
-                     <?php echo $this->renderPartial('_viewoutput', 
-                        array('model'=>$model, 
-                              'modelFile' => $modelFile,
-                              'newModelFile'=>$newModelFile, 
-                              'groupFile' => $groupFile,
-                              'validasi' => $validasi,  
-                              'modelProtokol' => $modelOutput,
+                              'data' => $data,
+                              'pages' => $pages
                         )); ?>
                   </div><!--widgetcontent-->
-            <?php } ?>
+            
 
               </div><!--span8-->
 

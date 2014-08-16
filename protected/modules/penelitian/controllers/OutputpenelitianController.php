@@ -226,12 +226,16 @@ class OutputpenelitianController extends Controller {
         } else {
 
             $modelFile = $modelOutput->file;
+            
             if (!empty($modelFile))
                 foreach ($modelFile as $_file) {
-
+                    
                     $groupFile[$_file->group_file] = $_file;
+                    
                 }
         }
+        
+        
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
@@ -243,7 +247,7 @@ class OutputpenelitianController extends Controller {
             $modelOutput->created_at = date('Y-m-d H:i:s');
 
             if ( $modelOutput->save() ) {
-                //print_r($_FILES);
+                
                 foreach ($_FILES['FilePenelitian']['name']['filename'] as $group => $files) {
                    
                     if (!empty($files)) {
@@ -277,7 +281,7 @@ class OutputpenelitianController extends Controller {
                     }
                     
                 }
-              
+                
                 $proposal = $modelOutput->proposal;
                 $proposal->step = ProposalPenelitian::OUTPUT;
                 $proposal->save();
@@ -453,28 +457,5 @@ class OutputpenelitianController extends Controller {
     return $model;
   }
 
-  /*
-  public function AccessAsKabid(){
-      return ( Yii::app()->user->isKabid || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin)  ;
-  }
   
-  public function AccessAsKasubbid(){
-      return ( Yii::app()->user->isKasubbid || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) ;
-  }
-  
-  public function AccessAsPPI(){
-      return (Yii::app()->user->isPPI || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin );
-  }
-  
-  public function AccessAsKapuslit(){
-      return (Yii::app()->user->isKapuslit || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin);
-  }
-  
-  public function AccessAsKI(){
-      return (Yii::app()->user->isKI || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin);
-  }
-  
-  public function AccessAsKE(){
-      return (Yii::app()->user->isKE || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin);
-  }*/
 }
