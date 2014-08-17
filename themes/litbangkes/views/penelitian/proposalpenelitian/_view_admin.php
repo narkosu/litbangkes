@@ -609,13 +609,17 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
                 ?>
                 <input type="hidden" name="group_validasi" value="ki">
                 <p>
+                    <label>Ditolak Oleh KI</label>
+                    <span class="field"><input type="radio" group="ki" class="validasiOption" name="ProposalValidasi[validasi_ki]" value="4" <?php echo ( $validasi->validasi_ki == 4 ? 'checked' : ''); ?> /></span>
+                </p>
+                <p>
                     <label>Revisi Oleh KI</label>
-                    <span class="field"><input type="radio" group="ppi"class="validasiOption" name="ProposalValidasi[validasi_ki]" value="2" <?php echo ( $validasi->validasi_ki == 2 ? 'checked' : ''); ?> /></span>
+                    <span class="field"><input type="radio" group="ki" class="validasiOption" name="ProposalValidasi[validasi_ki]" value="2" <?php echo ( $validasi->validasi_ki == 2 ? 'checked' : ''); ?> /></span>
                 </p>
 
                 <p>
                     <label>Disetujui Oleh KI</label>
-                    <span class="field"><input type="radio" group="ppi"class="validasiOption" name="ProposalValidasi[validasi_ki]" value="3" <?php echo ( $validasi->validasi_ki == 3 ? 'checked' : ''); ?> /></span>
+                    <span class="field"><input type="radio" group="ki" class="validasiOption" name="ProposalValidasi[validasi_ki]" value="3" <?php echo ( $validasi->validasi_ki == 3 ? 'checked' : ''); ?> /></span>
                 </p>
                 <p>
                     <label>Alasan</label>

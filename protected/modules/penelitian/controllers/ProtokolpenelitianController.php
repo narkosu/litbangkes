@@ -136,7 +136,10 @@ class ProtokolpenelitianController extends Controller {
             
 
             $validasi = $validasi->saveValidation($_POST);
-            if ( isset($_POST) ) {
+            if ( isset($_POST['ProposalValidasi']) ) {
+                /* save validasi history */
+                $validasi->setValidasiHistory($_POST);
+                
                 if ( $validasi->validasi_ke == ProposalPenelitian::STATUS_SETUJU ) {
                     $model->step = 3;
                     $model->save();
