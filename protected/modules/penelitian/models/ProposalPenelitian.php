@@ -29,6 +29,7 @@ class ProposalPenelitian extends CActiveRecord
   const ISPROTOKOL = 2;
   const PROGRES = 3;
   const OUTPUT = 4;
+  const DISEMINASI = 4;
   
   
   public $editable = true;
@@ -45,6 +46,7 @@ class ProposalPenelitian extends CActiveRecord
                             '2'=>'Protokol',
                             '3'=>'Progress',
                             '4'=>'Output',
+                            '5'=>'Diseminasi',
                             );   
   
   public $clients = array(1=>'Dalam Negeri', 2=>'Luar Negeri',3=> 'Lain - Lain');
@@ -263,5 +265,43 @@ class ProposalPenelitian extends CActiveRecord
       
       
       return false;
+  }
+  
+  public function isDesiminasiAvailable(){
+      static $isdesiminasi;
+      if ( empty($isdesiminasi) ) {
+        $desiminasi = OutputPenelitian::model()->find("proposal_id = '". $this->id ."'");
+        if ( !empty($desiminasi) ){
+            $isdesiminasi = $desiminasi;
+            return true;
+        }
+      }else{
+        return true;
+      }
+      
+      
+      return false;
+  }
+  
+  static function documentPosition($step){
+      $positionDocument = array(
+                            '1'=>'Proposal',
+                            '2'=>'Protokol',
+                            '3'=>'Progress',
+                            '4'=>'Output',
+                            '5'=>'Diseminasi',
+                            );   
+      return $positionDocument[$step];
+  }
+  
+  static function statusValidasi($validasi){
+      $statusDocument = array(
+                            '0'=>'Draft',
+                            '1'=>'Progress',
+                            '2'=>'Revisi',
+                            '3'=>'Disetujui',
+                            '4'=>'Ditolak',
+                            ); 
+      return $statusDocument[$validasi];
   }
 }

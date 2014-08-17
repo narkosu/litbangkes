@@ -98,18 +98,23 @@ class ProposalpenelitianController extends Controller
     }
     
     $validasi = $validasi->saveValidation($_POST);
-    if ( isset($_POST) ) {
+    
+    if ( isset($_POST['ProposalValidasi']) ) {
+        /* save validasi history */
+        $validasi->setValidasiHistory($_POST);
+        
         if ( $validasi->validasi_ki == ProposalPenelitian::STATUS_SETUJU ) {
             $proposal->step = 2;
             $proposal->save();
         }
     }
-//$validasi = $this->saveValidation($validasi, $_POST);
     
-		$this->render('viewvalidasi',array(
+    $historyValidasi = $this->loadHistory($id,1);
+    $this->render('viewvalidasi',array(
 			'model'=>$proposal,
       'modelFile'=>$modelFile,
 			'validasi'=>$validasi,
+      'historyValidasi' => $historyValidasi  
 		));
 	}
   
@@ -476,5 +481,14 @@ class ProposalpenelitianController extends Controller
   
   public function AccessAsKE(){
       return (Yii::app()->user->isKE || Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin);
+  }
+  
+  public function loadHistory($id, $step){
+      $criteria   = new CDbCriteria;
+      $criteria->condition   .= 'proposal_id = '.$id.' AND step = '.$step.' ';
+      $criteria->order   .= 'created_at desc';
+       
+      return $historyValidasi = ProposalValidasiHistory::model()
+                        ->findAll($criteria);
   }
 }

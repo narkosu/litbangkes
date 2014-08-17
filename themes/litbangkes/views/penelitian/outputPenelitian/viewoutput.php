@@ -36,6 +36,7 @@ $this->menu=array(
                            <span class="badge">3</span>&nbsp;&nbsp;Progress Penelitian</a>
                         </li>
                     <?php } ?>
+                        
                    <?php if ( $model->isOutputAvailable() ) { ?>
                         <li class="active">
                         <a href="<?php echo Yii::app()->createUrl('penelitian/outputpenelitian/view/id/'.$model->id)?>">
@@ -46,6 +47,17 @@ $this->menu=array(
                         <a><span class="badge">4</span>&nbsp;&nbsp;Output Penelitian</a>
                         </li>
                     <?php } ?>
+                        
+                    <?php if ( $model->isDesiminasiAvailable() ) { ?>
+                        <li class="active">
+                        <a href="<?php echo Yii::app()->createUrl('penelitian/desiminasi/view/id/'.$model->id)?>">
+                            <span class="badge badge-success">4</span>&nbsp;&nbsp;Desiminasi</a>
+                        </li>    
+                    <?php } else { ?>
+                        <li>
+                        <a><span class="badge">4</span>&nbsp;&nbsp;Desiminasi</a>
+                        </li>
+                    <?php } ?>    
                   </ul>
                 </div>
               </div>

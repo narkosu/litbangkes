@@ -23,10 +23,10 @@ $this->menu=array(
                <div class="navbar">
                 <div class="navbar-inner">
                   <ul class="nav">
-                    <li class="haslink"><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/viewvalidasi/id/'.$model->id)?>">
+                    <li class="haslink"><a href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/view/id/'.$model->id)?>">
                       <span class="badge">1</span>&nbsp;&nbsp;Proposal Penelitian <i class="iconfa-ok"></i></a></li>
-                    <li class="active"><a href="<?php echo Yii::app()->createUrl('penelitian/protokolpenelitian/viewvalidasi/id/'.$model->id)?>">
-                      <span class="badge badge-success">2</span>&nbsp;&nbsp;Protokol Penelitian </a></li>
+                    <li class="haslink"><a href="<?php echo Yii::app()->createUrl('penelitian/protokolpenelitian/create/id/'.$model->id)?>">
+                      <span class="badge ">2</span>&nbsp;&nbsp;Protokol Penelitian </a></li>
                     <?php if ( $model->step >= 3 ) { ?> 
                         <li class="haslink"><a href="<?php echo Yii::app()->createUrl('penelitian/progrespenelitian/view/id/'.$model->id)?>">
                            <span class="badge">3</span>&nbsp;&nbsp;Progress Penelitian</a>
@@ -36,16 +36,18 @@ $this->menu=array(
                            <span class="badge">3</span>&nbsp;&nbsp;Progress Penelitian</a>
                         </li>
                     <?php } ?>
-                    <?php if ( $model->isOutputAvailable() ) { ?>
+                        
+                   <?php if ( $model->isOutputAvailable() ) { ?>
                         <li class="haslink">
                         <a href="<?php echo Yii::app()->createUrl('penelitian/outputpenelitian/view/id/'.$model->id)?>">
-                            <span class="badge ">4</span>&nbsp;&nbsp;Output Penelitian</a>
+                            <span class="badge">4</span>&nbsp;&nbsp;Output Penelitian</a>
                         </li>    
                     <?php } else { ?>
                         <li>
                         <a><span class="badge">4</span>&nbsp;&nbsp;Output Penelitian</a>
                         </li>
                     <?php } ?>
+                        
                     <?php if ( $model->isDesiminasiAvailable() ) { ?>
                         <li class="active">
                         <a href="<?php echo Yii::app()->createUrl('penelitian/diseminasipenelitian/view/id/'.$model->id)?>">
@@ -55,49 +57,21 @@ $this->menu=array(
                         <li>
                         <a><span class="badge">5</span>&nbsp;&nbsp;Desiminasi</a>
                         </li>
-                    <?php } ?>  
+                    <?php } ?>    
                   </ul>
                 </div>
               </div>
-
-                 <?php
-                if (Yii::app()->user->isSuperAdmin ||
-                        Yii::app()->user->isKabid ||
-                        Yii::app()->user->isKasubbid ||
-                        Yii::app()->user->isAdmin ||
-                        Yii::app()->user->isPPI ||
-                        Yii::app()->user->isKapuslit ||
-                        Yii::app()->user->isKI ||
-                        Yii::app()->user->isKE) {
-                    
-                    ?>
-                  <div class="widgetcontent bordered shadowed nopadding">
-                      <?php echo $this->renderPartial('_viewprotokol_admin', 
-                        array('model'=>$model, 
-                              'modelFile' => $modelFile,
+				<div class="widgetcontent bordered shadowed nopadding">
+                     <?php echo $this->renderPartial('_viewdiseminasi', 
+                        array(
+                            'model'=>$model, 
+                            'modelDiseminasi' => $modelDiseminasi,
                               'newModelFile'=>$newModelFile, 
-                              'groupFile' => $groupFile,    
-                              'modelProtokol' => $modelProtokol,
-                                'validasi'  => $validasi,
-                                'pegawai'=> $pegawai
-                        )); 
-                      
-                      ?>
-                  </div>
-            <?php } else { ?>
-                  <h4 class="widgettitle nomargin shadowed">Update Protokol Penelitian : <?php echo $model->nama_penelitian?></h4>
-
-                  <div class="widgetcontent bordered shadowed nopadding">
-                     <?php echo $this->renderPartial('_viewprotokol', 
-                        array('model'=>$model, 
-                              'modelFile' => $modelFile,
-                              'newModelFile'=>$newModelFile, 
-                              'groupFile' => $groupFile,  
-                              'modelProtokol' => $modelProtokol,
-                            'validasi'  => $validasi
+                              'data' => $data,
+                              'pages' => $pages
                         )); ?>
                   </div><!--widgetcontent-->
-            <?php } ?>
+            
 
               </div><!--span8-->
 

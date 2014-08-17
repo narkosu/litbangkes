@@ -16,7 +16,7 @@ $StatusColor = array(   '0'=>'label-info',
     <div class="span16">                                           
 			<?php echo $this->renderPartial('_form', array('model'=>$model, 'modelFile' => $modelFile)); ?>
       
-      
+      TESTING
       
     </div><!--span8-->
 </div><!--row-fluid-->

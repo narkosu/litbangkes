@@ -53,9 +53,10 @@
 
     </div>
 <?php 
-//print_r($groupFile);
+print_r($groupFile);
 if ( $jenisFile ){ 
     foreach ($jenisFile as $group=>$groupname ){
+        
     ?>
         <div class="par">
             <label><?php echo $groupname['main'] ?>
