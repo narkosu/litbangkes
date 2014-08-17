@@ -165,7 +165,7 @@ class ProposalValidasi extends CActiveRecord
                 //$validasiHistory->value_validasi = $this->validasi_ki;
               }
               $this->proposal->save();
-              
+              /*
             
               
               $validasiHistory = new ProposalValidasiHistory;
@@ -179,11 +179,42 @@ class ProposalValidasi extends CActiveRecord
               $validasiHistory->created_at = date('Y-m-d H:i:s');
               $validasiHistory->created_by = Yii::app()->user->id;
               $validasiHistory->save();
-              
+               * 
+               */
+              //Yii::app()->user->setFlash('history_validasi_id_'.$this->id,$validasiHistory->id);
               return $this;
           }
         }
         return $this;
+        
+  }
+  
+  function setValidasiHistory($post){
+         $folder = Yii::getPathOfAlias('webroot')."/files/history";
+         if ( !file_exists($folder)){
+             @mkdir($folder);
+         }
+        $validasiHistory = new ProposalValidasiHistory;
+        $validasiHistory->proposal_id = $this->proposal_id;
+        $validasiHistory->step = $this->step;
+        $validasiHistory->level_validasi = $post['group_validasi'];
+        $validasiHistory->value_validasi = $post['ProposalValidasi']['validasi_'.$validasiHistory->level_validasi];
+
+        $validasiHistory->alasan = $post['ProposalValidasi']['alasan'];
+        $validasiHistory->created_at = date('Y-m-d H:i:s');
+        $validasiHistory->created_by = Yii::app()->user->id;
+        $fileaja=CUploadedFile::getInstance($validasiHistory,'file');
+          if($validasiHistory->save())
+          {
+                $time = time();
+                $newfilename = $post['group_validasi'].'_'.$time.'.'.$fileaja->getExtensionName();
+                $fileaja->saveAs($folder . '/' . $newfilename); 
+                $validasiHistory->file = $newfilename;
+                $validasiHistory->save();
+                
+        } else{
+            print_r($validasiHistory->getErrors());
+        }
         
   }
 }

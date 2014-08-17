@@ -98,7 +98,11 @@ class ProposalpenelitianController extends Controller
     }
     
     $validasi = $validasi->saveValidation($_POST);
-    if ( isset($_POST) ) {
+    
+    if ( isset($_POST['ProposalValidasi']) ) {
+        /* save validasi history */
+        $validasi->setValidasiHistory($_POST);
+        
         if ( $validasi->validasi_ki == ProposalPenelitian::STATUS_SETUJU ) {
             $proposal->step = 2;
             $proposal->save();

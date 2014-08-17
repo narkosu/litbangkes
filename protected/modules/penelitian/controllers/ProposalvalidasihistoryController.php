@@ -123,11 +123,14 @@ class ProposalvalidasihistoryController extends Controller
 	 */
 	public function actionIndex()
 	{
-
-
-    $criteria = new CDbCriteria();
-//    $criteria->condition   .= ' status_record = 1 '; // tidak delete
- //   $criteria->condition .= ' AND pegawai_id = '.$me->id;
+    $criteria = new CDbCriteria();  
+    if ( Yii::app()->user->isSuperAdmin ) {
+        
+    }else if ( Yii::app()->user->isMember ) {
+        
+        $criteria->join   = ' LEFT JOIN tbl_proposal_penelitian a on a.id = t.proposal_id '; // tidak delete
+        $criteria->condition   = 'a.user_id = '.Yii::app()->user->id; // tidak delete
+    }
     $criteria->order   = 'created_at desc';
 
     $count      = ProposalValidasiHistory::model()->count($criteria);

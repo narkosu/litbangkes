@@ -43,6 +43,7 @@ class ProposalValidasiHistory extends CActiveRecord
 		return array(
 			array('proposal_id, step, value_validasi, created_by', 'numerical', 'integerOnly'=>true),
 			array('level_validasi', 'length', 'max'=>255),
+			array('file', 'file', 'types'=>'jpg, gif, png, pdf, doc, xls, docx, xlsx', 'allowEmpty'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, proposal_id, step, level_validasi, value_validasi, alasan, created_at, created_by', 'safe', 'on'=>'search'),
