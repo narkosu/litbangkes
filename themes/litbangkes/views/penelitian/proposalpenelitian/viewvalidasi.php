@@ -72,14 +72,20 @@ $this->breadcrumbs = array(
                     <div class="widgetcontent bordered shadowed nopadding">
                         <?php
                         echo $this->renderPartial('_view_admin', array('model' => $model,
-                            'modelFile' => $modelFile, 'validasi' => $validasi));
+                            'modelFile' => $modelFile, 'validasi' => $validasi,
+                            'historyValidasi' => $historyValidasi
+                            ));
                         ?>
                     </div>
 <?php } else { ?>
                     <h4 class="widgettitle nomargin shadowed">Proposal Penelitian : <?php echo $model->nama_penelitian ?></h4>
 
                     <div class="widgetcontent bordered shadowed nopadding">
-                    <?php echo $this->renderPartial('_view', array('model' => $model, 'modelFile' => $modelFile, 'validasi' => $validasi)); ?>
+                    <?php echo $this->renderPartial('_view', 
+                            array(  'model' => $model, 
+                                    'modelFile' => $modelFile, 
+                                    'validasi' => $validasi,
+                                    'historyValidasi' => $historyValidasi)); ?>
                     </div><!--widgetcontent-->
 <?php } ?>
 
