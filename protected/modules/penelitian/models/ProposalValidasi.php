@@ -203,14 +203,18 @@ class ProposalValidasi extends CActiveRecord
         $validasiHistory->alasan = $post['ProposalValidasi']['alasan'];
         $validasiHistory->created_at = date('Y-m-d H:i:s');
         $validasiHistory->created_by = Yii::app()->user->id;
-        $fileaja=CUploadedFile::getInstance($validasiHistory,'file');
+        
           if($validasiHistory->save())
           {
-                $time = time();
-                $newfilename = $post['group_validasi'].'_'.$time.'.'.$fileaja->getExtensionName();
-                $fileaja->saveAs($folder . '/' . $newfilename); 
-                $validasiHistory->file = $newfilename;
-                $validasiHistory->save();
+                
+                $fileaja=CUploadedFile::getInstance($validasiHistory,'file');
+                if (!empty($fileaja) ) {
+                    $time = time();
+                    $newfilename = $post['group_validasi'].'_'.$time.'.'.$fileaja->getExtensionName();
+                    $fileaja->saveAs($folder . '/' . $newfilename); 
+                    $validasiHistory->file = $newfilename;
+                    $validasiHistory->save();
+                }
                 
         } else{
             print_r($validasiHistory->getErrors());
