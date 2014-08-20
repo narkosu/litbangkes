@@ -62,7 +62,7 @@ class User extends CActiveRecord
 		return array(
 			array('username, password', 'required'),
 			array('username', 'unique'),
-			array('username, password, salt, email', 'length', 'max'=>128),
+			array('firstname, lastname, username, password, salt, email', 'length', 'max'=>128),
 			array('profile,accessLevel,setHakAccess', 'safe'),
 		);
 	}

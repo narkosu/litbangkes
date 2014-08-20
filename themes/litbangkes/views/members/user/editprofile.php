@@ -45,30 +45,25 @@
                       )); ?>
                     <h4>Informasi Dasar</h4>
                       <p>
-                        <label>Nama Lengkap:</label>
-                        <?php echo $form->textField($model,'nama',array('size'=>30,'maxlength'=>130,'class'=>'input-xlarge')); ?>
+                        <label>Username:</label>
+                        <?php echo $model->username; ?>
                         
                       </p>
                       <p>
-                        <label>NIP:</label>
-                        <?php echo $form->textField($model,'nip',array('size'=>30,'maxlength'=>130,'class'=>'input-xlarge')); ?>
+                        <label>Nama Depan:</label>
+                        <?php echo $form->textField($model,'firstname',
+                                array('size'=>30,'maxlength'=>130,'class'=>'input-xlarge')); ?>
                         
+                      </p>
+                      <p>
+                        <label>Nama Belakang:</label>
+                            <?php echo $form->textField($model,'lastname',array('size'=>30,'maxlength'=>130,'class'=>'input-xlarge')); ?>
+                        <?php echo $form->error($model,'lastname'); ?>
                       </p>
                       <p>
                         <label>Email:</label>
                             <?php echo $form->textField($model,'email',array('size'=>30,'maxlength'=>130,'class'=>'input-xlarge')); ?>
                         <?php echo $form->error($model,'email'); ?>
-                      </p>
-
-                      <p>
-                        <label>Satuan Kerja:</label>
-                          <?php echo $form->textField($model,'satuan_kerja',array('size'=>30,'maxlength'=>130,'class'=>'input-xxlarge')); ?>
-                        
-                      </p>
-
-                      <p>
-                        <label style="padding:0">Password</label>
-                          <a href="gantipassword.html">Ganti Password?</a>
                       </p>
                       <p>
                         <button type="submit" class="btn btn-primary">Update Profile</button>

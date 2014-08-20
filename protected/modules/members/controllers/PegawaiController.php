@@ -15,7 +15,7 @@ class PegawaiController extends Controller {
     public function accessRules() {
         return array(
             array('allow',
-                'actions' => array('edit','profile'),
+                'actions' => array('edit','profile','avatar','photo'),
                 'users' => array('@'),
             ),
             array('allow',
@@ -135,7 +135,7 @@ class PegawaiController extends Controller {
         $model = Pegawai::model()->find('user_id ='.Yii::app()->user->id);
         
         if (!$model){
-            $this->redirect(array('/members/pegawai'));
+            $this->redirect(array('/members/user/edit'));
         }
         
         $userAccess = $model->userAccess;
@@ -153,6 +153,11 @@ class PegawaiController extends Controller {
                 $this->refresh();
 
             }
+        }
+        
+        if ( isset($_FILES['avatar'])){
+            $this->saveAvatar(Yii::app()->user->id);
+            $this->refresh();
         }
         
         $this->render('editprofile', array(
@@ -181,7 +186,7 @@ class PegawaiController extends Controller {
             $userAccess = $model->userAccess;
             $this->pageTitle .= ' '.ucfirst($model->nama);
         }
-        
+       
         
         if (empty($userAccess))
             $userAccess = new User;
@@ -204,4 +209,47 @@ class PegawaiController extends Controller {
         return $model;
     }
 
+    public function saveAvatar($cid = ''){
+		$folder = Yii::getPathOfAlias('webroot')."/files/avatar";
+    if (empty($cid)) return;
+		if ( !file_exists($folder)){
+        @mkdir($folder);
+    }
+    
+    $model = User::model()->findByPk($cid);
+    $pegawaiModel = Pegawai::model()->find('user_id = '.$cid);
+    
+    //$oldLogo_id         = $model->picture_id;
+    $oldLogo_picture    = $model->avatar;
+    
+		$file = CUploadedFile::getInstanceByName('avatar');
+		
+		$group = 'logo';
+		$filename = 'avatar_'.md5($cid).'.'.$file->getExtensionName();
+    
+		$return = $file->saveAs($folder . '/' . $filename); 
+		if ( !empty($return) ){
+    	$model->avatar =$filename;
+    	$pegawaiModel->photo = $filename;
+			if ( $model->save() ){
+          $pegawaiModel->save();
+         return;
+      }
+		}
+		// return the new file path
+		//echo Yii::app()->baseUrl.'/photo/view/id/'.$return->id.'/version/logo';
+	}
+  
+  public function actionPhoto($file)
+	{
+    $upload_path = Yii::getPathOfAlias('webroot')."/files/avatar/".$file;   
+		if (!empty($upload_path) && $upload_path!='') {
+        $request = Yii::app()->getRequest();
+        
+        echo $request->sendFile(basename($upload_path),file_get_contents($upload_path));
+        //echo CHtml::image($upload_path,'avatar',array('width'=>'180px','max-height'=>'180px'
+    //));
+    }
+	}
+  
 }

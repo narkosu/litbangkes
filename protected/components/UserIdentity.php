@@ -8,6 +8,7 @@
 class UserIdentity extends CUserIdentity
 {
 	private $_id;
+	
 
 	/**
 	 * Authenticates a user.
@@ -24,11 +25,13 @@ class UserIdentity extends CUserIdentity
 		{
 			$this->_id=$user->id;
 			$this->username=$user->username;
+			
 			$this->setState('accessLevel', $user->accessLevel);
       
       if ( $user->accessLevel == User::LEVEL_MEMBER ){
         $userPegawai = Pegawai::model()->find('user_id = :uid',array(':uid'=>$user->id));
         $this->setState('accessLevel', $user->accessLevel);
+        $this->setState('avatar', $user->avatar);
         $this->setState('pegawai', $userPegawai);
       }
       
