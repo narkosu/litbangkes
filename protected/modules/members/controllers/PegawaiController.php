@@ -135,7 +135,7 @@ class PegawaiController extends Controller {
         $model = Pegawai::model()->find('user_id ='.Yii::app()->user->id);
         
         if (!$model){
-            $this->redirect(array('/members/pegawai'));
+            $this->redirect(array('/members/user/edit'));
         }
         
         $userAccess = $model->userAccess;
@@ -231,7 +231,7 @@ class PegawaiController extends Controller {
 		if ( !empty($return) ){
     	$model->avatar =$filename;
     	$pegawaiModel->photo = $filename;
-			if ( !$model->save() ){
+			if ( $model->save() ){
           $pegawaiModel->save();
          return;
       }

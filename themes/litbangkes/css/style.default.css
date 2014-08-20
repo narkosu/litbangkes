@@ -876,8 +876,7 @@ ul.list-nostyle li span, ol.list-nostyle li span { vertical-align: top; }
     position: absolute;
     top: 0px;
     height: 181px;
-    width: 187px;
-    cursor: pointer;
+    width: 187px;cursor: pointer;
     opacity: 0;
 }
 

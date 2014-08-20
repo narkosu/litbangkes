@@ -59,26 +59,6 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
                     </span>
                     :
                     
-                    <?php if (!empty($validasi->validasi_kabid)) { ?>
-                        <?php
-                        if ($validasi->validasi_kabid == 3) {
-                            $labelValidasi = 'label-success';
-                        } else if ($validasi->validasi_kabid == 2) { // revisi
-                            $labelValidasi = 'label-success';
-                        } else if ($validasi->validasi_kabid == 4) { //ditolak
-                            $labelValidasi = 'label-important';
-                        } else {
-                            $labelValidasi = 'label-info';
-                        }
-                        ?>
-                        <span class="label <?php echo $labelValidasi ?>">
-                            <?php
-                            echo $validasi->getStatus('validasi_kabid');
-                            ?>
-                            Kabid
-                        </span>
-                    <?php } ?>
-
                     <?php if (!empty($validasi->validasi_kasubbid)) { ?>
                         <?php
                         if ($validasi->validasi_kasubbid == 3) {
@@ -98,7 +78,26 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
                             Kasubbid
                         </span>
                     <?php } ?>
-
+                    <?php if (!empty($validasi->validasi_kabid)) { ?>
+                        <?php
+                        if ($validasi->validasi_kabid == 3) {
+                            $labelValidasi = 'label-success';
+                        } else if ($validasi->validasi_kabid == 2) { // revisi
+                            $labelValidasi = 'label-success';
+                        } else if ($validasi->validasi_kabid == 4) { //ditolak
+                            $labelValidasi = 'label-important';
+                        } else {
+                            $labelValidasi = 'label-info';
+                        }
+                        ?>
+                        <span class="label <?php echo $labelValidasi ?>">
+                            <?php
+                            echo $validasi->getStatus('validasi_kabid');
+                            ?>
+                            Kabid
+                        </span>
+                    <?php } ?>
+                    
                     <?php if (!empty($validasi->validasi_ppi)) { ?>
                         <?php
                         if ($validasi->validasi_ppi == 3) {
