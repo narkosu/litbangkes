@@ -17,13 +17,11 @@
                       <?php echo Yii::app()->user->getFlash('editprofile_success');?>
                   </p>
                   <?php }?>
-                <?php $fieldavatar = Yii::app()->user->getState('avatar');
-                            $avatar = (empty($fieldavatar) ? Yii::app()->theme->baseUrl.'/img/profilethumb.png': Yii::app()->baseUrl.'/files/avatar/'.$fieldavatar);?>  
                 <h4>Your Profile Photo</h4>
 
                   <div class="profilethumb">
                     <a href="">Change Thumbnail</a>
-                      <img src="<?php echo $avatar?>" alt="" class="img-polaroid" />
+                      <img src="<?php echo Yii::app()->theme->baseUrl;?>/img/profilethumb.png" alt="" class="img-polaroid" />
                   </div><!--profilethumb-->
 
               </div><!--span3-->

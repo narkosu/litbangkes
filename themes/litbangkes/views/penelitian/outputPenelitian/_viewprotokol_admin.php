@@ -313,7 +313,7 @@
                 </p>
 
                 <p>
-                    <label>Disetujui Oleh KaSubBid</label>
+                    <label>Diijinkan Oleh KaSubBid</label>
                     <span class="field">
                         <input type="radio" name="ProposalValidasi[validasi_kasubbid]" value="3" <?php echo ( $validasi->validasi_kasubbid == 3 ? 'checked' : ''); ?> />
                     </span>
@@ -371,7 +371,7 @@
                 </p>
 
                 <p>
-                    <label>Disetujui Oleh KaBid</label>
+                    <label>Diijinkan Oleh KaBid</label>
                     <span class="field">
                         <input type="radio" name="ProposalValidasi[validasi_kabid]" value="3" <?php echo ( $validasi->validasi_kabid == 3 ? 'checked' : ''); ?> />
                     </span>
@@ -426,7 +426,7 @@
                 </p>
 
                 <p>
-                    <label>Disetujui Oleh PPI</label>
+                    <label>Diijinkan Oleh PPI</label>
                     <span class="field">
                         <input type="radio" name="ProposalValidasi[validasi_ppi]" value="3" <?php echo ( $validasi->validasi_ppi == 3 ? 'checked' : ''); ?> />
                     </span>
@@ -478,7 +478,7 @@
                             </p>
 
                             <p>
-                                <label>Disetujui Oleh Kapuslit</label>
+                                <label>Diijinkan Oleh Kapuslit</label>
                                 <span class="field">
                                     <input type="radio" name="ProposalValidasi[validasi_kapuslit]" value="3" <?php echo ( $validasi->validasi_kapuslit == 3 ? 'checked' : ''); ?> />
                                 </span>
@@ -532,7 +532,7 @@
                             </p>
 
                             <p>
-                                <label>Disetujui Oleh Komisi Etik</label>
+                                <label>Diijinkan Oleh Komisi Etik</label>
                                 <span class="field">
                                     <input type="radio" name="ProposalValidasi[validasi_ke]" value="3" <?php echo ( $validasi->validasi_ke == 3 ? 'checked' : ''); ?> />
                                 </span>

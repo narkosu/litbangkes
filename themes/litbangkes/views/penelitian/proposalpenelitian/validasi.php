@@ -25,6 +25,7 @@ $StatusColor = array(   '0'=>'label-info',
           
         <!-- dynamic table start-->
         <div id="dyntable_wrapper" class="dataTables_wrapper" role="grid">
+            <?php /*
             <div id="dyntable_length" class="dataTables_length">
                 <label style="display: inline-block">Show <select size="1" name="dyntable_length" aria-controls="dyntable">
                         <option value="10" selected="selected">10</option>
@@ -39,7 +40,7 @@ $StatusColor = array(   '0'=>'label-info',
             <div class="dataTables_filter" id="dyntable_filter">
                 <label>Search: <input type="text" aria-controls="dyntable"></label>
             </div>
-
+						*/ ?>
             <table class="table table-bordered" id="dyntable">
                 <colgroup>
                     <col class="con0" style="align: center; width: 4%" />
@@ -89,11 +90,14 @@ $StatusColor = array(   '0'=>'label-info',
                             <td><span class="label <?php echo $StatusColor[$proposal->status]?>"><?php echo $proposal->getStatus() ?></span></td>
                             <td class="center">
                                 <?php if (Yii::app()->user->isSuperAdmin || ( Yii::app()->user->getState('pegawai') && Yii::app()->user->getState('pegawai')->id == $proposal->pegawai_id)) { ?>
-                                    <a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/update/id/' . $proposal->id) ?>" class="btn btn-primary btn-rounded">Edit</a> 
+                                    <a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/update/id/' . $proposal->id) ?>" class="btn btn-warning">Edit</a> 
                                 <?php }  ?>
+                                
+                                <?php /*
                                     <?php if (Yii::app()->user->isSuperAdmin ) { ?>
                                     <a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/delete/id/' . $proposal->id) ?>" class="btn btn-primary btn-rounded">Delete</a> 
                                 <?php } ?>
+																*/ ?>
 
                             </td>
                         </tr>

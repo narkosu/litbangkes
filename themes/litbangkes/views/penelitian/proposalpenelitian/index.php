@@ -29,13 +29,13 @@ $StatusColor = array(   '0'=>'label-info',
                 <thead>
                     <tr>
                         <th class="head0 nosort center">No</th>
-                        <th class="head0">Judul Penelitian</th>
-                        <th class="head0 center">Diajukan oleh</th>
-                        <th class="head1 center">Sumber Dana</th>
-                        <th class="head0 center">Tahun Anggaran</th>
-                        <th class="head0 center">Position</th>
-                        <th class="head0 center">Status</th>
-                        <th class="head0 center">Tindakan</th>
+                        <th class="head0" width="30%">Judul Penelitian</th>
+                        <th class="head0 center" width="10%">Diajukan oleh</th>
+                        <th class="head1 center" width="10%">Sumber Dana</th>
+                        <th class="head0 center" width="5%">Tahun Anggaran</th>
+                        <th class="head0 center" width="10%">Position</th>
+                        <th class="head0 center" width="10%">Status</th>
+                        <th class="head0 center" width="10%">Tindakan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,7 +66,7 @@ $StatusColor = array(   '0'=>'label-info',
                                 <?php if (Yii::app()->user->isSuperAdmin || ( Yii::app()->user->getState('pegawai') && Yii::app()->user->getState('pegawai')->id == $proposal->pegawai_id)) { ?>
                                     <a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/update/id/' . $proposal->id) ?>" class="btn btn-warning">Edit</a> 
                                 <?php } ?>    
-                                    <?php if (Yii::app()->user->isSuperAdmin ) { ?>
+                                    <?php if ( Yii::app()->user->isSuperAdmin || Yii::app()->user->isMember ) { ?>
                                     <a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/delete/id/' . $proposal->id) ?>" class="btn btn-danger">Delete</a> 
                                 <?php } ?>
 

@@ -37,23 +37,11 @@ $this->breadcrumbs = array(
                                 </li>
                             <?php } ?>
                            <?php if ( $model->isOutputAvailable() ) { ?>
-                                <li>
                                 <a href="<?php echo Yii::app()->createUrl('penelitian/outputpenelitian/view/id/'.$model->id)?>">
                                     <span class="badge">4</span>&nbsp;&nbsp;Output Penelitian</a>
-                                </li>    
                             <?php } else { ?>
-                                <li><a><span class="badge">4</span>&nbsp;&nbsp;Output Penelitian</a></li>
+                                <a><span class="badge">4</span>&nbsp;&nbsp;Output Penelitian</a>
                             <?php } ?>
-                            <?php if ( $model->isDesiminasiAvailable() ) { ?>
-                                <li class="active">
-                                <a href="<?php echo Yii::app()->createUrl('penelitian/diseminasipenelitian/view/id/'.$model->id)?>">
-                                    <span class="badge badge-success">5</span>&nbsp;&nbsp;Desiminasi</a>
-                                </li>    
-                            <?php } else { ?>
-                                <li>
-                                <a><span class="badge">5</span>&nbsp;&nbsp;Desiminasi</a>
-                                </li>
-                            <?php } ?>     
                         </ul>
                     </div>
                 </div>
@@ -72,20 +60,14 @@ $this->breadcrumbs = array(
                     <div class="widgetcontent bordered shadowed nopadding">
                         <?php
                         echo $this->renderPartial('_view_admin', array('model' => $model,
-                            'modelFile' => $modelFile, 'validasi' => $validasi,
-                            'historyValidasi' => $historyValidasi
-                            ));
+                            'modelFile' => $modelFile, 'validasi' => $validasi));
                         ?>
                     </div>
 <?php } else { ?>
                     <h4 class="widgettitle nomargin shadowed">Proposal Penelitian : <?php echo $model->nama_penelitian ?></h4>
 
                     <div class="widgetcontent bordered shadowed nopadding">
-                    <?php echo $this->renderPartial('_view', 
-                            array(  'model' => $model, 
-                                    'modelFile' => $modelFile, 
-                                    'validasi' => $validasi,
-                                    'historyValidasi' => $historyValidasi)); ?>
+                    <?php echo $this->renderPartial('_view', array('model' => $model, 'modelFile' => $modelFile, 'validasi' => $validasi)); ?>
                     </div><!--widgetcontent-->
 <?php } ?>
 

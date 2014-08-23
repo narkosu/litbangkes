@@ -2,9 +2,9 @@
 /* @var $this ProposalPenelitianController */
 /* @var $model ProposalPenelitian */
 /* @var $form CActiveForm */
-$yearNow = date("Y");
+$yearNow = 2009;
 $yearFrom = $yearNow ;
-$yearTo = $yearNow + 5;
+$yearTo = $yearNow + 11;
 $arrYears = array();
     	 
 foreach (range($yearFrom, $yearTo) as $number) {
@@ -155,7 +155,7 @@ if ( Yii::app()->user->isMember ) {
 	</div>
   */ ?>
   
-  <?php $sumberdanalist = $model->getClients(); 
+  <?php $sumberdanalist = $model->getSumberDana(); 
 	echo $form->error($model,'sumber_dana'); ?>
   
   <div class="par">

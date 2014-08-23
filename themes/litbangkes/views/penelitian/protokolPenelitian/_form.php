@@ -44,7 +44,7 @@
     <div class="par">
         <label>Satuan Kerja</label>   
         <span class="field">
-            <?php ?>
+            <?php echo ucfirst($pegawai->satuan_kerja) ?>
         </span>
     </div>
 

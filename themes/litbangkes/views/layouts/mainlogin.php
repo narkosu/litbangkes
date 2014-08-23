@@ -6,7 +6,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Login</title>
+  <title>Login SIR - Pusat Humaniora, Kebijakan Kesehatan dan Pemberdayaan Masyarakat</title>
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl .'/css/login.css'?>" />	
 </head>
 
@@ -15,39 +15,24 @@
 	<div id="wrapper_login">
 		
     <div id="left_login">
-    	<h1 class="login_h1">
-      	Selamat Datang di<br />
-        <span class="login_h2">Sistem Informasi Riset</span>
-      </h1>
-      
-      <h3>BADAN PENELITIAN DAN PENGEMBANGAN KESEHATAN</h3>
+    	<span class="login_h2">Silahkan masukkan username dan password anda<br>untuk masuk ke halaman SIR.</span>
       <?php echo $content ?>
-      <?php /*
-      <form name="login_form" action="#" method="post">
-      	<p>
-        	<input type="text" class="login_text" name="username" />
-        </p>
-        <p>
-        	<input type="password" class="login_text" name="password" />
-        </p>
-        <p>
-        	<input type="submit" value="Login" class="login_btn" />
-        </p>
-      </form>
-       * 
-       */
-      ?>
+      
     </div>  
   	
+    <?php /*
     <div id="right_login">
     	<img src="<?php echo Yii::app()->theme->baseUrl ?>/img/iMac.png" alt="login sistem informasi riset"  />
     </div>
-  
+  	*/?>
+    
   </div>
   
+  <?php /*
   <div id="login_footer">
   	&copy; <?php echo date('Y');?> Pusat Humaniora, Kebijakan Kesehatan dan Pemberdayaan Masyarakat. All rights reserved.
-  </footer>
+  </div>
+	*/ ?>
   
 </body>
 </html>

@@ -200,7 +200,7 @@
         <div class="par">
             <label>Satuan Kerja</label>   
             <span class="field">
-                <?php ?>
+                <?php echo ucfirst($pegawai->satuan_kerja) ?>
             </span>
         </div>
 
@@ -313,7 +313,7 @@
                 </p>
 
                 <p>
-                    <label>Disetujui Oleh KaSubBid</label>
+                    <label>Diijinkan Oleh KaSubBid</label>
                     <span class="field">
                         <input type="radio" name="ProposalValidasi[validasi_kasubbid]" value="3" <?php echo ( $validasi->validasi_kasubbid == 3 ? 'checked' : ''); ?> />
                     </span>
@@ -324,14 +324,6 @@
                         <textarea name="ProposalValidasi[alasan]" class="input-xxlarge"></textarea>
                     </span>
                 </p>
-                
-                <p id="kasubbid_revisi_file" style="display:none;">
-                    <label>File Pendukung</label>
-                    <span class="field">
-                        <input type="file" name="ProposalValidasiHistory[file]" class="uniform-file">
-                    </span>
-                </p>
-                
                 <p class="stdformbutton">
                     <button type="submit" class="btn btn-primary">Validasi</button>
                 </p>
@@ -379,7 +371,7 @@
                 </p>
 
                 <p>
-                    <label>Disetujui Oleh KaBid</label>
+                    <label>Diijinkan Oleh KaBid</label>
                     <span class="field">
                         <input type="radio" name="ProposalValidasi[validasi_kabid]" value="3" <?php echo ( $validasi->validasi_kabid == 3 ? 'checked' : ''); ?> />
                     </span>
@@ -388,12 +380,6 @@
                     <label>Alasan</label>
                     <span class="field">
                         <textarea name="ProposalValidasi[alasan]" class="input-xxlarge"></textarea>
-                    </span>
-                </p>
-                <p id="kabid_revisi_file" style="display:none;">
-                    <label>File Pendukung</label>
-                    <span class="field">
-                        <input type="file" name="ProposalValidasiHistory[file]" class="uniform-file">
                     </span>
                 </p>
                 <p class="stdformbutton">
@@ -440,7 +426,7 @@
                 </p>
 
                 <p>
-                    <label>Disetujui Oleh PPI</label>
+                    <label>Diijinkan Oleh PPI</label>
                     <span class="field">
                         <input type="radio" name="ProposalValidasi[validasi_ppi]" value="3" <?php echo ( $validasi->validasi_ppi == 3 ? 'checked' : ''); ?> />
                     </span>
@@ -449,12 +435,6 @@
                     <label>Alasan</label>
                     <span class="field">
                         <textarea name="ProposalValidasi[alasan]" class="input-xxlarge"></textarea>
-                    </span>
-                </p>
-                <p id="ppi_revisi_file" style="display:none;">
-                    <label>File Pendukung</label>
-                    <span class="field">
-                        <input type="file" name="ProposalValidasiHistory[file]" class="uniform-file">
                     </span>
                 </p>
                 <p class="stdformbutton">
@@ -498,7 +478,7 @@
                             </p>
 
                             <p>
-                                <label>Disetujui Oleh Kapuslit</label>
+                                <label>Diijinkan Oleh Kapuslit</label>
                                 <span class="field">
                                     <input type="radio" name="ProposalValidasi[validasi_kapuslit]" value="3" <?php echo ( $validasi->validasi_kapuslit == 3 ? 'checked' : ''); ?> />
                                 </span>
@@ -507,12 +487,6 @@
                                 <label>Alasan</label>
                                 <span class="field">
                                     <textarea name="ProposalValidasi[alasan]" class="input-xxlarge"></textarea>
-                                </span>
-                            </p>
-                            <p id="kapuslit_revisi_file" style="display:none;">
-                                <label>File Pendukung</label>
-                                <span class="field">
-                                    <input type="file" name="ProposalValidasiHistory[file]" class="uniform-file">
                                 </span>
                             </p>
                             <p class="stdformbutton">
@@ -543,13 +517,13 @@
                     ));
                     ?>
                             <input type="hidden" name="group_validasi" value="ke">
-                            <p>
+                            <?php /*<p>
                                 <label>Ditolak Oleh Komisi Etik</label>
                                 <span class="field">
-                                    <input type="radio" name="ProposalValidasi[validasi_ke]" value="4" <?php echo ( $validasi->validasi_kapuslit == 4 ? 'checked' : ''); ?> /> 
+                                    <input type="radio" name="ProposalValidasi[validasi_kapuslit]" value="4" <?php echo ( $validasi->validasi_kapuslit == 4 ? 'checked' : ''); ?> /> 
                                 </span>
                             </p>
-                            
+                            */?>
                             <p>
                                 <label>Direvisi Oleh Komisi Etik</label>
                                 <span class="field">
@@ -558,7 +532,7 @@
                             </p>
 
                             <p>
-                                <label>Disetujui Oleh Komisi Etik</label>
+                                <label>Diijinkan Oleh Komisi Etik</label>
                                 <span class="field">
                                     <input type="radio" name="ProposalValidasi[validasi_ke]" value="3" <?php echo ( $validasi->validasi_ke == 3 ? 'checked' : ''); ?> />
                                 </span>
@@ -567,12 +541,6 @@
                                 <label>Alasan</label>
                                 <span class="field">
                                     <textarea name="ProposalValidasi[alasan]" class="input-xxlarge"></textarea>
-                                </span>
-                            </p>
-                            <p id="ke_revisi_file" style="display:none;">
-                                <label>File Pendukung</label>
-                                <span class="field">
-                                    <input type="file" name="ProposalValidasiHistory[file]" class="uniform-file">
                                 </span>
                             </p>
                             <p class="stdformbutton">

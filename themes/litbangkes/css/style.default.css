@@ -871,15 +871,6 @@ ul.list-nostyle li span, ol.list-nostyle li span { vertical-align: top; }
 }
 .editprofileform p { margin: 20px 0; }
 
-.profilethumb input.avatar{
-    line-height: 30px;
-    position: absolute;
-    top: 0px;
-    height: 181px;
-    width: 187px;cursor: pointer;
-    opacity: 0;
-}
-
 /***** INVOICE STYLES *****/
 /**************************/
 
