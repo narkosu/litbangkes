@@ -29,8 +29,8 @@
 <div class="mainwrapper fullwrapper">
 		
     <div class="headerpanel">
-        	<h1>SISTEM INFORMASI RISET</h1>
-          <span class="litbangkes-small-title">PUSAT HUMANIORA, KEBIJAKAN KESEHATAN DAN PERMBERDAYAAN MASYARAKAT</span>
+        	<h1></h1>
+          <span class="litbangkes-small-title"></span>
             
             <div class="headerright">
                 

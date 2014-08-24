@@ -198,7 +198,15 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
         </span>
 
     </div>
- 
+    <?php if ( $model->pakar_id == 99999 ) { ?>
+    <div class="par">
+        <label>Pakar Lain</label> 
+        <span class="field">
+            <?php echo $model->pakar_lain; ?>
+        </span>
+    </div>
+    <?php } ?>
+    
     <?php if ( $modelFile ){ 
             foreach ($modelFile as $file ){
             ?>
@@ -263,7 +271,7 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
         <label>Isu Strategis</label>  
         <span class="field">
               <?php if ( !empty($model->isustrategis) ) { ?>
-                      <?php echo $model->isustrategis->tahun.' : '.$model->isustrategis->isu_strategis; ?>  
+                      <?php echo $model->isustrategis->tahun_start.' - '.$model->isustrategis->tahun_end.' : '.$model->isustrategis->isu_strategis; ?>  
                 <?php } ?>
         </span>
 
@@ -277,6 +285,14 @@ $jenisFile['rab'] = array('main'=>'Rap','sub'=>'Upload file dalam bentuk Excel')
             <?php } ?>
         </span>
     </div>
+    <?php if ( $model->klien == 99999 ) { ?>
+    <div class="par">
+        <label>Klien Lain</label> 
+        <span class="field">
+            <?php echo $model->klien_lain; ?>
+        </span>
+    </div>
+    <?php } ?>
     <?php /*if ( $model->status == 0 ) { ?>
     <p class="stdformbutton">
     <button class="btn btn-primary">Pengajuan</button>

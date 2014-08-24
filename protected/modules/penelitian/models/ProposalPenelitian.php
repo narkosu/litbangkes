@@ -242,10 +242,13 @@ class ProposalPenelitian extends CActiveRecord
     return ( $this->validasi->validasi_ki != ProposalPenelitian::STATUS_SETUJU && $this->validasi->validasi_ki != ProposalPenelitian::STATUS_TOLAK ) ;
   }
   public function isValidate(){
+      
       return ($this->step == 1  );
   }
   
   public static function statusDocument($status){
+      $status = empty($status) ? 0 : $status;
+      
       return ProposalPenelitian::model()->statusDocument[$status];
   }
   

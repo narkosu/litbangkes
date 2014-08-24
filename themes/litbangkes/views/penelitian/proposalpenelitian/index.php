@@ -64,10 +64,10 @@ $StatusColor = array(   '0'=>'label-info',
                             <td class="center"><span class="label <?php echo $StatusColor[$proposal->status]?>"><?php echo $proposal->getStatus() ?></span></td>
                             <td class="center">
                                 <?php if (Yii::app()->user->isSuperAdmin || ( Yii::app()->user->getState('pegawai') && Yii::app()->user->getState('pegawai')->id == $proposal->pegawai_id)) { ?>
-                                    <a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/update/id/' . $proposal->id) ?>" class="btn btn-warning">Edit</a> 
+                                    <a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/update/id/' . $proposal->id) ?>" class="btn btn-warning">Ubah</a> 
                                 <?php } ?>    
                                     <?php if (Yii::app()->user->isSuperAdmin ) { ?>
-                                    <a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/delete/id/' . $proposal->id) ?>" class="btn btn-danger">Delete</a> 
+                                    <a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/delete/id/' . $proposal->id) ?>" class="btn btn-danger">Hapus</a> 
                                 <?php } ?>
 
                             </td>

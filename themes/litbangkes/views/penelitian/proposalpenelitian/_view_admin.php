@@ -9,7 +9,7 @@ $jenisFile['proposal'] = array('main' => 'Outline / Draft Proposal', 'sub' => 'U
 $jenisFile['tor'] = array('main' => 'TOR', 'sub' => 'Upload file dalam bentuk PDF');
 $jenisFile['protokol'] = array('main' => 'Protokol', 'sub' => 'Upload file dalam bentuk PDF');
 $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Excel');
-
+//print_r($validasi);
 ?>
 
 <div id="tabs">
@@ -223,7 +223,14 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
                 </span>
 
             </div>
- 
+            <?php if ( $model->pakar_id == 99999 ) { ?>
+            <div class="par">
+                <label>Pakar Lain</label> 
+                <span class="field">
+                    <?php echo $model->pakar_lain; ?>
+                </span>
+            </div>
+            <?php } ?>
             
             <?php
             if ($modelFile) {
@@ -285,7 +292,7 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
                 <label>Isu Strategis</label>  
                 <span class="field">
                     <?php if ( !empty($model->isustrategis) ) { ?>
-                      <?php echo $model->isustrategis->tahun.' : '.$model->isustrategis->isu_strategis; ?>  
+                      <?php echo $model->isustrategis->tahun_start.' - '.$model->isustrategis->tahun_end.' : '.$model->isustrategis->isu_strategis; ?>  
                     <?php } ?>
                 </span>
 
@@ -294,11 +301,21 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
             <div class="par">
                 <label>Klien</label> 
                 <span class="field">
-                <?php if ( !empty($model->nmklien) ) { ?>   
+                <?php 
+                
+                if ( !empty($model->nmklien) ) { ?>   
                     <?php echo $model->nmklien->name; ?>
                 <?php } ?>
                 </span>
             </div>
+            <?php if ( $model->klien == 99999 ) { ?>
+            <div class="par">
+                <label>Klien Lain</label> 
+                <span class="field">
+                    <?php echo $model->klien_lain; ?>
+                </span>
+            </div>
+            <?php } ?>
         </div>
 
     </div> <!-- tabs-1 -->
@@ -363,7 +380,7 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
 
                 <?php $this->endWidget(); ?>
             <?php } else { 
-               //die; 
+               
                 ?>
                  <?php
                     if ($validasi->validasi_kabid == ProposalPenelitian::STATUS_SETUJU) {
@@ -435,6 +452,7 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
                 <?php $this->endWidget(); ?>
             <?php } else { ?>  
                 <?php
+                
                     if ($validasi->validasi_kasubbid == ProposalPenelitian::STATUS_SETUJU) {
                         $labelValidasi = 'label-success';
                     } else if ($validasi->validasi_kasubbid == ProposalPenelitian::STATUS_REVISI ) { // revisi
@@ -505,6 +523,7 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
                 <?php $this->endWidget(); ?>
             <?php } else { ?>  
                 <?php
+                
                     if ($validasi->validasi_ppi == ProposalPenelitian::STATUS_SETUJU) {
                         $labelValidasi = 'label-success';
                     } else if ($validasi->validasi_ppi == ProposalPenelitian::STATUS_REVISI ) { // revisi
@@ -574,6 +593,7 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
                 <?php $this->endWidget(); ?>
             <?php } else { ?>  
                 <?php
+                
                     if ($validasi->validasi_kapuslit == ProposalPenelitian::STATUS_SETUJU) {
                         $labelValidasi = 'label-success';
                     } else if ($validasi->validasi_kapuslit == ProposalPenelitian::STATUS_REVISI ) { // revisi
@@ -637,7 +657,9 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
                 </p>
 
                 <?php $this->endWidget(); ?>
-            <?php } else { ?>  
+            <?php } else { 
+                
+                ?>  
                  <?php
                     if ($validasi->validasi_ki == ProposalPenelitian::STATUS_SETUJU) {
                         $labelValidasi = 'label-success';
