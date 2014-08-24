@@ -29,15 +29,14 @@
 <div class="mainwrapper fullwrapper">
 		
     <div class="headerpanel">
-    			<!--
         	<h1>SISTEM INFORMASI RISET</h1>
           <span class="litbangkes-small-title">PUSAT HUMANIORA, KEBIJAKAN KESEHATAN DAN PERMBERDAYAAN MASYARAKAT</span>
-            -->
+            
             <div class="headerright">
                 
     					<div class="dropdown userinfo">
               			<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/photo/pic1.png" >
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="/page.html">Selamat Datang,
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="/page.html">Hi,
                         <?php echo ucfirst(Yii::app()->user->name)?>! <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo Yii::app()->createUrl('members/pegawai/edit')?>"><span class="icon-edit"></span> Edit Profile</a></li>
@@ -85,15 +84,15 @@
           	<a class="btn btn-success" href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/validasi')?>">Daftar Validasi</a>
           <?php } ?>
           
-          <?php /*<a class="btn btn-success" href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/create') ?>">Sejarah</a> */ ?>
+          <a class="btn btn-success" href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/create') ?>">Sejarah</a>
              
         
         <div class="btn-group">
           <button data-toggle="dropdown" class="btn btn-success dropdown-toggle">Pencarian <span class="caret"></span></button>
           <ul class="dropdown-menu">
             <li><a href="<?php echo Yii::app()->createUrl('penelitian/search')?>">Cari Proposal Penelitian</a></li>
-            <!-- <li><a href="#">Cari Protokol Penelitian</a></li>
-            <li><a href="#">Cari Output Penelitian</a></li> -->
+            <li><a href="#">Cari Protokol Penelitian</a></li>
+            <li><a href="#">Cari Output Penelitian</a></li>
           </ul>
         </div>
         
@@ -108,12 +107,12 @@
             <button data-toggle="dropdown" class="btn btn-success dropdown-toggle">Pencarian <span class="caret"></span></button>
             <ul class="dropdown-menu">
               <li><a href="<?php echo Yii::app()->createUrl('penelitian/search')?>">Cari Proposal Penelitian</a></li>
-              <!--<li><a href="#">Cari Protokol Penelitian</a></li>
-              <li><a href="#">Cari Output Penelitian</a></li>-->
+              <li><a href="#">Cari Protokol Penelitian</a></li>
+              <li><a href="#">Cari Output Penelitian</a></li>
             </ul>
           </div>
           
-          <!--<div class="btn-group">
+          <div class="btn-group">
           <button data-toggle="dropdown" class="btn btn-success dropdown-toggle">Data Master <span class="caret"></span></button>
           <ul class="dropdown-menu">
             <li><a href="#">Master Jabatan Fungsional</a></li>
@@ -124,7 +123,7 @@
             <li><a href="#">Master Isu Strategis</a></li>
             <li><a href="#">Master Klien</a></li>
           </ul>
-        </div>-->
+        </div>
         
         <div class="btn-group">
           <button data-toggle="dropdown" class="btn btn-success dropdown-toggle">Kepegawaian <span class="caret"></span></button>

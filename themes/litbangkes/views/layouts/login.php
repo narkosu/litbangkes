@@ -20,7 +20,7 @@
         <span class="login_h2">Sistem Informasi Riset</span>
       </h1>
       
-      <h3>PUSAT HUMANIORA, KEBIJAKAN KESEHATAN DAN PEMBERDAYAAN MASYARAKAT</h3>
+      <h3>BADAN PENELITIAN DAN PENGEMBANGAN KESEHATAN</h3>
       
       <form name="login_form" action="#" method="post">
       	<p>

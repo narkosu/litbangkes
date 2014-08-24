@@ -4,26 +4,38 @@
 /* @var $form CActiveForm */
 ?>
 
-
-
-
 	<div class="contentinner content-editprofile">
     <h4 class="widgettitle nomargin">Edit Profile</h4>
       <div class="widgetcontent bordered">
         <div class="row-fluid">
             <div class="span3 profile-left">
-                <?php if ( Yii::app()->user->hasFlash('editprofile_success') ) { ?>
-                  <p class="alert alert-success">
-                      <?php echo Yii::app()->user->getFlash('editprofile_success');?>
-                  </p>
-                  <?php }?>
-                <h4>Your Profile Photo</h4>
-
-                  <div class="profilethumb">
-                    <a href="">Change Thumbnail</a>
-                      <img src="<?php echo Yii::app()->theme->baseUrl;?>/img/profilethumb.png" alt="" class="img-polaroid" />
-                  </div><!--profilethumb-->
-
+                 <?php $form=$this->beginWidget('CActiveForm', array(
+                        'id'=>'avatar-pegawai-form',
+                        'enableAjaxValidation'=>false,
+                         'htmlOptions'=>array('class'=>'editprofileform','enctype'=>'multipart/form-data')
+                      )); ?>
+                    <?php if ( Yii::app()->user->hasFlash('editprofile_success') ) { ?>
+                      <p class="alert alert-success">
+                          <?php echo Yii::app()->user->getFlash('editprofile_success');?>
+                      </p>
+                      <?php }?>
+                      <h4>Your Profile Photo</h4>
+                      <?php $fieldavatar = Yii::app()->user->getState('avatar');
+                            $avatar = (empty($fieldavatar) ? Yii::app()->theme->baseUrl.'/img/profilethumb.png': Yii::app()->baseUrl.'/files/avatar/'.$fieldavatar);?>
+                      <div class="profilethumb" style="float:left;">
+                        <a href="">Change Thumbnail</a>
+                        <div style="">
+                          <img src="<?php echo $avatar?>" alt="" id="mainavatar" class="img-polaroid" style="height:181px;" />
+                          <input class="avatar" type="file" name="avatar">
+                        </div>
+                      </div><!--profilethumb-->
+                      <div style="clear:both"></div>
+                      <div >
+                        
+                        <button type="submit" class="btn btn-primary">Ganti Avatar</button>
+                      </div>
+                  <?php $this->endWidget(); ?>
+              
               </div><!--span3-->
               <div class="span9">
                   <?php $form=$this->beginWidget('CActiveForm', array(
@@ -67,5 +79,33 @@
       </div><!--widgetcontent-->
   </div><!--contentinner-->
 
+  <script type="text/javascript">
+    jQuery(document).ready(function(){
+        
+      jQuery("input.avatar").change(function(e) {
+        
+         var input = e.originalEvent.srcElement;
+         
+         if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                
+                jQuery('#mainavatar')
+                    .attr('src', e.target.result)
+                    .height(180)
+                    ;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+        });
+        
+    
+
+  
+  });  
+  </script>
+      
 
 

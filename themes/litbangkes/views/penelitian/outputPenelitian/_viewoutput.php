@@ -27,7 +27,7 @@
     <div class="par">
         <label>Satuan Kerja</label>   
         <span class="field">
-            <?php echo ucfirst($pegawai->satuan_kerja) ?>
+            <?php ?>
         </span>
     </div>
 
@@ -53,9 +53,10 @@
 
     </div>
 <?php 
-//print_r($groupFile);
+print_r($groupFile);
 if ( $jenisFile ){ 
     foreach ($jenisFile as $group=>$groupname ){
+        
     ?>
         <div class="par">
             <label><?php echo $groupname['main'] ?>

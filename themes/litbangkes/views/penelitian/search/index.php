@@ -1,93 +1,22 @@
+<?php
+$this->breadcrumbs = array(
+    'Halaman Depan' => array('index'),
+    'Proposal Penelitian',
+);
 
+$StatusColor = array(   '0'=>'label-info',
+                        '1'=>'label-warning',
+                        '2'=>'label-info',
+                        '3'=>'label-success',
+                        '4'=>'label-important'
+                        
+                    );
+?>
 <div class="row-fluid">
-    <div class="span16">
-                                          
-			<div id="dyntable_wrapper" class="dataTables_wrapper" role="grid">
+    <div class="span16">                                           
+			<?php echo $this->renderPartial('_form', array('model'=>$model, 'modelFile' => $modelFile)); ?>
       
-      <table class="table table-bordered center" id="dyntable">
-      	<tbody>
-        	<tr>
-          	<td align="center" class="center">
-            
-            <form method="get" style="padding: 20px 0;">
-              <input type="search" placeholder="Masukkan kata kunci yang ingin anda cari" class="input-xxlarge" name="q" value="<?=isset($_GET['q']) ? CHtml::encode($_GET['q']) : '' ; ?>" />
-              <select name="by">
-              	<option value="">- Cari Berdasarkan -</option>
-              	<option value="judul">Judul Penelitian</option>
-                <option value="keywords">Keywords</option>
-                <option value="isu_strategis">Isu Strategis</option>
-              </select>
-              <input type="submit" value="Cari" class="btn btn-success" />
-              <a href="<?php echo Yii::app()->createUrl('penelitian/search/') ?>"><span class="btn btn-warning">Reset</span></a>
-            </form>
-            
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      TESTING
       
-      <?php 
-			
-			if( isset($_GET['q']) && $_GET['q'] != '' ){
-						
-			?>
-      <br />
-      <p class="center"><center>Hasil Pencarian dengan kata kunci <i>"<?php echo $_GET['q'];?>"</i></center></p>     
-      <table class="table table-bordered" id="dyntable">
-                <colgroup>
-                    <col class="con0" style="align: center; width: 4%" />
-                    <col class="con1" />
-                    <col class="con0" />
-                    <col class="con1" />
-                    <col class="con0" />
-                    <col class="con1" />
-                </colgroup>
-                <thead>
-                    <tr>
-                        <!-- <th class="head0 nosort center">No</th> -->
-                        <th class="head0 center" width="60%">Judul Penelitian</th>
-                        <th class="head0 center" width="30%">Diajukan oleh</th>
-                        <th class="head0 center" width="10%">Tahun Anggaran</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($data as $index => $proposal) { ?>
-                        <tr class="gradeX">
-                            <!-- <td class="center">&nbsp;</td>-->
-                            <td><a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/view/id/' . $proposal->id) ?>"><?php echo $proposal->nama_penelitian ?></a></td>
-                            <td class="center"><?php echo $proposal->pegawai->nama ?></td>                            
-                            <td class="center"><?php echo $proposal->tahun_anggaran ?></td>
-                        </tr>
-                    <?php } ?>
-
-                </tbody>
-            </table>
-            <?php /*
-            <div class="dataTables_info" >
-                
-                //echo $pages->getPageCount();
-                $this->widget('CLinkPager', array(
-                    'pages' => $pages,
-                ));
-                
-            </div>
-						
-            
-              <div class="pagination pagination-centered pagination-small">
-                <ul>
-                	<li><a href="#">Previous</a></li>
-                	<li><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
-                  <li><a href="#">6</a></li>
-                  <li><a href="#">Next</a></li>
-                </ul>
-              </div>
-							*/?>
-      		<?php } ?>
-      </div><!-- form -->
-            
     </div><!--span8-->
 </div><!--row-fluid-->

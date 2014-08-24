@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SISTEM INFORMASI BADAN PENELITIAN LITBANGKES SURABAYA</title>
+<link rel="stylesheet" href="css/style.default.css" type="text/css" />
+<link id="addonstyle" rel="stylesheet" href="css/style.dark.css" type="text/css" />
+<link rel="stylesheet" href="css/bootstrap-fileupload.min.css" type="text/css" />
+<link rel="stylesheet" href="prettify/prettify.css" type="text/css" />
+<script type="text/javascript" src="prettify/prettify.js"></script>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-migrate-1.1.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.9.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.flot.min.js"></script>
+<script type="text/javascript" src="js/jquery.flot.resize.min.js"></script>
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
+</head>
+
+<body>
+<!-- START OF HEADER -->
+
+    	
+
+<div class="mainwrapper fullwrapper">
+		
+    <div class="headerpanel">
+        	<a href="" class="showmenu"></a><h1 > SISTEM INFORMASI RISET BADAN LITBANGKES</h1>  
+            
+            <div class="headerright">
+                
+    					<div class="dropdown userinfo">
+              			<img src="img/photo/pic1.png" >
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="/page.html">Hi, Budi Sunarko! <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="editprofil.html"><span class="icon-edit"></span> Edit Profile</a></li>
+                        <li><a href="gantipassword.html"><span class="icon-wrench"></span> Ganti Password</a></li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><span class="icon-off"></span> Sign Out</a></li>
+                    </ul>
+                </div><!--dropdown-->
+    		
+            </div><!--headerright-->
+            
+    	</div><!--headerpanel-->
+		
+		
+    <!-- START OF LEFT PANEL -->
+    <div class="leftpanel">
+        
+        <div class="datewidget">Hari ini Senin, 2 Juni 2014</div>
+        
+        <div class="plainwidget">
+            <h6>Nama:<strong> Nirta Aditya</strong></h6>
+            <h6>NIP:<strong> 123456789</strong></h6>
+            <h6>Satker:<strong><br> Pusat Humaniora Kebijakan Kesehatan dan Pemberdayaan Masyarakat</strong></h6>
+        </div><!--plainwidget-->
+        
+        <div class="leftmenu">        
+            <ul class="nav nav-tabs nav-stacked">
+            	<li class="nav-header">MENU UTAMA</li>
+                <li class="active"><a href="daftar.html"><span class="icon-align-justify"></span> Daftar Penelitian</a></li>
+                <li><a href="pengajuan.html"><span class="icon-upload"></span> Pengajuan Penelitian</a></li>
+                
+                <li><a href="">&nbsp;</a></li>
+                <li><a href="editprofil.html"><span class="icon-user"></span> Edit Profil</a></li>
+                <li><a href="gantipassword.html"><span class="icon-cog"></span> Ganti Password</a></li>
+                <li><a href="logout.html"><span class="icon-off"></span> Logout</a></li>
+            </ul>
+        </div><!--leftmenu-->
+        
+    </div><!--mainleft-->
+    <!-- END OF LEFT PANEL -->
+    
+    <!-- START OF RIGHT PANEL -->
+    <div class="rightpanel">	
+      
+      <div class="breadcrumbwidget">
+        <ul class="breadcrumb">
+              <li><a href="dashboard.html">Halaman Depan</a> <span class="divider">/</span></li>
+              <li class="active">Pengajuan Proposal<span class="divider">/</span></li>
+          </ul>
+      </div><!--breadcrumbs-->
+     	
+      <!-- 
+      <div class="pagetitle">
+        	<h1>Dashboard</h1> <span>Selamat datang di halaman admin user..</span>
+        </div><!--pagetitle-->
+        
+        <div class="maincontent">
+        	<div class="contentinner content-dashboard">
+            		
+                <!--
+                <div class="alert alert-error">
+                  <button data-dismiss="alert" class="close" type="button">×</button>
+                  <strong>Maaf!</strong> Pengajuan proposal anda dengan judul "Penelitian Anak Cerdas Se-Indonesia" tidak disetujui.
+                </div><!--alert-->
+                
+                <!--
+                <div class="alert alert-success">
+                  <button data-dismiss="alert" class="close" type="button">×</button>
+                  <strong>Selamat!</strong> Proposal anda dengan judul "Penelitian Anak Cerdas Se-Indonesia" telah di setujui.
+                </div><!--alert-->
+                
+                <!--
+                <div class="alert alert-info">
+                  <button data-dismiss="alert" class="close" type="button">×</button>
+                  <strong></strong> Proposal anda dengan judul "Penelitian Anak Cerdas Se-Indonesia" sedang diseminarkan.
+                </div><!--alert-->
+                
+                
+                <div class="row-fluid">
+                	<div class="span16">
+                  		<!--
+                    	<ul class="widgeticons row-fluid">
+                        		<li class="one_fifth"><a href="pengajuan.html"><img src="img/gemicon/edit.png" alt="" /><span>Pengajuan Penelitian</span></a></li>
+                            <li class="one_fifth"><a href="penelitian.html"><img src="img/gemicon/list.png" alt="" /><span>Daftar Penelitian</span></a></li>
+                            <li class="one_fifth"><a href=""><img src="img/gemicon/archive.png" alt="" /><span>Status Penelitian</span></a></li>
+                            <li class="one_fifth"><a href=""><img src="img/gemicon/reports.png" alt="" /><span>Progress Report</span></a></li>
+                        		<li class="one_fifth last"><a href=""><img src="img/gemicon/files.png" alt="" /><span>Output</span></a></li>
+                        </ul>
+                        
+                        <!-- dynamic table start-->
+                        <table class="table table-bordered" id="dyntable">
+                            <colgroup>
+                                <col class="con0" style="align: center; width: 4%" />
+                                <col class="con1" />
+                                <col class="con0" />
+                                <col class="con1" />
+                                <col class="con0" />
+                                <col class="con1" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
+                                    <th class="head0">Judul Penelitian</th>
+                                    <th class="head1">Jenis Penelitian</th>
+                                    <th class="head0">Tahun Anggaran</th>
+                                    <th class="head1">Status</th>
+                                    <th class="head0">Tindakan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="gradeX">
+                                  <td class="aligncenter"><span class="center">
+                                    <input type="checkbox" />
+                                  </span></td>
+                                    <td>Judul Penelitian 1</td>
+                                    <td>RISBIN</td>
+                                    <td>2014</td>
+                                    <td class="center"><span class="label label-warning">Proses Ke PPI</span></td>
+                                    <td class="center"></td>
+                                </tr>
+                                
+                                <tr class="gradeC">
+                                  <td class="aligncenter"><span class="center">
+                                    <input type="checkbox" />
+                                  </span></td>
+                                    <td>Judul Penelitian 2</td>
+                                    <td>RISBIN</td>
+                                    <td>2013</td>
+                                    <td class="center"><span class="label label-important">Ditolak Oleh PPI</span></td>
+                                    <td class="center"></td>
+                                </tr>
+                                
+                                <tr class="gradeC">
+                                  <td class="aligncenter"><span class="center">
+                                    <input type="checkbox" />
+                                  </span></td>
+                                    <td>Judul Penelitian 2</td>
+                                    <td>RISBIN</td>
+                                    <td>2013</td>
+                                    <td class="center"><span class="label label-info">Revisi Oleh PPI</span></td>
+                                    <td class="center">
+                                    	<a href="update_proposal_penelitian.html" class="btn btn-primary btn-rounded"> <i class="iconsweets-create iconsweets-white"></i>  &nbsp; Update Proposal</a></td>
+                                </tr>
+                                
+                                <tr class="gradeX">
+                                  <td class="aligncenter"><span class="center">
+                                    <input type="checkbox" />
+                                  </span></td>
+                                    <td>Judul Penelitian 3</td>
+                                    <td>DIPA</td>
+                                    <td>2012</td>
+                                    <td class="center"><span class="label label-success">Disetujui Oleh PPI</span></td>
+                                    <td class="center"></td>
+                                </tr>
+                                
+                                 <tr class="gradeX">
+                                  <td class="aligncenter"><span class="center">
+                                    <input type="checkbox" />
+                                  </span></td>
+                                    <td>Judul Penelitian 1</td>
+                                    <td>RISBIN</td>
+                                    <td>2014</td>
+                                    <td class="center"><span class="label label-warning">Proses Ke KI</span></td>
+                                    <td class="center"></td>
+                                </tr>
+                                
+                                <tr class="gradeC">
+                                  <td class="aligncenter"><span class="center">
+                                    <input type="checkbox" />
+                                  </span></td>
+                                    <td>Judul Penelitian 2</td>
+                                    <td>RISBIN</td>
+                                    <td>2013</td>
+                                    <td class="center"><span class="label label-important">Ditolak Oleh KI</span></td>
+                                    <td class="center"></td>
+                                </tr>
+                                
+                                <tr class="gradeX">
+                                  <td class="aligncenter"><span class="center">
+                                    <input type="checkbox" />
+                                  </span></td>
+                                    <td>Judul Penelitian 3</td>
+                                    <td>DIPA</td>
+                                    <td>2012</td>
+                                    <td class="center"><span class="label label-info">Revisi Oleh KI</span></td>
+                                    <td class="center">
+                                    	<a href="" class="btn btn-primary btn-rounded"> <i class="iconsweets-create iconsweets-white"></i>  &nbsp; Update Proposal</a></td>
+                                </tr>
+                                
+                                <tr class="gradeX">
+                                  <td class="aligncenter"><span class="center">
+                                    <input type="checkbox" />
+                                  </span></td>
+                                    <td>Judul Penelitian 3</td>
+                                    <td>DIPA</td>
+                                    <td>2012</td>
+                                    <td class="center"><span class="label label-success">Disetujui Oleh KI</span></td>
+                                    <td class="center">
+                                    	<a href="" class="btn btn-primary btn-rounded"> <i class="iconsweets-create iconsweets-white"></i>  &nbsp; Upload Protokol</a></td>
+                                </tr>
+                                
+                                 <tr class="gradeX">
+                                  <td class="aligncenter"><span class="center">
+                                    <input type="checkbox" />
+                                  </span></td>
+                                    <td>Judul Penelitian 1</td>
+                                    <td>RISBIN</td>
+                                    <td>2014</td>
+                                    <td class="center"><span class="label label-warning">Proses Ke KE</span></td>
+                                    <td class="center"></td>
+                                </tr>
+                                
+                                <tr class="gradeX">
+                                  <td class="aligncenter"><span class="center">
+                                    <input type="checkbox" />
+                                  </span></td>
+                                    <td>Judul Penelitian 3</td>
+                                    <td>DIPA</td>
+                                    <td>2012</td>
+                                    <td class="center"><span class="label label-info">Revisi Oleh KE</span></td>
+                                    <td class="center">
+                                    	<a href="" class="btn btn-primary btn-rounded"> <i class="iconsweets-create iconsweets-white"></i>  &nbsp; Update Protokol</a></td>
+                                </tr>
+                                
+                                <tr class="gradeA">
+                                  <td class="aligncenter"><span class="center">
+                                    <input type="checkbox" />
+                                  </span></td>
+                                    <td>Judul Penelitian 3</td>
+                                    <td>DIPA</td>
+                                    <td>2012</td>
+                                    <td class="center"><span class="label label-success">Disetujui Oleh KE</span></td>
+                                    <td class="center"></td>
+                                </tr>
+                                
+                                <tr class="gradeA">
+                                  <td class="aligncenter"><span class="center">
+                                    <input type="checkbox" />
+                                  </span></td>
+                                    <td>Judul Penelitian 3</td>
+                                    <td>DIPA</td>
+                                    <td>2012</td>
+                                    <td class="center"><span class="label label-inverse">Pelaksanaan Penelitian</span></td>
+                                    <td class="center">
+                                    	<a href="" class="btn btn-primary btn-rounded"> <i class="iconsweets-create iconsweets-white"></i>  &nbsp; Progress Report</a></td>
+                                </tr>
+                                <tr class="gradeA">
+                                  <td class="aligncenter"><span class="center">
+                                    <input type="checkbox" />
+                                  </span></td>
+                                    <td>Judul Penelitian 3</td>
+                                    <td>DIPA</td>
+                                    <td>2012</td>
+                                    <td class="center"><span class="label">Penelitian Selesai</span></td>
+                                    <td class="center">
+                                    	<a href="" class="btn btn-primary btn-rounded"> <i class="iconsweets-create iconsweets-white"></i>  &nbsp; Upload Output</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <br>
+   
+                        <!-- dynamic table end -->
+                        
+                                              
+                        
+                    </div><!--span8-->
+                    
+                </div><!--row-fluid-->
+            </div><!--contentinner-->
+        </div><!--maincontent-->
+        
+    </div><!--mainright-->
+    <!-- END OF RIGHT PANEL -->
+    
+    <div class="clearfix"></div>
+    
+    <div class="footer">
+    	<div class="footerleft">&copy; Litbangkes 2014. All Rights Reserved.</div>
+    	<div class="footerright"></div>
+    </div><!--footer-->
+
+    
+</div><!--mainwrapper-->
+
+</body>
+</html>
