@@ -299,7 +299,8 @@ if ( Yii::app()->user->isMember ) {
     ?>
       </span>
   </div>
- <div class="par" id="klien_lain" style="display:none;">
+
+ <div class="par" id="klien_lain" style="<?php echo ($model->klien == 99999 ) ? 'display:block;' : 'display:none;'?>">
 		<?php echo $form->labelEx($model,'klien_lain'); ?>
       <span class="field">
         <?php echo $form->textField($model,'klien_lain',array('size'=>160,'maxlength'=>255,'class'=>'input-large')); ?>
