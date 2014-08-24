@@ -86,4 +86,14 @@ class SumberDana extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+  
+  public function listArray(){
+      $result = $this->findAll();
+      $output = array();
+      if ( !empty($result) )
+      foreach ($result as $row){
+          $output[$row->id] = $row->name;
+      }
+      return $output;
+  }
 }

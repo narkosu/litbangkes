@@ -110,6 +110,12 @@ if ( Yii::app()->user->isMember ) {
 		<?php echo $form->error($model,'pakar_id'); ?>
 	</div>
 
+<div class="par" id="pakar_lain" style="<?php echo ($model->pakar_id == 99999 ) ? 'display:block;' : 'display:none;'?>">
+		<?php echo $form->labelEx($model,'pakar_lain'); ?>
+      <span class="field">
+        <?php echo $form->textField($model,'pakar_lain',array('size'=>160,'maxlength'=>255,'class'=>'input-large')); ?>
+      </span>
+  </div>
   <div class="par">
       
 		<?php echo $form->labelEx($modelFile,'filename'); ?>
@@ -234,9 +240,7 @@ if ( Yii::app()->user->isMember ) {
 		<?php echo $form->labelEx($model,'isu_strategis'); ?>
       <span class="field">
 		<?php //echo $form->textField($model,'klien',array('size'=>60,'maxlength'=>255)); ?>
-      <?php $clients = $model->getClients(); 
      
-      ?>
       <?php echo $form->dropDownList($model, 'isu_strategis', IsuStrategis::model()->listArray(), array('empty' => 'Pilih Isu Strategis',
           'class'=>"uniformselect"			)); ?>    
       </span>
@@ -246,7 +250,7 @@ if ( Yii::app()->user->isMember ) {
 		<?php echo $form->labelEx($model,'klien (Optional )'); ?>
       <span class="field">
 		<?php //echo $form->textField($model,'klien',array('size'=>60,'maxlength'=>255)); ?>
-      <?php $clients = $model->getClients(); 
+      <?php $clients = Klien::model()->listArray(); 
      
       ?>
       <?php echo $form->dropDownList($model, 'klien', $clients, array('empty' => 'Pilih Klien',
@@ -321,6 +325,14 @@ $cs->registerScriptFile( Yii::app()->theme->baseUrl .'/js/jquery.tagsinput.min.j
 <script type="text/javascript">
   jQuery(document).ready(function(){
       jQuery('.uniform-file').uniform();
+      jQuery('#ProposalPenelitian_pakar_id').change(function(){
+          var $value = jQuery(this).val();
+          if ( $value == 99999) { // lain - lain
+              jQuery("#pakar_lain").show();
+          }else{
+              jQuery("#pakar_lain").hide();
+          }
+      });
   });
 </script>  
   

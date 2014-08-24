@@ -36,11 +36,11 @@ class IsuStrategis extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('status, tahun', 'numerical', 'integerOnly'=>true),
+			array('status, tahun_start, tahun_end', 'numerical', 'integerOnly'=>true),
 			array('isu_strategis', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, tahun, isu_strategis, status', 'safe', 'on'=>'search'),
+			array('id, tahun_start, tahun_end, isu_strategis, status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -93,7 +93,7 @@ class IsuStrategis extends CActiveRecord
       $output = array();
       if ( !empty($result) )
       foreach ($result as $row){
-          $output[$row->id] = $row->tahun.' - '.$row->isu_strategis;
+          $output[$row->id] = $row->tahun_start.' - '.$row->tahun_end.' : '. $row->isu_strategis;
       }
       return $output;
   }

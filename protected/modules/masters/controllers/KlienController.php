@@ -72,7 +72,7 @@ class KlienController extends Controller
         return;
     }
     
-    if ($id == 3) { // LAIN - LAIN
+    if ($id == 99999) { // LAIN - LAIN
         $output['error'] = false;
         $output['result']  = array();
         $output['lain'] = true;
