@@ -161,7 +161,8 @@ class PegawaiController extends Controller {
             }
         }
         
-        if ( isset($_FILES['avatar'])){
+        if ( !empty($_FILES['avatar']['name'])){
+            
             $this->saveAvatar(Yii::app()->user->id);
             $this->refresh();
         }
@@ -239,6 +240,7 @@ class PegawaiController extends Controller {
     	$pegawaiModel->photo = $filename;
 			if ( $model->save() ){
           $pegawaiModel->save();
+          Yii::app()->user->setState('avatar',$filename);
          return;
       }
 		}

@@ -142,12 +142,13 @@ class ProposalpenelitianController extends Controller
       if ( !empty($bidang) ){
         $model->bidang_id = $bidang->bidang_id;
       }
+      $model->step = 1;
 			if($model->save()) {
           $modelFile->attributes=$_POST['FilePenelitian'];
           $modelFile->filename=CUploadedFile::getInstance($modelFile,'filename');
           if($modelFile->save())
           {
-                $model->step = 1;
+                
                 $time = time();
                 $newfilename = $time.'.'.$modelFile->filename->getExtensionName();
                 $extension = $modelFile->filename->getExtensionName();

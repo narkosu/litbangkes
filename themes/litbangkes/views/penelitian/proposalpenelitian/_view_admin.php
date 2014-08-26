@@ -404,7 +404,9 @@ $jenisFile['rab'] = array('main' => 'Rap', 'sub' => 'Upload file dalam bentuk Ex
 
     <?php if ( $this->AccessAsKasubbid() ) { ?>
         <div id="tabs-3">
-            <?php if ( $model->isValidate() && !$model->isValidasiKasubbid()) { ?>
+            <?php 
+            
+            if ( $model->isValidate() && !$model->isValidasiKasubbid()) { ?>
                 <?php
                 $form = $this->beginWidget('CActiveForm', array(
                     'id' => 'validasi-ppi-form',
