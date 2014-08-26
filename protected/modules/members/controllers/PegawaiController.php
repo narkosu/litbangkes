@@ -34,10 +34,16 @@ class PegawaiController extends Controller {
 
     public function actionIndex() {
         
-        $this->pageTitle = 'Pegawai';
-        $pegawai = Pegawai::model()->findAll();
-
-        $this->render('daftar', array('data' => $pegawai));
+        $this->pageTitle    = 'Pegawai';
+        $criteria           = new CDbCriteria();
+        $count              = Pegawai::model()->count($criteria);
+        $pages              = new CPagination($count);
+        // results per page
+        $pages->pageSize    = 10;
+        $pages->applyLimit($criteria);
+        $pegawai = Pegawai::model()->findAll($criteria);
+        
+        $this->render('daftar', array('data' => $pegawai, 'pages'=>$pages));
     }
 
     /**

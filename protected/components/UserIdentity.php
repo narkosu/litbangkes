@@ -27,11 +27,9 @@ class UserIdentity extends CUserIdentity
 			$this->username=$user->username;
 			
 			$this->setState('accessLevel', $user->accessLevel);
-      
+      $this->setState('avatar', $user->avatar);
       if ( $user->accessLevel == User::LEVEL_MEMBER ){
         $userPegawai = Pegawai::model()->find('user_id = :uid',array(':uid'=>$user->id));
-        $this->setState('accessLevel', $user->accessLevel);
-        $this->setState('avatar', $user->avatar);
         $this->setState('pegawai', $userPegawai);
       }
       

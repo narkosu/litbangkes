@@ -66,7 +66,7 @@ class UserController extends Controller {
             }
         }
         
-        if ( isset($_FILES['avatar'])){
+        if ( !empty($_FILES['avatar']['name'])){
             $this->saveAvatar(Yii::app()->user->id);
             $this->refresh();
         }

@@ -60,9 +60,12 @@ $this->breadcrumbs=array(
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($data as $index=>$pegawai ){ ?>
+                    <?php 
+                    if (!empty($data)) { 
+                        $no = ($pages->getCurrentPage() * $pages->getPageSize()) + 1;
+                    foreach ($data as $index=>$pegawai ){ ?>
                     <tr class="gradeX">
-                      <td class="aligncenter">1</td>
+                      <td class="aligncenter"><?php echo $no?>.</td>
                         <td><a href="<?php echo Yii::app()->createUrl('/members/pegawai/update/id/'.$pegawai->id)?>"><?php echo $pegawai->nip ?></a></td>
                         <td><?php echo $pegawai->nama ?></td>
                         <td><?php echo $pegawai->satuan_kerja ?></td>
@@ -84,24 +87,27 @@ $this->breadcrumbs=array(
                             <!-- <a  title="Setting sebagai validasi">Bag Validasi</a>-->
                         </td>
                     </tr>
-                    <?php } ?>
+                    <?php 
+                        $no++;
+                                }
+                    }
+                    ?>
 
                 </tbody>
             </table>
 
             <!-- dynamic table end -->
             
-             <div class="pagination pagination-centered pagination-small">
-                <ul>
-                	<li><a href="#">Previous</a></li>
-                	<li><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
-                  <li><a href="#">6</a></li>
-                  <li><a href="#">Next</a></li>
-                </ul>
+             
+               <div class="pagination pagination-centered pagination-small" >
+                <?php
+                
+                $this->widget('CLinkPager', array(
+                    'pages' => $pages,
+                    'header'=>''
+                ));
+                ?>
+            
               </div>                                          
 
         </div><!--span8-->

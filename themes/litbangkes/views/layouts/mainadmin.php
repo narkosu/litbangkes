@@ -7,6 +7,7 @@
 <link id="addonstyle" rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl;?>/css/style.dark.css" type="text/css" />
 <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl;?>/css/bootstrap-fileupload.min.css" type="text/css" />
 <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl;?>/prettify/prettify.css" type="text/css" />
+<link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl;?>/css/jquery.ui.css" type="text/css" />
 <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl;?>/prettify/prettify.js"></script>
 <?php /*<script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery-1.9.1.min.js"></script>*/?>
 <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery-migrate-1.1.1.min.js"></script>
@@ -36,7 +37,10 @@
             <div class="headerright">
                 
     					<div class="dropdown userinfo">
-              			<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/photo/pic1.png" >
+                  <?php 
+                        $fieldavatar = Yii::app()->user->getState('avatar');
+                        $avatar = (empty($fieldavatar) ? Yii::app()->theme->baseUrl.'/img/profilethumb.png': Yii::app()->baseUrl.'/files/avatar/'.$fieldavatar);?>  
+                  <div style="float:left;width:36px;height:35px;border:1px solid #fff;border-radius:2px;margin-right:10px;"><img src="<?php echo $avatar?>" style="width:50px;"></div>
                     <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="/page.html">Selamat Datang,
                         <?php echo ucfirst(Yii::app()->user->name)?>! <b class="caret"></b></a>
                     <ul class="dropdown-menu">
