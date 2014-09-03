@@ -1,3 +1,5 @@
 assets/*
 files/*
 protected/runtime/*
+
+vendor/*

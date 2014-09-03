@@ -128,4 +128,9 @@ class SiteController extends Controller
     
 		$this->render('changepassword',array('model'=>$model));
 	}
+  
+  public function actionTestEmail(){
+      mail( 'budisunarko@gmail.com', 'Oh YE', 'DAAAR');
+      //Yii::app()->emailManager->email('budisunarko@gmail.com', 'test email', '<b>Hello</b> <i>World<i>!');
+  }
 }

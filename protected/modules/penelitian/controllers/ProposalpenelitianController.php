@@ -144,33 +144,38 @@ class ProposalpenelitianController extends Controller
       }
       $model->step = 1;
 			if($model->save()) {
-          $modelFile->attributes=$_POST['FilePenelitian'];
-          $modelFile->filename=CUploadedFile::getInstance($modelFile,'filename');
-          if($modelFile->save())
-          {
-                
-                $time = time();
-                $newfilename = $time.'.'.$modelFile->filename->getExtensionName();
-                $extension = $modelFile->filename->getExtensionName();
-                $modelFile->filename->saveAs($folder . '/' . $newfilename); 
-                $modelFile->filename = $newfilename;
-                $modelFile->proposal_id = $model->id;
-                $modelFile->step = $model->step;
-                $modelFile->group_file = 'proposal';
-                $modelFile->version = $time;
-                $modelFile->uploaded_by = Yii::app()->user->id;
-                $modelFile->created_at = date('Y-m-d H:i:s');
-                $modelFile->status = 1;
-                $modelFile->save();
-                $model->status = 0;
-                
-                $model->save();
+          if ( !empty($_FILE['FilePenelitian']['name']['filename']) ) {
+            $modelFile->attributes=$_POST['FilePenelitian'];
 
-                // redirect to success page
-                
-                $this->redirect(array('view','id'=>$model->id));
+
+            $modelFile->filename=CUploadedFile::getInstance($modelFile,'filename');
+            if($modelFile->save())
+            {
+
+                  $time = time();
+                  $newfilename = $time.'.'.$modelFile->filename->getExtensionName();
+                  $extension = $modelFile->filename->getExtensionName();
+                  $modelFile->filename->saveAs($folder . '/' . $newfilename); 
+                  $modelFile->filename = $newfilename;
+                  $modelFile->proposal_id = $model->id;
+                  $modelFile->step = $model->step;
+                  $modelFile->group_file = 'proposal';
+                  $modelFile->version = $time;
+                  $modelFile->uploaded_by = Yii::app()->user->id;
+                  $modelFile->created_at = date('Y-m-d H:i:s');
+                  $modelFile->status = 1;
+                  $modelFile->save();
+                  $model->status = 0;
+
+                  $model->save();
+
+                  // redirect to success page
+
+                 
+            }
           }
 				  
+          $this->redirect(array('view','id'=>$model->id));
       }
 		}
 
@@ -187,6 +192,7 @@ class ProposalpenelitianController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
+     $folder = Yii::getPathOfAlias('webroot')."/files";  
 		$model=$this->loadModel($id);
     $modelFile=new FilePenelitian;
 		// Uncomment the following line if AJAX validation is needed
@@ -197,7 +203,7 @@ class ProposalpenelitianController extends Controller
 			$model->attributes=$_POST['ProposalPenelitian'];
 			if($model->save()){
           
-          if ( !empty($_POST['FilePenelitian']['filename'])) {
+          if ( !empty($_FILES['FilePenelitian']['name']['filename'])) {
               
             $modelFile->attributes=$_POST['FilePenelitian'];
             $modelFile->filename=CUploadedFile::getInstance($modelFile,'filename');
@@ -222,9 +228,10 @@ class ProposalpenelitianController extends Controller
 
                   // redirect to success page
 
-                  $this->redirect(array('view','id'=>$model->id));
+                  
             }
           }
+          $this->redirect(array('view','id'=>$model->id));
       }
 		}
 
@@ -252,7 +259,7 @@ class ProposalpenelitianController extends Controller
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('proposalpenelitian'));
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('/penelitian/proposalpenelitian'));
 	}
 
 	/**
@@ -260,12 +267,12 @@ class ProposalpenelitianController extends Controller
 	 */
 	public function actionIndex()
 	{
-    if ( Yii::app()->user->isSuperAdmin ) {
+    if ( Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) {
         $criteria = new CDbCriteria();
         $criteria->condition   .= 'status_record = 1 '; // tidak delete
         $criteria->order   = 'created_at desc';
         
-    } else if ( Yii::app()->user->isKabid ){
+    /*} else if ( Yii::app()->user->isKabid ){
         $me = Yii::app()->user->getState('pegawai');
         
         $criteria = new CDbCriteria();
@@ -282,7 +289,7 @@ class ProposalpenelitianController extends Controller
         $criteria->condition .= ' AND  sub_bidang_id = '.$me->subbidang_id.' ) ';
         $criteria->condition .= ' OR pegawai_id = '.$me->id .' ';
         $criteria->order   = 'created_at desc'; 
-        
+    */    
     }else if ( Yii::app()->user->isMember ) {
         
         $me = Yii::app()->user->getState('pegawai');
@@ -293,6 +300,7 @@ class ProposalpenelitianController extends Controller
         $criteria->order   = 'created_at desc';
         
     }
+    
     
     $count      = ProposalPenelitian::model()->count($criteria);
     $pages      = new CPagination($count);

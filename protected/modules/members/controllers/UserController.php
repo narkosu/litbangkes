@@ -68,7 +68,8 @@ class UserController extends Controller {
         
         if ( !empty($_FILES['avatar']['name'])){
             $this->saveAvatar(Yii::app()->user->id);
-            $this->refresh();
+            
+            //$this->refresh();
         }
         
         $this->render('editprofile', array(
@@ -129,20 +130,26 @@ class UserController extends Controller {
 
         $model = User::model()->findByPk($cid);
         $pegawaiModel = Pegawai::model()->find('user_id = '.$cid);
-
-        //$oldLogo_id         = $model->picture_id;
-        $oldLogo_picture    = $model->avatar;
+       
+         $oldLogo_picture    = $model->avatar;
 
         $file = CUploadedFile::getInstanceByName('avatar');
-
+        $time = time();
         $group = 'logo';
-        $filename = 'avatar_'.md5($cid).'.'.$file->getExtensionName();
+        $filename = 'avatar_'.md5($cid.$time).'.'.$file->getExtensionName();
 
         $return = $file->saveAs($folder . '/' . $filename); 
+        
         if ( !empty($return) ){
-          $model->avatar =$filename;
+          if ( !empty($oldLogo_picture)) { 
+            @unlink($folder.'/'.$oldLogo_picture);  
+          }
           
-          if ( $model->save() ){
+          $model->avatar = $filename;
+          
+          
+          if ( $model->validate() && $model->save() ){
+             
               if ( $pegawaiModel ) {
                 $pegawaiModel->photo = $filename;
                 $pegawaiModel->save();
@@ -150,6 +157,8 @@ class UserController extends Controller {
               Yii::app()->user->setState('avatar',$filename);
              
           }else{
+              //print_r($model->getErrors());
+              //die;
               return;
           }
         }

@@ -61,9 +61,9 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('username, password', 'required'),
-			array('username', 'unique'),
+			array('username', 'unique', 'on' => 'insert'),
 			array('firstname, lastname, username, password, salt, email', 'length', 'max'=>128),
-			array('profile,accessLevel,setHakAccess', 'safe'),
+			array('profile,accessLevel,setHakAccess, avatar', 'safe'),
 		);
 	}
 

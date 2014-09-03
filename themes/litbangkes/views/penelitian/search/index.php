@@ -69,15 +69,18 @@
         	<tr>
           	<td align="center" class="center">
             
-            <form method="get" style="padding: 20px 0;">
-              <input type="search" placeholder="Masukkan kata kunci yang ingin anda cari" class="input-xxlarge" name="q" value="<?=isset($_GET['q']) ? CHtml::encode($_GET['q']) : '' ; ?>" />
-              <select name="by">
+            <form method="get" style="padding: 20px 0;" action="<?php echo Yii::app()->createUrl('penelitian/search')?>?>">
+              <input type="search" placeholder="Masukkan kata kunci yang ingin anda cari" class="input-xlarge" name="q" value="<?=isset($_GET['q']) ? CHtml::encode($_GET['q']) : '' ; ?>" />
+              <input type="text" id="nama_peneliti" name="nama_peneliti" value="<?=isset($_GET['nama_peneliti']) ? CHtml::encode($_GET['nama_peneliti']) : '' ; ?>" placeholder="Nama Peneliti">
+              <input type="text" id="tahun" name="tahun" placeholder="Tahun" value="<?=isset($_GET['tahun']) ? CHtml::encode($_GET['tahun']) : '' ; ?>">
+              <!--<select name="by">
               	<option value="">- Cari Berdasarkan -</option>
               	<option value="judul">Judul Penelitian</option>
                 <option value="keywords">Keywords</option>
                 <option value="isu_strategis">Isu Strategis</option>
+                <option value="isu_strategis">Isu Strategis</option>
               </select>
-              <input type="text" id="city">
+              -->
               <input type="submit" value="Cari" class="btn btn-success" />
               <a href="<?php echo Yii::app()->createUrl('penelitian/search/') ?>"><span class="btn btn-warning">Reset</span></a>
             </form>
@@ -93,7 +96,34 @@
 						
 			?>
       <br />
-      <p class="center"><center>Hasil Pencarian dengan kata kunci <i>"<?php echo $_GET['q'];?>"</i></center></p>     
+      <p class="center"><center><?php echo $count ?> data, Hasil Pencarian dengan 
+          <?php 
+          $searchQ = false;
+          if ( !empty($_GET['q']) ) { 
+              $searchQ = true;
+          ?> 
+            kata kunci <i>"<?php echo $_GET['q'];?>"</i>
+          <?php } ?>  
+          <?php
+          $searchNama = false;
+          if ( !empty($_GET['nama_peneliti']) ) {
+              $searchNama = true;
+              ?> 
+            <?php if ($searchQ ) { ?>
+                dan 
+            <?php } ?>
+            Nama Peneliti <i>"<?php echo $_GET['nama_peneliti'];?>"</i>
+          <?php } ?>
+            
+          <?php if ( !empty($_GET['tahun']) ) {
+              ?> 
+            <?php if ($searchQ || $searchNama) { ?>
+                dan 
+            <?php } ?>
+            Tahun <i>"<?php echo $_GET['tahun'];?>"</i>
+          <?php } ?>  
+      </center></p>  
+      
       <table class="table table-bordered" id="dyntable">
                 <colgroup>
                     <col class="con0" style="align: center; width: 4%" />
@@ -106,8 +136,9 @@
                 <thead>
                     <tr>
                         <!-- <th class="head0 nosort center">No</th> -->
-                        <th class="head0 center" width="60%">Judul Penelitian</th>
-                        <th class="head0 center" width="30%">Diajukan oleh</th>
+                        <th class="head0 center" width="40%">Judul Penelitian</th>
+                        <th class="head0 center" width="20%">Diajukan oleh</th>
+                        <th class="head0 center" width="30%">Isu Strategis</th>
                         <th class="head0 center" width="10%">Tahun Anggaran</th>
                     </tr>
                 </thead>
@@ -117,6 +148,7 @@
                             <!-- <td class="center">&nbsp;</td>-->
                             <td><a href="<?php echo Yii::app()->createUrl('/penelitian/proposalpenelitian/view/id/' . $proposal->id) ?>"><?php echo $proposal->nama_penelitian ?></a></td>
                             <td class="center"><?php echo $proposal->pegawai->nama ?></td>                            
+                            <td class="center"><?php echo ($proposal->isustrategis  ? $proposal->isustrategis->isu_strategis  : '')?></td>                            
                             <td class="center"><?php echo $proposal->tahun_anggaran ?></td>
                         </tr>
                     <?php } ?>
@@ -149,7 +181,16 @@
 							*/?>
       		<?php } ?>
       </div><!-- form -->
-            
+      <?php if ( !empty($pages) ) { ?>
+        <div class="pagination pagination-centered pagination-small" >
+                <?php
+                
+                $this->widget('CLinkPager', array(
+                    'pages' => $pages,
+                ));
+                ?>
+            </div>
+      <?php } ?>
     </div><!--span8-->
 </div><!--row-fluid-->
 <script type="text/javascript">

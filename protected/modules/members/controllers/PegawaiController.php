@@ -230,12 +230,14 @@ class PegawaiController extends Controller {
     $oldLogo_picture    = $model->avatar;
     
 		$file = CUploadedFile::getInstanceByName('avatar');
-		
+		$time = time();
 		$group = 'logo';
-		$filename = 'avatar_'.md5($cid).'.'.$file->getExtensionName();
+		$filename = 'avatar_'.md5($cid.$time).'.'.$file->getExtensionName();
     
 		$return = $file->saveAs($folder . '/' . $filename); 
 		if ( !empty($return) ){
+      if ( !empty($oldLogo_picture))  
+        @unlink($folder.'/'.$oldLogo_picture);  
     	$model->avatar =$filename;
     	$pegawaiModel->photo = $filename;
 			if ( $model->save() ){

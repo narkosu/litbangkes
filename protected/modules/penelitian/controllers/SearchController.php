@@ -28,20 +28,47 @@ class SearchController extends Controller
 	 */
 	public function actionIndex()
 	{
-		
-		
-		
-		if( isset($_GET['q']) && $_GET['q'] != '' ){
-			
-			if( $_GET['by'] == '' ){
-				
-				$criteria = new CDbCriteria();
+    $pages = '';  
+		$searchQ = false;
+		$searchNama = false;
+		$searchTahun = false;
+    
+     $criteria = new CDbCriteria(); 
+			if( !empty($_GET['q'])  ){
+				$searchQ = true;
+        $criteria->join = 'LEFT JOIN tbl_isu_strategis i ON i.id = t.isu_strategis ';
 				$criteria->condition  .= 'status_record = 1 '; // tidak delete
-				$criteria->condition 	.= ' AND ( nama_penelitian LIKE "%'.$_GET['q'].'%"';
-				$criteria->condition 	.= ' OR keywords LIKE "%'.$_GET['q'].'%"';
-				$criteria->condition 	.= ' OR isu_strategis LIKE "%'.$_GET['q'].'%" )';
-			
-			} else if( $_GET['by'] == 'judul' ){
+				$criteria->condition 	.= ' AND ( keywords LIKE "%'.$_GET['q'].'%"';
+				$criteria->condition 	.= ' OR nama_penelitian LIKE "%'.$_GET['q'].'%" ' ;
+				$criteria->condition 	.= ' OR i.isu_strategis LIKE "%'.$_GET['q'].'%" )' ;
+			}
+      
+      if ( !empty($_GET['nama_peneliti']) ) {
+          $searchNama = true;
+          if ( $searchQ ) {
+              $criteria->join = 'LEFT JOIN tbl_pegawai p ON p.id = t.pegawai_id ';
+              $criteria->condition 	.= ' AND ( nama LIKE "%'.$_GET['nama_peneliti'].'%" )' ;
+          }else{
+              $criteria->join = 'LEFT JOIN tbl_pegawai p ON p.id = t.pegawai_id ';
+              $criteria->condition  .= 'status_record = 1 '; // tidak delete
+              $criteria->condition 	.= ' AND ( nama LIKE "%'.$_GET['nama_peneliti'].'%" )' ;
+          }
+      }
+      
+      if ( !empty($_GET['tahun']) ) {
+          $searchTahun = true;
+          if ( $searchQ || $searchNama) {
+              $criteria->condition 	.= ' AND tahun_anggaran = '.$_GET['tahun'] ;
+          }else{
+              
+              $criteria->condition  .= 'status_record = 1 '; // tidak delete
+              $criteria->condition 	.= '  AND tahun_anggaran = '.$_GET['tahun'] ;
+          }
+      }
+      
+      
+      /*
+      else if( $_GET['by'] == 'judul' ){
 					$criteria = new CDbCriteria();
 					$criteria->condition  .= 'status_record = 1 '; // tidak delete
 					$criteria->condition 	.= ' AND  nama_penelitian LIKE "%'.$_GET['q'].'%"';
@@ -55,22 +82,31 @@ class SearchController extends Controller
 					$criteria = new CDbCriteria();
 					$criteria->condition  .= 'status_record = 1 '; // tidak delete
 					$criteria->condition 	.= ' AND  isu_strategis LIKE "%'.$_GET['q'].'%"';				
-			}
-			
-			$proposal = ProposalPenelitian::model()->findAll($criteria);
+			}*/
+      
+      $count = '';
+			if ( $searchQ || $searchNama || $searchTahun ) {
+        $count      = ProposalPenelitian::model()->count($criteria);
+        $pages      = new CPagination($count);
+        // results per page
+        $pages->pageSize    = 20;
+        $pages->applyLimit($criteria);
+        
+        $proposal = ProposalPenelitian::model()->findAll($criteria);
+        
+        $params = array(
+                        'data'=>$proposal,  
+                        'pages'=>$pages,
+                        'count'=>$count
+                      );
+      }else{
+          $proposal = '';
+          $params = array(
+                        'data'=>$proposal,  
+                      );
+      }
 		
-			$this->render('index',array(
-				'data'=>$proposal,  
-			));
-			
-		} else {
-			
-			$proposal = '';
-		
-			$this->render('index',array(
-				'data'=>$proposal,  
-			));
-		}
+			$this->render('index',$params);
 		
 		
 	}
