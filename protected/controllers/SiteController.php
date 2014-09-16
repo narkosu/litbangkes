@@ -130,7 +130,7 @@ class SiteController extends Controller
 	}
   
   public function actionTestEmail(){
-      mail( 'budisunarko@gmail.com', 'Oh YE', 'DAAAR');
-      //Yii::app()->emailManager->email('budisunarko@gmail.com', 'test email', '<b>Hello</b> <i>World<i>!');
+        
+      echo Yii::app()->emailManager->email('budisunarko@gmail.com', 'test email', '<b>Hello</b> <i>World<i>!','budi@sunarko.com',array(),null,false);
   }
 }

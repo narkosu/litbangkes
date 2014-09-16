@@ -56,7 +56,7 @@ return array(
             'controllerFilters' => array(
                 'emailAccess' => array('email.components.EmailAccessFilter'),
             ),
- 
+            
             // A list of users who can access this module.
            // 'adminUsers' => array('admin'),
  
@@ -135,7 +135,7 @@ return array(
                     // can be Swift_MailTransport or Swift_SmtpTransport
                     'class' => 'Swift_MailTransport',
                 ),
-                   
+               /*    
                 // smtp transport
                 'smtp' => array(
                     // if you use smtp you may need to define the host, port, security and setters
@@ -160,7 +160,7 @@ return array(
                         'password' => 'another_password',
                     ),
                 ),
-                
+                */
                 // gmail smtp transport
                 'gmailSmtp' => array(
                     'class' => 'Swift_SmtpTransport',
@@ -168,8 +168,8 @@ return array(
                     'port' => 465,
                     'security' => 'ssl',
                     'setters' => array(
-                        'username' => 'username@gmail.com',
-                        'password' => 'password',
+                        'username' => 'budisunarko@gmail.com',
+                        'password' => 'str355gendeng',
                     ),
                 ),
             ),
