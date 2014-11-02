@@ -187,7 +187,7 @@ return array(
 			//'connectionString' => 'mysql:host=localhost;dbname=litbangkes_682014',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => '',
+			'password' => 'akar',
 			'charset' => 'utf8',
 			'tablePrefix' => 'tbl_',
 		),
