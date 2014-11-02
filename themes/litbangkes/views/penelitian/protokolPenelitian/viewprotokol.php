@@ -47,9 +47,9 @@ $this->menu=array(
                         </li>
                     <?php } ?>
                     <?php if ( $model->isDesiminasiAvailable() ) { ?>
-                        <li class="active">
+                        <li class="haslink">
                         <a href="<?php echo Yii::app()->createUrl('penelitian/diseminasipenelitian/view/id/'.$model->id)?>">
-                            <span class="badge badge-success">5</span>&nbsp;&nbsp;Desiminasi</a>
+                            <span class="badge">5</span>&nbsp;&nbsp;Desiminasi</a>
                         </li>    
                     <?php } else { ?>
                         <li>

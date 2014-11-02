@@ -28,21 +28,36 @@ $this->menu=array(
                     <li class="active"><a href="<?php echo Yii::app()->createUrl('penelitian/protokolpenelitian/create/id/'.$model->id)?>">
                       <span class="badge badge-success">2</span>&nbsp;&nbsp;Protokol Penelitian </a></li>
                     
-                        <?php if ( $model->step >= 3 ) {?>
-                            <li class="haslink">
-                                <a href="upload_progress_triwulan_1.html">
-                                    <span class="badge">3</span>&nbsp;&nbsp;Progress Penelitian
-                                </a>
-                            </li>
-                        <?php } else { ?>
-                            <li class="haslink">
-                                <a >
-                                    <span class="badge">3</span>&nbsp;&nbsp;Progress Penelitian
-                                </a>
-                            </li>
-                        <?php } ?>
+                    <?php if ( $model->step >= 3 ) { ?> 
+                        <li class="haslink"><a href="<?php echo Yii::app()->createUrl('penelitian/progrespenelitian/view/id/'.$model->id)?>">
+                           <span class="badge">3</span>&nbsp;&nbsp;Progress Penelitian</a>
+                        </li>
+                    <?php } else { ?>
+                        <li ><a >
+                           <span class="badge">3</span>&nbsp;&nbsp;Progress Penelitian</a>
+                        </li>
+                    <?php } ?>
                     
-                    <li><a><span class="badge">4</span>&nbsp;&nbsp;Output Penelitian</a></li>
+                    <?php if ( $model->isOutputAvailable() ) { ?>
+                        <li class="haslink">
+                        <a href="<?php echo Yii::app()->createUrl('penelitian/outputpenelitian/view/id/'.$model->id)?>">
+                            <span class="badge ">4</span>&nbsp;&nbsp;Output Penelitian</a>
+                        </li>    
+                    <?php } else { ?>
+                        <li>
+                        <a><span class="badge">4</span>&nbsp;&nbsp;Output Penelitian</a>
+                        </li>
+                    <?php } ?>
+                    <?php if ( $model->isDesiminasiAvailable() ) { ?>
+                        <li class="haslink">
+                        <a href="<?php echo Yii::app()->createUrl('penelitian/diseminasipenelitian/view/id/'.$model->id)?>">
+                            <span class="badge">5</span>&nbsp;&nbsp;Desiminasi</a>
+                        </li>    
+                    <?php } else { ?>
+                        <li>
+                        <a><span class="badge">5</span>&nbsp;&nbsp;Desiminasi</a>
+                        </li>
+                    <?php } ?>   
                   </ul>
                 </div>
               </div>

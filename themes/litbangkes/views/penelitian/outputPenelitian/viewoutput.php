@@ -49,13 +49,13 @@ $this->menu=array(
                     <?php } ?>
                         
                     <?php if ( $model->isDesiminasiAvailable() ) { ?>
-                        <li class="active">
-                        <a href="<?php echo Yii::app()->createUrl('penelitian/desiminasi/view/id/'.$model->id)?>">
-                            <span class="badge badge-success">4</span>&nbsp;&nbsp;Desiminasi</a>
+                        <li class="haslink">
+                        <a href="<?php echo Yii::app()->createUrl('penelitian/diseminasipenelitian/view/id/'.$model->id)?>">
+                            <span class="badge ">5</span>&nbsp;&nbsp;Desiminasi</a>
                         </li>    
                     <?php } else { ?>
                         <li>
-                        <a><span class="badge">4</span>&nbsp;&nbsp;Desiminasi</a>
+                        <a><span class="badge">5</span>&nbsp;&nbsp;Desiminasi</a>
                         </li>
                     <?php } ?>    
                   </ul>
