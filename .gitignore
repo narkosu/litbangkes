@@ -3,3 +3,5 @@ files/*
 protected/runtime/*
 
 vendor/*
+
+protected/config/main.php
