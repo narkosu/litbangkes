@@ -1,11 +1,11 @@
 <?php
 $this->breadcrumbs=array(
 	'Halaman Depan'=>array('index'),
-	'Pegawai',
+	'',
 );
 ?>
 <div style="text-align:right">
-    <a class="btn" href="<?php echo Yii::app()->createUrl('masters/sumberdana/create')?>">Tambah Baru</a>
+    <a class="btn" href="<?php echo Yii::app()->createUrl('masters/klien/create')?>">Tambah Baru</a>
 </div>
 <div class="contentinner content-dashboard">
     <div class="row-fluid">
@@ -13,9 +13,6 @@ $this->breadcrumbs=array(
             <!-- dynamic table start-->
             
             <div id="dyntable_wrapper" class="dataTables_wrapper" role="grid">
-                
-               
-
             <table class="table table-bordered" id="dyntable">
                 <colgroup>
                     <col class="con0" style="align: center; width: 4%" />
@@ -43,7 +40,7 @@ $this->breadcrumbs=array(
                         <td><?php echo $row->name ?></td>
                         
                         <td class="center">
-                            <a href="<?php echo Yii::app()->createUrl('/masters/sumberdana/update/id/'.$row->id)?>"  class="btn btn-warning">Edit</a> 
+                            <a href="<?php echo Yii::app()->createUrl('/masters/klien/update/id/'.$row->id)?>"  class="btn btn-warning">Edit</a> 
                             <!-- <a  title="Setting sebagai validasi">Bag Validasi</a>-->
                         </td>
                     </tr>

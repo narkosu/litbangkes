@@ -4,14 +4,11 @@
 
 $this->breadcrumbs=array(
 	'Isu Strategises'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	'Create',
 );
 
 $this->menu=array(
 	array('label'=>'List IsuStrategis', 'url'=>array('index')),
-	array('label'=>'Create IsuStrategis', 'url'=>array('create')),
-	array('label'=>'View IsuStrategis', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Manage IsuStrategis', 'url'=>array('admin')),
 );
 ?>
@@ -20,7 +17,7 @@ $this->menu=array(
 <div class="row-fluid">
 <div class="span16">
 
-  <h4 class="widgettitle nomargin shadowed">Sumber Dana</h4>
+  <h4 class="widgettitle nomargin shadowed">Tambah Klien</h4>
   <div class="widgetcontent bordered shadowed nopadding">
       <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
   </div><!--widgetcontent-->                     
@@ -29,4 +26,3 @@ $this->menu=array(
 
 </div><!--row-fluid-->
 </div>
-

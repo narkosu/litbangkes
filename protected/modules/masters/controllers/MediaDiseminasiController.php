@@ -1,6 +1,6 @@
 <?php
 
-class SumberdanaController extends Controller
+class MediaDiseminasiController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -32,7 +32,7 @@ class SumberdanaController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','detaillist'),
+				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -56,53 +56,20 @@ class SumberdanaController extends Controller
 		));
 	}
 
-  
-  /**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
-	 */
-	public function actionDetaillist()
-	{
-		$output = array('error'=>false);
-    $id = $_POST['sumber_dana'];
-    if (empty($id)){
-        $output['error'] = true;
-        $output['result']  = array();
-        echo json_encode($output);
-        return;
-    }
-    
-    if ($id == 3) { // LAIN - LAIN
-        $output['error'] = false;
-        $output['result']  = array();
-        $output['lain'] = true;
-        echo json_encode($output);
-        return;
-    }
-    $return = array();
-		$details = DetailSumberDana::model()->findAll('sumberdana_id = '.$id);
-    if ( !empty($details) ){
-        foreach ( $details as $detail ){
-            $return[$detail->id] = $detail->nama;
-        }
-    }
-    $output['result']  = $return;
-    echo json_encode($output);
-	}
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionCreate()
 	{
-		$model=new SumberDana;
+		$model=new MediaDiseminasi;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['SumberDana']))
+		if(isset($_POST['MediaDiseminasi']))
 		{
-			$model->attributes=$_POST['SumberDana'];
+			$model->attributes=$_POST['MediaDiseminasi'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -124,9 +91,9 @@ class SumberdanaController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['SumberDana']))
+		if(isset($_POST['MediaDiseminasi']))
 		{
-			$model->attributes=$_POST['SumberDana'];
+			$model->attributes=$_POST['MediaDiseminasi'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -158,13 +125,13 @@ class SumberdanaController extends Controller
 		if ( Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) {
         $criteria = new CDbCriteria();
     }
-    
-    $count      = SumberDana::model()->count($criteria);
+    $this->pageTitle = 'Media Diseminasi';
+    $count      = MediaDiseminasi::model()->count($criteria);
     $pages      = new CPagination($count);
     // results per page
     $pages->pageSize    = 20;
     $pages->applyLimit($criteria);
-    $SumberDana= SumberDana::model()->findAll($criteria);
+    $SumberDana= MediaDiseminasi::model()->findAll($criteria);
     
      $this->render('index',array(
 			'data'=>$SumberDana,
@@ -177,10 +144,10 @@ class SumberdanaController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new SumberDana('search');
+		$model=new MediaDiseminasi('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['SumberDana']))
-			$model->attributes=$_GET['SumberDana'];
+		if(isset($_GET['MediaDiseminasi']))
+			$model->attributes=$_GET['MediaDiseminasi'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -194,7 +161,7 @@ class SumberdanaController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=SumberDana::model()->findByPk($id);
+		$model=MediaDiseminasi::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -206,7 +173,7 @@ class SumberdanaController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='sumber-dana-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='media-diseminasi-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

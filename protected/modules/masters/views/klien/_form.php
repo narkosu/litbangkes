@@ -1,18 +1,19 @@
 <?php
+/* @var $this MediaDiseminasiController */
+/* @var $model MediaDiseminasi */
+/* @var $form CActiveForm */
+?>
+
+<?php
 /* @var $this IsuStrategisController */
 /* @var $model IsuStrategis */
 /* @var $form CActiveForm */
 ?>
 
 
-<?php
-/* @var $this SumberDanaController */
-/* @var $model SumberDana */
-/* @var $form CActiveForm */
-?>
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'sumber-dana-form',
+	'id'=>'isu-strategis-form',
 	'enableAjaxValidation'=>false,
   'htmlOptions'=>array('class'=>'stdform stdform2')  
 )); ?>
@@ -27,7 +28,11 @@
 		<?php echo $form->textField($model,'name'); ?>
           <?php echo $form->error($model,'name'); ?>
       </span>
+    
+		
+    
 	</div>
+
 	<div class="par stdformbutton">
 		
       <button type="submit" class="btn btn-primary">
@@ -37,4 +42,3 @@
 	</div>
 
 <?php $this->endWidget(); ?>
-

@@ -1,11 +1,11 @@
 <?php
 $this->breadcrumbs=array(
 	'Halaman Depan'=>array('index'),
-	'Pegawai',
+	'',
 );
 ?>
 <div style="text-align:right">
-    <a class="btn" href="<?php echo Yii::app()->createUrl('masters/sumberdana/create')?>">Tambah Baru</a>
+    <a class="btn" href="<?php echo Yii::app()->createUrl('masters/kepakaran/create')?>">Tambah Baru</a>
 </div>
 <div class="contentinner content-dashboard">
     <div class="row-fluid">
@@ -40,10 +40,10 @@ $this->breadcrumbs=array(
                     foreach ($data as $index=>$row ){ ?>
                     <tr class="gradeX">
                       <td class="aligncenter"><?php echo $no?>.</td>
-                        <td><?php echo $row->name ?></td>
+                        <td><?php echo $row->nama_kepakaran ?></td>
                         
                         <td class="center">
-                            <a href="<?php echo Yii::app()->createUrl('/masters/sumberdana/update/id/'.$row->id)?>"  class="btn btn-warning">Edit</a> 
+                            <a href="<?php echo Yii::app()->createUrl('/masters/kepakaran/update/id/'.$row->id)?>"  class="btn btn-warning">Edit</a> 
                             <!-- <a  title="Setting sebagai validasi">Bag Validasi</a>-->
                         </td>
                     </tr>

@@ -96,7 +96,7 @@ class KlienController extends Controller
 	public function actionCreate()
 	{
 		$model=new Klien;
-
+    $this->pageTitle = 'Klien';
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -155,9 +155,20 @@ class KlienController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Klien');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+		if ( Yii::app()->user->isSuperAdmin || Yii::app()->user->isAdmin) {
+        $criteria = new CDbCriteria();
+    }
+    $this->pageTitle = 'Klien';
+    $count      = Klien::model()->count($criteria);
+    $pages      = new CPagination($count);
+    // results per page
+    $pages->pageSize    = 20;
+    $pages->applyLimit($criteria);
+    $SumberDana= Klien::model()->findAll($criteria);
+    
+     $this->render('index',array(
+			'data'=>$SumberDana,
+      'pages'=>$pages   
 		));
 	}
 

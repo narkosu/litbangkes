@@ -104,7 +104,16 @@
         <?php } ?> 
         
         <?php if ( Yii::app()->user->isSuperAdmin ) { ?>
-          <a class="btn btn-success" href="<?php echo Yii::app()->createUrl('masters')?>">Master</a>
+          
+          <div class="btn-group">
+          <button data-toggle="dropdown" class="btn btn-success dropdown-toggle">Master <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="<?php echo Yii::app()->createUrl('masters/isustrategis')?>">Isu Strategis</a></li>
+            <li><a href="<?php echo Yii::app()->createUrl('masters/sumberdana')?>">Sumber Dana</a></li>
+            <li><a href="<?php echo Yii::app()->createUrl('masters/klien')?>">Klien</a></li>
+            <li><a href="<?php echo Yii::app()->createUrl('masters/kepakaran')?>">Kepakaran</a></li>
+          </ul>
+        </div>
           <a class="btn btn-info" href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/create')?>">Pengajuan Penelitian</a>
           <a class="btn btn-success" href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian')?>">Daftar Penelitian</a>
           <a class="btn btn-success" href="<?php echo Yii::app()->createUrl('penelitian/proposalpenelitian/validasi')?>">Daftar Validasi</a>
